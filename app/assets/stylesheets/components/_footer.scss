@@ -1,0 +1,17 @@
+//--------------------------------------------------
+// footer
+//--------------------------------------------------
+.footer {
+  background-color: $primary;
+  border-bottom: solid 14px $black;
+  color: $white;
+  height: rem-calc(170);
+
+  &__container {
+    @include container;
+    @include flex;
+    @include flex-h-between;
+    @include flex-v-center;
+    height: 100%;
+  }
+}

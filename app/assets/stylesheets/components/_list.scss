@@ -1,0 +1,9 @@
+//--------------------------------------------------
+// partners
+//--------------------------------------------------
+.list--partners {
+  @include container;
+  @include flex-h-center;
+  
+  display: grid;
+}

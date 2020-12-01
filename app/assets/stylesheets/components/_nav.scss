@@ -1,5 +1,39 @@
-.nav--primary {
+//--------------------------------------------------
+// mixins
+//--------------------------------------------------
+@mixin nav-basic {
+  font-size: rem-calc(18);
   font-weight: $bold;
   text-decoration: none;
   text-transform: uppercase;
+}
+
+//--------------------------------------------------
+// primary
+//--------------------------------------------------
+.nav--primary {
+  @include nav-basic;
+  text-align: center;
+  width: 100%;
+}
+
+//--------------------------------------------------
+// footer
+//--------------------------------------------------
+.nav--footer {
+  @include nav-basic;
+  color: $white;
+  column-count: 2;
+
+  .nav__ul {
+    @include ul-unstyled;
+  }
+
+  .nav__a {
+    margin-right: rem-calc(30);
+    margin-bottom: rem-calc(8);
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }  
 }

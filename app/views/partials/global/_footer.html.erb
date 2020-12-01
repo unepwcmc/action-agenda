@@ -1,0 +1,18 @@
+<footer class="footer">
+  <div class="footer__container">
+    <nav class="nav--footer">
+      <ul class="nav__ul">
+        <% links.each do |link| %>
+          <li class="nav__li">
+            <%= link_to link[:title], link[:url], class: 'nav__a' %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+
+    <div>
+      <img src="" alt="UNEP-WCMC">
+      <img src="" alt="CBD">
+    </div>
+  </div>
+</footer>

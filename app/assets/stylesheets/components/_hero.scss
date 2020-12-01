@@ -1,0 +1,20 @@
+//--------------------------------------------------
+// primary
+//--------------------------------------------------
+.hero--home {
+  @include bg-image-overlay;
+  background-color: $grey-dark;
+  background-image: image_url('hero/adrian-bar-lruGiwfIIOo-unsplash-min.png');
+  background-size: cover;
+  color: $white;
+  min-height: rem-calc(524);
+
+  .hero__container {
+    @include container;
+    padding-top: rem-calc(100);
+  }
+
+  .hero__content {
+    width: 46%;
+  }
+}

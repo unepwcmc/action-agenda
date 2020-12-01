@@ -11,5 +11,7 @@
 
   <body>
     <%= yield %>
+    
+    <%= render partial:'partials/global/footer', locals: { links: footer_nav } %>
   </body>
 </html>

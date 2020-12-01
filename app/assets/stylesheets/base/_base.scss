@@ -7,7 +7,6 @@
 }
 
 body {
-  @include text-body;
   color: $body-font-colour;
   font-family: $body-font;
   margin: 0;
@@ -18,34 +17,39 @@ section {
 }
 
 h1 { 
-  @include h1; 
+  color: inherit;
+  margin-top: 0;
 
-  &.h1-home { @include h1-home; }
+  @include breakpoint($small) { font-size: $h1-size; }
 }
 
 h2 { 
-  @include h2; 
-  
-  &.h2-big { @include h-big;  }
-  &.h2-big-white { @include h-big; color: $white; }
-  .container--component & { margin-top: 0; }
+  color: inherit;
+  margin-top: 0;
+
+  @include breakpoint($small) { font-size: $h2-size; }
+
+  &.h2--full-width {
+    @include container;
+    background-color: $primary;
+    coloR: $white;
+    padding-top: rem-calc(10);
+    padding-bottom: rem-calc(10);
+    text-align: center;
+  }
 }
 
 h3 {
-  @include h3;
-
-  &.h3-big-white { @include h-big; color: $white; }
+  
 }
 
 h4 {
-  @include h4;
+  
 }
   
 p,a { 
   color: inherit; 
   line-height: $p-font-line-height;
-
-  &.text-intro { @include text-intro; }
 }
   
 a { 
