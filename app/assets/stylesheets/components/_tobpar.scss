@@ -1,4 +1,7 @@
-.topbar {
+//--------------------------------------------------
+// primary
+//--------------------------------------------------
+.topbar--primary {
   @include flex;
   @include flex-v-center;
   @include gutters;
@@ -6,4 +9,16 @@
   color: $white;
   font-weight: $bold;
   height: rem-calc(44); 
+}
+
+//--------------------------------------------------
+// secondary
+//--------------------------------------------------
+.topbar--secondary {
+  @include flex;
+  @include flex-h-between;
+  @include flex-v-center;
+  @include gutters;
+  background-color: $white;
+  height: rem-calc(116); 
 }
