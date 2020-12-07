@@ -1,16 +1,42 @@
 //--------------------------------------------------
-// primary
+// mixins
 //--------------------------------------------------
-.hero--home {
+@mixin hero-background($path) {
   @include bg-image-overlay;
   background-color: $grey-dark;
-  background-image: image_url('hero/adrian-bar-lruGiwfIIOo-unsplash-min.png');
+  background-image: image_url($path);
   background-size: cover;
   color: $white;
+}
+
+@mixin hero-container {
+  @include container;
+}
+
+//--------------------------------------------------
+// basic
+//--------------------------------------------------
+.hero--basic {
+  @include flex;
+  @include flex-v-center;
+  @include hero-background('hero/adrian-bar-lruGiwfIIOo-unsplash-min.png');
+  text-align: center;
+  height: rem-calc(340);
+
+  .hero__container {
+    @include hero-container;
+  }
+}
+
+//--------------------------------------------------
+// home
+//--------------------------------------------------
+.hero--home {
+  @include hero-background('hero/adrian-bar-lruGiwfIIOo-unsplash-min.png');
   min-height: rem-calc(524);
 
   .hero__container {
-    @include container;
+    @include hero-container;
     padding-top: rem-calc(100);
   }
 
