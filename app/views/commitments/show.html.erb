@@ -60,7 +60,7 @@
       <ul class="list__ul">
         <% @primary_objectives.each do |objective| %>
           <li class="list__li">
-            <i class="list__icon icon--climate-change-mitigation"></i>
+            <i class="list__icon icon--<%= objective[:icon] %>"></i>
             <%= objective[:title] %>
           </li>
         <% end %>
