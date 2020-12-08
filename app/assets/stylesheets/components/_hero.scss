@@ -19,7 +19,7 @@
 .hero--basic {
   @include flex;
   @include flex-v-center;
-  @include hero-background('hero/adrian-bar-lruGiwfIIOo-unsplash-min.png');
+  @include hero-background('hero/amir-samoh-WgV0g05NQCM-unsplash.png');
   text-align: center;
   height: rem-calc(340);
 
@@ -32,7 +32,7 @@
 // home
 //--------------------------------------------------
 .hero--home {
-  @include hero-background('hero/adrian-bar-lruGiwfIIOo-unsplash-min.png');
+  @include hero-background('hero/adrian-bar-lruGiwfIIOo-unsplash.png');
   min-height: rem-calc(524);
 
   .hero__container {

@@ -1,4 +1,8 @@
 //--------------------------------------------------
+// mixins
+//--------------------------------------------------
+
+//--------------------------------------------------
 // partners
 //--------------------------------------------------
 .list--partners {
@@ -6,4 +10,20 @@
   @include flex-h-center;
   
   display: grid;
+
+  .list__ul {
+    @include flex;
+    @include flex-v-center;
+    @include ul-unstyled;
+  }
+
+  .list__li {
+    display: inline;
+    margin: 0 rem-calc(6);
+  }
+
+  .list__img {
+    max-width: rem-calc(140);
+    max-height: rem-calc(70);
+  }
 }

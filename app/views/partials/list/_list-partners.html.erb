@@ -1,8 +1,11 @@
 <div class="list--partners spacer-small--top spacer-small--bottom">
   <h2>In Partnership with</h2>
 
-  <ul>
-    <img src="" alt="Earth Mind">
-    <img src="" alt="Earth Mind">
+  <ul class="list__ul">
+    <% partners.each do |partner| %>
+      <li class="list__li">
+        <%= image_tag partner[:src], alt: partner[:alt], class: 'list__img' %>
+      </li>
+    <% end %>
   </ul>
 </div>
