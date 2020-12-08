@@ -35,6 +35,40 @@
   }
 }
 
+@mixin list-box-height {
+  @include beautify-scrollbar;
+  max-height: rem-calc(330);
+}
+
+//--------------------------------------------------
+// commitment info
+//--------------------------------------------------
+.list--commitment-info {
+  background-color: $grey-xlight;
+
+  .list__title {
+    background-color: $primary;
+    color: $white;
+    margin-bottom: .5em;
+    padding: rem-calc(15 20);
+  }
+
+  .list__subtitle { 
+    font-weight: $bold; 
+
+    display: block;
+  }
+
+  .list__ul {
+    @include ul-unstyled;
+    padding: rem-calc(20 30);
+  }
+
+  .list__li {
+    margin-bottom: rem-calc(14);
+  }
+}
+
 //--------------------------------------------------
 // footer
 //--------------------------------------------------
@@ -51,6 +85,7 @@
 //--------------------------------------------------
 .list--governance {
   @include list-box;
+  @include list-box-height;
   font-size: rem-calc(20);
 }
 
@@ -73,7 +108,22 @@
 //--------------------------------------------------
 .list--primary-objectives {
   @include list-box;
+  @include list-box-height;
   font-size: rem-calc(20);
+
+  .list__ul {
+    @include ul-unstyled;
+  }
+
+  .list__li {
+    @include flex;
+    @include flex-v-center;
+    padding: rem-calc(10 0);
+  }
+
+  .list__icon {
+    margin-right: rem-calc(18);
+  }
 }
 
 //--------------------------------------------------

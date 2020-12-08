@@ -5,7 +5,8 @@ class CommitmentsController < ApplicationController
   def show
     @primary_objectives = [
       {
-        title: 'Sustainable use'
+        icon: 'climate-change-mitigation',
+        title: 'Climate Change Mitigation'
       }
     ]
   end
