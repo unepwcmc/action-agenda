@@ -15,6 +15,9 @@
     
     <%= yield %>
     
-    <%= render partial:'partials/global/footer', locals: { links: footer_nav } %>
+    <%= render partial:'partials/global/footer', locals: { 
+      links: footer_nav, 
+      logos: site_logos 
+    } %>
   </body>
 </html>

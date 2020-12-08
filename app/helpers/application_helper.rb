@@ -13,4 +13,10 @@ module ApplicationHelper
 
   def footer_icons
   end
+
+  def site_logos
+    imagePresenter = ImagePresenter.new
+    
+    imagePresenter.site_logos
+  end
 end

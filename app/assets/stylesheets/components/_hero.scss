@@ -9,10 +9,6 @@
   color: $white;
 }
 
-@mixin hero-container {
-  @include container;
-}
-
 //--------------------------------------------------
 // basic
 //--------------------------------------------------
@@ -24,7 +20,7 @@
   height: rem-calc(340);
 
   .hero__container {
-    @include hero-container;
+    @include container;
   }
 }
 
@@ -36,11 +32,11 @@
   min-height: rem-calc(524);
 
   .hero__container {
-    @include hero-container;
+    @include container-medium;
     padding-top: rem-calc(100);
   }
 
   .hero__content {
-    width: 46%;
+    width: 60%;
   }
 }
