@@ -10,6 +10,9 @@
   </head>
 
   <body>
+    <%= render partial: '/partials/topbar/topbar-primary' %>
+    <%= render partial: '/partials/topbar/topbar-secondary', locals: { links: header_nav } %>
+    
     <%= yield %>
     
     <%= render partial:'partials/global/footer', locals: { links: footer_nav } %>
