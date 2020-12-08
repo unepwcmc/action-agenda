@@ -3,6 +3,10 @@ class CommitmentsController < ApplicationController
   end
 
   def show
-    @primary_objectives = []
+    @primary_objectives = [
+      {
+        title: 'Sustainable use'
+      }
+    ]
   end
 end
