@@ -170,4 +170,19 @@
 .list--targets-biodiversity {
   @include list-box;
   grid-column: 1/3;
+
+  .list__ul {
+    @include ul-unstyled;
+    padding-top: rem-calc(20);
+  }
+
+  .list__li {
+    margin-right: rem-calc(20);
+
+    display: inline-block;
+  }
+
+  .list__subtitle {
+    font-weight: $bold;
+  }
 }

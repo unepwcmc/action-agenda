@@ -9,5 +9,7 @@ class CommitmentsController < ApplicationController
         title: 'Climate Change Mitigation'
       }
     ]
+
+    @targets_biodiversity = [5, 10] #Not sure how this will work yet
   end
 end

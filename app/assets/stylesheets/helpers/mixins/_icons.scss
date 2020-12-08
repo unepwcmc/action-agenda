@@ -40,8 +40,8 @@ $icon-search-width: rem-calc(21);
 // mixins for specific classes
 //--------------------------------------------------
 @mixin icon-aichi() {
-  @include responsive(width, rem-calc(85), rem-calc(85), rem-calc(110));
-  @include responsive(height, rem-calc(85), rem-calc(85), rem-calc(110));
+  @include responsive(width, rem-calc(85), rem-calc(85), rem-calc(90));
+  @include responsive(height, rem-calc(85), rem-calc(85), rem-calc(90));
   margin-bottom: rem-calc(20);
 
   display: block;

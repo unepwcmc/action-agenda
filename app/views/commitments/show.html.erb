@@ -76,6 +76,14 @@
 
     <div class="list--targets-biodiversity">
       <h3 class="list__title">Related Biodiversity Targets</h3>
+      <ul class="list__ul">
+        <% @targets_biodiversity.each do |target| %>
+          <li class="list__li">
+            <%= image_tag "icons/aichi-#{target}.svg", class: 'icon--aichi', alt: "Aichi target #{target} icon" %>
+            <span class="list__subtitle">Aichi target <%= target %></span>
+          </li>
+        <% end %>
+      </ul>
     </div>
 
     <div class="list--targets-additional">
