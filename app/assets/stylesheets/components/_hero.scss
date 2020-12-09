@@ -9,22 +9,18 @@
   color: $white;
 }
 
-@mixin hero-container {
-  @include container;
-}
-
 //--------------------------------------------------
 // basic
 //--------------------------------------------------
 .hero--basic {
   @include flex;
   @include flex-v-center;
-  @include hero-background('hero/adrian-bar-lruGiwfIIOo-unsplash-min.png');
+  @include hero-background('hero/amir-samoh-WgV0g05NQCM-unsplash.png');
   text-align: center;
   height: rem-calc(340);
 
   .hero__container {
-    @include hero-container;
+    @include container;
   }
 }
 
@@ -32,15 +28,20 @@
 // home
 //--------------------------------------------------
 .hero--home {
-  @include hero-background('hero/adrian-bar-lruGiwfIIOo-unsplash-min.png');
+  @include hero-background('hero/adrian-bar-lruGiwfIIOo-unsplash.png');
   min-height: rem-calc(524);
 
   .hero__container {
-    @include hero-container;
+    @include container-medium;
     padding-top: rem-calc(100);
   }
 
   .hero__content {
-    width: 46%;
+    width: 60%;
+  }
+
+  .hero__subtitle {
+    font-size: rem-calc(21);
+    font-weight: $bold;
   }
 }

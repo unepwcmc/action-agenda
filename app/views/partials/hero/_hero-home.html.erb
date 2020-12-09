@@ -2,10 +2,16 @@
   <div class="hero__container">
     <div class="hero__content">
       <h1>Capturing Area-Based Commitments</h1>
-      <p>Capturing Area-Based Commitments</p>
-      <div>
-        <img src="" alt="UNEP-WCMC">
-        <img src="" alt="CBD">
+      <p class="hero__subtitle">Capturing Area-Based Commitments</p>
+      
+      <div class="list--hero-logos">
+        <ul class="list__ul">
+          <% logos.each do |logo| %>
+            <li class="list__li">
+              <%= image_tag logo[:src], alt: logo[:alt], class: 'list__img' %>
+            </li>
+          <% end %>
+        </ul>
       </div>
     </div>
   </div>

@@ -1,7 +1,5 @@
-<%= render partial: '/partials/topbar/topbar-primary' %>
-<%= render partial: '/partials/topbar/topbar-secondary' %>
-<%= render partial: '/partials/hero/hero-home' %>
+<%= render partial: '/partials/hero/hero-home', locals: { logos: site_logos } %>
 
 <%= render partial: '/partials/map/map' %>
-<%= render partial: '/partials/list/list-partners' %>
+<%= render partial: '/partials/list/list-partners', locals: { partners: @partner_logos } %>
 <%= render partial: '/partials/carousel/carousel-targets' %>

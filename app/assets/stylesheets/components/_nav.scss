@@ -6,6 +6,16 @@
   font-weight: $bold;
   text-decoration: none;
   text-transform: uppercase;
+
+  .nav__ul {
+    @include ul-unstyled;
+  }
+
+  .nav__a {
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
 }
 
 //--------------------------------------------------
@@ -15,6 +25,22 @@
   @include nav-basic;
   text-align: center;
   width: 100%;
+
+  .nav__li {
+    margin: 0 rem-calc(14);
+    display: inline;
+
+    &:first-child {
+      .nav__a::before {
+        background-image: image-url('icons/home.svg');
+        content: '';
+        margin-right: rem-calc(8);
+        width: rem-calc(15); height: rem-calc(15);
+        
+        display: inline-block;
+      }
+    }
+  }
 }
 
 //--------------------------------------------------
@@ -25,15 +51,8 @@
   color: $white;
   column-count: 2;
 
-  .nav__ul {
-    @include ul-unstyled;
-  }
-
   .nav__a {
     margin-right: rem-calc(30);
     margin-bottom: rem-calc(8);
-    text-decoration: none;
-
-    &:hover { text-decoration: underline; }
   }  
 }

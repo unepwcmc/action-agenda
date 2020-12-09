@@ -11,9 +11,15 @@
 
   <body>
     <div id="v-app">
+      <%= render partial: '/partials/topbar/topbar-primary' %>
+      <%= render partial: '/partials/topbar/topbar-secondary', locals: { links: header_nav } %>
+      
       <%= yield %>
       
-      <%= render partial:'partials/global/footer', locals: { links: footer_nav } %>
+      <%= render partial:'partials/global/footer', locals: { 
+        links: footer_nav, 
+        logos: site_logos 
+      } %>
     </div>
   </body>
 </html>
