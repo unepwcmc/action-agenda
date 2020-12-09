@@ -85,7 +85,6 @@ $padding-medium: rem-calc(27);
   @include button-font;
   @include button-height;
   @include button-padding;
-  @include button-radius;
   border: solid $border-size $colour;
   color: $colour;
 }
@@ -156,6 +155,8 @@ $padding-medium: rem-calc(27);
 @mixin button-dropdown-filter {
   @include button-dropdown;
   @include button-outline($black, 1px);
+  font-weight: $bold;
+  text-transform: uppercase;
 
   @include breakpoint-down($medium) {
     font-size: rem-calc(16);

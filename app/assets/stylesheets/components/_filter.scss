@@ -126,7 +126,6 @@ $total-width-desktop: rem-calc(24);
 
       @include breakpoint($small) {
         border: solid rem-calc(1) $black;
-        border-radius: $radius-global;
         margin-top: rem-calc(18);
         min-width: rem-calc(460);
         width: auto; height: auto;

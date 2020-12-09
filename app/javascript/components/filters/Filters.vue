@@ -1,7 +1,5 @@
 <template>
   <div class="filters">
-    <span class="filter__title bold">Filters:</span>
-
     <data-filter v-for="(filter, index)  in filters"
       :key="`${filter.name}-${index}`"
       :name="filter.name"
@@ -14,7 +12,6 @@
 
 <script>
   import DataFilter from './DataFilter.vue'
-  // import DownloadCsv from '../forms/DownloadCsv.vue'
 
   export default {
     name: "filters",

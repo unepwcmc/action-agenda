@@ -1,5 +1,5 @@
 <template>
-  <div class="table-head__cell flex flex-h-center">
+  <div class="table-head__cell">
     <span class="table-head__title">{{ filter.title }}</span>
 
     <div 

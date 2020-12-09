@@ -32,17 +32,20 @@
     }
 
     &__row {
+      border: solid 1px $primary;
       display: flex;
     }
 
     &__cell {
       @include table-basic-column-widths;
+      @include flex;
+      @include flex-center;
       background-color: $primary;
       color: $white;
       font-size: rem-calc(16);
       font-weight: $bold;
       height: rem-calc(57);
-      padding: rem-calc(8 14 0 14);
+      padding: rem-calc(8 14);
 
       display: inline-block;
 

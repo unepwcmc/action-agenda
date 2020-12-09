@@ -1,15 +1,15 @@
 <template>
-  <tr>
-    <td>{{ item.id }}</td>
-    <td :title="item.title">{{ projectTitle }}</td>
-    <!-- <td>{{ checkForMultiples('ecosystem') }}</td>
-    <td>{{ checkForMultiples('country') }}</td> -->
-    <td>{{ item.total_project_cost }}</td>
-    <td>{{ item.primary_funding }}</td>
-    <!-- <td>{{ checkForMultiples('donors') }}</td>
-    <td>{{ checkForMultiples('partners') }}</td> -->
-    <td>{{ item.end_date }}</td>
-  </tr>
+  <div class="table__row">
+    <p class="table__cell">
+      <span class="table__cell-title">{{ item.title }}</span>
+      <span>{{ item.description | trimmed }}</span>
+    </p>
+    <p class="table__cell">{{ item.committed }}</p>
+    <p class="table__cell">add item.duration to backend{{ item.duration }}</p>
+    <p class="table__cell">add item.status to backend{{ item.status }}</p>
+    <p class="table__cell">add item.url to backend</p>
+    <!-- <p class="table__cell">{{ checkForMultiples('country') }}</p> -->
+  </div>
 </template>
 
 <script>
@@ -25,6 +25,12 @@
     computed: {
       projectTitle () {
         return this.trim(this.item.title)
+      }
+    },
+
+    filters: {
+      trimmed (text) {
+        return text.substring(0,160) + '...'
       }
     },
 
