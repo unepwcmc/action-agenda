@@ -96,7 +96,10 @@ class Commitment < ApplicationRecord
         id: commitment.id,
         title: commitment.name,
         description: commitment.description,
-        committed: commitment.committed_year
+        committed: commitment.committed_year,
+        duration: commitment.duration,
+        status: commitment.status,
+        url: commitment.link
       }
     end if filter_params.empty?
 
@@ -113,14 +116,14 @@ class Commitment < ApplicationRecord
       var_name = "@#{model.to_s.underscore.pluralize}"
       instance_variable_set(var_name, model.pluck(:name).compact.sort - ["Data not available"])
     end
-    @committed_years = Commitment.distinct.pluck(:committed_year)
+    @committed_years = Commitment.where.not(committed_year: nil).distinct.pluck(:committed_year)
   end
 
   def self.structure_data(page, items)
     {
       current_page: page,
       per_page: 50, #TODO This number should be coming through from the frontend items_per_page
-      total_entries: 10, # TODO make this work(items.count > 0 ? items[0][:total_entries] : 0),
+      total_entries: items.count,
       total_pages: 1, # TODO make this work (items.count > 0 ? items[0][:total_pages] : 0),
       items: items
     }

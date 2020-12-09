@@ -5,9 +5,9 @@
       <span>{{ item.description | trimmed }}</span>
     </p>
     <p class="table__cell">{{ item.committed }}</p>
-    <p class="table__cell">add item.duration to backend{{ item.duration }}</p>
-    <p class="table__cell">add item.status to backend{{ item.status }}</p>
-    <p class="table__cell">add item.url to backend</p>
+    <p class="table__cell">{{ item.duration }}</p>
+    <p class="table__cell">{{ item.status }}</p>
+    <p class="table__cell"><a :href="item.url">{{ item.url}}</a></p>
     <!-- <p class="table__cell">{{ checkForMultiples('country') }}</p> -->
   </div>
 </template>
