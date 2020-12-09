@@ -6,11 +6,11 @@
       :total-items="totalItems"
     />
 
-    <table class="table-head">
-      <table-head :filters="filters" />
+    <table class="table-head--basic">
+      <table-head :filters="attributes" />
     </table>
 
-    <table class="table table--body">
+    <table class="table--basic">
       <row v-for="item in items"
         :key="item._uid"
         :item="item">
@@ -128,6 +128,7 @@
 
       getNewItems () {
         let data = {
+          items_per_page: this.itemsPerPage,
           requested_page: this.$store.state.table.requestedPage,
           filters: this.$store.state.table.selectedFilterOptions
         }

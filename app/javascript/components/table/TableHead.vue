@@ -1,12 +1,16 @@
 <template>
-  <thead id="sticky" :class="{ 'table__head--stuck' : isSticky }">
-    <tr>
-      <table-header v-for="filter in filters"     
+  <div 
+    id="sticky" 
+    :class="{ 'table-head--stuck' : isSticky }"
+  >
+    <div class="table-head__row">
+      <table-header 
+        v-for="filter in filters"     
         :key="filter._uid"
         :filter="filter" 
       />
-    </tr>
-  </thead>
+    </div>
+  </div>
 </template>
 
 <script>

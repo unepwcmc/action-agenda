@@ -25,13 +25,13 @@ class Commitment < ApplicationRecord
       field: 'duration'
     },
     {
-      title: 'Assessment ID',
-      field: 'id'
-    },
-    {
       title: 'Status',
       field: 'status'
-    }
+    },
+    {
+      title: '',
+      field: 'id'
+    },
   ].freeze
   
   def self.filters_to_json
@@ -100,11 +100,6 @@ class Commitment < ApplicationRecord
       }
     end if filter_params.empty?
 
-    # filters = filter_params.select { |hash| hash["options"].present? }
-
-    # where_params = parse_filters(filters)
-    # run_query(page, where_params)  
-
     # return PameEvaluation.where('protected_area_id IS NOT NULL AND restricted = false').order('id ASC').paginate(page: page || 1, per_page: 50) if filter_params.empty?
 
     # filters = filter_params.select { |hash| hash["options"].present? }
@@ -124,9 +119,9 @@ class Commitment < ApplicationRecord
   def self.structure_data(page, items)
     {
       current_page: page,
-      per_page: 50, #TODO This number should be coming through from the frontend 
-      total_entries: 10, #(items.count > 0 ? items[0][:total_entries] : 0),
-      total_pages: 1, #  (items.count > 0 ? items[0][:total_pages] : 0),
+      per_page: 50, #TODO This number should be coming through from the frontend items_per_page
+      total_entries: 10, # TODO make this work(items.count > 0 ? items[0][:total_entries] : 0),
+      total_pages: 1, # TODO make this work (items.count > 0 ? items[0][:total_pages] : 0),
       items: items
     }
   end

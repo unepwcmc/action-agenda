@@ -1,12 +1,16 @@
 <template>
-  <th>
-    <span class="table__header">{{ filter.title }}</span>
+  <div class="table-head__cell flex flex-h-center">
+    <span class="table-head__title">{{ filter.title }}</span>
 
-    <div v-if="hasOptions" class="table__sorting" @click="sort()">
+    <div 
+      v-if="hasOptions" 
+      class="table__sorting" 
+      @click="sort()"
+    >
       <span alt="Sort results" class="table__sort table__sort--ascending"></span>
       <span alt="Sort results" class="table__sort table__sort--descending"></span>
     </div>
-  </th>
+  </div>
 </template>
 
 <script>
