@@ -19,14 +19,12 @@
 
     &__button--next {
       @include button-next;
-      @include icon-circle-chevron-green-right;
 
       // &.button--disabled { @include icon-circle-chevron-grey-right; }
     }
 
     &__button--previous {
-      // @include button-prev;
-      // @include icon-circle-chevron-green-left; 
+      @include button-prev;
       margin: rem-calc(0 6 0 10);
 
       // &.button--disabled { @include icon-circle-chevron-grey-left; }

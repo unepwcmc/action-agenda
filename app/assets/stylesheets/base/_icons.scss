@@ -5,14 +5,7 @@
   &--aichi { @include icon-aichi; }
   
   &--certificate-of-products { @include icon-certificate; }
-
-  &--circle-chevron-black { @include icon-circle-chevron-black; }
-  &--circle-chevron-white { @include icon-circle-chevron-white; }
-  &--circle-chevron-green-large-prev { @include icon-circle-chevron-green-large-left; }
-  &--circle-chevron-green-large-next { @include icon-circle-chevron-green-large-right; }
-
   &--close { @include icon-close; }
-
   &--climate-change-mitigation { @include icon-climate; }
 
   &--loading-spinner { 

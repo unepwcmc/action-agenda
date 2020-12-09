@@ -76,13 +76,19 @@ $padding-medium: rem-calc(27);
   color: $colour;
 }
 
+@mixin button-previous-next {
+  @include button-basic;
+  background-size: rem-calc(12), rem-calc(20);
+  border: solid 1px $black;
+  width: rem-calc(42); height: rem-calc(42);
+}
 //--------------------------------------------------
 // mixins for classes
 //--------------------------------------------------
 @mixin button-all($small: false) {
   @include button-with-icon;
   @include flex-no-shrink;
-  &::after { @include icon-circle-chevron-black; }
+  
 
   @if $small {
     @include breakpoint($medium) { font-size: rem-calc(16); }
@@ -119,7 +125,7 @@ $padding-medium: rem-calc(27);
 
 @mixin button-dropdown {
   @include button-with-icon;
-  &::after { @include icon-chevron-black-down; }
+  
 }
 @mixin button-dropdown-up {
   @include button-with-icon;
@@ -154,13 +160,6 @@ $padding-medium: rem-calc(27);
 
 @mixin button-external-link {
   @include button-with-icon;
-  &::after {
-    @include icon-circle-chevron-black;
-    height: rem-calc(21);
-    width: rem-calc(21);
-
-    display: inline-block;
-  }
 }
 
 @mixin button-filter-trigger {
@@ -188,9 +187,19 @@ $padding-medium: rem-calc(27);
     }
   }
 }
+
+@mixin button-next { 
+  @include icon-chevron-right;
+  @include button-previous-next;
+}
+
+@mixin button-prev { 
+  @include icon-chevron-left;
+  @include button-previous-next;
+}
+
 @mixin button-primary { @include button-block; }
-@mixin button-next { @include button-basic; }
-@mixin button-prev { @include button-basic; }
+
 @mixin button-search {
   @include button-basic;
   @include button-font;
