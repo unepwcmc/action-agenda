@@ -42,7 +42,7 @@ class Commitment < ApplicationRecord
     def self.commitments_to_json
     commitments = Commitment.all
                  .includes(:country)
-                 .order(id: :asc).to_a.map! do |project|
+                 .order(id: :asc).to_a.map! do |commitment|
       {
         id: commitment.id,
         title: commitment.name,
