@@ -4,11 +4,12 @@ export const storeTable = {
   namespaced: true,
 
   state: {
+    // activeItems: [],
     requestedPage: 1,
-    searchId: '',
+    // searchId: '',
     selectedFilterOptions: [], // an array containing an object for each filter that has an array of selected options
     sortDirection: '',
-    sortField: '', 
+    // sortField: '', 
     totalItemsOnCurrentPage: 0
   },
 
@@ -19,8 +20,11 @@ export const storeTable = {
     setFilterOptions ({ commit }, filterOptions) {
       commit('setFilterOptions', filterOptions)
     },
-    updateFilterOptions ({ commit }, newOptions) {
-      commit('updateFilterOptions', newOptions)
+    // updateActiveItems ({ commit }, newOptions) {
+    //   commit('updateFilterOptions', newOptions)
+    // },
+    updateRequestedPage ({ commit }, page) {
+      commit('updateRequestedPage', page)
     },
     updateSearch ({ commit }, searchId) {
       commit('updateSearchId', searchId)
@@ -28,11 +32,11 @@ export const storeTable = {
       commit('updateSortField', '')
       commit('updateRequestedPage', 1)
     },
-    updateSortParameters ({ commit }, sortParamters) {
-      commit('updateSortDirection', sortParamters.direction)
-      commit('updateSortField', sortParamters.field)
-      commit('updateRequestedPage', 1)
-    },
+    // updateSortParameters ({ commit }, sortParamters) {
+    //   commit('updateSortDirection', sortParamters.direction)
+    //   commit('updateSortField', sortParamters.field)
+    //   commit('updateRequestedPage', 1)
+    // },
     updatePage ({ commit }, requestedPage) {
       commit('updateRequestedPage', requestedPage)
     },
@@ -79,12 +83,12 @@ export const storeTable = {
     updateRequestedPage (state, page) {
       state.requestedPage = page
     },
-    updateSortDirection (state, direction) {
-      state.sortDirection = direction
-    },
-    updateSortField (state, field) {
-      state.sortField = field
-    },
+    // updateSortDirection (state, direction) {
+    //   state.sortDirection = direction
+    // },
+    // updateSortField (state, field) {
+    //   state.sortField = field
+    // },
     updateTotalItemsOnCurrentPage (state, total) {
       state.totalItemsOnCurrentPage = total
     },

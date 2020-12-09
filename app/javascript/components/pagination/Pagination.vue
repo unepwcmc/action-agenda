@@ -1,82 +1,107 @@
 <template>
-  <div class="pagination">
+  <div class="pagination right">
     <div 
-      v-if="haveResults"
       class="pagination__content"
+      v-if="haveResults"
     >
-      <span>{{ pageItemsStart }} - {{ pageItemsEnd }} of {{ totalItems }}</span>
+      <span class="bold">{{ firstItem }} - {{ lastItem }} of {{ totalItems }}</span>
 
-      <button 
+      <button
         v-bind="{ 'disabled' : !previousIsActive }"
         @click="changePage(previousIsActive, 'previous')"
-        :class="['pagination__button--previous', { 'button--disabled': !previousIsActive }]"
-      />
+        class="pagination__button--previous"
+        :class="{ 'button--disabled' : !previousIsActive }">
+      </button>
 
-      <button 
+      <button
         v-bind="{ 'disabled' : !nextIsActive }"
         @click="changePage(nextIsActive, 'next')"
-        :class="['pagination__button--next', { 'button--disabled': !nextIsActive }]"
-      />
+        class="pagination__button--next"
+        :class="{ 'button--disabled' : !nextIsActive }">
+      </button>
     </div>
 
-    <p 
-      v-else
-      v-html="noResultsText"
-      class="pagination__no-results"
-    />
-    
+    <div v-else class="left">
+      <p>There are no evaluations matching the selected filters options.</p>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'pagination',
+  export default {
+    name: "pagination",
 
-  props: {
-    currentPage: {
-      type: Number,
-      required: true
-    },
-    noResultsText: {
-      type: String,
-      required: true  
-    },
-    pageItemsEnd: {
-      type: Number,
-      required: true
-    },
-    pageItemsStart: {
-      type: Number,
-      required: true
-    },
-    totalItems: {
-      type: Number,
-      required: true
-    }
-  },
-  
-  computed: {
-    haveResults () {
-      return this.totalItems > 0
+    props: {
+      currentPage: {
+        required: true,
+        type: Number
+      },
+      itemsPerPage: {
+        required: true,
+        type: Number
+      },
+      totalItems: {
+        required: true,
+        type: Number
+      },
+      totalPages: {
+        required: true,
+        type: Number
+      }
     },
 
-    nextIsActive () {
-      return  this.pageItemsEnd < this.totalItems
+    computed: {
+      nextIsActive () {
+        return  this.currentPage < this.totalPages
+      },
+
+      previousIsActive () {
+        return this.currentPage > 1
+      },
+
+      firstItem () {
+        let first
+
+        if(this.totalItems == 0) {
+          first = 0
+
+        } else if (this.totalItems < this.itemsPerPage) {
+          first = 1
+
+        } else {
+          first = this.itemsPerPage * (this.currentPage - 1) + 1
+        }
+
+        return first
+      },
+
+      lastItem () {
+        let lastItem = this.itemsPerPage * this.currentPage
+
+        if (lastItem > this.totalItems) {
+          lastItem = this.totalItems
+        }
+
+        return lastItem
+      },
+
+      haveResults () {
+        return this.totalItems > 0
+      }
+
+
     },
 
-    previousIsActive () {
-      return this.currentPage > 1
-    },
-  },
+    methods: {
+      changePage (isActive, direction) {
+        // only change the page if the button is active
+        if (isActive) {
+          const newPage = direction == 'next' ? this.currentPage + 1 : this.currentPage - 1
 
-  methods: {
-    changePage (isActive, direction) {
-      if (isActive) {
-        const requestedPage = direction == 'next' ? this.currentPage + 1 : this.currentPage - 1
-        
-        this.$emit('update:page', requestedPage);
+          this.$store.dispatch('table/updateRequestedPage', newPage)
+          this.$emit('updated:page')
+        }
       }
     }
   }
-}
 </script>

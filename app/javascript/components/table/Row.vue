@@ -1,5 +1,5 @@
 <template>
-  <tr v-show="item.isActive">
+  <tr>
     <td>{{ item.id }}</td>
     <td :title="item.title">{{ projectTitle }}</td>
     <!-- <td>{{ checkForMultiples('ecosystem') }}</td>

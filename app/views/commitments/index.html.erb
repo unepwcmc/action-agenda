@@ -7,8 +7,9 @@
 
 <div class="container page-padding">
   <filtered-table 
+    :attributes="<%= @table_attributes %>"
+    endpoint="/commitments/list"
     :filters="<%= @filters %>" 
-    :rows="<%= @commitments %>"
+    :paginated-rows="<%= @paginatedCommitments %>"
   ></filtered-table>
 </div>
-
