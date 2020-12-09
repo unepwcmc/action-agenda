@@ -10,8 +10,6 @@
 </template>
 
 <script>
-  import { eventHub } from '../../home.js'
-  
   export default {
     name: 'table-header',
 
@@ -31,7 +29,7 @@
 
     methods: {
       sort () {
-        eventHub.$emit('sort', this.filter.name)
+        this.$eventHub.$emit('sort', this.filter.name)
       }
     }
   }

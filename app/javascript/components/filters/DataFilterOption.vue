@@ -6,8 +6,6 @@
 </template>
 
 <script>
-  import { eventHub } from '../../home.js'
-
   export default {
     name: 'data-filter-option',
 
@@ -25,7 +23,7 @@
 
     computed : {
       optionId () {
-        return this.option.replace(' |(|)|_', '-').toLowerCase()
+        return this.option.toString().replace(' |(|)|_', '-').toLowerCase()
       }
     },
 

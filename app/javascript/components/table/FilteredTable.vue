@@ -8,8 +8,8 @@
 
     <table class="table table--body">
       <tbody>
-        <row v-for="item, key in items"
-          :key="key"
+        <row v-for="item in items"
+          :key="item._uid"
           :item="item">
         </row>
       </tbody>
@@ -17,17 +17,16 @@
 
     <p class="table__note">*All currency values in Euros</p>
 
-    <pagination :items-per-page="config.itemsPerPage"></pagination>
+    <!-- <pagination :items-per-page="config.itemsPerPage"></pagination> -->
   </div>
 </template>
 
 <script>
-  import { eventHub } from '../home.js'
-  import Filters from './filters/Filters.vue'
-  import SelectedFilter from './filters/SelectedFilter.vue'
-  import TableHead from './table/TableHead.vue'
-  import Row from './table/Row.vue'
-  import Pagination from './pagination/Pagination.vue'
+  import Filters from '../filters/Filters.vue'
+  import SelectedFilter from '../filters/SelectedFilter.vue'
+  import TableHead from './TableHead.vue'
+  import Row from './Row.vue'
+  import Pagination from '../pagination/Pagination.vue'
 
   export default {
     name: 'filtered-table',
@@ -36,7 +35,7 @@
 
     props: {
       filters: { type: Array },
-      projects: { type: Array }
+      rows: { type: Array }
     },
 
     data () {
@@ -52,19 +51,19 @@
 
     created () {
       this.createSelectedFilterOptions()
-      this.items = this.projects
-      this.$store.commit('updateTotalItems', this.items.length)
+      this.items = this.rows
+      this.$store.dispatch('table/updateTotalItems', this.items.length)
     },
 
     mounted () {
       // refilter the items when the filters are changed
-      eventHub.$on('filtersChanged', this.filterItems)
+      this.$eventHub.$on('filtersChanged', this.filterItems)
 
       // repaginate the items when the previous/next buttons are clicked
-      eventHub.$on('pageChanged', this.paginateItems)
+      this.$eventHub.$on('pageChanged', this.paginateItems)
 
       // sort the active items when a sort button is clicked
-      eventHub.$on('sort', this.sortActiveItems)
+      this.$eventHub.$on('sort', this.sortActiveItems)
 
       // only display the items that match the page number
       this.filterItems()
@@ -102,7 +101,7 @@
 
     methods: {
       filterItems () {
-        this.$store.commit('clearActiveItems')
+        this.$store.dispatch('table/clearActiveOptions')
 
         // an item must match one option from each filter (if any have been selected)
         this.items.forEach(item => {
@@ -138,14 +137,14 @@
 
           // only push the item id into the active items array if there are no fails
           if (filterMatch) {
-            this.$store.commit('updateActiveItems', item.id)
+            this.$store.dispatch('table/updateActiveItems', item.id)
           }
         })
 
         this.paginateItems()
-        this.$store.commit('updateCurrentPage', 1)
-        this.$store.commit('updateTotalItems', this.$store.state.activeItems.length)
-        eventHub.$emit('activeItemsChanged');
+        this.$store.dispatch('table/updateCurrentPage', 1)
+        this.$store.dispatch('table/updateTotalItems', this.$store.state.activeItems.length)
+        this.$eventHub.$emit('activeItemsChanged');
       },
 
       // only display the items that match the page number
@@ -180,7 +179,7 @@
           }
         })
 
-        this.$store.commit('setFilterOptions', array)
+        this.$store.dispatch('table/setFilterOptions', array)
       },
 
       sortActiveItems (filter) {

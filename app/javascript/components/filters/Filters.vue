@@ -1,27 +1,25 @@
 <template>
-  <div>
+  <div class="filters">
     <span class="filter__title bold">Filters:</span>
 
-    <data-filter v-for="filter in filters"
+    <data-filter v-for="(filter, index)  in filters"
+      :key="`${filter.name}-${index}`"
       :name="filter.name"
       :title="filter.title" 
       :options="filter.options"
       :type="filter.type">
     </data-filter>
-
-    <download-csv class="inline-block"></download-csv>
   </div>
 </template>
 
 <script>
-  import { eventHub } from "../../home.js"
   import DataFilter from './DataFilter.vue'
-  import DownloadCsv from '../forms/DownloadCsv.vue'
+  // import DownloadCsv from '../forms/DownloadCsv.vue'
 
   export default {
     name: "filters",
 
-    components: { DataFilter, DownloadCsv },
+    components: { DataFilter },
 
     props: {
       filters: {
@@ -37,7 +35,7 @@
     },
 
     mounted () {
-      eventHub.$on('clickDropdown', this.updateDropdowns)
+      this.$eventHub.$on('clickDropdown', this.updateDropdowns)
     },
 
     methods: {

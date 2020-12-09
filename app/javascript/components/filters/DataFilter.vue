@@ -10,10 +10,14 @@
     
     <div class="filter__options" :class="{ 'filter__options--active' : isOpen }">
       <ul class="ul-unstyled filter__options-list" :class="filterClass">
-        <data-filter-option v-for="option in options" 
-          :option="option"
-          :selected="false">
-        </data-filter-option>
+        <template v-for="(option, index) in options">
+          <data-filter-option 
+            v-if="option != null"
+            :key="`${title}-${index}`"
+            :option="option"
+            :selected="false">
+          </data-filter-option>
+        </template>
       </ul>
 
       <div class="filter__buttons">
@@ -26,7 +30,6 @@
 </template>
 
 <script>
-  import { eventHub } from '../../home.js'
   import DataFilterOption from './DataFilterOption.vue'
 
   export default {
@@ -95,7 +98,7 @@
         if(this.isOpen){
           this.isOpen = false
         } else {
-          eventHub.$emit('clickDropdown', this.name)  
+          this.$eventHub.$emit('clickDropdown', this.name)  
         }
       },
 
@@ -132,7 +135,7 @@
 
         this.$store.commit('updateFilterOptions', newFilterOptions)
 
-        eventHub.$emit('filtersChanged')
+        this.$eventHub.$emit('filtersChanged')
       }
     }
   }

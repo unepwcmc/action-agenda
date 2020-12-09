@@ -6,12 +6,14 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
-    
-    <%= render partial:'partials/global/footer', locals: { links: footer_nav } %>
+    <div id="v-app">
+      <%= yield %>
+      
+      <%= render partial:'partials/global/footer', locals: { links: footer_nav } %>
+    </div>
   </body>
 </html>
