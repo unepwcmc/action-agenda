@@ -24,7 +24,7 @@ class CommitmentsController < ApplicationController
   end
 
   def list
-    @commitments = PameEvaluation.paginate_commitments(params.to_json)
+    @commitments = Commitment.paginate_commitments(params.to_json)
 
     render json: @commitments
   end

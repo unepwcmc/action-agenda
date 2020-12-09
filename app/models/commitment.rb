@@ -113,7 +113,7 @@ class Commitment < ApplicationRecord
       var_name = "@#{model.to_s.underscore.pluralize}"
       instance_variable_set(var_name, model.pluck(:name).compact.sort - ["Data not available"])
     end
-    @committed_years = Commitment.distinct.pluck(:committed_year)
+    @committed_years = Commitment.where.not(committed_year: nil).distinct.pluck(:committed_year)
   end
 
   def self.structure_data(page, items)
