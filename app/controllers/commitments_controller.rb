@@ -13,6 +13,8 @@ class CommitmentsController < ApplicationController
   end
 
   def show
+    @commitment = Commitment.find(params[:id])
+    
     @primary_objectives = [
       {
         icon: 'climate-change-mitigation',

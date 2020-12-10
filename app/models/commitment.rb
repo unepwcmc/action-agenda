@@ -99,7 +99,8 @@ class Commitment < ApplicationRecord
         committed: commitment.committed_year,
         duration: commitment.duration,
         status: commitment.status,
-        url: commitment.link
+        url: Rails.application.routes.url_helpers.commitment_path(commitment.id),
+        link: commitment.link
       }
     end if filter_params.empty?
 

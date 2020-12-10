@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   get '/', to: 'home#index'
 
   get '/commitments', to: 'commitments#index'
-  get '/commitment/:id', to: 'commitments#show'
+  get '/commitments/:id', to: 'commitments#show', as: 'commitment'
 end
