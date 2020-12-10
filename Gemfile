@@ -18,7 +18,7 @@ gem 'uglifier', '>= 1.3.0'
 
 #gem 'wcmc-components', path: "../web-components/gems/wcmc_components"
 gem 'wcmc-components', '~>0.0.5'
-
+gem 'will_paginate', '~> 3.0'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
