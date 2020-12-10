@@ -68,6 +68,7 @@ export const storeTable = {
       state.selectedFilterOptions = options
     },
     updateFilterOptions (state, newOptions) {
+      console.log('update', newOptions)
       // find the correct filter to update
       state.selectedFilterOptions.forEach(filter => {
         if(filter.name == newOptions.filter){
