@@ -35,6 +35,8 @@
   import Row from './Row.vue'
   import Pagination from '../pagination/Pagination.vue'
 
+  setAxiosHeaders(axios)
+  
   export default {
     name: 'filtered-table',
 
@@ -140,6 +142,7 @@
           this.updateProperties(response.data)
         })
         .catch(function (error) {
+          console.log(error.response)
           console.log(error)
         })
       }
