@@ -36,7 +36,7 @@
   import Pagination from '../pagination/Pagination.vue'
 
   setAxiosHeaders(axios)
-  
+
   export default {
     name: 'filtered-table',
 
@@ -136,13 +136,14 @@
           filters: this.$store.state.table.selectedFilterOptions
         }
 
+        console.log(this.$store.state.table)
+
         axios.post(this.endpoint, data)
         .then(response => {
           console.log('here', data)
           this.updateProperties(response.data)
         })
         .catch(function (error) {
-          console.log(error.response)
           console.log(error)
         })
       }
