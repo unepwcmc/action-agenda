@@ -29,11 +29,6 @@ $total-width-desktop: rem-calc(24);
       margin-bottom: 0;
     }
 
-    &__title {
-      font-size: rem-calc(20);
-      margin-right: rem-calc(20);
-    }
-
   //--------------------------------------------------
   // button
   //--------------------------------------------------
@@ -49,63 +44,19 @@ $total-width-desktop: rem-calc(24);
         background-color: $activeBackgroundColour;
         border-color: $activeBackgroundColour;
         color: $activeTextColour;
-
-        &:after { background-image: image-url('icons/chevron-white-down.svg'); }
       }
+    }
+    
+    &__button--active {
+      background-color: $activeBackgroundColour;
+      border-color: $activeBackgroundColour;
+      color: $activeTextColour;
+    }
 
-      &:after {
-        @include flex-v-center;
-        content: '';
-        width: rem-calc(8); height: rem-calc(6);
-
-        right: rem-calc(24);
-      }
-      
-      &--active {
-        background-color: $activeBackgroundColour;
-        border-color: $activeBackgroundColour;
-        color: $activeTextColour;     
-
-        &:after,
-        &:hover:after { background-image: image-url('icons/chevron-white-up.svg'); }
-      }
-
-      &--has-selected {
-        background-color: $activeBackgroundColour;
-        color: $activeTextColour;
-
-        @include breakpoint($small){ padding-right: rem-calc(34); }
-        
-        &:after,
-        &:hover:after { visibility: hidden; }
-      }
-
-        &-total {
-          display: none;
-
-          @include breakpoint($small) {
-            @include flex-v-center;
-            background-color: $activeTextColour;
-            border-radius: 100%;
-            color: $activeBackgroundColour;
-            font-size: rem-calc(14);
-            line-height: $total-width-mobile;
-            text-align: center;
-            width: $total-width-mobile; height: $total-width-mobile;
-          
-            display: block;
-            position: absolute;
-            right: rem-calc(8);
-          }
-
-          @include breakpoint($medium){ 
-            font-size: rem-calc(18);
-            line-height: $total-width-desktop;
-            width: $total-width-desktop; height: $total-width-desktop;
-
-            right: rem-calc(16); 
-          }
-        }
+    &:hover.filter__button--has-selected,
+    &__button--has-selected:not(.filter__button--active) {
+      border-color: $accent;
+      color: $accent;
     }
 
   //--------------------------------------------------

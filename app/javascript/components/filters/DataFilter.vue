@@ -5,7 +5,7 @@
       class="filter__button button" 
       :class="{ 'filter__button--active' : isOpen , 'filter__button--has-selected' : hasSelected }">
 
-      {{ title }} <span v-show="hasSelected" class="filter__button-total">{{ totalSelectedOptions }}</span>
+      {{ title }}
     </p>
     
     <div class="filter__options" :class="{ 'filter__options--active' : isOpen }">

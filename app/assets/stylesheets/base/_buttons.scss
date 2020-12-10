@@ -140,7 +140,6 @@ $padding-medium: rem-calc(27);
 }
 
 @mixin button-dropdown-filter {
-  @include button-dropdown;
   @include button-outline($black, 1px);
   font-weight: $bold;
   text-transform: uppercase;
@@ -149,10 +148,6 @@ $padding-medium: rem-calc(27);
     font-size: rem-calc(16);
     padding: rem-calc(1 11);
     height: rem-calc(34);
-  }
-
-  &:after {
-    @include breakpoint-down($medium) { display: none; }
   }
 }
 
