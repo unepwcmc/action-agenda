@@ -11,15 +11,14 @@
 
   .table {
     &__row {
+      @include table-grid-basic;
       border: solid 1px $grey-light;
-      margin-top: rem-calc(8);
-      margin-bottom: rem-calc(8);
+      margin-top: rem-calc(16);
+      margin-bottom: rem-calc(16);
       padding: rem-calc(6 0);
 
       @include breakpoint($medium) { 
         padding: 0;
-
-        display: flex;
       }
 
       &:nth-child(even) { 
@@ -33,13 +32,11 @@
       width: 100%;
 
       @include breakpoint($medium) {
-        @include table-basic-column-widths;
-        border-left: dotted white 2px;
-        padding: rem-calc(16 14);
+        padding: rem-calc(16 18);
         
-        justify-content: center;
-        display: inline-flex;
-        flex-direction: column;
+        align-items: center;
+        display: inline-grid;
+        justify-content: flex-start;
       }
 
       &:first-child { border-left: none; }

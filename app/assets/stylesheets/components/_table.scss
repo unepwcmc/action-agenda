@@ -26,12 +26,13 @@ $table-horizontal-scroll-row-width-desktop: 80vw;
 
 // fix the columns widths so that they don't change
 // size when you use the pagination
-@mixin table-basic-column-widths() {
-  &:first-child { width: 540px; }
-  &:nth-child(2) { width: 150px; }
-  &:nth-child(3) { width: 150px; }
-  &:nth-child(4) { width: 150px; }
-  &:nth-child(5) { width: 150px; }
+@mixin table-grid-basic {
+  grid-template-columns: 1fr;
+  display: grid;
+
+  @include breakpoint($medium){
+    grid-template-columns: 540px 1fr 1fr 1fr 1fr;
+  }
 }
 
 //--------------------------------------------------

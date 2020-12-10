@@ -32,19 +32,20 @@
     }
 
     &__row {
-      display: flex;
+      @include table-grid-basic;
     }
 
     &__cell {
-      @include table-basic-column-widths;
-      @include flex;
-      @include flex-v-center;
       background-color: $primary;
       color: $white;
       font-size: rem-calc(16);
       font-weight: $bold;
       height: rem-calc(57);
-      padding: rem-calc(8 14);
+      padding: rem-calc(16 18);
+
+      align-items: center;
+      display: grid;
+      justify-content: flex-start;
 
       &:first-child { border-left: none; }
     }

@@ -104,25 +104,6 @@ $total-width-desktop: rem-calc(24);
           max-height: $filters-menu-max-height;
         }
       }
-
-      &--donors {
-        column-count: 2;
-        flex-wrap: wrap;
-        width: 928px;
-        white-space: normal;
-
-        display: flex;
-
-        li {
-          flex: 1 0 50%;
-
-          float: left;
-        }
-      }
-      
-      &--category { max-width: rem-calc(803); }
-      &--country { max-width: rem-calc(480); }
-      &--ocean-region { max-width: rem-calc(300); }
     }
 
       &__option {

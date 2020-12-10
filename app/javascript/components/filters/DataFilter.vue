@@ -2,7 +2,7 @@
   <div v-if="hasOptions" class="filter">
     <p
       @click="openSelect()" 
-      class="filter__button button" 
+      class="filter__button" 
       :class="{ 'filter__button--active' : isOpen , 'filter__button--has-selected' : hasSelected }">
 
       {{ title }}

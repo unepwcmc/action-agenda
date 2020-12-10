@@ -50,7 +50,7 @@
         </li>
         <li class="list__li">
           <span class="list__subtitle">Linked from platform:</span>
-          <%= link_to @commitment.link, @commitment.link, target: '_blank', title: @commitment.name %>
+          <%= link_to @commitment.link.truncate(50), @commitment.link, target: '_blank', title: @commitment.name %>
         </li>
       </ul>
     </div>
