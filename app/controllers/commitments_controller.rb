@@ -13,8 +13,12 @@ class CommitmentsController < ApplicationController
   end
 
   def show
-    @commitment = Commitment.find(params[:id])
-    
+    begin
+      @commitment = Commitment.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render file: "#{Rails.root}/public/404", status: :not_found
+    end
+
     @primary_objectives = [
       {
         icon: 'climate-change-mitigation',
