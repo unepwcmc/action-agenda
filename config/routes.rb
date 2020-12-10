@@ -4,4 +4,5 @@ Rails.application.routes.draw do
 
   get '/commitments', to: 'commitments#index'
   get '/commitment/:id', to: 'commitments#show'
+  post '/commitments/list', to: 'commitments#list'
 end

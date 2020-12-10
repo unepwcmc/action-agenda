@@ -18,7 +18,6 @@ $grey-black: #242424;
 
 $blue: #004DA8;
 
-$green-bright: #38A800;
 $green: #009B48;
 $green-dark: #01473A;
 $green--darker: #415519;
@@ -32,52 +31,54 @@ $purple-dark: #794B9D;
 
 $red: #FA3232;
 
-$chart-aqua: #65C9B2;
-$chart-black: #151617;
-$chart-blue-light: #64BAD9;
-$chart-blue: #5F81CB;
-$chart-blue-dark: #1A4D9F;
-$chart-green: #009B48;
-$chart-orange: #FAA51B;
-$chart-orange-dark: #E57133;
-$chart-pink-light: #EF5F6C;
-$chart-pink: #EF266C;
-$chart-purple: #A54897;
-$chart-yellow: #F5F58A;
+// $chart-aqua: #65C9B2;
+// $chart-black: #151617;
+// $chart-blue-light: #64BAD9;
+// $chart-blue: #5F81CB;
+// $chart-blue-dark: #1A4D9F;
+// $chart-green: #009B48;
+// $chart-orange: #FAA51B;
+// $chart-orange-dark: #E57133;
+// $chart-pink-light: #EF5F6C;
+// $chart-pink: #EF266C;
+// $chart-purple: #A54897;
+// $chart-yellow: #F5F58A;
 
 $alert: $red;
+
+$accent: $green;
 
 $primary: $green-dark;
 $primary-dark: $green--darker;
 
-$global: $purple;
-$oecm: $orange;
-$marine: $blue;
-$terrestrial: $green-bright;
+// $global: $purple;
+// $oecm: $orange;
+// $marine: $blue;
+// $terrestrial: $green-bright;
 
-$map-oecm: rgba($orange, .8);
-$map-marine: rgba($blue, .8);
-$map-terrestrial: rgba($pink, .8);
+// $map-oecm: rgba($orange, .8);
+// $map-marine: rgba($blue, .8);
+// $map-terrestrial: rgba($pink, .8);
 
-$pin-marine: $marine;
-$pin-oecm: $oecm;
-$pin-terrestrial: $terrestrial;
+// $pin-marine: $marine;
+// $pin-oecm: $oecm;
+// $pin-terrestrial: $terrestrial;
 
-$theme-designation: [$chart-purple, $chart-aqua, $chart-blue];
-$theme-chart: [
-  $chart-blue-light, 
-  $chart-purple, 
-  $chart-aqua, 
-  $chart-blue, 
-  $chart-orange, 
-  $chart-pink-light, 
-  $chart-black, 
-  $chart-green, 
-  $chart-yellow, 
-  $chart-pink, 
-  $chart-blue-dark, 
-  $chart-orange-dark
-];
+// $theme-designation: [$chart-purple, $chart-aqua, $chart-blue];
+// $theme-chart: [
+//   $chart-blue-light, 
+//   $chart-purple, 
+//   $chart-aqua, 
+//   $chart-blue, 
+//   $chart-orange, 
+//   $chart-pink-light, 
+//   $chart-black, 
+//   $chart-green, 
+//   $chart-yellow, 
+//   $chart-pink, 
+//   $chart-blue-dark, 
+//   $chart-orange-dark
+// ];
 
 //--------------------------------------------------
 // buttons

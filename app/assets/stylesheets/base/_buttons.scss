@@ -2,16 +2,12 @@
 // variables
 //--------------------------------------------------
 $height-small: rem-calc(46);
-$height-medium: rem-calc(56);
+$height-medium: rem-calc(46);
 $padding-small: rem-calc(20);
 $padding-medium: rem-calc(27);
 //--------------------------------------------------
 // base mixins
 //--------------------------------------------------
-@mixin button-plain () { //delete
-  border: none;
-  padding: 0;
-}
 @mixin button-basic {
   background-color: transparent;
   border: none;
@@ -35,9 +31,14 @@ $padding-medium: rem-calc(27);
   display: inline-flex;
   align-items: center;
 }
-@mixin button-padding($size: default) {
+@mixin button-padding {
   @include responsive(padding-right, $padding-small, $padding-medium, $padding-medium);
   @include responsive(padding-left, $padding-small, $padding-medium, $padding-medium);
+}
+@mixin button-plain ($color) { 
+  color: $color;
+  font-weight: $bold;
+  text-transform: uppercase;
 }
 @mixin button-radius {
   border-radius: $button-radius;
@@ -45,12 +46,11 @@ $padding-medium: rem-calc(27);
 //--------------------------------------------------
 // shared mixins
 //--------------------------------------------------
-@mixin button-block ($bg: $purple, $text: $white) {
+@mixin button-block ($bg: $accent, $text: $white) {
   @include button-basic;
   @include button-height;
   @include button-font;
   @include button-padding;
-  @include button-radius;
   background-color: $bg;
   color: $text;
 }
@@ -76,6 +76,16 @@ $padding-medium: rem-calc(27);
   color: $colour;
 }
 
+@mixin button-plain-black {
+  @include button-basic;
+  @include button-plain($black);
+}
+
+@mixin button-plain-accent {
+  @include button-basic;
+  @include button-plain($accent);
+}
+
 @mixin button-previous-next {
   @include button-basic;
   background-size: rem-calc(12), rem-calc(20);
@@ -85,6 +95,12 @@ $padding-medium: rem-calc(27);
 //--------------------------------------------------
 // mixins for classes
 //--------------------------------------------------
+@mixin button-accent {
+  @include button-block;
+  font-weight: $bold;
+  text-transform: uppercase;
+}
+
 @mixin button-all($small: false) {
   @include button-with-icon;
   @include flex-no-shrink;
@@ -99,28 +115,19 @@ $padding-medium: rem-calc(27);
     }
   }
 }
+@mixin button-apply { @include button-plain-accent; }
+
 @mixin button-burger {
   @include button-basic;
   @include icon-burger;
 }
+
+@mixin button-cancel { @include button-plain-black; }
+@mixin button-clear { @include button-plain-black; }
+
 @mixin button-close {
   @include button-basic;
   @include icon-cross;
-}
-@mixin button-clear {
-  @include button-basic;
-  @include flex;
-  @include flex-v-center;
-
-  &::after {
-    @include icon-cross-white;
-    background-color: $black;
-    background-size: 54%;
-    border-radius: 100%;
-    content: '';
-    margin-left: rem-calc(6);
-    width: rem-calc(18); height: rem-calc(18);
-  }
 }
 
 @mixin button-dropdown {
@@ -193,6 +200,7 @@ $padding-medium: rem-calc(27);
   @include button-previous-next;
 }
 
+
 @mixin button-prev { 
   @include icon-chevron-left;
   @include button-previous-next;
@@ -241,7 +249,7 @@ $padding-medium: rem-calc(27);
 // classes
 //--------------------------------------------------
 .button {
-  &--accent { @include button-block; }
+  &--accent { @include button-accent; }
   &--all { @include button-all; }
   &--external {
     @include button-with-icon;

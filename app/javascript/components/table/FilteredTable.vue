@@ -117,6 +117,7 @@
         return this.$store.state.totalItems
       }
     },
+
     methods: {
       updateProperties (data) {
         this.currentPage = data.current_page
@@ -133,10 +134,9 @@
           filters: this.$store.state.table.selectedFilterOptions
         }
 
-        this.axiosSetHeaders()
-
         axios.post(this.endpoint, data)
         .then(response => {
+          console.log('here', data)
           this.updateProperties(response.data)
         })
         .catch(function (error) {
