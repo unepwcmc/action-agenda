@@ -67,6 +67,18 @@
   .list__li {
     margin-bottom: rem-calc(14);
   }
+
+  .list__icon {
+    margin-right: rem-calc(6);
+
+    display: inline-block;
+  }
+
+  .list__country {
+    @include flex;
+    @include flex-v-center;
+    margin-top: rem-calc(4);
+  }
 }
 
 //--------------------------------------------------

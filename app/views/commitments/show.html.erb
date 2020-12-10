@@ -43,8 +43,10 @@
         </li>
         <li class="list__li">
           <span class="list__subtitle">Country Location:</span>
-          <i class="icon--pin"></i>
-          <span class="list__text">XXXX</span>
+          <p class="list__country">
+            <i class="list__icon icon--pin"></i>
+            <span class="list__text"><%= @commitment.country.name %></span>
+          </p>
         </li>
         <li class="list__li">
           <span class="list__subtitle">Linked from platform:</span>
