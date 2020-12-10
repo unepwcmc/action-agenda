@@ -20,9 +20,9 @@ export const storeTable = {
     setFilterOptions ({ commit }, filterOptions) {
       commit('setFilterOptions', filterOptions)
     },
-    // updateActiveItems ({ commit }, newOptions) {
-    //   commit('updateFilterOptions', newOptions)
-    // },
+    updateFilterOptions ({ commit }, newOptions) {
+      commit('updateFilterOptions', newOptions)
+    },
     updateRequestedPage ({ commit }, page) {
       commit('updateRequestedPage', page)
     },

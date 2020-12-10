@@ -36,8 +36,10 @@
         @include table-basic-column-widths;
         border-left: dotted white 2px;
         padding: rem-calc(16 14);
-
-        display: inline-block;
+        
+        justify-content: center;
+        display: inline-flex;
+        flex-direction: column;
       }
 
       &:first-child { border-left: none; }
@@ -49,6 +51,7 @@
         @include breakpoint($medium){ display: none; }
       }
 
+      &:nth-child(n+2) { font-weight: $bold; }
       // Add copy for the table header
       // These are shown on mobile and tablet
       // Check pame_evalutation.rb for the copy
@@ -90,6 +93,8 @@
       }
     }
 
-    &__note { font-size: rem-calc(14); }
+    &__button {
+      @include button-accent;
+    }
   }
 }  

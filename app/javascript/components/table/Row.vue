@@ -7,7 +7,13 @@
     <p class="table__cell">{{ item.committed }}</p>
     <p class="table__cell">{{ item.duration }}</p>
     <p class="table__cell">{{ item.status }}</p>
-    <p class="table__cell"><a :href="item.url">{{ item.url}}</a></p>
+    <p class="table__cell">
+      <a 
+        :href="item.url" 
+        :title="item.title"
+        class="table__button"
+      >View</a>
+    </p>
     <!-- <p class="table__cell">{{ checkForMultiples('country') }}</p> -->
   </div>
 </template>
@@ -30,7 +36,7 @@
 
     filters: {
       trimmed (text) {
-        return text.substring(0,160) + '...'
+        return typeof text == 'string' ? text.substring(0,160) + '...' : ''
       }
     },
 
