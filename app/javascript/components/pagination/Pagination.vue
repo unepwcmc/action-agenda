@@ -10,14 +10,14 @@
         v-bind="{ 'disabled' : !previousIsActive }"
         @click="changePage(previousIsActive, 'previous')"
         class="pagination__button--previous"
-        :class="{ 'button--disabled' : !previousIsActive }">
+        :class="{ 'disabled' : !previousIsActive }">
       </button>
 
       <button
         v-bind="{ 'disabled' : !nextIsActive }"
         @click="changePage(nextIsActive, 'next')"
         class="pagination__button--next"
-        :class="{ 'button--disabled' : !nextIsActive }">
+        :class="{ 'disabled' : !nextIsActive }">
       </button>
     </div>
 

@@ -1,19 +1,19 @@
-
 <div class="container">
   <section class="grid-3-gap-2 spacer-small--top spacer-large--bottom">
     <div>
-      <p>Information updated: XXXX</p>
-      <p>ID: XXXX</p>
+      <h3>Information updated: <%= @commitment.update_year %></h3>
+      <h3>ID: <%= @commitment.id %></h3>
 
-      <h1>COMMITMENT TITLE</h1>
-      <p>Lorem Ipsum..... not sure what field this is?</p>
+      <h1><%= @commitment.name %></h1>
+      <p><%= @commitment.description %></p>
 
-      <p>Planned actions:</p>
+      <h3>Planned actions:</h3>
+      <p><%= @commitment.planned_actions %></p>
       
     </div>
 
     <div class="list--commitment-info">
-      <h2 class="list__title"><span class="green">Status:</span> STATUS</h2>
+      <h2 class="list__title"><span class="green">Status:</span> <%= @commitment.status %></h2>
 
       <ul class="list__ul">
         <li class="list__li">
@@ -23,23 +23,23 @@
         </li>
         <li class="list__li">
           <span class="list__subtitle">Current area:</span>
-          <span class="list__text">XXXX</span>
+          <span class="list__text"><%= @commitment.current_area_km %></span>
         </li>
         <li class="list__li">
           <span class="list__subtitle">Proposed area:</span>
-          <span class="list__text">XXXX</span>
+          <span class="list__text"><%= @commitment.proposed_area_km %></span>
         </li>
         <li class="list__li">
           <span class="list__subtitle">Year of commitment:</span>
-          <span class="list__text">XXXX</span>
+          <span class="list__text"><%= @commitment.committed_year %></span>
         </li>
         <li class="list__li">
           <span class="list__subtitle">Year of implementation:</span>
-          <span class="list__text">XXXX</span>
+          <span class="list__text"><%= @commitment.implementation_year %></span>
         </li>
         <li class="list__li">
           <span class="list__subtitle">Duration:</span>
-          <span class="list__text">XXXX</span>
+          <span class="list__text"><%= @commitment.duration %></span>
         </li>
         <li class="list__li">
           <span class="list__subtitle">Country Location:</span>
@@ -48,7 +48,7 @@
         </li>
         <li class="list__li">
           <span class="list__subtitle">Linked from platform:</span>
-          <% link_to 'XXXX', '#', title: '####', target: '_blank' %>
+          <%= link_to @commitment.link, @commitment.link, target: '_blank', title: @commitment.name %>
         </li>
       </ul>
     </div>
@@ -69,8 +69,8 @@
 
     <div class="list--governance">
       <h3 class="list__title">Governance Authority</h3>
-      <p>XXXX</p>
-      <p>Governance type</p>
+      <p><%= @commitment.governance_authority %></p>
+      <p class="bold">Governance type</p>
       <span>XXXX</span>
     </div>
 

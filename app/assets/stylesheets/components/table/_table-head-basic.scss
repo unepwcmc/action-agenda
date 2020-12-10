@@ -26,13 +26,12 @@
       position: fixed;
       top: 0;
 
-      width: rem-calc(1160);
+      width: rem-calc(1140);
 
       animation: showHeader .25s forwards linear;
     }
 
     &__row {
-      border: solid 1px $primary;
       display: flex;
     }
 

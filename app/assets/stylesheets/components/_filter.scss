@@ -53,8 +53,7 @@ $total-width-desktop: rem-calc(24);
       color: $activeTextColour;
     }
 
-    &:hover.filter__button--has-selected,
-    &__button--has-selected:not(.filter__button--active) {
+    &__button--has-selected:not(.filter__button--active):not(:hover) {
       border-color: $accent;
       color: $accent;
     }

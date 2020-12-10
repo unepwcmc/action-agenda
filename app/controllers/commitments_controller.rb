@@ -19,14 +19,16 @@ class CommitmentsController < ApplicationController
       render file: "#{Rails.root}/public/404", status: :not_found
     end
 
-    @primary_objectives = [
-      {
-        icon: 'climate-change-mitigation',
-        title: 'Climate Change Mitigation'
-      }
-    ]
+    @primary_objectives = @targets_biodiversity = []
 
-    @targets_biodiversity = [5, 10] #Not sure how this will work yet
+    # @primary_objectives = [
+    #   {
+    #     icon: 'climate-change-mitigation',
+    #     title: 'Climate Change Mitigation'
+    #   }
+    # ]
+
+    # @targets_biodiversity = [5, 10] #Not sure how this will work yet
   end
 
   def list

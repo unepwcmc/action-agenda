@@ -17,17 +17,17 @@
     // @include text-pagination;
   }
 
-    &__button--next {
-      @include button-next;
-
-      // &.button--disabled { @include icon-circle-chevron-grey-right; }
+    &__button--next { 
+      @include button-next; 
+    
+      &.disabled { @include button-disabled; }
     }
 
     &__button--previous {
       @include button-prev;
       margin: rem-calc(0 6 0 10);
-
-      // &.button--disabled { @include icon-circle-chevron-grey-left; }
+      
+      &.disabled { @include button-disabled; }
     }
 
   &__no-results {
