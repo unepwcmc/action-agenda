@@ -17,7 +17,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'mini_racer', platforms: :ruby
 
 #gem 'wcmc-components', path: "../web-components/gems/wcmc_components"
-gem 'wcmc-components', '~> 0.0.5'
+gem 'wcmc-components', '~> 0.0.5', source: "https://gem-server.unep-wcmc.org/"
 gem 'will_paginate', '~> 3.0'
 
 # Use CoffeeScript for .coffee assets and views
