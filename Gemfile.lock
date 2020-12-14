@@ -1,6 +1,6 @@
 GEM
   remote: https://rubygems.org/
-  remote: https://gem-server.unep-wcmc.org/
+  remote: https://gem-server-auth.unep-wcmc.org/
   specs:
     actioncable (5.2.4.4)
       actionpack (= 5.2.4.4)
