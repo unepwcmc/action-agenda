@@ -52,6 +52,10 @@
           <span class="list__subtitle">Linked from platform:</span>
           <%= link_to @commitment.link.truncate(50), @commitment.link, target: '_blank', title: @commitment.name %>
         </li>
+        <li class="list__li">
+          <span class="list__subtitle">Review method:</span>
+          <span class="list__text"><%= @commitment.review_method %></span>
+        </li>
       </ul>
     </div>
   </section>

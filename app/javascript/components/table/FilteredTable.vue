@@ -135,12 +135,12 @@
           requested_page: this.$store.state.table.requestedPage,
           filters: this.$store.state.table.selectedFilterOptions
         }
-
-        console.log(this.$store.state.table)
+        console.log('data', data)
+        // console.log(this.$store.state.table)
 
         axios.post(this.endpoint, data)
         .then(response => {
-          console.log('here', data)
+          console.log('here', response.data)
           this.updateProperties(response.data)
         })
         .catch(function (error) {
