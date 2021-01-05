@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_09_142215) do
+ActiveRecord::Schema.define(version: 2021_01_05_163434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,11 @@ ActiveRecord::Schema.define(version: 2020_12_09_142215) do
     t.bigint "country_id"
     t.string "duration"
     t.string "status"
+    t.string "actor"
+    t.string "governance_type"
+    t.string "related_biodiversity_targets"
+    t.string "primary_objectives"
+    t.string "review_method"
     t.index ["country_id"], name: "index_commitments_on_country_id"
   end
 
