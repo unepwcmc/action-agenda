@@ -1,6 +1,7 @@
 class CommitmentsController < ApplicationController
   DEFAULT_PARAMS =
   {
+    items_per_page: 10,
     requested_page: 1,
     filters: []
   }.to_json
@@ -33,7 +34,7 @@ class CommitmentsController < ApplicationController
 
   def list
     @commitments = Commitment.paginate_commitments(params.to_json)
-
+    
     render json: @commitments
   end
 end

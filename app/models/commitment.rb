@@ -38,7 +38,7 @@ class Commitment < ApplicationRecord
   
   # Filters moved to CommitmentPresenter to avoid repetition
   def self.filters_to_json
-    commitments = Commitment.all.order(id: :asc)
+    # commitments = Commitment.all.order(id: :asc)
     sanitise_filters
     CommitmentPresenter.new.populate_filters
   end
@@ -56,10 +56,11 @@ class Commitment < ApplicationRecord
     end.to_json
   end
 
-  def self.paginate_commitments(json=nil, order=nil)
+  def self.paginate_commitments(json=nil)
     json_params = json.nil? ? nil : JSON.parse(json)
     page = json_params.present? ? json_params["requested_page"].to_i : 1
-    order = (order && ['ASC', 'DESC'].include?(order.upcase)) ? order : 'DESC'
+    @items_per_page = json_params.present? ? json_params["items_per_page"].to_i : 10
+
     commitments = generate_query(page, json_params["filters"])
     items = commitments
     # items = serialise(commitments)
@@ -117,6 +118,7 @@ class Commitment < ApplicationRecord
       when 'governance_type'
         # TODO
       else 
+        # Single quoted strings needed for the SQL queries to work properly
         params[name] = options.empty? ? nil : "commitments.#{name} IN (#{options.map { |op| "'#{op}'" }.join(',')})"
       end
     end
@@ -130,7 +132,7 @@ class Commitment < ApplicationRecord
   def self.run_query(page, where_params)
       Commitment
       .where(where_params.values)
-      .paginate(page: page || 1, per_page: 10).order('id ASC')
+      .paginate(page: page || 1, per_page: @items_per_page).order('id ASC')
   end
 
   
@@ -143,12 +145,13 @@ class Commitment < ApplicationRecord
   end
 
   def self.structure_data(page, items)
+    puts page
     {
       current_page: page,
-      per_page: 50, #TODO This number should be coming through from the frontend items_per_page
+      per_page: @items_per_page, 
       total_entries: items.count,
-      total_pages: 1, # TODO make this work (items.count > 0 ? items[0][:total_pages] : 0),
-      items: items
+      total_pages: items.count.positive? ? items.count : 1,
+      items: items.each_slice(@items_per_page).to_a[page - 1]
     }
   end
 end
