@@ -3,22 +3,20 @@ class CommitmentPresenter
     filters = Commitment::FILTERS.map do |filter|
       {
         name: filter,
-        title: filter.capitalize,
+        title: filter.gsub(/_/, ' '),
         options: send("#{filter}_filters"),
         type: 'multiple'
       }
     end
 
-    filters.find { |filter| filter[:name] == 'governance_type' }[:title] = 'Governance Type'
     filters.find { |filter| filter[:name] == 'committed_year' }[:title] = 'Committed'
-    filters.find { |filter| filter[:name] == 'planned_actions' }[:title] = 'Objectives'
+    filters.find { |filter| filter[:name] == 'primary_objectives' }[:title] = 'Objectives'
 
     filters.to_json
   end
 
-  # TODO: - we need the type of org (actor) in the CSV
   def actor_filters
-    []
+    Commitment.pluck(:actor)
   end
 
   def country_filters
@@ -38,12 +36,15 @@ class CommitmentPresenter
   end
 
   # Possible TODO - how do we categorise the objectives?
-  def planned_actions_filters
+  def primary_objectives_filters
     Commitment.pluck(:planned_actions)
   end
 
-  # TODO: - missing governance type
   def governance_type_filters
-    []
+    Commitment.pluck(:governance_type)
+  end
+
+  def review_method_filters 
+    Commitment.pluck(:review_method)
   end
 end

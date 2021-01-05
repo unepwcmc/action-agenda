@@ -1,12 +1,10 @@
-# coding: utf-8
 require 'csv'
 require 'wcmc_components'
 class Commitment < ApplicationRecord
-
   include WcmcComponents::Loadable
   belongs_to :country, class_name: 'Country'
   import_by country: :name
-  
+
   validates :name, presence: true
 
   ignore_column 'TYPE'
@@ -31,11 +29,11 @@ class Commitment < ApplicationRecord
     {
       title: '',
       field: 'id'
-    },
+    }
   ].freeze
 
-  FILTERS = %w[actor country committed_year duration status planned_actions governance_type].freeze
-  
+  FILTERS = %w[actor country committed_year duration status primary_objectives governance_type review_method].freeze
+
   # Filters moved to CommitmentPresenter to avoid repetition
   def self.filters_to_json
     # commitments = Commitment.all.order(id: :asc)
@@ -45,8 +43,8 @@ class Commitment < ApplicationRecord
 
   def self.commitments_to_json
     commitments = Commitment.all
-                 .includes(:country)
-                 .order(id: :asc).to_a.map! do |commitment|
+                            .includes(:country)
+                            .order(id: :asc).to_a.map! do |commitment|
       {
         id: commitment.id,
         title: commitment.name,
@@ -56,12 +54,12 @@ class Commitment < ApplicationRecord
     end.to_json
   end
 
-  def self.paginate_commitments(json=nil)
+  def self.paginate_commitments(json = nil)
     json_params = json.nil? ? nil : JSON.parse(json)
-    page = json_params.present? ? json_params["requested_page"].to_i : 1
-    @items_per_page = json_params.present? ? json_params["items_per_page"].to_i : 10
+    page = json_params.present? ? json_params['requested_page'].to_i : 1
+    @items_per_page = json_params.present? ? json_params['items_per_page'].to_i : 10
 
-    commitments = generate_query(page, json_params["filters"])
+    commitments = generate_query(page, json_params['filters'])
     items = commitments
     # items = serialise(commitments)
     structure_data(page, items)
@@ -69,85 +67,76 @@ class Commitment < ApplicationRecord
 
   def to_hash
     {
-        id: id,
-        title: name,
-        description: description,
-        committed: committed_year,
-        duration: duration,
-        status: status,
-        url: Rails.application.routes.url_helpers.commitment_path(id),
-        link: link
+      id: id,
+      title: name,
+      description: description,
+      committed: committed_year,
+      duration: duration,
+      status: status,
+      url: Rails.application.routes.url_helpers.commitment_path(id),
+      link: link
     }
   end
-  
-  private
-  
+
   def self.generate_query(page, filter_params)
     # if params are empty then return the paginated results without filtering
 
-    return Commitment.includes(:country)
-      .order(id: :asc)
-      .to_a.map! do |commitment|
-      commitment.to_hash
-    end if filter_params.empty?
+    if filter_params.empty?
+      return Commitment.includes(:country)
+                       .order(id: :asc)
+                       .to_a.map! do |commitment|
+               commitment.to_hash
+             end
+    end
 
     # we have to do some hard work on the filtering...
-    filters = filter_params.select { |hash| hash["options"].present? }
+    filters = filter_params.select { |hash| hash['options'].present? }
     where_params = parse_filters(filters)
     run_query(page, where_params).to_a.map! do |commitment|
       commitment.to_hash
-    end 
+    end
   end
 
   def self.parse_filters(filters)
-    params = Hash.new
+    params = {}
     FILTERS.each { |filter| params[filter] = nil }
 
     filters.each do |filter|
-      options = filter["options"]
+      options = filter['options']
       name = filter['name']
       case name
-      when 'actor'
-        # TODO
       when 'country'
-        # TODO - need to fix this
+        # TODO: - need to fix this
         country_ids = []
         countries = options
         country_ids << Country.where(name: countries).pluck(:id)
         params['country'] = country_ids.flatten.empty? ? nil : "country.id IN (#{country_ids.join(',')})"
-      when 'governance_type'
-        # TODO
-      else 
+      else
         # Single quoted strings needed for the SQL queries to work properly
         params[name] = options.empty? ? nil : "commitments.#{name} IN (#{options.map { |op| "'#{op}'" }.join(',')})"
       end
     end
-   
-    # params
 
-     # For the time being, remove governance and actor
-     params.except('governance_type', 'actor').compact
+    params.compact
   end
 
   def self.run_query(page, where_params)
-      Commitment
+    Commitment
       .where(where_params.values)
       .paginate(page: page || 1, per_page: @items_per_page).order('id ASC')
   end
 
-  
-  
   def self.sanitise_filters
     [Country].each do |model|
       var_name = "@#{model.to_s.underscore.pluralize}"
-      instance_variable_set(var_name, model.pluck(:name).compact.sort - ["Data not available"])
+      instance_variable_set(var_name, model.pluck(:name).compact.sort - ['Data not available'])
     end
   end
 
   def self.structure_data(page, items)
     {
       current_page: page,
-      per_page: @items_per_page, 
+      per_page: @items_per_page,
       total_entries: items.count,
       total_pages: items.count.positive? ? items.each_slice(@items_per_page).to_a.count : 1,
       items: items.each_slice(@items_per_page).to_a[page - 1]
