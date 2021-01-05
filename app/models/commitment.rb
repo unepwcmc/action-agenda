@@ -145,12 +145,11 @@ class Commitment < ApplicationRecord
   end
 
   def self.structure_data(page, items)
-    puts page
     {
       current_page: page,
       per_page: @items_per_page, 
       total_entries: items.count,
-      total_pages: items.count.positive? ? items.count : 1,
+      total_pages: items.count.positive? ? items.each_slice(@items_per_page).to_a.count : 1,
       items: items.each_slice(@items_per_page).to_a[page - 1]
     }
   end
