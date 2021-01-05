@@ -1,8 +1,6 @@
 class CommitmentPresenter
-  FILTERS = %w[actor country committed duration status objectives governance_type].freeze
-
   def populate_filters
-    filters = FILTERS.map do |filter|
+    filters = Commitment::FILTERS.map do |filter|
       {
         name: filter,
         title: filter.capitalize,
@@ -12,6 +10,9 @@ class CommitmentPresenter
     end
 
     filters.find { |filter| filter[:name] == 'governance_type' }[:title] = 'Governance Type'
+    filters.find { |filter| filter[:name] == 'committed_year' }[:title] = 'Committed'
+    filters.find { |filter| filter[:name] == 'planned_actions' }[:title] = 'Objectives'
+
     filters.to_json
   end
 
@@ -24,7 +25,7 @@ class CommitmentPresenter
     Country.pluck(:name)
   end
 
-  def committed_filters
+  def committed_year_filters
     Commitment.where.not(committed_year: nil).distinct.pluck(:committed_year)
   end
 
@@ -37,7 +38,7 @@ class CommitmentPresenter
   end
 
   # Possible TODO - how do we categorise the objectives?
-  def objectives_filters
+  def planned_actions_filters
     Commitment.pluck(:planned_actions)
   end
 

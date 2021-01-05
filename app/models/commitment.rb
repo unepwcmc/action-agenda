@@ -33,6 +33,8 @@ class Commitment < ApplicationRecord
       field: 'id'
     },
   ].freeze
+
+  FILTERS = %w[actor country committed_year duration status planned_actions governance_type].freeze
   
   # Filters moved to CommitmentPresenter to avoid repetition
   def self.filters_to_json
@@ -78,6 +80,7 @@ class Commitment < ApplicationRecord
   end
   
   private
+  
   def self.generate_query(page, filter_params)
     # if params are empty then return the paginated results without filtering
 
@@ -96,29 +99,38 @@ class Commitment < ApplicationRecord
   end
 
   def self.parse_filters(filters)
-    committed_years = []
-    country_ids = []
-    where_params = {committed_year: "", country: ""}
+    params = Hash.new
+    FILTERS.each { |filter| params[filter] = nil }
+
     filters.each do |filter|
       options = filter["options"]
-      case filter['name']
-      when 'committed'
-        where_params[:committed_year] = options.empty? ? nil : "commitments.committed_year IN (#{options.join(',')})"
+      name = filter['name']
+      case name
+      when 'actor'
+        # TODO
       when 'country'
-#        countries = options
-#        site_ids << countries.map{ |iso3| Country.find_by(iso_3: iso3).protected_areas.pluck(:id) }
-#        where_params[:sites] = site_ids.flatten.empty? ? nil : "pame_evaluations.protected_area_id IN (#{site_ids.join(',')})"
-#        country_ids << countries.map{ |iso3| "#{ Country.find_by(iso_3: iso3).id }" }
-#        where_params[:iso3] = country_ids.flatten.empty? ? nil : "countries.id IN (#{country_ids.join(',')})"
+        # TODO - need to fix this
+        country_ids = []
+        countries = options
+        country_ids << Country.where(name: countries).pluck(:id)
+        params['country'] = country_ids.flatten.empty? ? nil : "country.id IN (#{country_ids.join(',')})"
+      when 'governance_type'
+        # TODO
+      else 
+        params[name] = options.empty? ? nil : "commitments.#{name} IN (#{options.map { |op| "'#{op}'" }.join(',')})"
       end
     end
-    where_params
+   
+    # params
+
+     # For the time being, remove governance and actor
+     params.except('governance_type', 'actor').compact
   end
 
   def self.run_query(page, where_params)
       Commitment
-      .where(where_params[:committed_year])
-      .paginate(page: page || 1, per_page: 50).order('id ASC')
+      .where(where_params.values)
+      .paginate(page: page || 1, per_page: 10).order('id ASC')
   end
 
   
