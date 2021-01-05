@@ -34,32 +34,11 @@ class Commitment < ApplicationRecord
     },
   ].freeze
   
+  # Filters moved to CommitmentPresenter to avoid repetition
   def self.filters_to_json
     commitments = Commitment.all.order(id: :asc)
     sanitise_filters
-    filters = [
-      {
-        title:"ID"
-      },
-      {
-        title: "Commitment"
-      },
-      {
-        name: "committed",
-        title: "Committed",
-        options: @committed_years,
-        type: 'multiple'
-      },
-      {
-        name: "country",
-        title: "Country",
-        options: @countries,
-        type: 'multiple'
-      },
-
-
-    ].to_json
-
+    CommitmentPresenter.new.populate_filters
   end
 
   def self.commitments_to_json
@@ -149,7 +128,6 @@ class Commitment < ApplicationRecord
       var_name = "@#{model.to_s.underscore.pluralize}"
       instance_variable_set(var_name, model.pluck(:name).compact.sort - ["Data not available"])
     end
-    @committed_years = Commitment.where.not(committed_year: nil).distinct.pluck(:committed_year)
   end
 
   def self.structure_data(page, items)
