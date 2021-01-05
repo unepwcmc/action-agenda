@@ -1,24 +1,11 @@
-# README
+# Action Agenda
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Quickstart
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. `bundle install`
+2. `yarn install`
+3. `rails db:create db:migrate`
+4. `rails s` 
+5. Obtain a copy of the 'commitments' CSV if not already present in `lib/data/seeds`
+6. Run `rails import:commitments`
+7. On the Commitments page, you should see a list of commitments.
