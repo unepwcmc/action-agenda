@@ -16,7 +16,7 @@ class CommitmentPresenter
   end
 
   def actor_filters
-    Commitment.pluck(:actor)
+    Commitment.pluck(:actor).uniq.compact.map(&:squish)
   end
 
   def country_filters
@@ -28,23 +28,22 @@ class CommitmentPresenter
   end
 
   def duration_filters
-    Commitment.pluck(:duration).uniq
+    Commitment.pluck(:duration).uniq.compact.map(&:squish)
   end
 
   def status_filters
-    Commitment.pluck(:status).uniq
+    Commitment.pluck(:status).uniq.compact.map(&:squish)
   end
 
-  # Possible TODO - how do we categorise the objectives?
   def primary_objectives_filters
-    Commitment.pluck(:planned_actions)
+    Commitment.pluck(:planned_actions).uniq.compact.map(&:squish)
   end
 
   def governance_type_filters
-    Commitment.pluck(:governance_type)
+    Commitment.pluck(:governance_type).uniq.compact.map(&:squish)
   end
 
   def review_method_filters 
-    Commitment.pluck(:review_method)
+    Commitment.pluck(:review_method).uniq.compact.map(&:squish)
   end
 end
