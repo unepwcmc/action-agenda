@@ -24,8 +24,8 @@ class CommitmentsController < ApplicationController
 
     @primary_objectives = [
       {
-        icon: 'climate-change-mitigation',
-        title: 'Climate Change Mitigation'
+        icon: @commitment.primary_objectives.downcase.squish.gsub(' ', '-'),
+        title: @commitment.primary_objectives
       }
     ]
 
