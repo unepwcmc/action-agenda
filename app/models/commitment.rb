@@ -61,6 +61,7 @@ class Commitment < ApplicationRecord
 
     commitments = generate_query(page, json_params['filters'])
     items = commitments
+
     # items = serialise(commitments)
     structure_data(page, items)
   end
@@ -80,10 +81,9 @@ class Commitment < ApplicationRecord
 
   def self.generate_query(page, filter_params)
     # if params are empty then return the paginated results without filtering
-
     if filter_params.empty?
       return Commitment.includes(:country)
-                       .order(id: :asc)
+                       .order(id: :asc).paginate(page: page || 1, per_page: @items_per_page)
                        .to_a.map! do |commitment|
                commitment.to_hash
              end
@@ -137,9 +137,9 @@ class Commitment < ApplicationRecord
     {
       current_page: page,
       per_page: @items_per_page,
-      total_entries: items.count,
-      total_pages: items.count.positive? ? items.each_slice(@items_per_page).to_a.count : 1,
-      items: items.each_slice(@items_per_page).to_a[page - 1]
+      total_entries: Commitment.count,
+      total_pages: items.count.positive? ? Commitment.all.to_a.each_slice(@items_per_page).count : 1,
+      items: items
     }
   end
 end
