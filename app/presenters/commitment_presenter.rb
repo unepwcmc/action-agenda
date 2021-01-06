@@ -42,8 +42,4 @@ class CommitmentPresenter
   def governance_type_filters
     Commitment.pluck(:governance_type).uniq.compact.map(&:squish)
   end
-
-  def review_method_filters 
-    Commitment.pluck(:review_method).uniq.compact.map(&:squish)
-  end
 end
