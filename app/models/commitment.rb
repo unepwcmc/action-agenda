@@ -153,6 +153,8 @@ class Commitment < ApplicationRecord
   end
 
   def self.pages(items) 
+    return 0 if items.count == 0
+
     total_pages = items.each_slice(@items_per_page).count
 
     if @filter_params.empty?
