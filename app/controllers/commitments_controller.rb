@@ -22,14 +22,14 @@ class CommitmentsController < ApplicationController
 
     @primary_objectives = @targets_biodiversity = []
 
-    # @primary_objectives = [
-    #   {
-    #     icon: 'climate-change-mitigation',
-    #     title: 'Climate Change Mitigation'
-    #   }
-    # ]
+    @primary_objectives = [
+      {
+        icon: 'climate-change-mitigation',
+        title: 'Climate Change Mitigation'
+      }
+    ]
 
-    # @targets_biodiversity = [5, 10] #Not sure how this will work yet
+    @targets_biodiversity = [5, 10]
   end
 
   def list
