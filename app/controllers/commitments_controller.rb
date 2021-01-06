@@ -1,6 +1,7 @@
 class CommitmentsController < ApplicationController
   DEFAULT_PARAMS =
   {
+    items_per_page: 10,
     requested_page: 1,
     filters: []
   }.to_json
@@ -21,19 +22,19 @@ class CommitmentsController < ApplicationController
 
     @primary_objectives = @targets_biodiversity = []
 
-    # @primary_objectives = [
-    #   {
-    #     icon: 'climate-change-mitigation',
-    #     title: 'Climate Change Mitigation'
-    #   }
-    # ]
+    @primary_objectives = [
+      {
+        icon: @commitment.primary_objectives.downcase.squish.gsub(' ', '-'),
+        title: @commitment.primary_objectives
+      }
+    ]
 
-    # @targets_biodiversity = [5, 10] #Not sure how this will work yet
+    @targets_biodiversity = @commitment.related_biodiversity_targets.scan(/\d+/).map(&:to_i)
   end
 
   def list
     @commitments = Commitment.paginate_commitments(params.to_json)
-
+    
     render json: @commitments
   end
 end

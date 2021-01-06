@@ -18,7 +18,7 @@
       <ul class="list__ul">
         <li class="list__li">
           <span class="list__subtitle">Actor:</span>
-          <span class="list__text">COMPANY NAME</span>
+          <span class="list__text"><%= @commitment.actor %></span>
           <span class="list__text">COMPANY WEBSITE</span>
         </li>
         <li class="list__li">
@@ -42,6 +42,10 @@
           <span class="list__text"><%= @commitment.duration %></span>
         </li>
         <li class="list__li">
+          <span class="list__subtitle">Review method:</span>
+          <span class="list__text"><%= @commitment.review_method %></span>
+        </li>
+        <li class="list__li">
           <span class="list__subtitle">Country Location:</span>
           <p class="list__country">
             <i class="list__icon icon--pin"></i>
@@ -51,6 +55,10 @@
         <li class="list__li">
           <span class="list__subtitle">Linked from platform:</span>
           <%= link_to @commitment.link.truncate(50), @commitment.link, target: '_blank', title: @commitment.name %>
+        </li>
+        <li class="list__li">
+          <span class="list__subtitle">Review method:</span>
+          <span class="list__text"><%= @commitment.review_method %></span>
         </li>
       </ul>
     </div>
@@ -73,7 +81,7 @@
       <h3 class="list__title">Governance Authority</h3>
       <p><%= @commitment.governance_authority %></p>
       <p class="bold">Governance type</p>
-      <span>XXXX</span>
+      <span><%= @commitment.governance_type %></span>
     </div>
 
     <div class="list--targets-biodiversity">
@@ -81,7 +89,11 @@
       <ul class="list__ul">
         <% @targets_biodiversity.each do |target| %>
           <li class="list__li">
-            <%= image_tag "icons/aichi-#{target}.svg", class: 'icon--aichi', alt: "Aichi target #{target} icon" %>
+            <% begin %>
+              <%= image_tag "icons/aichi-#{target}.svg", class: 'icon--aichi', alt: "Aichi target #{target} icon" %>
+            <% rescue Sprockets::Rails::Helper::AssetNotFound  %>
+              <% Rails.logger.info("Aichi icon not found") %>
+            <% end %>
             <span class="list__subtitle">Aichi target <%= target %></span>
           </li>
         <% end %>
@@ -89,7 +101,7 @@
     </div>
 
     <div class="list--targets-additional">
-      <h3 class="list__title">Additional Targets</h3>
+      <h3 class="list__title">Additional Details</h3>
       <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur Qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate</p>
     </div>
   </section>

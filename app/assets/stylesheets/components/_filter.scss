@@ -87,6 +87,10 @@ $total-width-desktop: rem-calc(24);
         left: unset;
       }
 
+      @include breakpoint($medium) {
+        width: rem-calc(300);
+      }
+
       &--active {
         display: block;
       }
@@ -98,7 +102,6 @@ $total-width-desktop: rem-calc(24);
         max-height: 85vh;
         overflow-y: scroll;
         overflow-x: hidden; //for IE11
-        white-space: nowrap; 
 
         @include breakpoint($small) {
           max-height: $filters-menu-max-height;
