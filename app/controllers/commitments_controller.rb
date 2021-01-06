@@ -29,7 +29,7 @@ class CommitmentsController < ApplicationController
       }
     ]
 
-    @targets_biodiversity = [5, 10]
+    @targets_biodiversity = @commitment.related_biodiversity_targets.scan(/\d+/).map(&:to_i)
   end
 
   def list

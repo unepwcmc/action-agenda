@@ -36,7 +36,7 @@ class CommitmentPresenter
   end
 
   def primary_objectives_filters
-    Commitment.pluck(:planned_actions).uniq.compact.map(&:squish)
+    Commitment.pluck(:primary_objectives).uniq.compact.map(&:squish)
   end
 
   def governance_type_filters

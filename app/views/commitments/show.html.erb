@@ -89,7 +89,11 @@
       <ul class="list__ul">
         <% @targets_biodiversity.each do |target| %>
           <li class="list__li">
-            <%= image_tag "icons/aichi-#{target}.svg", class: 'icon--aichi', alt: "Aichi target #{target} icon" %>
+            <% begin %>
+              <%= image_tag "icons/aichi-#{target}.svg", class: 'icon--aichi', alt: "Aichi target #{target} icon" %>
+            <% rescue Sprockets::Rails::Helper::AssetNotFound  %>
+              <% Rails.logger.info("Aichi icon not found") %>
+            <% end %>
             <span class="list__subtitle">Aichi target <%= target %></span>
           </li>
         <% end %>
