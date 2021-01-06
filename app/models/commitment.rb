@@ -58,12 +58,22 @@ class Commitment < ApplicationRecord
     json_params = json.nil? ? nil : JSON.parse(json)
     page = json_params.present? ? json_params['requested_page'].to_i : 1
     @items_per_page = json_params.present? ? json_params['items_per_page'].to_i : 10
+    filter_params = nil
+    if json_params.present?
+      filter_params = json_params['filters'].all? { |p| p['options'].blank? } ? [] : json_params['filters']
+    end
 
-    commitments = generate_query(page, json_params['filters'])
+    commitments = generate_query(page, filter_params)
     items = commitments
+    total_entries = filter_params.empty? ? Commitment.count : items.count
 
+    total_pages = items.each_slice(@items_per_page).count
+
+    if filter_params.empty?
+      total_pages = Commitment.all.each_slice(@items_per_page).count
+    end
     # items = serialise(commitments)
-    structure_data(page, items)
+    structure_data(page, items, total_entries, total_pages)
   end
 
   def to_hash
@@ -106,11 +116,10 @@ class Commitment < ApplicationRecord
       name = filter['name']
       case name
       when 'country'
-        # TODO: - need to fix this
         country_ids = []
         countries = options
         country_ids << Country.where(name: countries).pluck(:id)
-        params['country'] = country_ids.flatten.empty? ? nil : "country.id IN (#{country_ids.join(',')})"
+        params['country'] = country_ids.flatten.empty? ? nil : "commitments.country_id IN (#{country_ids.join(',')})"
       else
         # Single quoted strings needed for the SQL queries to work properly
         params[name] = options.empty? ? nil : "commitments.#{name} IN (#{options.map { |op| "'#{op}'" }.join(',')})"
@@ -122,7 +131,8 @@ class Commitment < ApplicationRecord
 
   def self.run_query(page, where_params)
     Commitment
-      .where(where_params.values)
+      .where(where_params[:country])
+      .where(where_params.except(:country).values)
       .paginate(page: page || 1, per_page: @items_per_page).order('id ASC')
   end
 
@@ -133,12 +143,12 @@ class Commitment < ApplicationRecord
     end
   end
 
-  def self.structure_data(page, items)
+  def self.structure_data(page, items, total_entries, total_pages)
     {
       current_page: page,
       per_page: @items_per_page,
-      total_entries: Commitment.count,
-      total_pages: items.count.positive? ? Commitment.all.to_a.each_slice(@items_per_page).count : 1,
+      total_entries: total_entries,
+      total_pages: total_pages,
       items: items
     }
   end
