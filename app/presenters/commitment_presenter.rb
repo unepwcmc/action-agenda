@@ -4,7 +4,7 @@ class CommitmentPresenter
       {
         name: filter,
         title: filter.gsub(/_/, ' '),
-        options: send("#{filter}_filters"),
+        options: get_filters(filter),
         type: 'multiple'
       }
     end
@@ -15,31 +15,14 @@ class CommitmentPresenter
     filters.to_json
   end
 
-  def actor_filters
-    Commitment.pluck(:actor).uniq.compact.map(&:squish)
-  end
-
-  def country_filters
-    Country.pluck(:name)
-  end
-
-  def committed_year_filters
-    Commitment.where.not(committed_year: nil).distinct.pluck(:committed_year)
-  end
-
-  def duration_filters
-    Commitment.pluck(:duration).uniq.compact.map(&:squish)
-  end
-
-  def status_filters
-    Commitment.pluck(:status).uniq.compact.map(&:squish)
-  end
-
-  def primary_objectives_filters
-    Commitment.pluck(:primary_objectives).uniq.compact.map(&:squish)
-  end
-
-  def governance_type_filters
-    Commitment.pluck(:governance_type).uniq.compact.map(&:squish)
+  def get_filters(filter)
+    case filter
+    when 'country'
+      Country.pluck(:name)
+    when 'committed_year'
+      Commitment.where.not(committed_year: nil).distinct.pluck(:committed_year)
+    else
+      Commitment.pluck(filter.to_sym).uniq.compact.map(&:squish)
+    end
   end
 end
