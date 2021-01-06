@@ -58,22 +58,15 @@ class Commitment < ApplicationRecord
     json_params = json.nil? ? nil : JSON.parse(json)
     page = json_params.present? ? json_params['requested_page'].to_i : 1
     @items_per_page = json_params.present? ? json_params['items_per_page'].to_i : 10
-    filter_params = nil
+    @filter_params = nil
     if json_params.present?
-      filter_params = json_params['filters'].all? { |p| p['options'].blank? } ? [] : json_params['filters']
+      @filter_params = json_params['filters'].all? { |p| p['options'].blank? } ? [] : json_params['filters']
     end
 
-    commitments = generate_query(page, filter_params)
+    commitments = generate_query(page, @filter_params)
     items = commitments
-    total_entries = filter_params.empty? ? Commitment.count : items.count
 
-    total_pages = items.each_slice(@items_per_page).count
-
-    if filter_params.empty?
-      total_pages = Commitment.all.each_slice(@items_per_page).count
-    end
-    # items = serialise(commitments)
-    structure_data(page, items, total_entries, total_pages)
+    structure_data(page, items)
   end
 
   def to_hash
@@ -126,12 +119,10 @@ class Commitment < ApplicationRecord
       end
     end
 
-    puts params.compact
     params.compact
   end
 
   def self.run_query(page, where_params)
-    puts where_params.values
     Commitment
       .from("commitments")
       .where(where_params.values.join(' AND '))
@@ -145,13 +136,27 @@ class Commitment < ApplicationRecord
     end
   end
 
-  def self.structure_data(page, items, total_entries, total_pages)
+  def self.structure_data(page, items)
     {
       current_page: page,
       per_page: @items_per_page,
-      total_entries: total_entries,
-      total_pages: total_pages,
+      total_entries: entries(items),
+      total_pages: pages(items),
       items: items
     }
+  end
+
+  def self.entries(items)
+    @filter_params.empty? ? Commitment.count : items.count
+  end
+
+  def self.pages(items) 
+    total_pages = items.each_slice(@items_per_page).count
+
+    if @filter_params.empty?
+      total_pages = Commitment.all.each_slice(@items_per_page).count
+    end
+
+    total_pages
   end
 end
