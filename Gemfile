@@ -28,7 +28,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # Use webpack to manage app-like JavaScript modules in Rails
 gem 'webpacker', '~> 4.2', '>= 4.2.2'
-
+gem 'httparty'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password

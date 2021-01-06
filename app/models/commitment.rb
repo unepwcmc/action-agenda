@@ -85,6 +85,8 @@ class Commitment < ApplicationRecord
     structure_data(page, items)
   end
 
+
+  
   def to_hash
     {
         id: id,
