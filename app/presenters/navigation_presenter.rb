@@ -40,7 +40,7 @@ class NavigationPresenter
         url: '#'
       },
       {
-        title: 'Main Action Agenda',
+        title: 'CBD Action Agenda',
         url: 'https://www.cbd.int/action-agenda/'
       }
     ]
