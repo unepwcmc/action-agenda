@@ -32,7 +32,7 @@ class Commitment < ApplicationRecord
     }
   ].freeze
 
-  FILTERS = %w[actor country committed_year duration status primary_objectives governance_type].freeze
+  FILTERS = %w[actor country committed_year status primary_objectives governance_type].freeze
 
   # Filters moved to CommitmentPresenter to avoid repetition
   def self.filters_to_json
