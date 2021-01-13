@@ -18,7 +18,7 @@ class CommitmentPresenter
   def get_filters(filter)
     case filter
     when 'country'
-      Country.pluck(:name)
+      Country.pluck(:name).sort
     when 'committed_year'
       Commitment.where.not(committed_year: nil).distinct.pluck(:committed_year)
     else
