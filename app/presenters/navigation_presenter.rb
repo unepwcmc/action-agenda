@@ -12,7 +12,7 @@ class NavigationPresenter
       },
       {
         title: 'Make a Commitment',
-        url: '#'
+        url: 'https://www.cbd.int/action-agenda/contribute/'
       },
       {
         title: 'Explore Commitments',
@@ -29,7 +29,7 @@ class NavigationPresenter
     [
       {
         title: 'Make a Commitment',
-        url: '#'
+        url: 'https://www.cbd.int/action-agenda/contribute/'
       },
       {
         title: 'Explore Commitments',

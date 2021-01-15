@@ -23,8 +23,8 @@ class Commitment < ApplicationRecord
       field: 'duration'
     },
     {
-      title: 'Status',
-      field: 'status'
+      title: 'Stage',
+      field: 'stage'
     },
     {
       title: '',
@@ -32,7 +32,7 @@ class Commitment < ApplicationRecord
     }
   ].freeze
 
-  FILTERS = %w[actor country committed_year status primary_objectives governance_type].freeze
+  FILTERS = %w[actor country committed_year stage primary_objectives governance_type].freeze
 
   # Filters moved to CommitmentPresenter to avoid repetition
   def self.filters_to_json
@@ -78,7 +78,7 @@ class Commitment < ApplicationRecord
       description: description,
       committed: committed_year,
       duration: duration,
-      status: status,
+      stage: stage,
       url: Rails.application.routes.url_helpers.commitment_path(id),
       link: link
     }
