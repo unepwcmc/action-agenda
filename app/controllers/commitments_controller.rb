@@ -21,15 +21,15 @@ class CommitmentsController < ApplicationController
     end
 
     @primary_objectives = @targets_biodiversity = []
-
+    
     @primary_objectives = [
       {
         icon: @commitment.primary_objectives.downcase.squish.gsub(' ', '-'),
         title: @commitment.primary_objectives
       }
-    ]
+    ] unless @commitment.primary_objectives.nil?
 
-    @targets_biodiversity = @commitment.related_biodiversity_targets.scan(/\d+/).map(&:to_i)
+    @targets_biodiversity = @commitment.related_biodiversity_targets.scan(/\d+/).map(&:to_i) unless @commitment.related_biodiversity_targets.nil?
   end
 
   def list

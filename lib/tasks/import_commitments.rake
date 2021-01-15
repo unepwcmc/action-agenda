@@ -27,12 +27,16 @@ namespace :import do
         next if cbd_com.nil?
         country = !cbd_com["contacts"][0]["country"].nil? ? Country.find_by(iso: cbd_com["contacts"][0]["country"]["identifier"].upcase)
                   : Country.find_by(iso: "--")
+
+        aichi_targets = cbd_com["actionDetails"]["aichiTargets"].map{ |at| at["identifier"] }.join(';').downcase
+        
         our_com = Commitment.new(name: cbd_action["name"]["en"],
                                  description: cbd_action["description"]["en"],
                                  link: "https://www.cbd.int/action-agenda/contributions/action?action-id=#{cbd_id}",
                                  country: country,
                                  committed_year: cbd_com["meta"]["createdOn"].to_date.year,
-                                 update_year: cbd_com["meta"]["modifiedOn"].to_date.year
+                                 update_year: cbd_com["meta"]["modifiedOn"].to_date.year,
+                                 related_biodiversity_targets: aichi_targets
                                 )
         our_com.save
       end
