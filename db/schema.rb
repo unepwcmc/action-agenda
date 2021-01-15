@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_06_141536) do
+ActiveRecord::Schema.define(version: 2021_01_15_122243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2021_01_06_141536) do
     t.datetime "updated_at", null: false
     t.bigint "country_id"
     t.string "duration"
-    t.string "status"
+    t.string "stage"
     t.string "actor"
     t.string "governance_type"
     t.string "related_biodiversity_targets"

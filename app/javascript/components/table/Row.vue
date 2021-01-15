@@ -6,7 +6,7 @@
     </p>
     <p class="table__cell">{{ item.committed }}</p>
     <p class="table__cell">{{ item.duration }}</p>
-    <p class="table__cell">{{ item.status }}</p>
+    <p class="table__cell">{{ item.stage }}</p>
     <p class="table__cell">
       <a 
         :href="item.url" 
