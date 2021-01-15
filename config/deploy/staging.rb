@@ -5,7 +5,7 @@ set :branch, "develop"
 server "web-supported-staging.linode.unep-wcmc.org", user: 'wcmc', roles: %w{app web db}
 
 set :application, "actionagenda"
-set :server_name, "actionagenda.web-supoorted-staging.linode.unep-wcmc.org"
+set :server_name, "actionagenda.web-supported-staging.linode.unep-wcmc.org"
 set :sudo_user, "wcmc"
 set :app_port, "80"
 
