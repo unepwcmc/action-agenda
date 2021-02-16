@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_15_122243) do
+ActiveRecord::Schema.define(version: 2021_02_16_150439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2021_01_15_122243) do
     t.boolean "geographic_boundary"
     t.float "latitude"
     t.float "longitude"
-    t.integer "current_area_km"
-    t.integer "proposed_area_km"
+    t.integer "current_area_ha"
+    t.integer "proposed_area_ha"
     t.integer "committed_year"
     t.integer "implementation_year"
     t.integer "update_year"

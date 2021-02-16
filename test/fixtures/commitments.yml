@@ -5,8 +5,8 @@ one:
   geographic_boundary: false
   latitude: 1.5
   longitude: 1.5
-  current_area_km: 1
-  proposed_area_km: 1
+  current_area_ha: 1
+  proposed_area_ha: 1
   committed_year: 1
   implementation_year: 1
   update_year: 1
@@ -21,8 +21,8 @@ two:
   geographic_boundary: false
   latitude: 1.5
   longitude: 1.5
-  current_area_km: 1
-  proposed_area_km: 1
+  current_area_ha: 1
+  proposed_area_ha: 1
   committed_year: 1
   implementation_year: 1
   update_year: 1
