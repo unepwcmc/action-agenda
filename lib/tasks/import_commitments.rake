@@ -11,7 +11,7 @@ namespace :import do
   end
 
   def import_csv_file file
-    Commitment.import file, 'utf-8'
+    Commitment.import file
   end
 
 
