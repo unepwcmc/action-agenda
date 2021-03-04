@@ -21,6 +21,8 @@ class CommitmentPresenter
       Country.pluck(:name).sort
     when 'committed_year'
       Commitment.where.not(committed_year: nil).distinct.pluck(:committed_year)
+    when 'actor'
+      Actor.pluck(:name).sort
     else
       Commitment.pluck(filter.to_sym).uniq.compact.map(&:squish)
     end

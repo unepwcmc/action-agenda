@@ -4,7 +4,8 @@ class Commitment < ApplicationRecord
   include WcmcComponents::Loadable
   belongs_to :country, class_name: 'Country'
   import_by country: :name
-
+  has_and_belongs_to_many :actors
+  import_by actors: :name
   validates :name, presence: true
 
   ignore_column 'TYPE'
@@ -97,7 +98,6 @@ class Commitment < ApplicationRecord
     # we have to do some hard work on the filtering...
     filters = filter_params.select { |hash| hash['options'].present? }
     where_params = parse_filters(filters)
-
     run_query(page, where_params).to_a.map! do |commitment|
       commitment.to_hash
     end
@@ -105,16 +105,22 @@ class Commitment < ApplicationRecord
 
   def self.parse_filters(filters)
     country_ids = []
+    actor_ids = []
     params = {}
     FILTERS.each { |filter| params[filter] = nil }
 
     filters.each do |filter|
       options = filter['options']
       name = filter['name']
-      if name == 'country'
+      case name
+      when 'country'
         countries = options
         country_ids << Country.where(name: countries).pluck(:id)
         params['country'] = country_ids.flatten.empty? ? "" : "commitments.country_id IN (#{country_ids.join(',')})"
+      when 'actor'
+        actors = options
+        actor_ids << Actor.where(name: actors).pluck(:id)
+        params['actor'] = actor_ids.flatten.empty? ? "" : "actors_commitments.actor_id IN (#{actor_ids.join(',')})"
       else
         # Single quoted strings needed for the SQL queries to work properly
         params[name] = options.empty? ? "" : "commitments.#{name} IN (#{options.map { |op| "'#{op}'" }.join(',')})"
@@ -127,6 +133,7 @@ class Commitment < ApplicationRecord
   def self.run_query(page, where_params)
     Commitment
       .from("commitments")
+      .joins("JOIN actors_commitments ON commitment_id = commitments.id")
       .where(where_params.values.join(' AND '))
       .paginate(page: page || 1, per_page: @items_per_page).order('id ASC')
   end

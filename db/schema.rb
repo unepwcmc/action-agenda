@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_16_150439) do
+ActiveRecord::Schema.define(version: 2021_03_04_090216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "actors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "actors_commitments", id: false, force: :cascade do |t|
+    t.bigint "commitment_id"
+    t.bigint "actor_id"
+    t.index ["actor_id"], name: "index_actors_commitments_on_actor_id"
+    t.index ["commitment_id"], name: "index_actors_commitments_on_commitment_id"
+  end
 
   create_table "commitments", force: :cascade do |t|
     t.boolean "geographic_boundary"
@@ -34,7 +47,6 @@ ActiveRecord::Schema.define(version: 2021_02_16_150439) do
     t.bigint "country_id"
     t.string "duration"
     t.string "stage"
-    t.string "actor"
     t.string "governance_type"
     t.string "related_biodiversity_targets"
     t.string "primary_objectives"

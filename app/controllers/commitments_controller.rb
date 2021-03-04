@@ -34,7 +34,6 @@ class CommitmentsController < ApplicationController
 
   def list
     @commitments = Commitment.paginate_commitments(params.to_json)
-    
     render json: @commitments
   end
 end
