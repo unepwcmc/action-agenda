@@ -8,6 +8,8 @@ class Commitment < ApplicationRecord
   import_by actors: :name
   has_and_belongs_to_many :objectives
   import_by objectives: :name
+  has_and_belongs_to_many :governance_types
+  import_by governance_types: :name
 
 
   validates :name, presence: true
@@ -111,6 +113,7 @@ class Commitment < ApplicationRecord
     country_ids = []
     actor_ids = []
     objective_ids = []
+    governance_type_ids = []
     params = {}
     FILTERS.each { |filter| params[filter] = nil }
 
@@ -130,6 +133,12 @@ class Commitment < ApplicationRecord
         objectives = options
         objective_ids << Objective.where(name: objectives).pluck(:id)
         params['objective'] = objective_ids.flatten.empty? ? "" : "co.objective_id IN (#{objective_ids.join(',')})"
+      when 'governance_type'
+        governance_types = options
+        governance_type_ids << GovernanceType.where(name: governance_types).pluck(:id)
+        params['governance_type'] = governance_type_ids.flatten.empty? ? "" : "cgt.governance_type_id IN (#{governance_type_ids.join(',')})"
+
+
       else
         # Single quoted strings needed for the SQL queries to work properly
         params[name] = options.empty? ? "" : "commitments.#{name} IN (#{options.map { |op| "'#{op}'" }.join(',')})"
@@ -144,6 +153,7 @@ class Commitment < ApplicationRecord
       .from("commitments")
       .joins("JOIN actors_commitments AS ac ON ac.commitment_id = commitments.id")
       .joins("JOIN commitments_objectives AS co ON co.commitment_id = commitments.id")
+      .joins("JOIN commitments_governance_types AS cgt ON cgt.commitment_id = commitments.id")  
       .where(where_params.values.join(' AND '))
       .paginate(page: page || 1, per_page: @items_per_page).order('id ASC')
   end

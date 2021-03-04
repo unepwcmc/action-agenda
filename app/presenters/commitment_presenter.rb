@@ -25,6 +25,8 @@ class CommitmentPresenter
       Actor.pluck(:name).sort
     when 'primary_objectives'
       Objective.pluck(:name).sort
+    when 'governance_type'
+      GovernanceType.pluck(:name).sort
     else
       Commitment.pluck(filter.to_sym).uniq.compact.map(&:squish)
     end

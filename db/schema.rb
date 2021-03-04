@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_04_132343) do
+ActiveRecord::Schema.define(version: 2021_03_04_134628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,10 +47,16 @@ ActiveRecord::Schema.define(version: 2021_03_04_132343) do
     t.bigint "country_id"
     t.string "duration"
     t.string "stage"
-    t.string "governance_type"
     t.string "related_biodiversity_targets"
     t.string "review_method"
     t.index ["country_id"], name: "index_commitments_on_country_id"
+  end
+
+  create_table "commitments_governance_types", id: false, force: :cascade do |t|
+    t.bigint "commitment_id"
+    t.bigint "governance_type_id"
+    t.index ["commitment_id"], name: "index_commitments_governance_types_on_commitment_id"
+    t.index ["governance_type_id"], name: "index_commitments_governance_types_on_governance_type_id"
   end
 
   create_table "commitments_objectives", id: false, force: :cascade do |t|
@@ -65,6 +71,12 @@ ActiveRecord::Schema.define(version: 2021_03_04_132343) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "iso"
+  end
+
+  create_table "governance_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "objectives", force: :cascade do |t|
