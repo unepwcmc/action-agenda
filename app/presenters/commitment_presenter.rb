@@ -23,6 +23,8 @@ class CommitmentPresenter
       Commitment.where.not(committed_year: nil).distinct.pluck(:committed_year)
     when 'actor'
       Actor.pluck(:name).sort
+    when 'primary_objectives'
+      Objective.pluck(:name).sort
     else
       Commitment.pluck(filter.to_sym).uniq.compact.map(&:squish)
     end
