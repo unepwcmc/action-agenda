@@ -14,6 +14,7 @@ import store from '../store/store.js'
 
 // components
 import FilteredTable from '../components/table/FilteredTable'
+import TestForm from '../components/forms/TestForm'
 
 export const eventHub = new Vue()
 
@@ -37,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
       store,
       components: {
 	      FilteredTable,
+        TestForm
       }
     })
   }
