@@ -38,8 +38,11 @@ en:
   activerecord:
     errors:
       models:
-        criteria: 
+        criterium:
           attributes:
+            base:
+              none_of_the_above_option_for_cbd_commitments: 'CBD Objectives cannot include named objectives if "None of the above" option is selected'
+              none_of_the_above_option_for_stakeholders: '"Who is making the commitment" cannot include named stakeholders if "None of the above" option is selected'
             boundary:
               nil_value: 'Boundary information missing' 
             five_year_commitment:
@@ -56,6 +59,6 @@ en:
       boundary: Your commitment has no current/planned boundary
       five_year_commitment: The lifespan of your commitment is less than 5 years
       progress_report: You aren't able to submit progress reports
-      cbd_objectives: Your commitment doesn't contribute to any of the CBD commitments
-      stakeholders: Your commitment is being made by a government
+      no_cbd_objectives: Your commitment doesn't contribute to any of the CBD commitments
+      government_stakeholders: Your commitment is being made by a government
 

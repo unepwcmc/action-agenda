@@ -3,39 +3,46 @@ valid_criterium:
   five_year_commitment: true
   progress_report: true
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
-  stakeholders: local_communities, indiginous_peoples
+  stakeholders: local_communities, indigenous_peoples
 
 no_boundary:
   boundary: false
   five_year_commitment: true
   progress_report: true
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
-  stakeholders: local_communities, indiginous_peoples
+  stakeholders: local_communities, indigenous_peoples
 
 no_five_year_commitment:
   boundary: true
   five_year_commitment: false
   progress_report: true
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
-  stakeholders: local_communities, indiginous_peoples
+  stakeholders: local_communities, indigenous_peoples
 
 no_progress_report:
   boundary: true
   five_year_commitment: true
   progress_report: false
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
-  stakeholders: local_communities, indiginous_peoples
+  stakeholders: local_communities, indigenous_peoples
+
+government_stakeholder:
+  boundary: true
+  five_year_commitment: true
+  progress_report: true
+  cbd_objectives: conservation_of_biological_diversity, sustainable_use
+  stakeholders: local_communities, indigenous_peoples, local_government
 
 no_cbd_objectives:
   boundary: true
   five_year_commitment: true
   progress_report: true
-  cbd_objectives: 
-  stakeholders: local_communities, indiginous_peoples
+  cbd_objectives: none_of_the_above
+  stakeholders: local_communities, indigenous_peoples
 
-no_stakeholders:
+invalid_none_of_the_above_options:
   boundary: true
   five_year_commitment: true
   progress_report: true
-  cbd_objectives: sustainable_use
-  stakeholders: 
+  cbd_objectives: none_of_the_above, sustainable_use
+  stakeholders: none_of_the_above, local_communities
