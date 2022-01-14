@@ -9,9 +9,7 @@ class Criterium < ApplicationRecord
   validate :none_of_the_above_for_stakeholders
 
   def criteria_valid_for_commitment?
-    ![boundary, five_year_commitment, progress_report].map(&:blank?).any? ||
-      includes_none_of_the_above(CbdObjective, cbd_objective_ids) ||
-        includes_none_of_the_above(Stakeholder, stakeholder_ids)
+    !has_failing_data
   end
 
   private
@@ -30,5 +28,11 @@ class Criterium < ApplicationRecord
 
   def includes_none_of_the_above(klass, record_ids) 
     klass.where(id: record_ids).pluck(:name).include?('None of the above')
+  end
+
+  def has_failing_data
+    [boundary, five_year_commitment, progress_report].map(&:blank?).include?(true) ||
+        includes_none_of_the_above(CbdObjective, cbd_objective_ids) ||
+          includes_none_of_the_above(Stakeholder, stakeholder_ids)
   end
 end

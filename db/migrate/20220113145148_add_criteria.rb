@@ -23,15 +23,11 @@ class AddCriteria < ActiveRecord::Migration[5.2]
     create_table :criteria_stakeholders do |t|
       t.belongs_to :criterium
       t.belongs_to :stakeholder
-
-      t.timestamps
     end
 
     create_table :cbd_objectives_criteria do |t|
       t.belongs_to :criterium
       t.belongs_to :cbd_objective
-
-      t.timestamps
     end
   end
 end
