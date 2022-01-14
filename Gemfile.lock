@@ -1,6 +1,10 @@
 GEM
-  remote: https://rubygems.org/
   remote: https://gem-server.unep-wcmc.org/
+  specs:
+    wcmc-components (0.0.5)
+
+GEM
+  remote: https://rubygems.org/
   specs:
     actioncable (5.2.4.4)
       actionpack (= 5.2.4.4)
@@ -204,7 +208,6 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
-    wcmc-components (0.0.5)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -257,4 +260,4 @@ RUBY VERSION
    ruby 2.6.3p62
 
 BUNDLED WITH
-   2.1.4
+   2.2.26
