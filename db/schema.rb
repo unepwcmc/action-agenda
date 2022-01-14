@@ -22,12 +22,12 @@ ActiveRecord::Schema.define(version: 2022_01_13_145148) do
   end
 
   create_table "cbd_objectives_criteria", force: :cascade do |t|
-    t.bigint "criteria_id"
+    t.bigint "criterium_id"
     t.bigint "cbd_objective_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cbd_objective_id"], name: "index_cbd_objectives_criteria_on_cbd_objective_id"
-    t.index ["criteria_id"], name: "index_cbd_objectives_criteria_on_criteria_id"
+    t.index ["criterium_id"], name: "index_cbd_objectives_criteria_on_criterium_id"
   end
 
   create_table "commitments", force: :cascade do |t|
@@ -73,11 +73,11 @@ ActiveRecord::Schema.define(version: 2022_01_13_145148) do
   end
 
   create_table "criteria_stakeholders", force: :cascade do |t|
-    t.bigint "criteria_id"
+    t.bigint "criterium_id"
     t.bigint "stakeholder_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["criteria_id"], name: "index_criteria_stakeholders_on_criteria_id"
+    t.index ["criterium_id"], name: "index_criteria_stakeholders_on_criterium_id"
     t.index ["stakeholder_id"], name: "index_criteria_stakeholders_on_stakeholder_id"
   end
 

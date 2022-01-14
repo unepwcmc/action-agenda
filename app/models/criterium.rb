@@ -1,6 +1,6 @@
-class Criteria < ApplicationRecord
-  has_and_belongs_to_many :stakeholders
+class Criterium < ApplicationRecord
   has_and_belongs_to_many :cbd_objectives
+  has_and_belongs_to_many :stakeholders
 
   validates_inclusion_of :boundary, :five_year_commitment, :progress_report, in: [true, false], message: :nil_value
   validates :cbd_objectives, presence: true
