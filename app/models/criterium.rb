@@ -7,4 +7,9 @@ class Criterium < ApplicationRecord
   def criteria_valid_for_commitment?
     ![boundary, five_year_commitment, progress_report, cbd_objective_ids, stakeholder_ids].map(&:blank?).include?(true)
   end
+
+  def failure_messages
+    messages = []
+    
+  end
 end
