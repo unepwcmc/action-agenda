@@ -14,10 +14,10 @@ cbd_objective_names = [ 'Conservation of biological diversity', 'Sustainable use
 CbdObjective.create!(cbd_objective_names.map {|name| { name: name }})
 
 criteria = [
-  { boundary: true, five_year_commitment: true, progress_report: true, stakeholder_ids: Stakeholder.pluck(:id).sample(2), cbd_objective_ids: CbdObjective.pluck(:id).sample(2) },
-  { boundary: false, five_year_commitment: true, progress_report: true, stakeholder_ids: Stakeholder.pluck(:id).sample(2), cbd_objective_ids: CbdObjective.pluck(:id).sample(2) },
-  { boundary: true, five_year_commitment: false, progress_report: true, stakeholder_ids: Stakeholder.pluck(:id).sample(2), cbd_objective_ids: CbdObjective.pluck(:id).sample(2) },
-  { boundary: true, five_year_commitment: true, progress_report: false, stakeholder_ids: Stakeholder.pluck(:id).sample(2), cbd_objective_ids: CbdObjective.pluck(:id).sample(2) },
-  { boundary: true, five_year_commitment: true, progress_report: true, stakeholder_ids: [CbdObjective.last], cbd_objective_ids: [CbdObjective.last] }
+  { boundary: true, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first] },
+  { boundary: false, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first] },
+  { boundary: true, five_year_commitment: false, progress_report: true, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first] },
+  { boundary: true, five_year_commitment: true, progress_report: false, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first] },
+  { boundary: true, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.last], cbd_objectives: [CbdObjective.last] }
 ]
 Criterium.create!(criteria)
