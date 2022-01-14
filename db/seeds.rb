@@ -6,7 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
 # Criteria and assicated records
 stakeholder_names = [ 'Local communities', 'Indiginous peoples', 'Non-governmental organisation (NGO)', 'Priivate sector (business and industry)', 'Sub-national or local government' ]
 Stakeholder.create!(stakeholder_names.map {|name| { name: name }})

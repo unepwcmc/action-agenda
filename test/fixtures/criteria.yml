@@ -1,4 +1,3 @@
-
 valid_criterium:
   boundary: true
   five_year_commitment: true
@@ -40,4 +39,3 @@ no_stakeholders:
   progress_report: true
   cbd_objectives: sustainable_use
   stakeholders: 
-
