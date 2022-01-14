@@ -8,18 +8,16 @@
 
 
 # Criteria and assicated records
-stakeholder_names = [ 'Local communities', 'Indiginous peoples', 'Non-governmental organisation (NGO)', 'Priivate sector (business and industry)', 'Sub-national or local government' ]
+stakeholder_names = [ 'Local communities', 'Indiginous peoples', 'Non-governmental organisation (NGO)', 'Priivate sector (business and industry)', 'Sub-national or local government', 'None of the above' ]
 Stakeholder.create!(stakeholder_names.map {|name| { name: name }})
 
-cbd_objective_names = [ 'Conservation of biological diversity', 'Sustainable use', 'Fair and equitable sharing of benefits from the utilization of genetic resources' ]
+cbd_objective_names = [ 'Conservation of biological diversity', 'Sustainable use', 'Fair and equitable sharing of benefits from the utilization of genetic resources', 'None of the above' ]
 CbdObjective.create!(cbd_objective_names.map {|name| { name: name }})
 
 criteria = [
-  { boundary: true, five_year_commitment: true, progress_report: true, stakeholder_ids: Stakeholder.pluck(:id).sample(2), cbd_objective_ids: CbdObjective.pluck(:id).sample(2) },
-  { boundary: false, five_year_commitment: true, progress_report: true, stakeholder_ids: Stakeholder.pluck(:id).sample(2), cbd_objective_ids: CbdObjective.pluck(:id).sample(2) },
-  { boundary: true, five_year_commitment: false, progress_report: true, stakeholder_ids: Stakeholder.pluck(:id).sample(2), cbd_objective_ids: CbdObjective.pluck(:id).sample(2) },
-  { boundary: true, five_year_commitment: false, progress_report: false, stakeholder_ids: Stakeholder.pluck(:id).sample(2), cbd_objective_ids: CbdObjective.pluck(:id).sample(2) },
-  { boundary: true, five_year_commitment: true, progress_report: true, stakeholder_ids: [], cbd_objective_ids: CbdObjective.pluck(:id).sample(2) },
-  { boundary: true, five_year_commitment: true, progress_report: true, stakeholder_ids: Stakeholder.pluck(:id).sample(2), cbd_objective_ids: [] }
+  { boundary: true, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first] },
+  { boundary: false, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.second], cbd_objectives: [CbdObjective.third] },
+  { boundary: true, five_year_commitment: false, progress_report: true, stakeholders: [Stakeholder.last], cbd_objectives: [CbdObjective.first] },
+  { boundary: true, five_year_commitment: false, progress_report: false, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.last] }
 ]
 Criteria.create!(criteria)

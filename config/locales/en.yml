@@ -31,3 +31,25 @@
 
 en:
   hello: "Hello world"
+
+  errors:
+      format: "%{message}"
+
+  activerecord:
+    errors:
+      models:
+        criteria: 
+          attributes:
+            base:
+              none_of_the_above_option_for_cbd_commitments: 'CBD Objectives cannot include named objectives if "None of the above" option is selected'
+              none_of_the_above_option_for_stakeholders: '"Who is making the commitment" cannot include named stakeholders if "None of the above" option is selected'
+            boundary:
+              nil_value: 'Boundary information missing' 
+            five_year_commitment:
+              nil_value: 'Five year commitment information missing'
+            progress_report:
+              nil_value: 'Progress report information missing'
+            cbd_objectives:
+              blank: 'CBD Objective information missing'
+            stakeholders:
+              blank: 'Stakeholder information missing'
