@@ -12,3 +12,6 @@ private_sector:
 
 local_government:
   name: 'Sub-national or local government'
+
+none_of_the_above:
+  name: 'None of the above'

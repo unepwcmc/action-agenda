@@ -18,7 +18,6 @@ criteria = [
   { boundary: false, five_year_commitment: true, progress_report: true, stakeholder_ids: Stakeholder.pluck(:id).sample(2), cbd_objective_ids: CbdObjective.pluck(:id).sample(2) },
   { boundary: true, five_year_commitment: false, progress_report: true, stakeholder_ids: Stakeholder.pluck(:id).sample(2), cbd_objective_ids: CbdObjective.pluck(:id).sample(2) },
   { boundary: true, five_year_commitment: true, progress_report: false, stakeholder_ids: Stakeholder.pluck(:id).sample(2), cbd_objective_ids: CbdObjective.pluck(:id).sample(2) },
-  { boundary: true, five_year_commitment: true, progress_report: true, stakeholder_ids: [], cbd_objective_ids: CbdObjective.pluck(:id).sample(2) },
-  { boundary: true, five_year_commitment: true, progress_report: true, stakeholder_ids: Stakeholder.pluck(:id).sample(2), cbd_objective_ids: [] }
+  { boundary: true, five_year_commitment: true, progress_report: true, stakeholder_ids: [CbdObjective.last], cbd_objective_ids: [CbdObjective.last] }
 ]
 Criterium.create!(criteria)

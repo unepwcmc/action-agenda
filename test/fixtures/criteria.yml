@@ -26,16 +26,23 @@ no_progress_report:
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
   stakeholders: local_communities, indigenous_peoples
 
+government_stakeholder:
+  boundary: true
+  five_year_commitment: true
+  progress_report: true
+  cbd_objectives: conservation_of_biological_diversity, sustainable_use
+  stakeholders: local_communities, indigenous_peoples, local_government
+
 no_cbd_objectives:
   boundary: true
   five_year_commitment: true
   progress_report: true
-  cbd_objectives: 
+  cbd_objectives: none_of_the_above
   stakeholders: local_communities, indigenous_peoples
 
-no_stakeholders:
+invalid_none_of_the_above_options:
   boundary: true
   five_year_commitment: true
   progress_report: true
-  cbd_objectives: sustainable_use
-  stakeholders: 
+  cbd_objectives: none_of_the_above, sustainable_use
+  stakeholders: none_of_the_above, local_communities
