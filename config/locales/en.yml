@@ -33,7 +33,7 @@ en:
   hello: "Hello world"
 
   errors:
-      format: "%{message}"
+    format: "%{message}"
 
   activerecord:
     errors:
@@ -50,3 +50,12 @@ en:
               blank: 'CBD Objective information missing'
             stakeholders:
               blank: 'Stakeholder information missing'
+
+  criterium:
+    failure_messages:
+      boundary: Your commitment has no current/planned boundary
+      five_year_commitment: The lifespan of your commitment is less than 5 years
+      progress_report: You aren't able to submit progress reports
+      cbd_objectives: Your commitment doesn't contribute to any of the CBD commitments
+      stakeholders: Your commitment is being made by a government
+
