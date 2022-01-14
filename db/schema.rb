@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_16_150439) do
+ActiveRecord::Schema.define(version: 2022_01_13_145148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cbd_objectives", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cbd_objectives_criteria", force: :cascade do |t|
+    t.bigint "criterium_id"
+    t.bigint "cbd_objective_id"
+    t.index ["cbd_objective_id"], name: "index_cbd_objectives_criteria_on_cbd_objective_id"
+    t.index ["criterium_id"], name: "index_cbd_objectives_criteria_on_criterium_id"
+  end
 
   create_table "commitments", force: :cascade do |t|
     t.boolean "geographic_boundary"
@@ -47,6 +60,27 @@ ActiveRecord::Schema.define(version: 2021_02_16_150439) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "iso"
+  end
+
+  create_table "criteria", force: :cascade do |t|
+    t.boolean "boundary", null: false
+    t.boolean "five_year_commitment", null: false
+    t.boolean "progress_report", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "criteria_stakeholders", force: :cascade do |t|
+    t.bigint "criterium_id"
+    t.bigint "stakeholder_id"
+    t.index ["criterium_id"], name: "index_criteria_stakeholders_on_criterium_id"
+    t.index ["stakeholder_id"], name: "index_criteria_stakeholders_on_stakeholder_id"
+  end
+
+  create_table "stakeholders", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "commitments", "countries"
