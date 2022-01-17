@@ -14,27 +14,21 @@ class CommitmentsController < ApplicationController
   end
 
   def show
-    begin
-      @commitment = Commitment.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      render file: "#{Rails.root}/public/404", status: :not_found
-    end
+    @commitment = Commitment.find(params[:id])
 
-    @primary_objectives = @targets_biodiversity = []
-    
-    @primary_objectives = [
+    @primary_objectives = @commitment.objectives.pluck(:name).map do |name|
       {
-        icon: @commitment.primary_objectives.downcase.squish.gsub(' ', '-'),
-        title: @commitment.primary_objectives
+        icon: name.downcase.squish.gsub(' ', '-'),
+        title: name
       }
-    ] unless @commitment.primary_objectives.nil?
-
+    end
+    
+    @targets_biodiversity = []
     @targets_biodiversity = @commitment.related_biodiversity_targets.scan(/\d+/).map(&:to_i) unless @commitment.related_biodiversity_targets.nil?
   end
-
+  
   def list
     @commitments = Commitment.paginate_commitments(params.to_json)
-    
     render json: @commitments
   end
 end
