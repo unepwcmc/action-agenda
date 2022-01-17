@@ -2,14 +2,11 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get '/', to: 'home#index'
 
-  get '/commitments', to: 'commitments#index', as: 'commitments'
 
-  get '/commitments/:id', to: 'commitments#show', as: 'commitment'
+  resources :commitments, only: [:show, :index, :new]
   post '/commitments/list', to: 'commitments#list'
 
-  resources :failed_criteria, only: [:show]
+  resources :criteria, only: [:new, :create]
 
-  resources :criteria, only: [:new, :create] do
-    resources :commitments, only: [:new]
-  end
+  get '/criteria/:id/ineligible', to: 'criteria#ineligible', as: 'ineligible_criteria'
 end

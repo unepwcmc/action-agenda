@@ -1,4 +1,6 @@
 class CriteriaController < ApplicationController
+  before_action :set_criterium, only: [:ineligible]
+
   def new
     @criterium = Criterium.new
   end
@@ -9,7 +11,7 @@ class CriteriaController < ApplicationController
     respond_to do |format|
       if @criterium.save
         format.json {
-          redirect_path = @criterium.criteria_valid_for_commitment? ? new_criterium_commitment_path(@criterium) : failed_criterium_path(@criterium)
+          redirect_path = @criterium.criteria_valid_for_commitment? ? new_commitment_path(criterium_id: @criterium.id) : ineligible_criteria_url(@criterium)
           json_response({ criterium: @criterium, redirect_path: redirect_path }, :created)
         }
       else
@@ -18,7 +20,14 @@ class CriteriaController < ApplicationController
     end
   end
 
+  def ineligible
+  end
+
   private
+
+  def set_criterium
+    @criterium = Criterium.find(params[:id])
+  end
 
   def criterium_params
     params.require(:criterium).permit(

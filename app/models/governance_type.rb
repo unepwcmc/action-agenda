@@ -1,0 +1,2 @@
+class GovernanceType < ApplicationRecord
+end

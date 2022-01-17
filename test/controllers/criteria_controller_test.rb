@@ -23,7 +23,7 @@ class CriteriaControllerTest < ActionDispatch::IntegrationTest
     post criteria_url(valid_params), as: :json
     assert_response :success
     response_json = JSON.parse(response.body)
-    assert(response_json.dig('redirect_path').include?('commitments/new')) 
+    assert(response_json.dig('redirect_path') == new_commitment_path(params: { criterium_id: Criterium.last.id }))
   end
 
   test "should create criterium unsuitable for commitment" do
@@ -43,7 +43,7 @@ class CriteriaControllerTest < ActionDispatch::IntegrationTest
     post criteria_url(valid_params), as: :json
     assert_response :success
     response_json = JSON.parse(response.body)
-    assert(response_json.dig('redirect_path').include?('failed_criteria')) 
+    assert(response_json.dig('redirect_path').include?('ineligible'))
   end
 
   test "return errors if parameters are invalid" do
@@ -64,5 +64,11 @@ class CriteriaControllerTest < ActionDispatch::IntegrationTest
     assert(response_json.keys.include?('errors'))
     assert(response_json.dig('errors').length == 5)
     assert(response_json.dig('errors').values.flatten.all? {|error_message| error_message.include?('missing') })
+  end
+
+  test "should get ineligible" do
+    criterium = criteria(:no_boundary)
+    get ineligible_criteria_url(criterium)
+    assert_response :success
   end
 end
