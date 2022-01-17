@@ -22,13 +22,12 @@ class CommitmentsController < ApplicationController
 
     @primary_objectives = @targets_biodiversity = []
 
-    
-    @primary_objectives = @commitment.objectives.map{ |obj|
+    @primary_objectives = @commitment.objectives.pluck(:name).map do |name|
       {
-        icon: obj.name.downcase.squish.gsub(' ', '-'),
-        title: obj.name
+        icon: name.downcase.squish.gsub(' ', '-'),
+        title: name
       }
-    }
+    end
     @targets_biodiversity = @commitment.related_biodiversity_targets.scan(/\d+/).map(&:to_i) unless @commitment.related_biodiversity_targets.nil?
   end
   

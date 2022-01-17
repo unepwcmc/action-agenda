@@ -18,7 +18,7 @@
       <ul class="list__ul">
         <li class="list__li">
           <span class="list__subtitle">Actors:</span>
-          <span class="list__text"><%= @commitment.actors.map{|a| a.name}.join(', ') %></span>
+          <span class="list__text"><%= @commitment.actors.pluck(:name).join(', ') %></span>
           <%# <span class="list__text">COMPANY WEBSITE</span> %>
         </li>
         <li class="list__li">
@@ -81,7 +81,7 @@
       <h3 class="list__title">Governance Authority</h3>
       <p><%= @commitment.governance_authority %></p>
       <p class="bold">Governance type</p>
-      <span><%= @commitment.governance_types.map{|gt| gt.name}.join(',') %></span>
+      <span><%= @commitment.governance_types.pluck(:name).join(', ') %></span>
     </div>
 
     <div class="list--targets-biodiversity">
