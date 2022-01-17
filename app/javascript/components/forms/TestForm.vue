@@ -1,180 +1,139 @@
 <template>
   <div class="container">
     <!-- If you want to hide survey, comment the lines below -->
-    <h2>SurveyJS Library - a sample survey below</h2>
+    <h2>Product Feedback Survey Example</h2>
     <survey :survey="survey"></survey>
   </div>
 </template>
 
 <script>
 import * as SurveyVue from "survey-vue";
-import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap/dist/css/bootstrap.css";
 var Survey = SurveyVue.Survey;
-Survey.cssType = "bootstrap";
+Survey.cssType = "default";
 
 import * as widgets from "surveyjs-widgets";
 
-
 // widgets.icheck(SurveyVue);
-widgets.select2(SurveyVue);
-widgets.inputmask(SurveyVue);
-widgets.jquerybarrating(SurveyVue);
-widgets.jqueryuidatepicker(SurveyVue);
-widgets.nouislider(SurveyVue);
-widgets.select2tagbox(SurveyVue);
-widgets.sortablejs(SurveyVue);
-widgets.ckeditor(SurveyVue);
-widgets.autocomplete(SurveyVue);
-widgets.bootstrapslider(SurveyVue);
-
+// widgets.select2(SurveyVue);
+// widgets.inputmask(SurveyVue);
+// widgets.jquerybarrating(SurveyVue);
+// widgets.jqueryuidatepicker(SurveyVue);
+// widgets.nouislider(SurveyVue);
+// widgets.select2tagbox(SurveyVue);
+// widgets.sortablejs(SurveyVue);
+// widgets.ckeditor(SurveyVue);
+// widgets.autocomplete(SurveyVue);
+// widgets.bootstrapslider(SurveyVue);
+// Survey.StylesManager.applyTheme("default");
 SurveyVue.Serializer.addProperty("question", "tag:number");
 
 export default {
   components: {
-    Survey
+    Survey,
   },
+  props: {},
   data() {
     var json = {
-      title: "Product Feedback Survey Example",
-      showProgressBar: "top",
+      title: "Form 1: criteria",
+      description:
+        "Form 1 will help establish whether this platform is the right place for your commitment. ‘Commitment’ refers to what you intend to do, for example, commitments to enhance/improve an existing area where new actions are planned or to establish a new area. ‘Area’ refers to the geographical area this is (or will be) under management as a result of this commitment.",
       pages: [
         {
-          questions: [
+          name: "page1",
+          elements: [
             {
-              name: "date",
-              type: "datepicker",
-              inputType: "date",
-              title: "Your favorite date:",
-              dateFormat: "mm/dd/yy",
-              isRequired: true
-            },
-            {
-              type: "matrix",
-              name: "Quality",
-              title:
-                "Please indicate if you agree or disagree with the following statements",
-              columns: [
+              type: "radiogroup",
+              name: "boundary",
+              title: "Does/will the area have a clearly-defined boundary?",
+              isRequired: true,
+              choices: [
                 {
-                  value: 1,
-                  text: "Strongly Disagree"
+                  value: "true",
+                  text:
+                    "The area has, or will have, a clearly defined boundary",
                 },
                 {
-                  value: 2,
-                  text: "Disagree"
+                  value: "false",
+                  text:
+                    "The area does not and will not have a clearly defined boundary",
                 },
-                {
-                  value: 3,
-                  text: "Neutral"
-                },
-                {
-                  value: 4,
-                  text: "Agree"
-                },
-                {
-                  value: 5,
-                  text: "Strongly Agree"
-                }
               ],
-              rows: [
-                {
-                  value: "affordable",
-                  text: "Product is affordable"
-                },
-                {
-                  value: "does what it claims",
-                  text: "Product does what it claims"
-                },
-                {
-                  value: "better then others",
-                  text: "Product is better than other products on the market"
-                },
-                {
-                  value: "easy to use",
-                  text: "Product is easy to use"
-                }
-              ]
             },
             {
-              type: "rating",
-              name: "satisfaction",
-              title: "How satisfied are you with the Product?",
-              mininumRateDescription: "Not Satisfied",
-              maximumRateDescription: "Completely satisfied"
-            },
-            {
-              type: "rating",
-              name: "recommend friends",
-              visibleIf: "{satisfaction} > 3",
+              type: "checkbox",
+              name: "cbd_objectives",
               title:
-                "How likely are you to recommend the Product to a friend or co-worker?",
-              mininumRateDescription: "Will not recommend",
-              maximumRateDescription: "I will recommend"
+                "Please select the objectives of the Convention on Biological Diversity that your commitment contributes to",
+              isRequired: true,
+              choices: [
+                "Conservation of biological diversity",
+                "Sustainable use",
+                "Fair and equitable sharing of benefits from the utilization of genetic resources",
+              ],
+              hasNone: true,
+              noneText: "None of the above",
             },
             {
-              type: "comment",
-              name: "suggestions",
-              title: "What would make you more satisfied with the Product?"
-            }
-          ]
-        },
-        {
-          questions: [
-            {
-              type: "radiogroup",
-              name: "price to competitors",
-              title: "Compared to our competitors, do you feel the Product is",
+              type: "checkbox",
+              name: "stakeholders",
+              title: "Who is making the commitment?",
+              isRequired: true,
               choices: [
-                "Less expensive",
-                "Priced about the same",
-                "More expensive",
-                "Not sure"
-              ]
+                "Local communities",
+                "Indigenous peoples",
+                "Non-governmental organization (NGO)",
+                "Private sector (business and industry)",
+                "Sub-national or local government",
+              ],
+              hasNone: true,
+              noneText: "None of the above",
             },
             {
               type: "radiogroup",
-              name: "price",
-              title: "Do you feel our current price is merited by our product?",
+              name: "five_year_commitment",
+              title: "Is the duration of the commitment at least 5 years?",
+              isRequired: true,
               choices: [
-                "correct|Yes, the price is about right",
-                "low|No, the price is too low for your product",
-                "high|No, the price is too high for your product"
-              ]
-            },
-            {
-              type: "multipletext",
-              name: "pricelimit",
-              title: "What is the... ",
-              items: [
                 {
-                  name: "mostamount",
-                  title:
-                    "Most amount you would every pay for a product like ours"
+                  value: "true",
+                  text: "Yes",
                 },
                 {
-                  name: "leastamount",
-                  title: "The least amount you would feel comfortable paying"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          questions: [
+                  value: "false",
+                  text: "No",
+                },
+              ],
+            },
             {
-              type: "text",
-              name: "email",
+              type: "radiogroup",
+              name: "progress_report",
               title:
-                'Thank you for taking our survey. Please enter your email address, then press the "Submit" button.'
-            }
-          ]
-        }
-      ]
+                "Are you able to submit annual progress reports to this platform?",
+              isRequired: true,
+              choices: [
+                {
+                  value: "true",
+                  text: "Yes",
+                },
+                {
+                  value: "false",
+                  text: "No",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      showPageTitles: false,
+      completeText: "Submit",
+      requiredText: "",
     };
     var model = new SurveyVue.Model(json);
     return {
-      survey: model
+      survey: model,
     };
-  }
+  },
 };
 </script>
 
@@ -186,3 +145,34 @@ export default {
   color: #2c3e50;
 }
 </style>
+
+Survey.StylesManager.applyTheme("default"); var json = { title: "Form 1:
+criteria", description: "Form 1 will help establish whether this platform is the
+right place for your commitment. ‘Commitment’ refers to what you intend to do,
+for example, commitments to enhance/improve an existing area where new actions
+are planned or to establish a new area. ‘Area’ refers to the geographical area
+this is (or will be) under management as a result of this commitment.", pages: [
+{ name: "page1", elements: [ { type: "radiogroup", name: "boundary", title:
+"Does/will the area have a clearly-defined boundary?", isRequired: true,
+choices: [ { value: "true", text: "The area has, or will have, a clearly defined
+boundary" }, { value: "false", text: "The area does not and will not have a
+clearly defined boundary" } ] }, { type: "checkbox", name: "cbd_objectives",
+title: "Please select the objectives of the Convention on Biological Diversity
+that your commitment contributes to", isRequired: true, choices: [ "Conservation
+of biological diversity", "Sustainable use", "Fair and equitable sharing of
+benefits from the utilization of genetic resources" ], hasNone: true, noneText:
+"None of the above" }, { type: "checkbox", name: "stakeholders", title: "Who is
+making the commitment?", isRequired: true, choices: [ "Local communities",
+"Indigenous peoples", "Non-governmental organization (NGO)", "Private sector
+(business and industry)", "Sub-national or local government" ], hasNone: true,
+noneText: "None of the above" }, { type: "radiogroup", name:
+"five_year_commitment", title: "Is the duration of the commitment at least 5
+years?", isRequired: true, choices: [ { value: "true", text: "Yes" }, { value:
+"false", text: "No" } ] }, { type: "radiogroup", name: "progress_report", title:
+"Are you able to submit annual progress reports to this platform?", isRequired:
+true, choices: [ { value: "true", text: "Yes" }, { value: "false", text: "No" }
+] } ] } ], showPageTitles: false, completeText: "Submit", requiredText: "" };
+window.survey = new Survey.Model(json); survey.onComplete.add(function (sender)
+{ document.querySelector("#surveyResult").textContent = "Result JSON:\n" +
+JSON.stringify(sender.data, null, 3); }); var app = new Vue({ el:
+"#surveyElement", data: { survey: survey } });

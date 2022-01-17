@@ -4,7 +4,11 @@
 // findPolyfill()
 
 // dependencies
+import "core-js/stable"
+import "regenerator-runtime/runtime"
 import Vue from 'vue/dist/vue.esm'
+import Turbolinks from "turbolinks"
+import TurbolinksAdapter from "vue-turbolinks"
 // import VueAnalytics from 'vue-analytics'
 // import Vue2TouchEvents from 'vue2-touch-events'
 // import VueLazyload from 'vue-lazyload'
@@ -16,10 +20,14 @@ import store from '../store/store.js'
 import FilteredTable from '../components/table/FilteredTable'
 import TestForm from '../components/forms/TestForm'
 
+Vue.config.productionTip = false
+Vue.use(TurbolinksAdapter)
+Turbolinks.start()
 export const eventHub = new Vue()
+// const images = require.context("../images", true)
 
-document.addEventListener('DOMContentLoaded', () => {
-  if(document.getElementById('v-app')) {
+document.addEventListener("turbolinks:load", () => {
+  if (document.getElementById('v-app')) {
     
     if(process.env.NODE_ENV == 'development' || process.env.NODE_ENV == 'staging') {
       // Vue.use(VueAnalytics, { id: 'UA-12920389-5' }) // staging
