@@ -1,8 +1,10 @@
 class CriteriaController < ApplicationController
   before_action :set_criterium, only: [:ineligible]
-
+  
+  # GET /criteria/new
   def new
     @criterium = Criterium.new
+    @form_hash = Services::CriteriumProps.new(@criterium).call
   end
 
   def create

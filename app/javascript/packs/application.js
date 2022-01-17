@@ -18,7 +18,7 @@ import store from '../store/store.js'
 
 // components
 import FilteredTable from '../components/table/FilteredTable'
-import TestForm from '../components/forms/TestForm'
+import CriteriaForm from '../components/forms/CriteriaForm'
 
 Vue.config.productionTip = false
 Vue.use(TurbolinksAdapter)
@@ -47,7 +47,7 @@ document.addEventListener("turbolinks:load", () => {
       store,
       components: {
 	      FilteredTable,
-        TestForm
+        CriteriaForm
       }
     })
   }
