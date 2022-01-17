@@ -14,13 +14,7 @@ class CommitmentsController < ApplicationController
   end
 
   def show
-    begin
-      @commitment = Commitment.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      render file: "#{Rails.root}/public/404", status: :not_found
-    end
-
-    @primary_objectives = @targets_biodiversity = []
+    @commitment = Commitment.find(params[:id])
 
     @primary_objectives = @commitment.objectives.pluck(:name).map do |name|
       {
@@ -28,6 +22,8 @@ class CommitmentsController < ApplicationController
         title: name
       }
     end
+    
+    @targets_biodiversity = []
     @targets_biodiversity = @commitment.related_biodiversity_targets.scan(/\d+/).map(&:to_i) unless @commitment.related_biodiversity_targets.nil?
   end
   
