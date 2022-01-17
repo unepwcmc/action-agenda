@@ -1,17 +1,13 @@
 class Services::CriteriumProps
-
   def initialize(criterium)
     @criterium = criterium
   end
 
   def call
     {
-      title: 'Form 1: criteria',
-      description:
-    'Form 1 will help establish whether this platform is the right place for your commitment. ‘Commitment’ refers to what you intend to do, for example, commitments to enhance/improve an existing area where new actions are planned or to establish a new area. ‘Area’ refers to the geographical area this is (or will be) under management as a result of this commitment.',
       pages: [
         {
-          name: 'page1',
+          navigationTitle: 'criteria',
           elements: [
             {
               type: 'radiogroup',
@@ -94,9 +90,24 @@ class Services::CriteriumProps
               ]
             }
           ]
+        },
+        {
+          navigationTitle: 'Commitment form',
+          elements: [
+            {
+              type: 'radiogroup',
+              name: 'question4',
+              choices: %w[
+                item1
+                item2
+                item3
+              ]
+            }
+          ]
         }
       ],
-      showPageTitles: false,
+      progressBarType: "buttons",
+      showProgressBar: "top",
       completeText: 'Submit',
       requiredText: ''
     }
