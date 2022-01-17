@@ -22,9 +22,10 @@ import TestForm from '../components/forms/TestForm'
 
 Vue.config.productionTip = false
 Vue.use(TurbolinksAdapter)
+
 Turbolinks.start()
+
 export const eventHub = new Vue()
-// const images = require.context("../images", true)
 
 document.addEventListener("turbolinks:load", () => {
   if (document.getElementById('v-app')) {
