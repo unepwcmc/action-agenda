@@ -16,20 +16,22 @@ class CommitmentsController < ApplicationController
   def show
     begin
       @commitment = Commitment.find(params[:id])
+
+
+      @primary_objectives = @targets_biodiversity = []
+      
+      @primary_objectives = [
+        {
+          icon: @commitment.primary_objectives.downcase.squish.gsub(' ', '-'),
+          title: @commitment.primary_objectives
+        }
+      ] unless @commitment.primary_objectives.nil?
+
+      @targets_biodiversity = @commitment.related_biodiversity_targets.scan(/\d+/).map(&:to_i) unless @commitment.related_biodiversity_targets.nil?
+  
     rescue ActiveRecord::RecordNotFound
       render file: "#{Rails.root}/public/404", status: :not_found
     end
-
-    @primary_objectives = @targets_biodiversity = []
-    
-    @primary_objectives = [
-      {
-        icon: @commitment.primary_objectives.downcase.squish.gsub(' ', '-'),
-        title: @commitment.primary_objectives
-      }
-    ] unless @commitment.primary_objectives.nil?
-
-    @targets_biodiversity = @commitment.related_biodiversity_targets.scan(/\d+/).map(&:to_i) unless @commitment.related_biodiversity_targets.nil?
   end
 
   def list

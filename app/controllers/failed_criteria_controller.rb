@@ -7,6 +7,6 @@ class FailedCriteriaController < ApplicationController
   private
 
   def set_criterium
-    @criterium = Criteria.find(params[:id])
+    @criterium = Criterium.find(params[:id])
   end
 end

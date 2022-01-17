@@ -15,7 +15,4 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     get commitment_url(commitments(:one).id)
     assert_response :success
   end
-
-  
-  
 end

@@ -10,10 +10,10 @@ class CriteriaController < ApplicationController
       if @criterium.save
         format.json {
           redirect_path = @criterium.criteria_valid_for_commitment? ? new_criterium_commitment_path(@criterium) : failed_criterium_path(@criterium)
-          json_response({ criterium: @criterium, redirect_path: redirect_path }, status = :created)
+          json_response({ criterium: @criterium, redirect_path: redirect_path }, :created)
         }
       else
-        format.json { render json: @criterium.errors, status: :unprocessable_entity }
+        format.json { render json: { errors: @criterium.errors }, status: :unprocessable_entity }
       end
     end
   end
