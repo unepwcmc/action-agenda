@@ -6,7 +6,7 @@
 // dependencies
 import "core-js/stable"
 import "regenerator-runtime/runtime"
-import Vue from 'vue/dist/vue.esm'
+import Vue from 'vue'
 import Turbolinks from "turbolinks"
 import TurbolinksAdapter from "vue-turbolinks"
 // import VueAnalytics from 'vue-analytics'
