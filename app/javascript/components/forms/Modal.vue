@@ -9,7 +9,10 @@
         class="modal__body"
       >
         <div class="modal__content">
-          Slot goes here
+          Title from props
+          Slot for body or just pass as prop with paragraphing and bold text?
+          Continue button with text from props
+          Exit button with text and link from props
         </div>
       </div>
     </div>
