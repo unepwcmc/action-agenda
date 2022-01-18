@@ -5,6 +5,12 @@ class Services::CriteriumProps
 
   def call
     {
+      progressBarType: 'buttons',
+      showProgressBar: 'top',
+      completeText: 'Submit',
+      requiredText: '',
+      title: I18n.t('form.criteria.title'),
+      description: I18n.t('form.criteria.description'),
       pages: [
         {
           navigationTitle: 'criteria',
@@ -12,7 +18,7 @@ class Services::CriteriumProps
             {
               type: 'radiogroup',
               name: 'boundary',
-              title: 'Does/will the area have a clearly-defined boundary?',
+              title: I18n.t('form.criteria.q1.label'),
               isRequired: true,
               choices: [
                 {
@@ -30,8 +36,7 @@ class Services::CriteriumProps
             {
               type: 'checkbox',
               name: 'cbd_objectives',
-              title:
-                'Please select the objectives of the Convention on Biological Diversity that your commitment contributes to',
+              title: I18n.t('form.criteria.q2.label'),
               isRequired: true,
               choices: [
                 'Conservation of biological diversity',
@@ -44,7 +49,7 @@ class Services::CriteriumProps
             {
               type: 'checkbox',
               name: 'stakeholders',
-              title: 'Who is making the commitment?',
+              title: I18n.t('form.criteria.q3.label'),
               isRequired: true,
               choices: [
                 'Local communities',
@@ -59,7 +64,7 @@ class Services::CriteriumProps
             {
               type: 'radiogroup',
               name: 'five_year_commitment',
-              title: 'Is the duration of the commitment at least 5 years?',
+              title: I18n.t('form.criteria.q4.label'),
               isRequired: true,
               choices: [
                 {
@@ -70,13 +75,13 @@ class Services::CriteriumProps
                   value: 'false',
                   text: 'No'
                 }
-              ]
+              ],
+              colCount: 2
             },
             {
               type: 'radiogroup',
               name: 'progress_report',
-              title:
-                'Are you able to submit annual progress reports to this platform?',
+              title: I18n.t('form.criteria.q5.label'),
               isRequired: true,
               choices: [
                 {
@@ -87,29 +92,12 @@ class Services::CriteriumProps
                   value: 'false',
                   text: 'No'
                 }
-              ]
-            }
-          ]
-        },
-        {
-          navigationTitle: 'Commitment form',
-          elements: [
-            {
-              type: 'radiogroup',
-              name: 'question4',
-              choices: %w[
-                item1
-                item2
-                item3
-              ]
+              ],
+              colCount: 2
             }
           ]
         }
-      ],
-      progressBarType: "buttons",
-      showProgressBar: "top",
-      completeText: 'Submit',
-      requiredText: ''
+      ]
     }
   end
 end

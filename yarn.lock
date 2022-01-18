@@ -1944,16 +1944,6 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   resolved "https://registry.npmjs.org/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
 
-bootstrap-slider@^10.0.0:
-  version "10.6.2"
-  resolved "https://registry.npmjs.org/bootstrap-slider/-/bootstrap-slider-10.6.2.tgz#7341f468c012bdaa6a1d8625d989fdeb8ed7dd38"
-  integrity sha512-8JTPZB9QVOdrGzYF3YgC3YW6ssfPeBvBwZnXffiZ7YH/zz1D0EKlZvmQsm/w3N0XjVNYQEoQ0ax+jHrErV4K1Q==
-
-bootstrap@^3.3.7:
-  version "3.4.1"
-  resolved "https://registry.npmjs.org/bootstrap/-/bootstrap-3.4.1.tgz#c3a347d419e289ad11f4033e3c4132b87c081d72"
-  integrity sha512-yN5oZVmRCwe5aKwzRj6736nSmKDX7pLYwsXiCj/EYmo16hODaBiT4En5btW/jhBF/seV+XMx3aYwukYC3A49DA==
-
 boundary-cells@^2.0.0:
   version "2.0.2"
   resolved "https://registry.npmjs.org/boundary-cells/-/boundary-cells-2.0.2.tgz#ed28c5a2eb36500413e5714f8eec862ad8ffec14"
@@ -3713,13 +3703,6 @@ earcut@^2.1.5, earcut@^2.2.2:
   resolved "https://registry.npmjs.org/earcut/-/earcut-2.2.3.tgz#d44ced2ff5a18859568e327dd9c7d46b16f55cf4"
   integrity sha512-iRDI1QeCQIhMCZk48DRDMVgQSSBDmbzzNhnxIo+pwx3swkfjMh6vh0nWLq1NdvGHLKH6wIrAM3vQWeTj6qeoug==
 
-easy-autocomplete@^1.3.5:
-  version "1.3.5"
-  resolved "https://registry.npmjs.org/easy-autocomplete/-/easy-autocomplete-1.3.5.tgz#2a2d2df699f13ddc48661c9375b9437acf1a0a9c"
-  integrity sha1-Ki0t9pnxPdxIZhyTdblDes8aCpw=
-  dependencies:
-    jquery "*"
-
 ecc-jsbn@~0.1.1:
   version "0.1.2"
   resolved "https://registry.npmjs.org/ecc-jsbn/-/ecc-jsbn-0.1.2.tgz#3a83a904e54353287874c564b7549386849a98c9"
@@ -3784,11 +3767,6 @@ emojis-list@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/emojis-list/-/emojis-list-3.0.0.tgz#5570662046ad29e2e916e71aae260abdff4f6a78"
   integrity sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==
-
-emotion-ratings@^2.0.1:
-  version "2.0.2"
-  resolved "https://registry.npmjs.org/emotion-ratings/-/emotion-ratings-2.0.2.tgz#9440e1bc02d59b727166e162f31240711201d1ba"
-  integrity sha512-b+HR3kMOC2biuF/nrQk35IuSrEt8jAIay8clGqa4oVmbS8BHkpBnNS5wofly2ArA9Tvzek+3qFt9sK6FMhDuPA==
 
 encodeurl@~1.0.2:
   version "1.0.2"
@@ -5564,11 +5542,6 @@ https-browserify@^1.0.0:
   resolved "https://registry.npmjs.org/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
 
-icheck@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/icheck/-/icheck-1.0.2.tgz#06d08da3d47ae448c153b2639b86e9ad7fdf7128"
-  integrity sha1-BtCNo9R65EjBU7Jjm4bprX/fcSg=
-
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
   version "0.4.24"
   resolved "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
@@ -5717,11 +5690,6 @@ ini@^1.3.4, ini@^1.3.5:
   version "1.3.8"
   resolved "https://registry.npmjs.org/ini/-/ini-1.3.8.tgz#a29da425b48806f34767a4efce397269af28432c"
   integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
-
-inputmask@^5.0.3:
-  version "5.0.7"
-  resolved "https://registry.npmjs.org/inputmask/-/inputmask-5.0.7.tgz#b04d5d4e1c85018893c3c8edb1a9f074b051007f"
-  integrity sha512-rUxbRDS25KEib+c/Ow+K01oprU/+EK9t9SOPC8ov94/ftULGDqj1zOgRU/Hko6uzoKRMdwCfuhAafJ/Wk2wffQ==
 
 inquirer@^7.0.0:
   version "7.3.3"
@@ -6217,29 +6185,15 @@ jest-worker@^25.4.0:
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
-jquery-bar-rating@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.npmjs.org/jquery-bar-rating/-/jquery-bar-rating-1.2.2.tgz#9594d662cff9deb0fe7b372511bb2492a436f392"
-  integrity sha1-lZTWYs/53rD+ezclEbskkqQ285I=
-  dependencies:
-    jquery ">=1.7.2"
-
-jquery-ui@^1.12.1:
-  version "1.13.0"
-  resolved "https://registry.npmjs.org/jquery-ui/-/jquery-ui-1.13.0.tgz#ab5ac65f37ca093c51b3478c4097f55bbc008f36"
-  integrity sha512-Osf7ECXNTYHtKBkn9xzbIf9kifNrBhfywFEKxOeB/OVctVmLlouV9mfc2qXCp6uyO4Pn72PXKOnj09qXetopCw==
-  dependencies:
-    jquery ">=1.8.0 <4.0.0"
-
-jquery@*, jquery@>=1.7, jquery@>=1.7.2, "jquery@>=1.8.0 <4.0.0", jquery@^3.1.1, jquery@^3.2.1:
-  version "3.6.0"
-  resolved "https://registry.npmjs.org/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
-  integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
-
 jquery@3.5.0:
   version "3.5.0"
   resolved "https://registry.npmjs.org/jquery/-/jquery-3.5.0.tgz#9980b97d9e4194611c36530e7dc46a58d7340fc9"
   integrity sha512-Xb7SVYMvygPxbFMpTFQiHh1J7HClEaThguL15N/Gg37Lri/qKyhRGZYzHRyLH8Stq3Aow0LsHO2O2ci86fCrNQ==
+
+jquery@>=1.7, jquery@^3.1.1:
+  version "3.6.0"
+  resolved "https://registry.npmjs.org/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
+  integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
 
 js-base64@^2.1.8:
   version "2.6.4"
@@ -6386,11 +6340,6 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.3"
   resolved "https://registry.npmjs.org/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
-
-knockout@^3.5.0, knockout@^3.5.1:
-  version "3.5.1"
-  resolved "https://registry.npmjs.org/knockout/-/knockout-3.5.1.tgz#62c81e81843bea2008fd23c575edd9ca978e75cf"
-  integrity sha512-wRJ9I4az0QcsH7A4v4l0enUpkS++MBx0BnL/68KaLzJg7x1qmbjSlwEoCNol7KTYZ+pmtI7Eh2J0Nu6/2Z5J/Q==
 
 last-call-webpack-plugin@^3.0.0:
   version "3.0.0"
@@ -7237,11 +7186,6 @@ normals@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/normals/-/normals-1.1.0.tgz#325b595ed34afe467a6c55a14fd9085787ff59c0"
   integrity sha1-MltZXtNK/kZ6bFWhT9kIV4f/WcA=
-
-nouislider@^14.6.3:
-  version "14.7.0"
-  resolved "https://registry.npmjs.org/nouislider/-/nouislider-14.7.0.tgz#a71db0587c92567b6da1df57d251d3696d942362"
-  integrity sha512-4RtQ1+LHJKesDCNJrXkQcwXAWCrC2aggdLYMstS/G5fEWL+fXZbUA9pwVNHFghMGuFGRATlDLNInRaPeRKzpFQ==
 
 npm-run-path@^2.0.0:
   version "2.0.2"
@@ -8593,11 +8537,6 @@ prepend-http@^1.0.0:
   resolved "https://registry.npmjs.org/prettier/-/prettier-2.5.1.tgz#fff75fa9d519c54cf0fce328c1017d94546bc56a"
   integrity sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==
 
-pretty-checkbox@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.npmjs.org/pretty-checkbox/-/pretty-checkbox-3.0.3.tgz#d49c8013a8fc08ee0c2d6ebde453464bfdbc428e"
-  integrity sha1-1JyAE6j8CO4MLW695FNGS/28Qo4=
-
 printj@~1.1.0:
   version "1.1.2"
   resolved "https://registry.npmjs.org/printj/-/printj-1.1.2.tgz#d90deb2975a8b9f600fb3a1c94e3f4c53c78a222"
@@ -8895,11 +8834,6 @@ readdirp@~3.6.0:
   integrity sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==
   dependencies:
     picomatch "^2.2.1"
-
-recordrtc@^5.4.6:
-  version "5.6.2"
-  resolved "https://registry.npmjs.org/recordrtc/-/recordrtc-5.6.2.tgz#48fc214b35084973ccce82c6251198b5742bc327"
-  integrity sha512-1QNKKNtl7+KcwD1lyOgP3ZlbiJ1d0HtXnypUy7yq49xEERxk31PHvE9RCciDrulPCY7WJ+oz0R9hpNxgsIurGQ==
 
 redent@^1.0.0:
   version "1.0.0"
@@ -9441,11 +9375,6 @@ select-hose@^2.0.0:
   resolved "https://registry.npmjs.org/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
   integrity sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
 
-select2@^4.0.4:
-  version "4.0.13"
-  resolved "https://registry.npmjs.org/select2/-/select2-4.0.13.tgz#0dbe377df3f96167c4c1626033e924372d8ef44d"
-  integrity sha512-1JeB87s6oN/TDxQQYCvS5EFoQyvV6eYMZZ0AeA4tdFDYWN3BAGZ8npr17UBFddU0lgAt3H0yjX3X6/ekOj1yjw==
-
 selfsigned@^1.10.8:
   version "1.10.14"
   resolved "https://registry.npmjs.org/selfsigned/-/selfsigned-1.10.14.tgz#ee51d84d9dcecc61e07e4aba34f229ab525c1574"
@@ -9739,11 +9668,6 @@ sort-keys@^1.0.0:
   integrity sha1-RBttTTRnmPG05J6JIK37oOVD+a0=
   dependencies:
     is-plain-obj "^1.0.0"
-
-sortablejs@^1.6.1:
-  version "1.14.0"
-  resolved "https://registry.npmjs.org/sortablejs/-/sortablejs-1.14.0.tgz#6d2e17ccbdb25f464734df621d4f35d4ab35b3d8"
-  integrity sha512-pBXvQCs5/33fdN1/39pPL0NZF20LeRbLQ5jtnheIPN9JQAaufGjKdWduZn4U7wCtVuzKhmRkI0DFYHYRbB2H1w==
 
 source-list-map@^2.0.0:
   version "2.0.1"
@@ -10208,33 +10132,10 @@ survey-analytics@latest:
     tabulator-tables "4.8.4"
     wordcloud "^1.1.0"
 
-survey-core@^1.8.29, survey-core@^1.8.34:
+survey-core@^1.8.34:
   version "1.9.5"
   resolved "https://registry.npmjs.org/survey-core/-/survey-core-1.9.5.tgz#ac6fd0935ff1e1b781e173abfe57019db0160d40"
   integrity sha512-+l7jLktYuDC2m3xlxSktu92mRXdfiBWC4nR6Bg53eq9NfJpFN36j1U+Zkue+omVRcnAOGufBGt70maZ0Bfp/9Q==
-
-survey-creator@latest:
-  version "1.9.5"
-  resolved "https://registry.npmjs.org/survey-creator/-/survey-creator-1.9.5.tgz#7505ed2835de98e00349dbf3c3a04bbb9a41a5b2"
-  integrity sha512-6t6iJgKQ1wXe5BCwI2xETZoXzkkAHY+QcqBAkDzdGD3IVx/WWv9ArGJYAThwsEBpyVahSL5py3YYeUFZ25B98w==
-  dependencies:
-    knockout "^3.5.0"
-    survey-knockout "^1.9.5"
-
-survey-knockout@^1.9.5:
-  version "1.9.5"
-  resolved "https://registry.npmjs.org/survey-knockout/-/survey-knockout-1.9.5.tgz#c16fe186b2c7ef992923ce66cfa3b37d7115b55c"
-  integrity sha512-ugf5OwgsqxeyUjvaw/xDdFydeLsDwe8Bnyki8zd7KhEzOgoiXZBEmQkAXxCCBXOOroL9nCIQRd4F+H9btEN2ng==
-  dependencies:
-    knockout "^3.5.1"
-
-survey-pdf@latest:
-  version "1.9.5"
-  resolved "https://registry.npmjs.org/survey-pdf/-/survey-pdf-1.9.5.tgz#a6c806da9fda62b1cbdd52c52286e9d9fdbdf673"
-  integrity sha512-M+voOYlw0WsO9We+LsLs164Eu91QzXY8wBo5sXfmXHHklOVIW+tiRVqO0Vw9Gn/j7PfdHfdK/Qyymc+3Jnd+Fg==
-  dependencies:
-    jspdf "^2.3.0"
-    survey-core "^1.8.29"
 
 survey-vue@latest:
   version "1.9.5"
@@ -10242,25 +10143,6 @@ survey-vue@latest:
   integrity sha512-Oo0WBCDUWVc3XfD5NLJJK8UFOdK8FlXijRnjjVZ5zqKHQvraoqwECO7KQ6PhzuXI7goB4rCH0aT7I3PmKqu3aQ==
   dependencies:
     vue "^2.1.10"
-
-surveyjs-widgets@latest:
-  version "1.9.5"
-  resolved "https://registry.npmjs.org/surveyjs-widgets/-/surveyjs-widgets-1.9.5.tgz#aa1ad6c5ada275057d7de79af369edbba51ded24"
-  integrity sha512-ml3cE6WK7U+Q2fiOTPraJnHhrx3pH71zKzFcsKr9izXH/ZBsynDbfGzMLxplpRW+lqFucWLvVxWrFbyI/Y0viQ==
-  dependencies:
-    bootstrap-slider "^10.0.0"
-    easy-autocomplete "^1.3.5"
-    emotion-ratings "^2.0.1"
-    icheck "^1.0.2"
-    inputmask "^5.0.3"
-    jquery "^3.2.1"
-    jquery-bar-rating "^1.2.2"
-    jquery-ui "^1.12.1"
-    nouislider "^14.6.3"
-    pretty-checkbox "^3.0.3"
-    recordrtc "^5.4.6"
-    select2 "^4.0.4"
-    sortablejs "^1.6.1"
 
 svg-arc-to-cubic-bezier@^3.0.0:
   version "3.2.0"
