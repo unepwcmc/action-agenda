@@ -1,0 +1,64 @@
+//--------------------------------------------------
+// modal
+//--------------------------------------------------
+.modal {
+  width: 100%;
+  height: 100%;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  z-index: 20;
+}
+
+.modal__inner {
+  @include gutters;
+  width: 100%;
+
+  display: flex;
+
+  @include breakpoint($small) {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.modal__body {
+  @include spacer-top($spacer-medium-mobile, $spacer-medium-tablet, $spacer-medium-desktop);
+  @include spacer-bottom($spacer-medium-mobile, $spacer-medium-tablet, $spacer-medium-desktop);
+
+  background-color: $white;
+  border-radius: 0.625rem; // 10px
+  height: 100%;
+  max-width: 53.5rem; // 856px
+
+  position: relative;
+  z-index: 22;
+
+  @include breakpoint($small) {
+    max-height: 70%;
+  }
+}
+
+.modal__content {
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.modal__overlay {
+  background-color: rgba($grey-light, 0.4);
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  z-index: 21;
+}
