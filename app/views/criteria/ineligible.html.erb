@@ -1,1 +1,22 @@
-Ineligible Criteria page
+<h1><%= t('views.criterium.ineligible.title') %></h1>
+
+<div>
+  <%= t('views.criterium.ineligible.description') %>
+</div>
+<div class='bold'>
+  <%= t('views.criterium.ineligible.results_did_not_pass') %>
+</div>
+
+<ul>
+  <% @criterium.failure_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+</ul>
+
+<div>
+  <div class='bold'><%= t('views.titles.action_agenda') %></div>
+  <div><%= t('views.criterium.ineligible.links.action_agenda.description') %></div>
+  <%= link_to('https://www.cbd.int/action-agenda/', title: 'Visit the Action Agenda website', target: '_blank') do %>
+    <div class=''><%= t('views.buttons.access').upcase %></div>
+  <% end %>
+</div>

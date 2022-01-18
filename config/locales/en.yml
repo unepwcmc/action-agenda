@@ -54,10 +54,27 @@ en:
             stakeholders:
               blank: 'Stakeholder information missing'
 
-  criterium:
-    failure_messages:
-      boundary: Your commitment has no current/planned boundary
-      five_year_commitment: The lifespan of your commitment is less than 5 years
-      progress_report: You aren't able to submit progress reports
-      no_cbd_objectives: Your commitment doesn't contribute to any of the CBD commitments
-      government_stakeholders: Your commitment is being made by a government
+  models:
+    criterium:
+      failure_messages:
+        boundary: Your commitment has no current/planned boundary
+        five_year_commitment: The lifespan of your commitment is less than 5 years
+        progress_report: You aren't able to submit progress reports
+        no_cbd_objectives: Your commitment doesn't contribute to any of the CBD commitments
+        government_stakeholders: Your commitment is being made by a government
+
+
+  views:
+    titles:
+      action_agenda: Action Agenda
+    buttons:
+      access: 'Access'
+      my_dashboard: My dashboard
+    criterium:
+      ineligible:
+        title: This platform might not be the best place to record your commitment
+        description: Your answers in the current form suggest your commitment might be better suited to another platform, for example because it is not area-based or won't be in place for more than 5 years.
+        results_did_not_pass: Your results that didn't pass the criteria form
+        links:
+          action_agenda:
+            description: For other biodiversity related commitments
