@@ -15,6 +15,7 @@ one:
   planned_actions: MyText
   description: MyText
   link: MyString
+  managers: indigenous, custom
 
 two:
   country: test_country
@@ -31,3 +32,4 @@ two:
   planned_actions: MyText
   description: MyText
   link: MyString
+  managers: indigenous

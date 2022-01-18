@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+indigenous:
+  name: Indigenous peoples
+  default_option: true
+
+custom:
+  name: Another manager name
+  default_option: false

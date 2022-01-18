@@ -21,3 +21,14 @@ criteria = [
   { boundary: true, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.last], cbd_objectives: [CbdObjective.last] }
 ]
 Criterium.create!(criteria)
+
+
+# commitments and associated records
+managers = [
+  { name: "Indigenous peoples", default_option: true },
+  { name: "Local communities", default_option: true },
+  { name: "Non-governmental organization", default_option: true },
+  { name: "Private sector", default_option: true },
+  { name: "Sub-national  or local government", default_option: true }
+]
+Manager.create!(managers)

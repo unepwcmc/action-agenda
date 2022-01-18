@@ -10,23 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_13_145148) do
+ActiveRecord::Schema.define(version: 2022_01_18_154811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "actors", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "actors_commitments", id: false, force: :cascade do |t|
-    t.bigint "commitment_id"
-    t.bigint "actor_id"
-    t.index ["actor_id"], name: "index_actors_commitments_on_actor_id"
-    t.index ["commitment_id"], name: "index_actors_commitments_on_commitment_id"
-  end
 
   create_table "cbd_objectives", force: :cascade do |t|
     t.string "name"
@@ -72,6 +59,13 @@ ActiveRecord::Schema.define(version: 2022_01_13_145148) do
     t.index ["governance_type_id"], name: "index_commitments_governance_types_on_governance_type_id"
   end
 
+  create_table "commitments_managers", id: false, force: :cascade do |t|
+    t.bigint "commitment_id"
+    t.bigint "manager_id"
+    t.index ["commitment_id"], name: "index_commitments_managers_on_commitment_id"
+    t.index ["manager_id"], name: "index_commitments_managers_on_manager_id"
+  end
+
   create_table "commitments_objectives", id: false, force: :cascade do |t|
     t.bigint "commitment_id"
     t.bigint "objective_id"
@@ -105,6 +99,13 @@ ActiveRecord::Schema.define(version: 2022_01_13_145148) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "managers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "default_option", default: false
   end
 
   create_table "objectives", force: :cascade do |t|

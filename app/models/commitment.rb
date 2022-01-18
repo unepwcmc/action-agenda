@@ -4,8 +4,8 @@ class Commitment < ApplicationRecord
   include WcmcComponents::Loadable
   belongs_to :country, class_name: 'Country'
   import_by country: :name
-  has_and_belongs_to_many :actors
-  import_by actors: :name
+  has_and_belongs_to_many :managers
+  import_by managers: :name
   has_and_belongs_to_many :objectives
   import_by objectives: :name
   has_and_belongs_to_many :governance_types
@@ -39,7 +39,7 @@ class Commitment < ApplicationRecord
     }
   ].freeze
 
-  FILTERS = %w[actor country committed_year stage primary_objectives governance_type].freeze
+  FILTERS = %w[manager country committed_year stage primary_objectives governance_type].freeze
 
   # Filters moved to CommitmentPresenter to avoid repetition
   def self.filters_to_json
@@ -111,7 +111,7 @@ class Commitment < ApplicationRecord
 
   def self.parse_filters(filters)
     country_ids = []
-    actor_ids = []
+    management_ids = []
     objective_ids = []
     governance_type_ids = []
     params = {}
@@ -125,10 +125,10 @@ class Commitment < ApplicationRecord
         countries = options
         country_ids << Country.where(name: countries).pluck(:id)
         params['country'] = country_ids.flatten.empty? ? "" : "commitments.country_id IN (#{country_ids.join(',')})"
-      when 'actor'
-        actors = options
-        actor_ids << Actor.where(name: actors).pluck(:id)
-        params['actor'] = actor_ids.flatten.empty? ? "" : "ac.actor_id IN (#{actor_ids.join(',')})"
+      when 'manager'
+        managers = options
+        manager_ids << Manager.where(name: managers).pluck(:id)
+        params['manager'] = manager_ids.flatten.empty? ? "" : "ac.manager_id IN (#{manager_ids.join(',')})"
       when 'primary_objectives'
         objectives = options
         objective_ids << Objective.where(name: objectives).pluck(:id)
@@ -151,7 +151,7 @@ class Commitment < ApplicationRecord
   def self.run_query(page, where_params)
     Commitment
       .from("commitments")
-      .joins("JOIN actors_commitments AS ac ON ac.commitment_id = commitments.id")
+      .joins("JOIN managers_commitments AS ac ON ac.commitment_id = commitments.id")
       .joins("JOIN commitments_objectives AS co ON co.commitment_id = commitments.id")
       .joins("JOIN commitments_governance_types AS cgt ON cgt.commitment_id = commitments.id")  
       .where(where_params.values.join(' AND '))
