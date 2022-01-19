@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-valid_commitment:
+valid_commitment_1:
   responsible_group: a group name 
   geographic_boundary: false
   latitude: 1.5
@@ -17,12 +17,12 @@ valid_commitment:
   managers: indigenous, custom
   state: live
   stage: 'Committed'
-  countries: test_country_1, test_country_2
+  countries: hungary, madagascar
   links: link_1, link_2
   actions: species_management, livelihood
   threats: pollution, other
 
-two:
+valid_commitment_2:
   responsible_group: another group name 
   geographic_boundary: false
   latitude: 1.5
@@ -39,7 +39,10 @@ two:
   managers: indigenous
   state: draft
   stage: 'Implemented'
-  countries: test_country_1
+  countries: hungary
   links: link_1
   actions: species_management
   threats: pollution
+
+invalid_commitment:
+  latitude: 1.5

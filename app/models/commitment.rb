@@ -14,8 +14,8 @@ class Commitment < ApplicationRecord
   import_by objectives: :name
   has_and_belongs_to_many :governance_types
   import_by governance_types: :name
-  has_and_belongs_to_many :links
   has_and_belongs_to_many :actions
+  has_and_belongs_to_many :links
   has_and_belongs_to_many :threats
 
   validates :name, presence: true
@@ -131,7 +131,6 @@ class Commitment < ApplicationRecord
       when 'country'
         countries = options
         country_ids << Country.where(name: countries).pluck(:id)
-        # TO DO: fix this
         params['country'] = country_ids.flatten.empty? ? "" : "cc.country_id IN (#{country_ids.join(',')})"
       when 'manager'
         managers = options

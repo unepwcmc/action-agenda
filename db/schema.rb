@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_140327) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "default_option", default: false
+    t.index ["name"], name: "index_managers_on_name", unique: true
   end
 
   create_table "objectives", force: :cascade do |t|

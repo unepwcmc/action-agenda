@@ -2,7 +2,7 @@ class CreateThreatsAndJoin < ActiveRecord::Migration[5.2]
   def change
     create_table :threats_and_joins do |t|
       create_table :threats do |t|
-        t.text :name, null: false
+        t.text :name, null: false, unique: true
   
         t.timestamps
       end

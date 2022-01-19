@@ -34,6 +34,22 @@ Action.create!(actions.map {|action_name| { name: action_name }})
 threat_names = ['Residential & commercial development', 'Agriculture & aquaculture', 'Energy production & mining', 'Transportation & service corridors', 'Biological resource use', 'Human intrusions & disturbance', 'Natural system modifications', 'Invasive & other problematic species', 'genes & diseases', 'Pollution', 'Geological events', 'Climate change & severe weather', 'Other']
 Threat.create!(threat_names.map {|threat_name| { name: threat_name }})
 
-# commitment
-# progress_documents
-# links
+objective_names = ['Sustainable use', 'Biodiversity conservation', 'Equitable sharing of benefits from the use of genetic resources', 'Restoration', 'Climate change adaptation and mitigation', 'Preservation of cultural values', 'Preservation of spiritual values', 'Preservation of traditional livelihoods', 'Certification of products', 'Recreation', 'Academic research']
+Objective.create!(objective_names.map {|objective_name| { name: objective_name }})
+
+links = [
+  { url: 'something.com', name: 'a website' },
+  { url: 'something.org', name: 'another website' }
+]
+Link.create!(links)
+
+commitments = [
+  {
+    geographic_boundary: true, latitude: 0.002, longitude: 0.9, current_area_ha: 12, proposed_area_ha: 15, 
+    committed_year: 2021, implementation_year: 2022, update_year: 2022, name: 'A commitment', 
+    governance_authority: 'A governance authrity name', description: 'A description', duration: 5, 
+    stage: 'Implemented', responsible_group: 'The responsible group', state: 'live',
+    threats: Threat.all, actions: Action.all, managers: Manager.all, links: Link.all, objectives: Objective.all
+  }
+]
+Commitment.create!(commitments)

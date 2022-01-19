@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-test_country_1:
-  name: Test country
-  iso: TC
+hungary:
+  name: Hungary
+  iso: HU
 
-test_country_2:
-  name: Another test country
-  iso: ATT
+madagascar:
+  name: Madagascar
+  iso: MG
