@@ -5,7 +5,7 @@ class Country < ApplicationRecord
   include WcmcComponents::Loadable
   
   has_and_belongs_to_many :commitments
-  validates_presence_of :name, :iso
+  validates_presence_of :name
   validates_uniqueness_of :name
 
   ignore_column 'iso_3'

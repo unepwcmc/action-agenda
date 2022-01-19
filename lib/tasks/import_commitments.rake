@@ -3,11 +3,11 @@ require 'csv'
 namespace :import do
   desc "import CSV data into database"
   task :commitments, [:csv_file] => [:environment] do |t, args|
-    Country.import 
+    # Country.import 
     import_csv_file(args.csv_file)
-    puts "local Commitments successfully imported"
-    import_from_cbd
-    puts "CBD Commitments successfully imported"
+    # puts "local Commitments successfully imported"
+    # import_from_cbd
+    # puts "CBD Commitments successfully imported"
   end
 
   def import_csv_file file
