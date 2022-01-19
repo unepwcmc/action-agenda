@@ -29,13 +29,11 @@ class Services::CriteriumProps
                 choices: [
                   {
                     value: 'true',
-                    text:
-                      'The area has, or will have, a clearly defined boundary'
+                    text: I18n.t('form.criteria.q1.t')
                   },
                   {
                     value: 'false',
-                    text:
-                      'The area does not and will not have a clearly defined boundary'
+                    text: I18n.t('form.criteria.q1.f')
                   }
                 ]
               },
@@ -51,7 +49,7 @@ class Services::CriteriumProps
                            }
                          end,
                 hasNone: true,
-                noneText: 'None of the above'
+                noneText: I18n.t('form.criteria.other')
               },
               {
                 type: 'checkbox',
@@ -65,7 +63,7 @@ class Services::CriteriumProps
                            }
                          end,
                 hasNone: true,
-                noneText: 'None of the above'
+                noneText: I18n.t('form.criteria.other')
               },
               {
                 type: 'radiogroup',
@@ -75,11 +73,11 @@ class Services::CriteriumProps
                 choices: [
                   {
                     value: 'true',
-                    text: 'Yes'
+                    text: I18n.t('form.criteria.q4.t')
                   },
                   {
                     value: 'false',
-                    text: 'No'
+                    text: I18n.t('form.criteria.q4.f')
                   }
                 ],
                 colCount: 2
@@ -92,11 +90,11 @@ class Services::CriteriumProps
                 choices: [
                   {
                     value: 'true',
-                    text: 'Yes'
+                    text: I18n.t('form.criteria.q5.t')
                   },
                   {
                     value: 'false',
-                    text: 'No'
+                    text: I18n.t('form.criteria.q5.f')
                   }
                 ],
                 colCount: 2

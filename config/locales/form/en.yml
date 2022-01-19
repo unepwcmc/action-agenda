@@ -7,17 +7,21 @@ en:
             dormant: "Commitment form"
       title: 'Form 1: criteria'
       description: 'Form 1 will help establish whether this platform is the right place for your commitment. ‘Commitment’ refers to what you intend to do, for example, commitments to enhance/improve an existing area where new actions are planned or to establish a new area. ‘Area’ refers to the geographical area this is (or will be) under management as a result of this commitment.'
+      other: None of the above
       q1: 
         label: Does/will the area have a clearly-defined boundary?
+        t: 'The area has, or will have, a clearly defined boundary'
+        f: 'The area does not and will not have a clearly defined boundary'
       q2:
         label: Please select the objectives of the Convention on Biological Diversity that your commitment contributes to
       q3:
         label: Who is making the commitment?
       q4:
         label: Is the duration of the commitment at least 5 years?
+        t: 'Yes'
+        f: 'No'
       q5:
         label: Are you able to submit annual progress reports to this platform?
+        t: 'Yes'
+        f: 'No'
     commitments: 
-
-
-
