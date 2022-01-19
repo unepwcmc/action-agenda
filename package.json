@@ -4,12 +4,8 @@
   "dependencies": {
     "@rails/webpacker": "4.3.0",
     "axios": "^0.21.0",
-    "ckeditor": "^4.11.4",
     "core-js": "^3.6.5",
     "jquery": "^3.1.1",
-    "jspdf": "^2.3.0",
-    "jspdf-autotable": "^3.0.10",
-    "survey-analytics": "latest",
     "survey-vue": "latest",
     "turbolinks": "^5.2.0",
     "vue": "^2.6.12",
