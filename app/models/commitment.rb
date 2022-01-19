@@ -2,8 +2,8 @@ require 'csv'
 require 'wcmc_components'
 class Commitment < ApplicationRecord
   include WcmcComponents::Loadable
-  belongs_to :country, class_name: 'Country'
-  import_by country: :name
+  has_and_belongs_to_many :countries
+  import_by countries: :name
   has_and_belongs_to_many :managers
   import_by managers: :name
   has_and_belongs_to_many :objectives
@@ -39,7 +39,7 @@ class Commitment < ApplicationRecord
     }
   ].freeze
 
-  FILTERS = %w[manager country committed_year stage primary_objectives governance_type].freeze
+  FILTERS = %w[manager committed_year stage primary_objectives governance_type].freeze
 
   # Filters moved to CommitmentPresenter to avoid repetition
   def self.filters_to_json
@@ -50,7 +50,7 @@ class Commitment < ApplicationRecord
 
   def self.commitments_to_json
     commitments = Commitment.all
-                            .includes(:country)
+                            .includes(:countries)
                             .order(id: :asc).to_a.map! do |commitment|
       {
         id: commitment.id,
@@ -94,7 +94,7 @@ class Commitment < ApplicationRecord
   def self.generate_query(page, filter_params)
     # if params are empty then return the paginated results without filtering
     if filter_params.empty?
-      return Commitment.includes(:country)
+      return Commitment.includes(:countries)
                        .order(id: :asc).paginate(page: page || 1, per_page: @items_per_page)
                        .to_a.map! do |commitment|
                commitment.to_hash
@@ -124,6 +124,7 @@ class Commitment < ApplicationRecord
       when 'country'
         countries = options
         country_ids << Country.where(name: countries).pluck(:id)
+        # TO DO: fix this
         params['country'] = country_ids.flatten.empty? ? "" : "commitments.country_id IN (#{country_ids.join(',')})"
       when 'manager'
         managers = options

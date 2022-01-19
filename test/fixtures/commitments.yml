@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  country: test_country
+  countries: test_country
   geographic_boundary: false
   latitude: 1.5
   longitude: 1.5
@@ -18,7 +18,7 @@ one:
   managers: indigenous, custom
 
 two:
-  country: test_country
+  countries: test_country
   geographic_boundary: false
   latitude: 1.5
   longitude: 1.5

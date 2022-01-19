@@ -49,7 +49,7 @@
           <span class="list__subtitle">Country Location:</span>
           <p class="list__country">
             <i class="list__icon icon--pin"></i>
-            <span class="list__text"><%= @commitment.country.name %></span>
+            <span class="list__text"><%= @commitment.countries.pluck(:name) %></span>
           </p>
         </li>
         <li class="list__li">

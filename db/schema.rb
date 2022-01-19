@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_18_154811) do
+ActiveRecord::Schema.define(version: 2022_01_18_163852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(version: 2022_01_18_154811) do
     t.string "related_biodiversity_targets"
     t.string "review_method"
     t.index ["country_id"], name: "index_commitments_on_country_id"
+  end
+
+  create_table "commitments_countries", id: false, force: :cascade do |t|
+    t.bigint "commitment_id"
+    t.bigint "country_id"
+    t.index ["commitment_id"], name: "index_commitments_countries_on_commitment_id"
+    t.index ["country_id"], name: "index_commitments_countries_on_country_id"
   end
 
   create_table "commitments_governance_types", id: false, force: :cascade do |t|
