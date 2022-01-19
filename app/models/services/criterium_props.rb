@@ -38,11 +38,12 @@ class Services::CriteriumProps
               name: 'cbd_objectives',
               title: I18n.t('form.criteria.q2.label'),
               isRequired: true,
-              choices: [
-                'Conservation of biological diversity',
-                'Sustainable use',
-                'Fair and equitable sharing of benefits from the utilization of genetic resources'
-              ],
+              choices: CbdObjective.pluck(:id, :name).map do |id, name|
+                         {
+                           value: id,
+                           text: name
+                         }
+                       end,
               hasNone: true,
               noneText: 'None of the above'
             },
@@ -51,13 +52,12 @@ class Services::CriteriumProps
               name: 'stakeholders',
               title: I18n.t('form.criteria.q3.label'),
               isRequired: true,
-              choices: [
-                'Local communities',
-                'Indigenous peoples',
-                'Non-governmental organization (NGO)',
-                'Private sector (business and industry)',
-                'Sub-national or local government'
-              ],
+              choices: Stakeholder.pluck(:id, :name).map do |id, name|
+                         {
+                           value: id,
+                           text: name
+                         }
+                       end,
               hasNone: true,
               noneText: 'None of the above'
             },
