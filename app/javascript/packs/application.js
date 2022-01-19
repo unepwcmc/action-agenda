@@ -14,7 +14,7 @@ import store from '../store/store.js'
 
 // components
 import FilteredTable from '../components/table/FilteredTable'
-import Modal from '../components/forms/Modal'
+import FormCommitment from '../components/form/Commitment'
 
 export const eventHub = new Vue()
 
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
       store,
       components: {
 	      FilteredTable,
-        Modal
+        FormCommitment
       }
     })
   }

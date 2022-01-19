@@ -4,15 +4,18 @@
     class="modal"
   >
     <div class="modal__inner">
-      <div
-        v-scroll-lock="showModal"
-        class="modal__body"
-      >
+      <div class="modal__body">
         <div class="modal__content">
-          Title from props
-          Slot for body or just pass as prop with paragraphing and bold text?
-          Continue button with text from props
-          Exit button with text and link from props
+          <h3>Title from props</h3>
+          <slot />
+          <button>Continue button with text from props</button>
+          <button>Exit button with text and link from props</button>
+        <button
+          class="modal__close"
+          @click="closeModal"
+        >
+          Close modal button
+        </button>
         </div>
       </div>
     </div>
