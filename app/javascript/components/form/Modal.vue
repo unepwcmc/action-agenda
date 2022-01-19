@@ -14,12 +14,12 @@
             v-html="modalQuestionBody"
           />
           <button
-            class="modal__continue"
+            class="modal__button modal__button--continue"
             v-text="modalText.continue"
             @click="closeModal"
           />
           <button
-            class="modal__exit"
+            class="modal__button modal__button--exit"
             v-text="modalText.exit"
             @click="exit"
           />

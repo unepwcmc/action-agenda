@@ -1,5 +1,5 @@
 //--------------------------------------------------
-// modal
+// form modal
 //--------------------------------------------------
 .modal {
   width: 100%;
@@ -47,6 +47,10 @@
 .modal__content {
   overflow-y: auto;
   max-height: 100%;
+}
+
+.modal__button {
+  @include button-accent;
 }
 
 .modal__overlay {
