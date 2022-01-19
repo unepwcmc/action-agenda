@@ -39,7 +39,7 @@ class Commitment < ApplicationRecord
     }
   ].freeze
 
-  FILTERS = %w[manager committed_year stage primary_objectives governance_type].freeze
+  FILTERS = %w[manager country committed_year stage primary_objectives governance_type].freeze
 
   # Filters moved to CommitmentPresenter to avoid repetition
   def self.filters_to_json
@@ -125,11 +125,11 @@ class Commitment < ApplicationRecord
         countries = options
         country_ids << Country.where(name: countries).pluck(:id)
         # TO DO: fix this
-        params['country'] = country_ids.flatten.empty? ? "" : "commitments.country_id IN (#{country_ids.join(',')})"
+        params['country'] = country_ids.flatten.empty? ? "" : "cc.country_id IN (#{country_ids.join(',')})"
       when 'manager'
         managers = options
         manager_ids << Manager.where(name: managers).pluck(:id)
-        params['manager'] = manager_ids.flatten.empty? ? "" : "ac.manager_id IN (#{manager_ids.join(',')})"
+        params['manager'] = manager_ids.flatten.empty? ? "" : "cm.manager_id IN (#{manager_ids.join(',')})"
       when 'primary_objectives'
         objectives = options
         objective_ids << Objective.where(name: objectives).pluck(:id)
@@ -152,7 +152,8 @@ class Commitment < ApplicationRecord
   def self.run_query(page, where_params)
     Commitment
       .from("commitments")
-      .joins("JOIN managers_commitments AS ac ON ac.commitment_id = commitments.id")
+      .joins("JOIN commitments_managers AS cm ON cm.commitment_id = commitments.id")
+      .joins("JOIN commitments_countries AS cc ON cc.commitment_id = commitments.id")
       .joins("JOIN commitments_objectives AS co ON co.commitment_id = commitments.id")
       .joins("JOIN commitments_governance_types AS cgt ON cgt.commitment_id = commitments.id")  
       .where(where_params.values.join(' AND '))
