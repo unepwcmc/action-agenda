@@ -6,16 +6,23 @@
     <div class="modal__inner">
       <div class="modal__body">
         <div class="modal__content">
-          <h3>Title from props</h3>
-          <slot />
-          <button>Continue button with text from props</button>
-          <button>Exit button with text and link from props</button>
-        <button
-          class="modal__close"
-          @click="closeModal"
-        >
-          Close modal button
-        </button>
+          <p class="modal__question">
+            <b v-text="modalText.question" />
+          </p>
+          <div
+            class="modal__question-body"
+            v-html="modalQuestionBody"
+          />
+          <button
+            class="modal__continue"
+            v-text="modalText.continue"
+            @click="closeModal"
+          />
+          <button
+            class="modal__exit"
+            v-text="modalText.exit"
+            @click="exit"
+          />
         </div>
       </div>
     </div>
@@ -38,6 +45,21 @@ export default {
   },
 
   props: {
+    exit: {
+      type: Function,
+      required: true
+    },
+
+    modalQuestionBody: {
+      type: String,
+      required: true
+    },
+
+    modalText: {
+      type: Object,
+      required: true
+    },
+
     showModal: {
       type: Boolean,
       required: true
