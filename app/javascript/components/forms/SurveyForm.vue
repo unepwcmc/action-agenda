@@ -49,14 +49,17 @@ export default {
       }
       axios(this.formData.config.action, options)
         .then((response) => {
-          if (response.data.redirect_path) {
-            Turbolinks.visit(`${response.data.redirect_path}`);
-          }
+          this.redirect(response.data.redirect_path)
         })
         .catch((error) => {
           console.log("FAILED!", error.data);
         })
     },
+    redirect(link) {
+      if (link) {
+        Turbolinks.visit(`${link}`);
+      }
+    }
   },
 };
 </script>
