@@ -1,5 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-test_country:
+test_country_1:
   name: Test country
   iso: TC
+
+test_country_2:
+  name: Another test country
+  iso: ATT

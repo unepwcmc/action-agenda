@@ -7,13 +7,13 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get not found on bad id" do
-    commitment = commitments(:one)
+    commitment = commitments(:valid_commitment)
     get commitment_url(1111)
     assert_response :not_found
   end
 
   test "should get show" do
-    get commitment_url(commitments(:one).id)
+    get commitment_url(commitments(:valid_commitment).id)
     assert_response :success
   end
 end

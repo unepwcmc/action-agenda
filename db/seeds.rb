@@ -22,13 +22,18 @@ criteria = [
 ]
 Criterium.create!(criteria)
 
-
 # commitments and associated records
-managers = [
-  { name: "Indigenous peoples", default_option: true },
-  { name: "Local communities", default_option: true },
-  { name: "Non-governmental organization", default_option: true },
-  { name: "Private sector", default_option: true },
-  { name: "Sub-national  or local government", default_option: true }
-]
-Manager.create!(managers)
+Country.import
+
+manager_names = ['Indigenous peoples', 'Local communities', 'For-profit organisations', 'Non-profit organisations', 'Individual landowners', 'Collaborative governance', 'Joint governance', 'Sub-national ministry or agency', 'Other']
+Manager.create!(manager_names.map {|manager_name| { name: manager_name, default_option: true }})
+
+actions =['Land/water protection', 'Land/water management', 'Species management', 'Education & awareness', 'Law & policy', 'Livelihood', 'economic & other incentives' , 'Other']
+Action.create!(actions.map {|action_name| { name: action_name }})
+
+threat_names = ['Residential & commercial development', 'Agriculture & aquaculture', 'Energy production & mining', 'Transportation & service corridors', 'Biological resource use', 'Human intrusions & disturbance', 'Natural system modifications', 'Invasive & other problematic species', 'genes & diseases', 'Pollution', 'Geological events', 'Climate change & severe weather', 'Other']
+Threat.create!(threat_names.map {|threat_name| { name: threat_name }})
+
+# commitment
+# progress_documents
+# links

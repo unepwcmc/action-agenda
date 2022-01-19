@@ -7,4 +7,11 @@ namespace :migrate_data do
     end
     puts "commitment.country converted to commitment.countries"
   end
+
+  task add_commitment_link_to_commitment_links: :environment do
+    Commitment.find_each do |commitment|
+      commitment.links.create!(url: commitment.link)
+    end
+    puts "commitment.link converted to commitment.links"
+  end
 end

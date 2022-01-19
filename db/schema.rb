@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_18_163852) do
+ActiveRecord::Schema.define(version: 2022_01_19_140327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "actions", force: :cascade do |t|
+    t.text "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "actions_commitments", force: :cascade do |t|
+    t.bigint "commitment_id"
+    t.bigint "action_id"
+    t.index ["action_id"], name: "index_actions_commitments_on_action_id"
+    t.index ["commitment_id"], name: "index_actions_commitments_on_commitment_id"
+  end
 
   create_table "cbd_objectives", force: :cascade do |t|
     t.string "name"
@@ -49,6 +62,8 @@ ActiveRecord::Schema.define(version: 2022_01_18_163852) do
     t.string "stage"
     t.string "related_biodiversity_targets"
     t.string "review_method"
+    t.text "responsible_group"
+    t.integer "state", default: 0
     t.index ["country_id"], name: "index_commitments_on_country_id"
   end
 
@@ -66,6 +81,13 @@ ActiveRecord::Schema.define(version: 2022_01_18_163852) do
     t.index ["governance_type_id"], name: "index_commitments_governance_types_on_governance_type_id"
   end
 
+  create_table "commitments_links", force: :cascade do |t|
+    t.bigint "commitment_id"
+    t.bigint "link_id"
+    t.index ["commitment_id"], name: "index_commitments_links_on_commitment_id"
+    t.index ["link_id"], name: "index_commitments_links_on_link_id"
+  end
+
   create_table "commitments_managers", id: false, force: :cascade do |t|
     t.bigint "commitment_id"
     t.bigint "manager_id"
@@ -78,6 +100,13 @@ ActiveRecord::Schema.define(version: 2022_01_18_163852) do
     t.bigint "objective_id"
     t.index ["commitment_id"], name: "index_commitments_objectives_on_commitment_id"
     t.index ["objective_id"], name: "index_commitments_objectives_on_objective_id"
+  end
+
+  create_table "commitments_threats", force: :cascade do |t|
+    t.bigint "commitment_id"
+    t.bigint "threat_id"
+    t.index ["commitment_id"], name: "index_commitments_threats_on_commitment_id"
+    t.index ["threat_id"], name: "index_commitments_threats_on_threat_id"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -108,6 +137,13 @@ ActiveRecord::Schema.define(version: 2022_01_18_163852) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "links", force: :cascade do |t|
+    t.text "name"
+    t.text "url", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "managers", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -125,6 +161,15 @@ ActiveRecord::Schema.define(version: 2022_01_18_163852) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "threats", force: :cascade do |t|
+    t.text "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "threats_and_joins", force: :cascade do |t|
   end
 
   add_foreign_key "commitments", "countries"

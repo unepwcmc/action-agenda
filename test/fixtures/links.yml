@@ -1,0 +1,7 @@
+link_1:
+  url: 'www.test.com'
+  name: 'commitment organisation home page'
+
+link_2:
+  url: 'www.test2.com'
+  name: 'another website'

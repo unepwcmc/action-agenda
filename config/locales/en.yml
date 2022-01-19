@@ -53,6 +53,10 @@ en:
               blank: 'CBD Objective information missing'
             stakeholders:
               blank: 'Stakeholder information missing'
+        commitment:
+          attributes:
+            stage:
+              inclusion: "is not one of the allowed stage options"
 
   criterium:
     failure_messages:

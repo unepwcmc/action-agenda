@@ -49,12 +49,14 @@
           <span class="list__subtitle">Country Location:</span>
           <p class="list__country">
             <i class="list__icon icon--pin"></i>
-            <span class="list__text"><%= @commitment.countries.pluck(:name) %></span>
+            <span class="list__text"><%= @commitment.countries.pluck(:name).join(', ') %></span>
           </p>
         </li>
         <li class="list__li">
           <span class="list__subtitle">Linked from platform:</span>
-          <%= link_to @commitment.link.truncate(50), @commitment.link, target: '_blank', title: @commitment.name %>
+          <% @commitment.links.each do |link| %>
+            <%= link_to link.name, link.url, target: '_blank', title: link.name %>
+          <% end %>
         </li>
         <li class="list__li">
           <span class="list__subtitle">Review method:</span>

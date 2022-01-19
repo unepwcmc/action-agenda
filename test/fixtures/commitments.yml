@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  countries: test_country
+valid_commitment:
+  responsible_group: a group name 
   geographic_boundary: false
   latitude: 1.5
   longitude: 1.5
@@ -14,11 +14,16 @@ one:
   governance_authority: MyText
   planned_actions: MyText
   description: MyText
-  link: MyString
   managers: indigenous, custom
+  state: live
+  stage: 'Committed'
+  countries: test_country_1, test_country_2
+  links: link_1, link_2
+  actions: species_management, livelihood
+  threats: pollution, other
 
 two:
-  countries: test_country
+  responsible_group: another group name 
   geographic_boundary: false
   latitude: 1.5
   longitude: 1.5
@@ -31,5 +36,10 @@ two:
   governance_authority: MyText
   planned_actions: MyText
   description: MyText
-  link: MyString
   managers: indigenous
+  state: draft
+  stage: 'Implemented'
+  countries: test_country_1
+  links: link_1
+  actions: species_management
+  threats: pollution
