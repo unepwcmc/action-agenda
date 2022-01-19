@@ -9,7 +9,7 @@
 
 1. `bundle install`
 2. `yarn install`
-3. `bundle exec rails db:create db:migrate`
+3. `bundle exec rails db:create db:migrate rails db:seed`
 4. `bundle exec rails s` 
 5. Obtain a copy of the 'commitments' CSV if not already present in `lib/data/seeds`
 6. Run `rails import:commitments`
