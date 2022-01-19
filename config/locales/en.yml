@@ -36,7 +36,7 @@ en:
     format: "%{message}"
     messages:
       content_type_invalid: "has an invalid content type: %{content_type}"
-      file_size_out_of_range: "size %{file_size} is not between required range"
+      file_size_out_of_range: "file size %{file_size} is too large"
 
   activerecord:
     errors:

@@ -17,7 +17,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'mini_racer', platforms: :ruby
 
 #gem 'wcmc-components', path: "../web-components/gems/wcmc_components"
-gem 'wcmc-components', '~> 0.0.5', source: "https://gem-server.unep-wcmc.org/"
+gem 'wcmc-components', '~> 0.0.5', source: 'https://gem-server.unep-wcmc.org/'
 gem 'will_paginate', '~> 3.0'
 
 # Use CoffeeScript for .coffee assets and views
@@ -36,7 +36,7 @@ gem 'httparty'
 
 # ActiveStorage
 gem 'mini_magick', '~> 4.8' # Use ActiveStorage variant
-gem "aws-sdk-s3", require: false # Use S3 bucket for document storage
+gem 'aws-sdk-s3', require: false # Use S3 bucket for document storage
 gem 'active_storage_validations', '~> 0.1' # validate upload types
 
 # Use Capistrano for deployment
