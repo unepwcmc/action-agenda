@@ -63,10 +63,10 @@
 </template>
 
 <script>
-import FormModal from './Modal'
+import FormModal from "./Modal"
 
 export default {
-  name: 'FormNavigation',
+  name: "FormNavigation",
 
   components: { 
     FormModal

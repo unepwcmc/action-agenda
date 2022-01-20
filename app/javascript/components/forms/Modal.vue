@@ -37,11 +37,11 @@
 const ESCAPE_KEY = 27
 
 export default {
-  name: 'FormModal',
+  name: "FormModal",
 
   model: {
-    event: 'change',
-    prop: 'showModal'
+    event: "change",
+    prop: "showModal"
   },
 
   props: {
@@ -67,16 +67,16 @@ export default {
   },
 
   mounted () {
-    window.addEventListener('keyup', this.onKeyup)
+    window.addEventListener("keyup", this.onKeyup)
   },
 
   beforeDestroy () {
-    window.removeEventListener('keyup', this.onKeyup)
+    window.removeEventListener("keyup", this.onKeyup)
   },
 
   methods: {
     closeModal () {
-      this.$emit('change', false)
+      this.$emit("change", false)
     },
 
     onKeyup (e) {
