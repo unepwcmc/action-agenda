@@ -1,8 +1,8 @@
 require 'csv'
 require 'wcmc_components'
 class Commitment < ApplicationRecord
-  STAGE_OPTIONS = ['In progress', 'Committed','Implemented'].freeze
   enum state: [:draft, :live]
+  enum stage: [:commited, :in_progress, :implemented]
 
   include WcmcComponents::Loadable
   has_and_belongs_to_many :countries
@@ -19,12 +19,16 @@ class Commitment < ApplicationRecord
   has_many :progress_documents
   has_one_attached :spatial_data
 
+  # belongs_to :criterium, optional: true
+
   validates :spatial_data, 
     content_type: %w(application/vnd.google-earth.kml+xml application/vnd.google-earth.kmz application/zip), 
     size: { less_than: 25.megabytes }
 
   validates :name, presence: true
-  validates :stage, inclusion: { in: STAGE_OPTIONS }, allow_nil: true
+
+  # :has_primary_management_objective
+  # :year > 5
 
   ignore_column 'TYPE'
 

@@ -33,4 +33,11 @@ namespace :migrate_data do
     end
     puts failed_to_set_live.empty? ? "All commitments set to 'live'." : "Commitements #{ failed_to_set_live.join(', ')} could not be set to live"
   end
+
+  task move_old_stage_string_to_enum: :environment do
+    Commitment.find_each do |commitment|
+      stage = commitment.old_stage.gsub!(/( )/, '_').nil? ? commitment.old_stage.downcase : commitment.old_stage.gsub!(/( )/, '_')  
+      Commitment.update(stage: stage)
+    end
+  end
 end
