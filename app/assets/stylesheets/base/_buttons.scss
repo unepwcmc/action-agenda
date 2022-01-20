@@ -100,8 +100,8 @@ $padding-medium: rem-calc(27);
   text-transform: uppercase;
 }
 
-@mixin button-grey-mdlight {
-  @include button-block($grey-mdlight, $black);
+@mixin button-grey-light {
+  @include button-block($grey-light, $black);
   font-weight: $bold;
   text-transform: uppercase;
 }

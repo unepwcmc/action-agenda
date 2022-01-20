@@ -43,7 +43,7 @@
   }
 
   &.form-navigation__item--back {
-    @include button-grey-mdlight;
+    @include button-grey-light;
     position: relative;
 
     &:before {
