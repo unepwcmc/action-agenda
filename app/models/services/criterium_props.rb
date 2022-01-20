@@ -19,7 +19,6 @@ class Services::CriteriumProps
         description: I18n.t('form.criteria.description'),
         pages: [
           {
-            navigationTitle: 'criteria',
             elements: [
               {
                 type: 'radiogroup',
@@ -49,7 +48,7 @@ class Services::CriteriumProps
                            }
                          end,
                 hasNone: true,
-                noneText: I18n.t('form.criteria.other')
+                noneText: I18n.t('form.criteria.none')
               },
               {
                 type: 'checkbox',
@@ -63,7 +62,7 @@ class Services::CriteriumProps
                            }
                          end,
                 hasNone: true,
-                noneText: I18n.t('form.criteria.other')
+                noneText: I18n.t('form.criteria.none')
               },
               {
                 type: 'radiogroup',

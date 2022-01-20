@@ -12,32 +12,29 @@
 .progress {
   @include flex;
   @include flex-v-center;
-
   width: 100%;
+  background-color: $grey-mdlight;
+  font-weight: bold;
+  list-style: none;
   margin: 0 2rem;
   padding: 0;
 
-  font-weight: bold;
-  list-style: none;
-  background-color: $grey-mdlight;
-
   &__active {
-    padding: 2rem;
-    color: $white;
     background-color: $green-dark;
-    
+    color: $white;
+    padding: 2rem;
+
     &:after {
-      width: 0;
-      height: 0;
-      margin-top: -32px;
+      width: 0; height: 0;
+      margin-top: -2rem;
       margin-left: 2rem;
       z-index: 1;
 
-      content: "";
-      position:absolute;
+      content: '';
+      position: absolute;
 
       border-style: solid;
-      border-width: 41px 0 41px 55px;
+      border-width: 2.563rem 0 2.563rem 3.438rem;
       border-color: transparent transparent transparent $green-dark;
     }
   }
@@ -45,31 +42,29 @@
   &__dormant {
     margin-left: 4rem;
     padding: 2rem;
+    
     &:before {
-      width: 0;
-      height: 0;
-      margin-top: -32px;
-      margin-left: -5rem;
-      z-index: 0;
+      width: 0; height: 0;
 
-      content: "";
-      position:absolute;
-
-      border-style: solid;
-      border-width: 41px 0 41px 55px;
       border-color: transparent transparent transparent $white;
-    }
-    span:before {
-      width: 1rem;
-      height: 6rem;
-      margin-top: -32px;
-      margin-left: -6rem;
+      border-style: solid;
+      border-width: 2.563rem 0 2.563rem 3.438rem;
+      content: '';
+      margin-top: -2rem;
+      margin-left: -5rem;
+      position: absolute;
       z-index: 0;
+    }
 
-      content: "";
-      position:absolute;
-
+    span:before {
+      width: 1rem; height: 6rem;
       background-color: $white;
+      content: '';
+      margin-top: -2rem;
+      margin-left: -6rem;
+
+      position: absolute;
+      z-index: 0;
     }
   }
 }

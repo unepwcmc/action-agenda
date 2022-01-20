@@ -10,9 +10,10 @@ import Turbolinks from "turbolinks";
 import axios from "axios";
 import { setAxiosHeaders } from "../../helpers/axios-helpers";
 import "survey-vue/modern.css";
+
 SurveyVue.StylesManager.applyTheme("modern");
 
-var Survey = SurveyVue.Survey;
+const Survey = SurveyVue.Survey;
 
 export default {
   name: "SurveyForm",
@@ -45,7 +46,7 @@ export default {
     onComplete(sender) {
       const options = {
         method: this.formData.config.method,
-        data: { [this.formData.config.root_key]:  sender.data },
+        data: { [this.formData.config.root_key]: sender.data },
       }
       axios(this.formData.config.action, options)
         .then((response) => {
@@ -57,7 +58,7 @@ export default {
     },
     redirect(link) {
       if (link) {
-        Turbolinks.visit(`${link}`);
+        Turbolinks.visit(link);
       }
     }
   },
