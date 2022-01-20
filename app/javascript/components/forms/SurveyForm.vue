@@ -24,14 +24,14 @@ import Turbolinks from "turbolinks";
 import axios from "axios";
 import { setAxiosHeaders } from "../../helpers/axios-helpers";
 import "survey-vue/modern.css";
-import FormNavigation from './Navigation'
+import FormNavigation from "./Navigation"
 
 SurveyVue.StylesManager.applyTheme("modern");
 
 const Survey = SurveyVue.Survey;
 
 export default {
-  name: 'SurveyForm',
+  name: "SurveyForm",
 
   components: { 
     FormNavigation,
@@ -91,7 +91,7 @@ export default {
       if (this.dataModel === "Commitment") {
         this.survey.completeLastPage();
       } else {
-        Turbolinks.visit('/dashboard');
+        Turbolinks.visit("/dashboard");
       }
     },
 
@@ -100,10 +100,23 @@ export default {
     },
 
     onComplete(sender) {
+      const data = sender.data;
+      const questionsWithNoneOption = ["cbd_objective_ids", "stakeholder_ids"];
+
+      questionsWithNoneOption.forEach((question) => {
+        if (data[question] && data[question][0] === "none") {
+          data[question][0] = null;
+        }
+      });
+
+      console.log(data)
+
       const options = {
         method: this.formData.config.method,
-        data: { [this.formData.config.root_key]: sender.data },
-      }
+        data: { [this.formData.config.root_key]: data },
+      };
+
+      console.log(options)
 
       axios(this.formData.config.action, options)
         .then((response) => {
