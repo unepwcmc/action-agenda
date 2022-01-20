@@ -4,11 +4,12 @@
       :title="<%=I18n.t('form.criteria.progress.title').to_json%>">
     </mock-progress-bar>
     <survey-form
+      data-model="Criterium"
       :form-data="<%= @form_hash.to_json %>"
       modal-question-body="<%="<p>#{I18n.t('form.criteria.modal.p')}</p>"%>"
       :modal-text="<%=I18n.t('form.criteria.modal').to_json%>"
-      data-model="Criterium"
       :navigation-text="<%=I18n.t('form.criteria.navigation').to_json%>"
+      :none-values="<%= @none_values.to_json %>"
     >
     </survey-form>
   </div>

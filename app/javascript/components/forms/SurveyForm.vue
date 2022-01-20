@@ -62,6 +62,11 @@ export default {
     navigationText: {
       type: Object,
       required: true
+    },
+
+    noneValues: {
+      type: Object,
+      default: () => ({})
     }
   },
 
@@ -101,22 +106,17 @@ export default {
 
     onComplete(sender) {
       const data = sender.data;
-      const questionsWithNoneOption = ["cbd_objective_ids", "stakeholder_ids"];
 
-      questionsWithNoneOption.forEach((question) => {
+      Object.keys(this.noneValues).forEach((question) => {
         if (data[question] && data[question][0] === "none") {
-          data[question][0] = null;
+          data[question][0] = this.noneValues[question];
         }
       });
-
-      console.log(data)
 
       const options = {
         method: this.formData.config.method,
         data: { [this.formData.config.root_key]: data },
       };
-
-      console.log(options)
 
       axios(this.formData.config.action, options)
         .then((response) => {

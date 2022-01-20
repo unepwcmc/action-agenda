@@ -42,11 +42,15 @@ class Services::CriteriumProps
                 title: I18n.t('form.criteria.q2.label'),
                 isRequired: true,
                 choices: CbdObjective.pluck(:id, :name).map do |id, name|
-                           {
-                             value: id,
-                             text: name
-                           }
-                         end,
+                          if name != 'None of the above'
+                            {
+                              value: id,
+                              text: name
+                            }
+                          else
+                            nil
+                          end
+                         end.compact,
                 hasNone: true,
                 noneText: I18n.t('form.criteria.none')
               },
@@ -56,11 +60,15 @@ class Services::CriteriumProps
                 title: I18n.t('form.criteria.q3.label'),
                 isRequired: true,
                 choices: Stakeholder.pluck(:id, :name).map do |id, name|
-                           {
-                             value: id,
-                             text: name
-                           }
-                         end,
+                          if name != 'None of the above'
+                            {
+                              value: id,
+                              text: name
+                            }
+                          else
+                            nil
+                          end
+                         end.compact,
                 hasNone: true,
                 noneText: I18n.t('form.criteria.none')
               },
