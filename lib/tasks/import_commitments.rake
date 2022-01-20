@@ -35,7 +35,8 @@ namespace :import do
                                  country_ids: [country.id],
                                  committed_year: cbd_com["meta"]["createdOn"].to_date.year,
                                  update_year: cbd_com["meta"]["modifiedOn"].to_date.year,
-                                 related_biodiversity_targets: aichi_targets
+                                 related_biodiversity_targets: aichi_targets,
+                                 state: :live
                                 )
         our_com.links.build(url: "https://www.cbd.int/action-agenda/contributions/action?action-id=#{cbd_id}")
         our_com.save!

@@ -10,7 +10,7 @@ namespace :migrate_data do
 
   task add_commitment_link_to_commitment_links: :environment do
     Commitment.find_each do |commitment|
-      commitment.links.create!(url: commitment.link)
+      commitment.links.create!(url: commitment.link) if commitment.link
     end
     puts "commitment.link converted to commitment.links"
   end
