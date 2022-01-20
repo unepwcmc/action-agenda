@@ -31,6 +31,6 @@ namespace :migrate_data do
       commitment.state = :live
       failed_to_set_live << commitment.id unless commitment.save
     end
-    puts failed_to_set_to_live.empty? ? "All commitments set to 'live'." : "Commitements #{ failed_to_set_live.join(', ')} could not be set to live"
+    puts failed_to_set_live.empty? ? "All commitments set to 'live'." : "Commitements #{ failed_to_set_live.join(', ')} could not be set to live"
   end
 end
