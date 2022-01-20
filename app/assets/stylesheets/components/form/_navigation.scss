@@ -9,22 +9,27 @@
 
 .form-navigation__items-side {
   display: flex;
+
+  &.form-navigation__items-side--right {
+    align-items: center;
+    // justify-content: flex-end;
+  }
 }
 
 .form-navigation__item {
-  @include button-accent;
   font-size: rem-calc(18);
   line-height: rem-calc(18); // helps the icon align with the text where present
-  width: rem-calc(235);
-  min-height: rem-calc(67);
 
-  justify-content: center;
-
-  &.form-navigation__item--save-first-page {
-    text-transform: none;
+  &.form-navigation__item--first-page-left {
+    @include button-outline($black, rem-calc(2));
+    font-weight: $bold;
   }
 
-  &.form-navigation__item--next {
+  &.form-navigation__item--rightmost {
+    @include button-accent;
+  }
+
+  &.form-navigation__item--next-commitment {
     position: relative;
 
     &:after {
@@ -36,5 +41,34 @@
       width: rem-calc(12 / 19 * 13.4); // 12 width / 19 height * height specified below
       height: rem-calc(13.4);
     }
+  }
+
+  &.form-navigation__item--back {
+    @include button-grey-mdlight;
+    position: relative;
+
+    &:before {
+      background-image: image_url("icons/chevron-left-black.svg"); // couldn't work out how to get it working as a component in the Rails Vue setup
+      background-repeat: no-repeat;
+      background-size: contain;
+      content: '';
+      margin-right: rem-calc(8);
+      width: rem-calc(12 / 19 * 13.4); // 12 width / 19 height * height specified below
+      height: rem-calc(13.4);
+    }
+  }
+
+  &.form-navigation__item--save-middle-page {
+    @include button-basic;
+    font-weight: $bold;
+    margin-right: $spacer-small-desktop;
+    text-decoration: underline;
+  }
+
+  &:not(.form-navigation__item--save-middle-page) {
+    width: rem-calc(235);
+    min-height: rem-calc(67);
+
+    justify-content: center;
   }
 }
