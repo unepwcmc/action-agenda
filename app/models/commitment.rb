@@ -1,7 +1,7 @@
 require 'csv'
 require 'wcmc_components'
 class Commitment < ApplicationRecord
-  
+  STAGE_OPTIONS = ['In progress', 'Committed','Implemented'].freeze
   enum state: [:draft, :live]
 
   include WcmcComponents::Loadable
@@ -52,7 +52,6 @@ class Commitment < ApplicationRecord
   ].freeze
 
   FILTERS = %w[manager country committed_year stage primary_objectives governance_type].freeze
-  STAGE_OPTIONS = ['In progress', 'Committed','Implemented'].freeze
 
   # Filters moved to CommitmentPresenter to avoid repetition
   def self.filters_to_json

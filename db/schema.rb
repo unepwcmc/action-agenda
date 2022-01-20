@@ -10,19 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2022_01_20_091033) do
-=======
-ActiveRecord::Schema.define(version: 2022_01_18_120611) do
->>>>>>> develop
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-<<<<<<< HEAD
   create_table "actions", force: :cascade do |t|
     t.text "name", null: false
-=======
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "default_option", default: false
+  end
+
+  create_table "actions_commitments", force: :cascade do |t|
+    t.bigint "commitment_id"
+    t.bigint "action_id"
+    t.index ["action_id"], name: "index_actions_commitments_on_action_id"
+    t.index ["commitment_id"], name: "index_actions_commitments_on_commitment_id"
+  end
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -42,21 +48,6 @@ ActiveRecord::Schema.define(version: 2022_01_18_120611) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "actors", force: :cascade do |t|
-    t.string "name"
->>>>>>> develop
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "default_option", default: false
-  end
-
-  create_table "actions_commitments", force: :cascade do |t|
-    t.bigint "commitment_id"
-    t.bigint "action_id"
-    t.index ["action_id"], name: "index_actions_commitments_on_action_id"
-    t.index ["commitment_id"], name: "index_actions_commitments_on_commitment_id"
   end
 
   create_table "cbd_objectives", force: :cascade do |t|
@@ -204,7 +195,6 @@ ActiveRecord::Schema.define(version: 2022_01_18_120611) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
   create_table "threats", force: :cascade do |t|
     t.text "name", null: false
     t.datetime "created_at", null: false
@@ -215,8 +205,6 @@ ActiveRecord::Schema.define(version: 2022_01_18_120611) do
   create_table "threats_and_joins", force: :cascade do |t|
   end
 
-=======
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
->>>>>>> develop
   add_foreign_key "commitments", "countries"
 end
