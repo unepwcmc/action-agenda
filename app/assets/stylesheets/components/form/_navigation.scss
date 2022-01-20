@@ -13,4 +13,28 @@
 
 .form-navigation__item {
   @include button-accent;
+  font-size: rem-calc(18);
+  line-height: rem-calc(18); // helps the icon align with the text where present
+  width: rem-calc(235);
+  min-height: rem-calc(67);
+
+  justify-content: center;
+
+  &.form-navigation__item--save-first-page {
+    text-transform: none;
+  }
+
+  &.form-navigation__item--next {
+    position: relative;
+
+    &:after {
+      background-image: image_url("icons/chevron-right-white.svg"); // couldn't work out how to get it working as a component in the Rails Vue setup
+      background-repeat: no-repeat;
+      background-size: contain;
+      content: '';
+      margin-left: rem-calc(8);
+      width: rem-calc(12 / 19 * 13.4); // 12 width / 19 height * height specified below
+      height: rem-calc(13.4);
+    }
+  }
 }
