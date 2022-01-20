@@ -12,12 +12,12 @@
 .progress {
   @include flex;
   @include flex-v-center;
-  width: 100%;
   background-color: $grey-mdlight;
   font-weight: bold;
   list-style: none;
   margin: 0 2rem;
   padding: 0;
+  width: 100%;
 
   &__active {
     background-color: $green-dark;
@@ -27,44 +27,40 @@
     &:after {
       border-color: transparent transparent transparent $green-dark;
       border-style: solid;
-      border-width: 2.6rem 0 2.6rem 3.4rem;
+      border-width: 2.563rem 0 2.563rem 3.438rem;
       content: '';
       margin-top: -2rem;
       margin-left: 2rem;
-      z-index: 1;
+      width: 0; height: 0;
 
-      content: '';
       position: absolute;
-
-      border-style: solid;
-      border-width: 2.563rem 0 2.563rem 3.438rem;
-      border-color: transparent transparent transparent $green-dark;
+      z-index: 1;
     }
   }
 
   &__dormant {
     margin-left: 4rem;
     padding: 2rem;
-    
-    &:before {
-      width: 0; height: 0;
 
+    &:before {
       border-color: transparent transparent transparent $white;
       border-style: solid;
       border-width: 2.6rem 0 2.6rem 3.4rem;
       content: '';
       margin-top: -2rem;
       margin-left: -5rem;
+      width: 0; height: 0;
+
       position: absolute;
       z-index: 0;
     }
 
     span:before {
-      width: 1rem; height: 6rem;
       background-color: $white;
       content: '';
       margin-top: -2rem;
       margin-left: -6rem;
+      width: 1rem; height: 6rem;
 
       position: absolute;
       z-index: 0;
