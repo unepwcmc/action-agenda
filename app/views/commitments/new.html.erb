@@ -1,8 +1,10 @@
-New commitment page
-
-<div class="container spacer-medium--top spacer-large--bottom">
-  <form-commitment 
-    :modal-text="<%=I18n.t('form.commitments.modal').to_json%>"
-    :navigation-text="<%=I18n.t('form.commitments.navigation').to_json%>"
-  />
+<div class="bg--grey-xlight">
+  <div class="container spacer-medium--top spacer-large--bottom">
+    New commitment page
+    <survey-form
+      :modal-text="<%=I18n.t('form.commitments.modal').to_json%>"
+      :model="Commitment"
+      :navigation-text="<%=I18n.t('form.commitments.navigation').to_json%>"
+    />
+  </div>
 </div>
