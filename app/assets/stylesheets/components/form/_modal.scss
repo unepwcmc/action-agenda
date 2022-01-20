@@ -51,20 +51,22 @@
 }
 
 .modal__button {
-  @include button-accent;
   font-size: rem-calc(18);
   width: 100%;
   min-height: rem-calc(67);
 
-  display: block;
+  justify-content: center;
 
   &:not(:last-child) {
     margin-bottom: rem-calc(7);
   }
 
+  &.modal__button--continue {
+    @include button-accent;
+  }
+
   &.modal__button--exit {
-    background-color: $grey-mdlight;
-    color: $black;
+    @include button-grey-mdlight;
   }
 }
 
