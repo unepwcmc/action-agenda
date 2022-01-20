@@ -5,7 +5,7 @@
     >
       <div class="form-navigation__items-side">
         <button
-          v-if="model === 'Criteria'"
+          v-if="dataModel === 'Criterium'"
           class="form-navigation__item form-navigation__item--first-page-left"
           v-text="navigationText.exit"
           @click.prevent="openModal"
@@ -25,7 +25,7 @@
       </div>
       <div class="form-navigation__items-side form-navigation__items-side--right">
         <button
-          v-if="model === 'Criteria'"
+          v-if="dataModel === 'Criterium'"
           class="form-navigation__item form-navigation__item--rightmost"
           v-text="navigationText.next"
           @click.prevent="complete"
@@ -37,13 +37,13 @@
           @click.prevent="openModal"
         />
         <button
-          v-if="model === 'Commitment' && !isLastPage"
+          v-if="dataModel === 'Commitment' && !isLastPage"
           class="form-navigation__item form-navigation__item--rightmost form-navigation__item--commitment-next"
           v-text="navigationText.next"
           @click.prevent="nextPage"
         />
         <button
-          v-if="model === 'Commitment' && isLastPage"
+          v-if="dataModel === 'Commitment' && isLastPage"
           class="form-navigation__item form-navigation__item--rightmost"
           v-text="navigationText.save"
           @click.prevent="complete"
@@ -103,7 +103,7 @@ export default {
       required: true
     },
 
-    model: {
+    dataModel: {
       type: String,
       required: true
     },

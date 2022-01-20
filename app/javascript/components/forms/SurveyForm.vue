@@ -4,12 +4,12 @@
     <form-navigation
       v-bind="{
         complete,
+        dataModel,
         exit,
         isFirstPage, 
         isLastPage,
         modalQuestionBody,
         modalText,
-        model,
         navigationText,
         prevPage,
         nextPage,
@@ -54,7 +54,7 @@ export default {
       required: true
     },
 
-    model: {
+    dataModel: {
       type: String,
       required: true
     },
@@ -89,8 +89,11 @@ export default {
     },
 
     exit () {
-      // survey.completeLastPage(); something like this? May need some validation, e.g. that the title is provided, though this could possibly be added to onComplete method
-      console.log("exited!");
+      if (this.dataModel === "Commitment") {
+        survey.completeLastPage();
+      } else {
+        Turbolinks.visit('/dashboard');
+      }
     },
 
     nextPage () {
