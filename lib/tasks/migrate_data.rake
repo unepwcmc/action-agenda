@@ -24,4 +24,13 @@ namespace :migrate_data do
     end
     puts "default options added"
   end
+
+  task set_existing_commitments_to_live: :environment do
+    failed_to_set_live = []
+    Commitment.find_each do |commitment|
+      commitment.state = :live
+      failed_to_set_live << commitment.id unless commitment.save
+    end
+    puts "commitments set to 'live'. Commitments #{ failed_to_set_live.join(', ') } could not be set to live"
+  end
 end

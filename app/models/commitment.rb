@@ -3,7 +3,7 @@ require 'wcmc_components'
 class Commitment < ApplicationRecord
 
   STAGE_OPTIONS = ['In progress', 'Committed','Implemented']
-  enum state: [ :draft, :live ]
+  enum state: [:draft, :live]
 
   include WcmcComponents::Loadable
   has_and_belongs_to_many :countries
