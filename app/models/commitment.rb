@@ -28,6 +28,11 @@ class Commitment < ApplicationRecord
   validates :name, presence: true
   validates :stage, inclusion: { in: STAGE_OPTIONS }, allow_nil: true
 
+  validates_presence_of :description, :latitude, :longitude, :committed_year, :responsible_group, :duration_years,
+                        :objectives, :managers, :countries, :actions, :threats, if: :live?
+
+  # joint governance
+
   ignore_column 'TYPE'
 
   TABLE_ATTRIBUTES = [
@@ -89,8 +94,6 @@ class Commitment < ApplicationRecord
 
     structure_data(page, items)
   end
-
-
   
   def to_hash
     {

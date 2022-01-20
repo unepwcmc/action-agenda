@@ -46,7 +46,7 @@ class CommitmentsController < ApplicationController
     else
       respond_to do |format|
         format.json { 
-          error_messages = @commitment.errors
+          error_messages = @commitment.errors.messages
           @commitment.state = :draft
           @commitment.save
           json_response({ errors: error_messages }, :unprocessable_entity) 
