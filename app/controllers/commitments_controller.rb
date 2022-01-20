@@ -16,7 +16,11 @@ class CommitmentsController < ApplicationController
   def new
     @commitment = Commitment.new
     @form_hash = Services::CommitmentProps.new(@commitment).call
-  end  
+  end 
+  
+  # TODO
+  def update
+  end
 
   def show
     @commitment = Commitment.find(params[:id])

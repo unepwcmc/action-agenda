@@ -7,8 +7,8 @@ class Services::CommitmentProps
     {
       config:
       {
-        action: '/commitments.json',
-        method: 'post',
+        action: @commitment.new_record? ? '/commitments.json' : "/commitments/#{ @commitments.id }.json",
+        method: @commitment.new_record? ? 'post' : 'put',
         root_key: 'commitment'
       },
       survey: {
@@ -38,6 +38,7 @@ class Services::CommitmentProps
                 name: 'objectiveIds',
                 title: 'Please select the primary management objectives for the area',
                 description: 'Multi select option',
+                # defaultValue: [],
                 choices: [
                   'Sustainable use',
                   'Biodiversity conservation',
@@ -58,6 +59,7 @@ class Services::CommitmentProps
                 title:
                   'Who will be responsible for deciding how the area is being managed?',
                 description: 'Multi select option',
+                # defaultValue: [],
                 choices: [
                   'Indigenous peoples',
                   'Local communities',
@@ -96,6 +98,7 @@ class Services::CommitmentProps
                 name: 'countryIds',
                 title: 'Select commitment location by country',
                 description: 'Multi select option',
+                # defaultValue: [],
                 choicesByUrl: {
                   url: 'https://surveyjs.io/api/CountriesExample'
                 },
@@ -145,6 +148,7 @@ class Services::CommitmentProps
                 type: 'dropdown',
                 name: 'committedYear',
                 title: 'Please state the year the commitment was made',
+                # defaultValue: [],
                 choices: %w[
                   2022
                   2021
@@ -165,6 +169,7 @@ class Services::CommitmentProps
                 name: 'duration',
                 title:
                   'How many years do you expect the commitment to be in place for?',
+                  # defaultValue: [],
                 choices: %w[
                   5
                   6
@@ -190,6 +195,7 @@ class Services::CommitmentProps
                 type: 'radiogroup',
                 name: 'stage',
                 title: 'Please select the stage of implementation of your commitment',
+                # defaultValue: [],
                 choices: ['Committed', 'In progress', 'Implemented']
               },
               {
@@ -198,6 +204,7 @@ class Services::CommitmentProps
                 title:
                   'What actions do you intend/or have taken to implement the commitment?',
                 description: 'Multi select option',
+                # defaultValue: [],
                 choices: [
                   'Land/water protection',
                   'Land/water management',
@@ -213,6 +220,7 @@ class Services::CommitmentProps
                 type: 'dropdown',
                 name: 'implementationYear',
                 title: 'Please state the first year of commitment actions',
+                # defaultValue: [],
                 choices: %w[
                   2022
                   2021
@@ -233,6 +241,7 @@ class Services::CommitmentProps
                 title:
                   'What are the main threats that your commitment is seeking to address?',
                 description: 'Multi select option',
+                # defaultValue: [],
                 choices: [
                   'Residential & commercial development',
                   'Agriculture & aquaculture',
