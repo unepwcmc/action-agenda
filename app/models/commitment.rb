@@ -1,8 +1,7 @@
 require 'csv'
 require 'wcmc_components'
 class Commitment < ApplicationRecord
-
-  STAGE_OPTIONS = ['In progress', 'Committed','Implemented']
+  
   enum state: [:draft, :live]
 
   include WcmcComponents::Loadable
@@ -17,6 +16,12 @@ class Commitment < ApplicationRecord
   has_and_belongs_to_many :actions
   has_and_belongs_to_many :links
   has_and_belongs_to_many :threats
+  has_many :progress_documents
+  has_one_attached :spatial_data
+
+  validates :spatial_data, 
+    content_type: %w(application/vnd.google-earth.kml+xml application/vnd.google-earth.kmz application/zip), 
+    size: { less_than: 25.megabytes }
 
   validates :name, presence: true
   validates :stage, inclusion: { in: STAGE_OPTIONS }, allow_nil: true
@@ -47,6 +52,7 @@ class Commitment < ApplicationRecord
   ].freeze
 
   FILTERS = %w[manager country committed_year stage primary_objectives governance_type].freeze
+  STAGE_OPTIONS = ['In progress', 'Committed','Implemented'].freeze
 
   # Filters moved to CommitmentPresenter to avoid repetition
   def self.filters_to_json
