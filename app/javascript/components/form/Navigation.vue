@@ -2,7 +2,6 @@
   <div class="form-navigation">
     <div
       class="form-navigation__items"
-      :class="{ itemsModifierClass }"
     >
       <div class="form-navigation__items-side">
         <button
@@ -131,10 +130,6 @@ export default {
   computed: {
     isMiddlePage () {
       return !this.isFirstPage && !this.isLastPage;
-    },
-
-    itemsModifierClass () {
-      return `form-navigation__items--${this.model}`;
     }
   },
 
