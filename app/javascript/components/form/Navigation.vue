@@ -52,7 +52,10 @@
     </div>
     <form-modal
       v-bind="{
-        exit, modalQuestionBody, modalText, showModal
+        exit,
+        modalQuestionBody,
+        modalText,
+        showModal
       }"
       @change="closeModal"
     />
