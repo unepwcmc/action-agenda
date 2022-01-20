@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_091033) do
     t.integer "proposed_area_ha"
     t.integer "committed_year"
     t.integer "implementation_year"
+    t.integer "update_year"
     t.text "name"
     t.text "governance_authority"
     t.text "planned_actions"
