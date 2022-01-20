@@ -124,7 +124,6 @@ class Commitment < ApplicationRecord
 
   def self.parse_filters(filters)
     country_ids = []
-    management_ids = []
     objective_ids = []
     governance_type_ids = []
     manager_ids = []
