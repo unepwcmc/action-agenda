@@ -9,7 +9,6 @@ valid_commitment_1:
   proposed_area_ha: 1
   committed_year: 1
   implementation_year: 1
-  update_year: 1
   name: MyText
   governance_authority: MyText
   planned_actions: MyText
@@ -17,6 +16,7 @@ valid_commitment_1:
   managers: indigenous, custom
   state: live
   stage: 'Committed'
+  duration_years: 5
   countries: hungary, madagascar
   links: link_1, link_2
   actions: species_management, livelihood
@@ -32,7 +32,6 @@ valid_commitment_2:
   proposed_area_ha: 1
   committed_year: 1
   implementation_year: 1
-  update_year: 1
   name: MyText
   governance_authority: MyText
   planned_actions: MyText
@@ -40,6 +39,7 @@ valid_commitment_2:
   managers: indigenous
   state: draft
   stage: 'Implemented'
+  duration_years: 5
   countries: hungary
   links: link_1
   actions: species_management
