@@ -37,7 +37,7 @@
 const ESCAPE_KEY = 27
 
 export default {
-  name: 'modal',
+  name: 'FormModal',
 
   model: {
     event: 'change',

@@ -51,7 +51,7 @@
         />
       </div>
     </div>
-    <modal
+    <form-modal
       v-bind="{
         exit, modalQuestionBody, modalText, showModal
       }"
@@ -61,13 +61,13 @@
 </template>
 
 <script>
-import Modal from './Modal'
+import FormModal from './Modal'
 
 export default {
-  name: 'navigation',
+  name: 'FormNavigation',
 
   components: { 
-    Modal
+    FormModal
   },
 
   props: {
