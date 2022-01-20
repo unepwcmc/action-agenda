@@ -25,17 +25,10 @@ Criterium.create!(criteria)
 # commitments and associated records
 Country.import
 
-manager_names = ['Indigenous peoples', 'Local communities', 'For-profit organisations', 'Non-profit organisations', 'Individual landowners', 'Collaborative governance', 'Joint governance', 'Sub-national ministry or agency', 'Other']
-Manager.create!(manager_names.map {|manager_name| { name: manager_name, default_option: true }})
-
-actions =['Land/water protection', 'Land/water management', 'Species management', 'Education & awareness', 'Law & policy', 'Livelihood', 'economic & other incentives' , 'Other']
-Action.create!(actions.map {|action_name| { name: action_name }})
-
-threat_names = ['Residential & commercial development', 'Agriculture & aquaculture', 'Energy production & mining', 'Transportation & service corridors', 'Biological resource use', 'Human intrusions & disturbance', 'Natural system modifications', 'Invasive & other problematic species', 'genes & diseases', 'Pollution', 'Geological events', 'Climate change & severe weather', 'Other']
-Threat.create!(threat_names.map {|threat_name| { name: threat_name }})
-
-objective_names = ['Sustainable use', 'Biodiversity conservation', 'Equitable sharing of benefits from the use of genetic resources', 'Restoration', 'Climate change adaptation and mitigation', 'Preservation of cultural values', 'Preservation of spiritual values', 'Preservation of traditional livelihoods', 'Certification of products', 'Recreation', 'Academic research']
-Objective.create!(objective_names.map {|objective_name| { name: objective_name }})
+Manager.create!(Manager::DEFAULT_OPTIONS.map {|manager_name| { name: manager_name, default_option: true }})
+Action.create!(Action::DEFAULT_OPTIONS.map {|action_name| { name: action_name, default_option: true }})
+Threat.create!(Threat::DEFAULT_OPTIONS.map {|threat_name| { name: threat_name, default_option: true }})
+Objective.create!(Objective::DEFAULT_OPTIONS.map {|objective_name| { name: objective_name, default_option: true }})
 
 links = [
   { url: 'something.com', name: 'a website' },

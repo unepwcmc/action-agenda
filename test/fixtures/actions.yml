@@ -1,5 +1,7 @@
 species_management:
   name: Species Management
+  default_option: true
 
 livelihood:
   name: Livelihood
+  default_option: true

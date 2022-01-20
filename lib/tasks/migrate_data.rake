@@ -14,4 +14,14 @@ namespace :migrate_data do
     end
     puts "commitment.link converted to commitment.links"
   end
+
+  task add_default_options_for_threats: :environment do
+    [Threat, Manager, Action, Objective].each do |klass|
+      klass::DEFAULT_OPTIONS.each do |option|
+        record = klass.find_by(name: option)
+        record ? klass.update(default_option: true) : klass.create(name: option, default_option: true) 
+      end
+    end
+    puts "default options added"
+  end
 end
