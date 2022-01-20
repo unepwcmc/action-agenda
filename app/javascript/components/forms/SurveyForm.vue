@@ -69,7 +69,7 @@ export default {
     const model = new SurveyVue.Model(this.formData.survey);
     // call methods on library-provided events here
     model.onComplete.add(this.onComplete);
-    // model.onCurrentPageChanged(this.onCurrentPageChanged);
+    model.onCurrentPageChanged.add(this.onCurrentPageChanged);
 
     return {
       isFirstPage: true,
@@ -84,21 +84,19 @@ export default {
 
   methods: {
     complete () {
-      // survey.completeLastPage();
-      console.log("completed!");
+      this.survey.completeLastPage();
     },
 
     exit () {
       if (this.dataModel === "Commitment") {
-        survey.completeLastPage();
+        this.survey.completeLastPage();
       } else {
         Turbolinks.visit('/dashboard');
       }
     },
 
     nextPage () {
-      // survey.nextPage();
-      console.log("going to next page");
+      this.survey.nextPage();
     },
 
     onComplete(sender) {
@@ -116,14 +114,13 @@ export default {
         })
     },
 
-    // onCurrentPageChanged () {
-      // this.isFirstPage = survey.isFirstPage;
-      // this.isLastPage = survey.isLastPage;
-    // },
+    onCurrentPageChanged () {
+      this.isFirstPage = survey.isFirstPage;
+      this.isLastPage = survey.isLastPage;
+    },
   
     prevPage () {
-      // survey.prevPage();
-      console.log("going to previous page");
+      this.survey.prevPage();
     },
 
     redirect(link) {
