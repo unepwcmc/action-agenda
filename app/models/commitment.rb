@@ -1,8 +1,7 @@
 require 'csv'
 require 'wcmc_components'
 class Commitment < ApplicationRecord
-  enum state: [:draft, :live]
-  enum stage: [:commited, :in_progress, :implemented]
+  STAGE_OPTIONS = ['In progress', 'Committed', 'Implemented']
 
   include WcmcComponents::Loadable
   has_and_belongs_to_many :countries
@@ -19,16 +18,14 @@ class Commitment < ApplicationRecord
   has_many :progress_documents
   has_one_attached :spatial_data
 
-  # belongs_to :criterium, optional: true
+  belongs_to :criterium, optional: true
 
   validates :spatial_data, 
     content_type: %w(application/vnd.google-earth.kml+xml application/vnd.google-earth.kmz application/zip), 
     size: { less_than: 25.megabytes }
 
   validates :name, presence: true
-
-  # :has_primary_management_objective
-  # :year > 5
+  validates :stage, inclusion: { in: STAGE_OPTIONS }, allow_nil: true
 
   ignore_column 'TYPE'
 
@@ -100,7 +97,7 @@ class Commitment < ApplicationRecord
       title: name,
       description: description,
       committed: committed_year,
-      duration: duration,
+      duration_years: duration_years,
       stage: stage,
       url: Rails.application.routes.url_helpers.commitment_path(id),
       links: links

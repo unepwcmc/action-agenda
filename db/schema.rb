@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_20_133737) do
+ActiveRecord::Schema.define(version: 2022_01_20_091033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,7 +71,6 @@ ActiveRecord::Schema.define(version: 2022_01_20_133737) do
     t.integer "proposed_area_ha"
     t.integer "committed_year"
     t.integer "implementation_year"
-    t.integer "update_year"
     t.text "name"
     t.text "governance_authority"
     t.text "planned_actions"
@@ -80,13 +79,12 @@ ActiveRecord::Schema.define(version: 2022_01_20_133737) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "country_id"
-    t.string "duration"
-    t.string "old_stage"
+    t.string "stage"
     t.string "related_biodiversity_targets"
     t.string "review_method"
     t.text "responsible_group"
     t.integer "state", default: 0
-    t.integer "stage"
+    t.integer "duration_years"
     t.index ["country_id"], name: "index_commitments_on_country_id"
   end
 
