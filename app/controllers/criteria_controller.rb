@@ -15,7 +15,7 @@ class CriteriaController < ApplicationController
           json_response({ criterium: @criterium, redirect_path: redirect_path }, :created)
         }
       else
-        format.json { render json: { errors: @criterium.errors }, status: :unprocessable_entity }
+        format.json { json_response({ errors: @criterium.errors }, :unprocessable_entity) }
       end
     end
   end

@@ -19,6 +19,8 @@ class Commitment < ApplicationRecord
   has_many :progress_documents
   has_one_attached :spatial_data
 
+  belongs_to :criterium, optional: true
+  
   validates :spatial_data, 
     content_type: %w(application/vnd.google-earth.kml+xml application/vnd.google-earth.kmz application/zip), 
     size: { less_than: 25.megabytes }
