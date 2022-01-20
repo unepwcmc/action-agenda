@@ -4,16 +4,16 @@
       class="form-navigation__items"
       :class="{ itemsModifierClass }"
     >
-      <div class="form-navigation__items-side form-navigation__items-side--left">
+      <div class="form-navigation__items-side">
         <button
           v-if="model === 'Criteria'"
-          class="form-navigation__item form-navigation__item--exit"
+          class="form-navigation__item form-navigation__item--first-page-left"
           v-text="navigationText.exit"
           @click.prevent="openModal"
         />
         <button
           v-else-if="isFirstPage"
-          class="form-navigation__item form-navigation__item--save-first-page"
+          class="form-navigation__item form-navigation__item--first-page-left"
           v-text="navigationText.exit.left"
           @click.prevent="openModal"
         />
@@ -27,7 +27,7 @@
       <div class="form-navigation__items-side form-navigation__items-side--right">
         <button
           v-if="model === 'Criteria'"
-          class="form-navigation__item form-navigation__item--complete"
+          class="form-navigation__item form-navigation__item--rightmost"
           v-text="navigationText.next"
           @click.prevent="complete"
         />
@@ -39,13 +39,13 @@
         />
         <button
           v-if="model === 'Commitment' && !isLastPage"
-          class="form-navigation__item form-navigation__item--next"
+          class="form-navigation__item form-navigation__item--rightmost form-navigation__item--commitment-next"
           v-text="navigationText.next"
           @click.prevent="nextPage"
         />
         <button
           v-if="model === 'Commitment' && isLastPage"
-          class="form-navigation__item form-navigation__item--save-last-page"
+          class="form-navigation__item form-navigation__item--rightmost"
           v-text="navigationText.save"
           @click.prevent="complete"
         />

@@ -9,7 +9,7 @@
         isLastPage,
         modalQuestionBody,
         modalText,
-        model: 'Commitment',
+        model,
         navigationText,
         prevPage,
         nextPage,
@@ -19,35 +19,25 @@
 </template>
 
 <script>
-// import * as SurveyVue from "survey-vue";
-// import Turbolinks from "turbolinks";
-// import axios from "axios";
-// import { setAxiosHeaders } from "../../helpers/axios-helpers";
-// import "survey-vue/modern.css";
 import Navigation from './Navigation'
 
-// SurveyVue.StylesManager.applyTheme("modern");
-
-// const Survey = SurveyVue.Survey;
-
 export default {
-  name: 'form-commitment',
+  name: 'SurveyForm',
 
   components: { 
     Navigation
-    // Survey
   },
 
   props: {
-    // formData: {
-    //   type: Object,
-    //   required: true,
-    // },
-
     modalText: {
       type: Object,
       required: true
     },
+
+    model: {
+      type: String,
+      required: true
+    }
 
     navigationText: {
       type: Object,
@@ -56,22 +46,14 @@ export default {
   },
 
   data () {
-    // const model = new SurveyVue.Model(this.formData.survey);
-    // call methods on library-provided events here
-    // model.onComplete.add(this.onComplete);
     // model.onCurrentPageChanged(this.onCurrentPageChanged);
 
     return {
       isFirstPage: true,
       isLastPage: false,
       modalQuestionBody: `<p>${this.modalText.p1}</p><p><b>${this.modalText.p2.prefix}*</b> ${this.modalText.p2.content}</p>`
-      // survey: model
     }
   },
-
-  // mounted() {
-  //   setAxiosHeaders(axios);
-  // },
 
   methods: {
     complete () {
@@ -89,9 +71,6 @@ export default {
       console.log("going to next page");
     },
 
-    // onComplete () {
-    // },
-
     // onCurrentPageChanged () {
       // this.isFirstPage = survey.isFirstPage;
       // this.isLastPage = survey.isLastPage;
@@ -101,9 +80,6 @@ export default {
       // survey.prevPage();
       console.log("going to previous page");
     }
-
-    // redirect () {
-    // }
   }
 }
 </script>
