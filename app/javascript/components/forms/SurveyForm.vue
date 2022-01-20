@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <survey :survey="survey"></survey>
+  <div class="survey-commitment">
+    <survey :survey="survey" />
     <form-navigation
       v-bind="{
         complete,
@@ -121,7 +121,7 @@ export default {
     prevPage () {
       // survey.prevPage();
       console.log("going to previous page");
-    }
+    },
 
     redirect(link) {
       if (link) {
