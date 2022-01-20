@@ -1,7 +1,7 @@
 <template>
   <div class="survey-commitment">
-    Commitment survey
-    <navigation
+    Survey
+    <form-navigation
       v-bind="{
         complete,
         exit,
@@ -19,16 +19,21 @@
 </template>
 
 <script>
-import Navigation from './Navigation'
+import FormNavigation from './Navigation'
 
 export default {
   name: 'SurveyForm',
 
   components: { 
-    Navigation
+    FormNavigation
   },
 
   props: {
+    modalQuestionBody: {
+      type: String,
+      required: true
+    },
+  
     modalText: {
       type: Object,
       required: true
@@ -37,7 +42,7 @@ export default {
     model: {
       type: String,
       required: true
-    }
+    },
 
     navigationText: {
       type: Object,
@@ -51,7 +56,6 @@ export default {
     return {
       isFirstPage: true,
       isLastPage: false,
-      modalQuestionBody: `<p>${this.modalText.p1}</p><p><b>${this.modalText.p2.prefix}*</b> ${this.modalText.p2.content}</p>`
     }
   },
 

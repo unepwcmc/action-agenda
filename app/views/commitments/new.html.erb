@@ -2,8 +2,9 @@
   <div class="container spacer-medium--top spacer-large--bottom">
     New commitment page
     <survey-form
+      modal-question-body="<%="<p>#{I18n.t('form.commitments.modal.p1')}</p><p><b>#{I18n.t('form.commitments.modal.p2.prefix')}*</b> #{I18n.t('form.commitments.modal.p2.content')}</p>"%>"
       :modal-text="<%=I18n.t('form.commitments.modal').to_json%>"
-      :model="Commitment"
+      model="Commitment"
       :navigation-text="<%=I18n.t('form.commitments.navigation').to_json%>"
     />
   </div>
