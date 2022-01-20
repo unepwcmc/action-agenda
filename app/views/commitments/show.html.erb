@@ -38,7 +38,7 @@
         </li>
         <li class="list__li">
           <span class="list__subtitle">Expected duration once fully implemented:</span>
-          <span class="list__text"><%= @commitment.duration_years ? "#{ @commitment.duration_years } years" : "NA" %></span>
+          <span class="list__text"><%= @commitment.duration_years ? "#{ @commitment.duration_years } years" : @commitment.duration %></span>
         </li>
         <li class="list__li">
           <span class="list__subtitle">Review method:</span>

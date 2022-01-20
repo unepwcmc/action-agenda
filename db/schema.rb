@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_091033) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "country_id"
+    t.string "duration"
     t.string "stage"
     t.string "related_biodiversity_targets"
     t.string "review_method"
