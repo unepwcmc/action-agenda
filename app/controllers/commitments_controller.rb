@@ -12,6 +12,11 @@ class CommitmentsController < ApplicationController
     @filters = Commitment.filters_to_json
     @table_attributes = Commitment::TABLE_ATTRIBUTES.to_json
   end
+   
+  def new
+    @commitment = Commitment.new
+    @form_hash = Services::CommitmentProps.new(@commitment).call
+  end  
 
   def show
     @commitment = Commitment.find(params[:id])

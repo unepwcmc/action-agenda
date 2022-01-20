@@ -25,7 +25,10 @@
     padding: 2rem;
 
     &:after {
-      width: 0; height: 0;
+      border-color: transparent transparent transparent $green-dark;
+      border-style: solid;
+      border-width: 2.6rem 0 2.6rem 3.4rem;
+      content: '';
       margin-top: -2rem;
       margin-left: 2rem;
       z-index: 1;
@@ -48,7 +51,7 @@
 
       border-color: transparent transparent transparent $white;
       border-style: solid;
-      border-width: 2.563rem 0 2.563rem 3.438rem;
+      border-width: 2.6rem 0 2.6rem 3.4rem;
       content: '';
       margin-top: -2rem;
       margin-left: -5rem;
