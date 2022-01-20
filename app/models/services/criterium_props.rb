@@ -15,6 +15,7 @@ class Services::CriteriumProps
       {
         completeText: 'Submit',
         requiredText: '',
+        showNavigationButtons: 'none',
         title: I18n.t('form.criteria.title'),
         description: I18n.t('form.criteria.description'),
         pages: [
