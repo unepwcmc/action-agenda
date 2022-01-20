@@ -4,7 +4,7 @@
       class="form-navigation__items"
       :class="{ itemsModifierClass }"
     >
-      <div class="form-navigation__items-left">
+      <div class="form-navigation__items-side form-navigation__items-side--left">
         <button
           v-if="model === 'Criteria'"
           class="form-navigation__item form-navigation__item--exit"
@@ -24,7 +24,7 @@
           @click.prevent="prevPage"
         />
       </div>
-      <div class="form-navigation__items-right">
+      <div class="form-navigation__items-side form-navigation__items-side--right">
         <button
           v-if="model === 'Criteria'"
           class="form-navigation__item form-navigation__item--complete"

@@ -16,7 +16,6 @@
 }
 
 .modal__inner {
-  @include gutters;
   width: 100%;
 
   display: flex;
@@ -28,33 +27,50 @@
 }
 
 .modal__body {
-  @include spacer-top($spacer-medium-mobile, $spacer-medium-tablet, $spacer-medium-desktop);
-  @include spacer-bottom($spacer-medium-mobile, $spacer-medium-tablet, $spacer-medium-desktop);
-
   background-color: $white;
-  border-radius: 0.625rem; // 10px
-  height: 100%;
-  max-width: 53.5rem; // 856px
+  padding: rem-calc(70) rem-calc(95);
+  // height: 100%;
+  max-width: rem-calc(572);
 
   position: relative;
   z-index: 22;
 
   @include breakpoint($small) {
-    max-height: 70%;
+    overflow-y: auto;
+    max-height: 80%;
   }
 }
 
 .modal__content {
+  font-size: rem-calc(20);
   overflow-y: auto;
   max-height: 100%;
 }
 
+.modal__question {
+  margin-top: 0;
+}
+
 .modal__button {
   @include button-accent;
+  font-size: rem-calc(18);
+  width: 100%;
+  min-height: rem-calc(67);
+
+  display: block;
+
+  &:not(:last-child) {
+    margin-bottom: rem-calc(7);
+  }
+
+  &.modal__button--exit {
+    background-color: $grey-mdlight;
+    color: $black;
+  }
 }
 
 .modal__overlay {
-  background-color: rgba($grey-light, 0.4);
+  background-color: rgba($black, 0.3);
   width: 100%;
   height: 100%;
 
