@@ -14,7 +14,7 @@ import store from '../store/store.js'
 
 // components
 import FilteredTable from '../components/table/FilteredTable'
-import SurveyForm from '../components/form/SurveyForm'
+import SurveyForm from '../components/forms/SurveyForm'
 
 export const eventHub = new Vue()
 
