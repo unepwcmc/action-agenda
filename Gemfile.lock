@@ -29,6 +29,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_storage_validations (0.9.5)
+      rails (>= 5.2.0)
     activejob (5.2.6)
       activesupport (= 5.2.6)
       globalid (>= 0.3.6)
@@ -54,6 +56,22 @@ GEM
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
+    aws-eventstream (1.2.0)
+    aws-partitions (1.547.0)
+    aws-sdk-core (3.125.2)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.525.0)
+      aws-sigv4 (~> 1.1)
+      jmespath (~> 1.0)
+    aws-sdk-kms (1.53.0)
+      aws-sdk-core (~> 3, >= 3.125.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.111.1)
+      aws-sdk-core (~> 3, >= 3.125.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.4)
+    aws-sigv4 (1.4.0)
+      aws-eventstream (~> 1, >= 1.0.2)
     bindex (0.8.1)
     bootsnap (1.10.1)
       msgpack (~> 1.2)
@@ -110,6 +128,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jmespath (1.5.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -125,6 +144,7 @@ GEM
     mime-types (3.4.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2022.0105)
+    mini_magick (4.11.0)
     mini_mime (1.1.2)
     mini_portile2 (2.7.1)
     minitest (5.15.0)
@@ -136,6 +156,9 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.1)
       mini_portile2 (~> 2.7.0)
+    nokogiri (1.13.1-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.13.1-x86_64-linux)
       racc (~> 1.4)
     pg (0.21.0)
     public_suffix (4.0.6)
@@ -235,9 +258,12 @@ GEM
 
 PLATFORMS
   -darwin-21
+  x86_64-darwin-19
   x86_64-linux
 
 DEPENDENCIES
+  active_storage_validations (~> 0.1)
+  aws-sdk-s3
   bootsnap (>= 1.1.0)
   byebug
   capistrano (~> 3.14.1)
@@ -251,6 +277,7 @@ DEPENDENCIES
   httparty
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
+  mini_magick (~> 4.8)
   pg (~> 0.18)
   puma (~> 3.11)
   rails (~> 5.2.0)

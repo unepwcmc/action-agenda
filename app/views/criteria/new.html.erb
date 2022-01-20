@@ -1,7 +1,10 @@
 <div class="bg--grey-xlight">
   <div class="container spacer-medium--top spacer-large--bottom">
-    New criteria page
+    <mock-progress-bar
+      :title="<%=I18n.t('form.criteria.progress.title').to_json%>"
+    />
     <survey-form
+      :form-data="<%= @form_hash.to_json %>"
       modal-question-body="<%="<p>#{I18n.t('form.criteria.modal.p')}</p>"%>"
       :modal-text="<%=I18n.t('form.criteria.modal').to_json%>"
       model="Criteria"

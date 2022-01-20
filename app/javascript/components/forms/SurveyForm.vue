@@ -1,6 +1,6 @@
 <template>
-  <div class="survey-commitment">
-    Survey
+  <div class="container">
+    <survey :survey="survey"></survey>
     <form-navigation
       v-bind="{
         complete,
@@ -19,16 +19,31 @@
 </template>
 
 <script>
+import * as SurveyVue from "survey-vue";
+import Turbolinks from "turbolinks";
+import axios from "axios";
+import { setAxiosHeaders } from "../../helpers/axios-helpers";
+import "survey-vue/modern.css";
 import FormNavigation from './Navigation'
+
+SurveyVue.StylesManager.applyTheme("modern");
+
+const Survey = SurveyVue.Survey;
 
 export default {
   name: 'SurveyForm',
 
   components: { 
-    FormNavigation
+    FormNavigation,
+    Survey
   },
 
   props: {
+    formData: {
+      type: Object,
+      required: true,
+    },
+
     modalQuestionBody: {
       type: String,
       required: true
@@ -51,12 +66,20 @@ export default {
   },
 
   data () {
+    const model = new SurveyVue.Model(this.formData.survey);
+    // call methods on library-provided events here
+    model.onComplete.add(this.onComplete);
     // model.onCurrentPageChanged(this.onCurrentPageChanged);
 
     return {
       isFirstPage: true,
       isLastPage: false,
-    }
+      survey: model,
+    };
+  },
+
+  mounted() {
+    setAxiosHeaders(axios);
   },
 
   methods: {
@@ -75,6 +98,21 @@ export default {
       console.log("going to next page");
     },
 
+    onComplete(sender) {
+      const options = {
+        method: this.formData.config.method,
+        data: { [this.formData.config.root_key]: sender.data },
+      }
+
+      axios(this.formData.config.action, options)
+        .then((response) => {
+          this.redirect(response.data.redirect_path)
+        })
+        .catch((error) => {
+          console.log("FAILED!", error.data);
+        })
+    },
+
     // onCurrentPageChanged () {
       // this.isFirstPage = survey.isFirstPage;
       // this.isLastPage = survey.isLastPage;
@@ -83,6 +121,12 @@ export default {
     prevPage () {
       // survey.prevPage();
       console.log("going to previous page");
+    }
+
+    redirect(link) {
+      if (link) {
+        Turbolinks.visit(link);
+      }
     }
   }
 }
