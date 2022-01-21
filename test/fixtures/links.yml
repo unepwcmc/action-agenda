@@ -1,7 +1,9 @@
 link_1:
-  url: 'www.test.com'
-  name: 'commitment organisation home page'
+  url: www.test.com
+  name: commitment organisation home page
+  commitment: valid_commitment_1
 
 link_2:
-  url: 'www.test2.com'
-  name: 'another website'
+  url: www.test2.com
+  name: another website
+  commitment: valid_commitment_1

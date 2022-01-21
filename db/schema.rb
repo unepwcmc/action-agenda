@@ -104,13 +104,6 @@ ActiveRecord::Schema.define(version: 2022_01_20_091033) do
     t.index ["governance_type_id"], name: "index_commitments_governance_types_on_governance_type_id"
   end
 
-  create_table "commitments_links", force: :cascade do |t|
-    t.bigint "commitment_id"
-    t.bigint "link_id"
-    t.index ["commitment_id"], name: "index_commitments_links_on_commitment_id"
-    t.index ["link_id"], name: "index_commitments_links_on_link_id"
-  end
-
   create_table "commitments_managers", id: false, force: :cascade do |t|
     t.bigint "commitment_id"
     t.bigint "manager_id"
@@ -163,8 +156,10 @@ ActiveRecord::Schema.define(version: 2022_01_20_091033) do
   create_table "links", force: :cascade do |t|
     t.text "name"
     t.text "url", null: false
+    t.bigint "commitment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["commitment_id"], name: "index_links_on_commitment_id"
   end
 
   create_table "managers", force: :cascade do |t|

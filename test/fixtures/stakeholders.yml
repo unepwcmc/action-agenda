@@ -1,17 +1,17 @@
 local_communities:
-  name: 'Local communities'
+  name: Local communities
 
 indigenous_peoples:
-  name: 'Indigenous peoples'
+  name: Indigenous peoples
 
 ngo:
-  name: 'Non-governmental organisation (NGO)'
+  name: Non-governmental organisation (NGO)
 
 private_sector:
-  name: 'Private sector (business and industry)'
+  name: Private sector (business and industry)
 
 local_government:
-  name: 'Sub-national or local government'
+  name: Sub-national or local government
 
 none_of_the_above:
-  name: 'None of the above'
+  name: None of the above

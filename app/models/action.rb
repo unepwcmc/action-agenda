@@ -1,7 +1,7 @@
 class Action < ApplicationRecord
   DEFAULT_OPTIONS = [
     'Land/water protection', 'Land/water management', 'Species management', 'Education & awareness',
-    'Law & policy', 'Livelihood', 'economic & other incentives' , 'Other'
+    'Law & policy', 'Livelihood', 'Economic & other incentives' , 'Other'
   ]
 
   has_and_belongs_to_many :commitments
