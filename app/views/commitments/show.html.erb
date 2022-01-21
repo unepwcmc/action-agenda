@@ -1,7 +1,6 @@
 <div class="container">
   <section class="grid-3-gap-2 spacer-small--top spacer-large--bottom">
     <div>
-      <h3>Information updated: <%= @commitment.update_year %></h3>
       <h3>ID: <%= @commitment.id %></h3>
 
       <h1><%= @commitment.name %></h1>
@@ -39,7 +38,7 @@
         </li>
         <li class="list__li">
           <span class="list__subtitle">Expected duration once fully implemented:</span>
-          <span class="list__text"><%= @commitment.duration %></span>
+          <span class="list__text"><%= @commitment.duration_years ? "#{ @commitment.duration_years } years" : @commitment.duration %></span>
         </li>
         <li class="list__li">
           <span class="list__subtitle">Review method:</span>

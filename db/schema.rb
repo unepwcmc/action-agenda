@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_130432) do
     t.string "review_method"
     t.text "responsible_group"
     t.integer "state", default: 0
+    t.integer "duration_years"
     t.bigint "criterium_id"
     t.index ["country_id"], name: "index_commitments_on_country_id"
   end
@@ -102,13 +103,6 @@ ActiveRecord::Schema.define(version: 2022_01_20_130432) do
     t.bigint "governance_type_id"
     t.index ["commitment_id"], name: "index_commitments_governance_types_on_commitment_id"
     t.index ["governance_type_id"], name: "index_commitments_governance_types_on_governance_type_id"
-  end
-
-  create_table "commitments_links", force: :cascade do |t|
-    t.bigint "commitment_id"
-    t.bigint "link_id"
-    t.index ["commitment_id"], name: "index_commitments_links_on_commitment_id"
-    t.index ["link_id"], name: "index_commitments_links_on_link_id"
   end
 
   create_table "commitments_managers", id: false, force: :cascade do |t|
@@ -163,8 +157,10 @@ ActiveRecord::Schema.define(version: 2022_01_20_130432) do
   create_table "links", force: :cascade do |t|
     t.text "name"
     t.text "url", null: false
+    t.bigint "commitment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["commitment_id"], name: "index_links_on_commitment_id"
   end
 
   create_table "managers", force: :cascade do |t|
