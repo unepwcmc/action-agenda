@@ -30,10 +30,13 @@ class Commitment < ApplicationRecord
 
   validates_presence_of :description, :latitude, :longitude, :committed_year, :responsible_group, :duration_years,
                         :objectives, :managers, :countries, :actions, :threats, if: :live?
-
+  
+  validate :has_joint_governance_description, if: :live?
   # joint governance
 
   ignore_column 'TYPE'
+
+  before_save :clear_joint_governance_description_if_not_joint_governance_managed
 
   TABLE_ATTRIBUTES = [
     {
@@ -201,5 +204,17 @@ class Commitment < ApplicationRecord
     end
 
     total_pages
+  end
+
+  private
+
+  def clear_joint_governance_description_if_not_joint_governance_managed
+    byebug
+    joint_governance_description = '' unless Manager.where(id: manager_ids).pluck(:name).include?('Joint governance')
+  end
+
+  def has_joint_governance_description
+    byebug
+    errors.add(:joint_goverenance, :description_blank) if joint_governance_description.blank? && managers.pluck(:name).include?('Joint governance')
   end
 end
