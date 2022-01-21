@@ -1,7 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+sustainable_use:
+  name: Sustainable use
+  default_option: true
 
-two:
-  name: MyString
+biodiversity_conservation:
+  name: Biodiversity conservation
+  default_option: true
