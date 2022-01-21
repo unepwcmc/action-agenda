@@ -1,5 +1,15 @@
+<dashboard-navigation></dashboard-navigation>
+<dashboard-hero
+  :has-commitments="<%= @has_commitments %>"
+  heading-text="<%= @has_commitments ? I18n.t('dashboard.hero.existing') : I18n.t('dashboard.hero.none') %>"
+  button-text="<%= I18n.t('dashboard.add_button') %>"
+></dashboard-hero>
 <div class="container spacer-medium--top spacer-large--bottom">
-    <% @commitments.each do |commitment| %>
-        <p><%= commitment.name %></p>
-    <% end %>
+  <% if @commitments.empty? %>
+    <dashboard-no-commitments></dashboard-no-commitments>
+  <% else %>
+    <dashboard-existing-commitments
+      :commitments="<%= @commitments %>"
+    ></dashboard-existing-commitments>
+  <% end %>
 </div>
