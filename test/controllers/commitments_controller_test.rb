@@ -48,7 +48,19 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     assert Commitment.last.state == 'draft'
   end
 
-  test "should save commitment as draft if attempt to create a live commitment fails" do
+  test "should save commitment as draft and return errors if attempt to create a live commitment fails" do
+    commitment_count_at_start = Commitment.count
+    valid_params = {
+      commitment: {
+        name: 'a name',
+        state: 'live'
+      }
+    }
+    post commitments_url(params: valid_params), as: :json
+    assert_response :unprocessable_entity
+    assert Commitment.count == commitment_count_at_start + 1
+    assert Commitment.last.state == 'draft'
+    JSON.parse(response.body).dig('errors').count > 1
   end
   
   test "should get edit" do

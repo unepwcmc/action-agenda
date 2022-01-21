@@ -17,11 +17,11 @@ class Commitment < ApplicationRecord
   has_and_belongs_to_many :threats
   has_many :progress_documents
   has_many :links
-  has_one_attached :spatial_data
+  has_one_attached :geospatial_file
 
   belongs_to :criterium, optional: true
   
-  validates :spatial_data, 
+  validates :geospatial_file, 
     content_type: %w(application/vnd.google-earth.kml+xml application/vnd.google-earth.kmz application/zip), 
     size: { less_than: 25.megabytes }
 
@@ -31,12 +31,12 @@ class Commitment < ApplicationRecord
   validates_presence_of :description, :latitude, :longitude, :committed_year, :responsible_group, :duration_years,
                         :objectives, :managers, :countries, :actions, :threats, if: :live?
   
-  validate :has_joint_governance_description, if: :live?
+  validate :has_joint_governance_type, if: :live?
   # joint governance
 
   ignore_column 'TYPE'
 
-  before_save :clear_joint_governance_description_if_not_joint_governance_managed
+  before_save :clear_joint_governance_type_if_not_joint_governance_managed
 
   TABLE_ATTRIBUTES = [
     {
@@ -208,13 +208,15 @@ class Commitment < ApplicationRecord
 
   private
 
-  def clear_joint_governance_description_if_not_joint_governance_managed
-    byebug
-    joint_governance_description = '' unless Manager.where(id: manager_ids).pluck(:name).include?('Joint governance')
+  def clear_joint_governance_type_if_not_joint_governance_managed
+    joint_governance_type = '' unless joint_governance?
   end
 
-  def has_joint_governance_description
-    byebug
-    errors.add(:joint_goverenance, :description_blank) if joint_governance_description.blank? && managers.pluck(:name).include?('Joint governance')
+  def has_joint_governance_type
+    errors.add(:joint_governance_type, :description_blank) if joint_governance_type.blank? && joint_governance?
+  end
+
+  def joint_governance?
+    Manager.where(id: manager_ids).pluck(:name).include?('Joint governance')
   end
 end

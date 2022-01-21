@@ -45,8 +45,8 @@ class CommitmentsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.json { 
-          error_messages = @commitment.errors.messages
+        format.json {
+          error_messages = @commitment.errors.messages.dup
           @commitment.state = :draft
           @commitment.save
           json_response({ errors: error_messages }, :unprocessable_entity) 
@@ -96,8 +96,8 @@ class CommitmentsController < ApplicationController
       :review_method,
       :responsible_group,
       :state,
-      :associations,
-      :spatial_data,
+      :join_governance_type,
+      :geospatial_file,
       country_ids: [],
       action_ids: [],
       threat_ids: [],
