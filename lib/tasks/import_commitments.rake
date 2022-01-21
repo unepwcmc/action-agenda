@@ -8,6 +8,8 @@ namespace :import do
     puts "local Commitments successfully imported"
     import_from_cbd
     puts "CBD Commitments successfully imported"
+    set_commiments_to_live
+    puts "#{ Commitment.where(state: :live).count } of #{ Commitment.count } CBD Commitments set to live"
   end
 
   def import_csv_file file
@@ -35,12 +37,15 @@ namespace :import do
                                  country_ids: [country.id],
                                  committed_year: cbd_com["meta"]["createdOn"].to_date.year,
                                  update_year: cbd_com["meta"]["modifiedOn"].to_date.year,
-                                 related_biodiversity_targets: aichi_targets,
-                                 state: :live
+                                 related_biodiversity_targets: aichi_targets
                                 )
         our_com.links.build(url: "https://www.cbd.int/action-agenda/contributions/action?action-id=#{cbd_id}")
         our_com.save!
       end
     end
+  end
+
+  def set_commiments_to_live
+    Commitment.find_each {|commitment| commitment.update(state: 'live') }
   end
 end
