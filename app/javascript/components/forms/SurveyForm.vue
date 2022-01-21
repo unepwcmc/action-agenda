@@ -6,12 +6,15 @@
 
 <script>
 import * as SurveyVue from "survey-vue";
+import * as widgets from "surveyjs-widgets";
 import Turbolinks from "turbolinks";
 import axios from "axios";
 import { setAxiosHeaders } from "../../helpers/axios-helpers";
 import "survey-vue/modern.css";
 
 SurveyVue.StylesManager.applyTheme("modern");
+
+widgets.select2tagbox(SurveyVue);
 
 const Survey = SurveyVue.Survey;
 

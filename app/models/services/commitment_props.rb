@@ -7,7 +7,7 @@ class Services::CommitmentProps
     {
       config:
       {
-        action: @commitment.new_record? ? '/commitments.json' : "/commitments/#{ @commitments.id }.json",
+        action: @commitment.new_record? ? '/commitments.json' : "/commitments/#{@commitments.id}.json",
         method: @commitment.new_record? ? 'post' : 'put',
         root_key: 'commitment'
       },
@@ -15,29 +15,31 @@ class Services::CommitmentProps
         showPrevButton: false,
         showQuestionNumbers: 'onPage',
         showProgressBar: 'top',
+        progressBarType: 'buttons',
         requiredText: '',
         pages: [
           {
-            name: 'generalPage',
+            name: I18n.t('form.commitments.page1.name'),
+            title: I18n.t('form.commitments.page1.title'),
+            description: I18n.t('form.commitments.page1.description'),
             elements: [
               {
                 type: 'text',
                 name: 'name',
-                title: 'Enter commitment name',
-                description:
-                  '(To save or continue with this form, you’ll need to provide a name for your commitment)',
+                title: I18n.t('form.commitments.page1.q1.title'),
+                description: I18n.t('form.commitments.page1.q1.description'),
                 isRequired: true
               },
               {
                 type: 'comment',
                 name: 'description',
-                title: 'Please provide a description for your commitment'
+                title: I18n.t('form.commitments.page1.q2.title')
               },
               {
                 type: 'checkbox',
                 name: 'objectiveIds',
-                title: 'Please select the primary management objectives for the area',
-                description: 'Multi select option',
+                title: I18n.t('form.commitments.page1.q3.title'),
+                description: I18n.t('form.commitments.page1.q3.description'),
                 # defaultValue: [],
                 choices: [
                   'Sustainable use',
@@ -56,9 +58,8 @@ class Services::CommitmentProps
               {
                 type: 'checkbox',
                 name: 'managerIds',
-                title:
-                  'Who will be responsible for deciding how the area is being managed?',
-                description: 'Multi select option',
+                title: I18n.t('form.commitments.page1.q4.title'),
+                description: I18n.t('form.commitments.page1.q3.description'),
                 # defaultValue: [],
                 choices: [
                   'Indigenous peoples',
@@ -71,64 +72,61 @@ class Services::CommitmentProps
                   'Sub-national ministry or agency',
                   'Other'
                 ],
-                otherText: 'Other'
+                otherText: I18n.t('form.none')
               },
               {
                 type: 'comment',
                 name: 'jointGovernanceType',
-                visibleIf: "{managerIds} contains 'Joint governance'",
-                title: 'Specify the type of joint governance',
+                visibleIf: "{ managerIds } contains 'Joint governance'",
+                title: I18n.t('form.commitments.page1.q5.title'),
                 hideNumber: true
               },
               {
                 type: 'text',
                 name: 'responsibleGroup',
-                title: 'Name of the group responsible for decisions'
+                title: I18n.t('form.commitments.page1.q6.title')
               }
-            ],
-            title: 'General Info',
-            description:
-              '‘Commitment’ refers to what you intend to do, for example establishing a new protected area, or working to improve the management of an existing area. ‘Area’ refers to the geographical area that is (or will be) under management as a result of this commitment.’'
+            ]
           },
           {
-            name: 'locationPage',
+            name: I18n.t('form.commitments.page2.name'),
+            title: 'Location',
             elements: [
+              # currently not working
               {
                 type: 'tagbox',
                 name: 'countryIds',
-                title: 'Select commitment location by country',
-                description: 'Multi select option',
-                # defaultValue: [],
+                title: I18n.t('form.commitments.page2.q1.title'),
+                description: I18n.t('form.commitments.page2.q1.description'),
                 choicesByUrl: {
                   url: 'https://surveyjs.io/api/CountriesExample'
                 },
-                optionsCaption: '-Select a country-'
+                optionsCaption: I18n.t('form.commitments.page2.q1.caption')
               },
               {
                 type: 'expression',
                 name: 'latlongHeading',
-                title: 'Please provide the latitude and longitude of the area'
+                title: I18n.t('form.commitments.page2.q2.title')
               },
               {
                 type: 'text',
                 name: 'latitude',
-                title: 'Latitude',
+                title: I18n.t('form.commitments.page2.q3.title'),
                 titleLocation: 'left',
                 hideNumber: true
               },
               {
                 type: 'text',
                 name: 'longitude',
-                title: 'Longitude',
+                title: I18n.t('form.commitments.page2.q4.title'),
                 titleLocation: 'left',
                 hideNumber: true
               },
               {
                 type: 'file',
                 name: 'geospatialFilename',
-                title:
-                  'If you have spatial data you would like to share, please upload it here.',
-                description: '(Optional field)',
+                title: I18n.t('form.commitments.page2.q5.title'),
+                description: I18n.t('form.commitments.page2.q5.tdescription'),
                 hideNumber: true,
                 allowImagesPreview: false,
                 maxSize: 26_214_400
@@ -136,74 +134,48 @@ class Services::CommitmentProps
               {
                 type: 'text',
                 name: 'areaHa',
-                title: 'How many hectares does/will the area cover?'
+                title: I18n.t('form.commitments.page2.q6.title')
               }
-            ],
-            title: 'Location'
+            ]
           },
           {
-            name: 'durationPage',
+            name: I18n.t('form.commitments.page3.name'),
             elements: [
               {
                 type: 'dropdown',
                 name: 'committedYear',
-                title: 'Please state the year the commitment was made',
+                title: I18n.t('form.commitments.page3.q1.title'),
                 # defaultValue: [],
-                choices: %w[
-                  2022
-                  2021
-                  2020
-                  2019
-                  2018
-                  2017
-                  2016
-                  2015
-                  2014
-                  2013
-                  2012
-                ],
-                optionsCaption: '-Select-'
+                choices: (2012..Date.today.year).to_a.reverse,
+                optionsCaption: I18n.t('form.commitments.page3.q1.caption')
               },
               {
                 type: 'dropdown',
                 name: 'duration',
-                title:
-                  'How many years do you expect the commitment to be in place for?',
-                  # defaultValue: [],
-                choices: %w[
-                  5
-                  6
-                  7
-                  8
-                  9
-                  10
-                  11
-                  12
-                  13
-                  14
-                  15
-                ],
-                optionsCaption: '-Select-'
+                title: I18n.t('form.commitments.page3.q2.title'),
+                # defaultValue: [],
+                choices: (5..15).to_a,
+                optionsCaption: I18n.t('form.commitments.page3.q2.caption')
               }
             ],
             title: 'Duration'
           },
           {
-            name: 'stagePage',
+            name: I18n.t('form.commitments.page4.name'),
+            title: 'Stage',
             elements: [
               {
                 type: 'radiogroup',
                 name: 'stage',
-                title: 'Please select the stage of implementation of your commitment',
+                title: I18n.t('form.commitments.page4.q1.title'),
                 # defaultValue: [],
                 choices: ['Committed', 'In progress', 'Implemented']
               },
               {
                 type: 'checkbox',
                 name: 'actionIds',
-                title:
-                  'What actions do you intend/or have taken to implement the commitment?',
-                description: 'Multi select option',
+                title: I18n.t('form.commitments.page4.q2.title'),
+                description: I18n.t('form.commitments.page4.q2.description'),
                 # defaultValue: [],
                 choices: [
                   'Land/water protection',
@@ -219,28 +191,15 @@ class Services::CommitmentProps
               {
                 type: 'dropdown',
                 name: 'implementationYear',
-                title: 'Please state the first year of commitment actions',
+                title: I18n.t('form.commitments.page4.q3.title'),
                 # defaultValue: [],
-                choices: %w[
-                  2022
-                  2021
-                  2020
-                  2019
-                  2018
-                  2017
-                  2016
-                  2015
-                  2014
-                  2013
-                  2012
-                ]
+                choices: (2012..Date.today.year).to_a.reverse
               },
               {
                 type: 'checkbox',
                 name: 'threatIds',
-                title:
-                  'What are the main threats that your commitment is seeking to address?',
-                description: 'Multi select option',
+                title: I18n.t('form.commitments.page4.q4.title'),
+                description: I18n.t('form.commitments.page4.q4.description'),
                 # defaultValue: [],
                 choices: [
                   'Residential & commercial development',
@@ -260,9 +219,8 @@ class Services::CommitmentProps
               {
                 type: 'paneldynamic',
                 name: 'linksAttributes',
-                title:
-                  'Please provide the name and URL of any other websites containing information on your commitment.',
-                description: '(Optional field)',
+                title: I18n.t('form.commitments.page4.q5.title'),
+                description: I18n.t('form.commitments.page4.q4.description'),
                 templateElements: [
                   {
                     type: 'text',
@@ -279,20 +237,19 @@ class Services::CommitmentProps
                 ],
                 panelCount: 1,
                 confirmDelete: true,
-                confirmDeleteText: 'Are you sure you want to delete this website?',
-                panelAddText: 'Add another'
+                confirmDeleteText: I18n.t('form.commitments.page4.q5.delete'),
+                panelAddText: I18n.t('form.commitments.page4.q5.add')
               }
-            ],
-            title: 'Stage'
+            ]
           },
           {
-            name: 'progressPage',
+            name: I18n.t('form.commitments.page5.name'),
             elements: [
               {
                 type: 'paneldynamic',
                 name: 'progressItems',
-                title: 'Upload your progress documentation',
-                description: '(Optional field)',
+                title: I18n.t('form.commitments.page5.q1.title'),
+                description: I18n.t('form.commitments.page5.q1.description'),
                 templateElements: [
                   {
                     type: 'file',
@@ -309,13 +266,13 @@ class Services::CommitmentProps
                 ],
                 panelCount: 1,
                 confirmDelete: true,
-                confirmDeleteText: 'Are you sure you want to delete this file?',
-                panelAddText: 'Add another'
+                confirmDeleteText: I18n.t('form.commitments.page5.q1.delete'),
+                panelAddText: I18n.t('form.commitments.page5.q1.add')
               }
             ],
             title: 'Progress'
           }
-        ],
+        ]
       }
     }
   end
