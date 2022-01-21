@@ -8,8 +8,6 @@ namespace :import do
     puts "local Commitments successfully imported"
     import_from_cbd
     puts "CBD Commitments successfully imported"
-    set_commiments_to_live
-    puts "#{ Commitment.where(state: :live).count } of #{ Commitment.count } CBD Commitments set to live"
   end
 
   def import_csv_file file
@@ -43,9 +41,5 @@ namespace :import do
         our_com.save!
       end
     end
-  end
-
-  def set_commiments_to_live
-    Commitment.find_each {|commitment| commitment.update(state: 'live') }
   end
 end
