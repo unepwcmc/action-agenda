@@ -6,6 +6,9 @@ class CommitmentsController < ApplicationController
     filters: []
   }.to_json
 
+  def new
+  end
+
   def index
     @paginatedCommitments = Commitment.paginate_commitments(DEFAULT_PARAMS).to_json
     # @commitments = Commitment.commitments_to_json
