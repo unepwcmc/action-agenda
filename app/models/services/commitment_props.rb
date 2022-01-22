@@ -7,7 +7,7 @@ class Services::CommitmentProps
     {
       config:
       {
-        action: @commitment.new_record? ? '/commitments.json' : "/commitments/#{@commitments.id}.json",
+        action: @commitment.new_record? ? '/commitments.json' : "/commitments/#{@commitment.id}.json",
         method: @commitment.new_record? ? 'post' : 'put',
         root_key: 'commitment'
       },
@@ -136,7 +136,7 @@ class Services::CommitmentProps
               },
               {
                 type: 'text',
-                name: 'areaHa',
+                name: 'current_area_ha',
                 title: I18n.t('form.commitments.page2.q6.title')
               }
             ]
