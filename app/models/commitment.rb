@@ -11,7 +11,7 @@ class Commitment < ApplicationRecord
   has_and_belongs_to_many :governance_types
   import_by governance_types: :name
   has_many :progress_documents
-  has_one_attached :spatial_data
+  has_one_attached :geospatial_file
 
   validates :spatial_data, 
     content_type: %w(application/vnd.google-earth.kml+xml application/vnd.google-earth.kmz application/zip), 

@@ -37,7 +37,7 @@ class Services::CommitmentProps
               },
               {
                 type: 'checkbox',
-                name: 'objectiveIds',
+                name: 'objective_ids',
                 title: I18n.t('form.commitments.page1.q3.title'),
                 description: I18n.t('form.commitments.page1.q3.description'),
                 # defaultValue: [],
@@ -95,12 +95,15 @@ class Services::CommitmentProps
               # currently not working
               {
                 type: 'tagbox',
-                name: 'countryIds',
+                name: 'country_ids',
                 title: I18n.t('form.commitments.page2.q1.title'),
                 description: I18n.t('form.commitments.page2.q1.description'),
-                choicesByUrl: {
-                  url: 'https://surveyjs.io/api/CountriesExample'
-                },
+                choices: Country.pluck(:id, :name).map do |id, name|
+                           {
+                             value: id,
+                             text: name
+                           }
+                         end,
                 optionsCaption: I18n.t('form.commitments.page2.q1.caption')
               },
               {
@@ -124,7 +127,7 @@ class Services::CommitmentProps
               },
               {
                 type: 'file',
-                name: 'geospatialFilename',
+                name: 'geospatialFile',
                 title: I18n.t('form.commitments.page2.q5.title'),
                 description: I18n.t('form.commitments.page2.q5.tdescription'),
                 hideNumber: true,
