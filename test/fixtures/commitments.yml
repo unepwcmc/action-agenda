@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  country: test_country
+valid_commitment_1:
+  responsible_group: a group name 
   geographic_boundary: false
   latitude: 1.5
   longitude: 1.5
@@ -9,15 +9,21 @@ one:
   proposed_area_ha: 1
   committed_year: 1
   implementation_year: 1
-  update_year: 1
   name: MyText
   governance_authority: MyText
   planned_actions: MyText
   description: MyText
-  link: MyString
+  managers: indigenous, custom
+  state: live
+  stage: Committed
+  duration_years: 5
+  countries: hungary, madagascar
+  actions: species_management, livelihood
+  threats: pollution, other
+  objectives: sustainable_use, biodiversity_conservation
 
-two:
-  country: test_country
+valid_commitment_2:
+  responsible_group: another group name 
   geographic_boundary: false
   latitude: 1.5
   longitude: 1.5
@@ -25,9 +31,18 @@ two:
   proposed_area_ha: 1
   committed_year: 1
   implementation_year: 1
-  update_year: 1
   name: MyText
   governance_authority: MyText
   planned_actions: MyText
   description: MyText
-  link: MyString
+  managers: indigenous
+  state: draft
+  stage: Implemented
+  duration_years: 5
+  countries: hungary
+  actions: species_management
+  threats: pollution
+  objectives: biodiversity_conservation
+
+invalid_commitment:
+  latitude: 1.5

@@ -1,16 +1,21 @@
 require 'csv'
 require 'wcmc_components'
 class Commitment < ApplicationRecord
+  STAGE_OPTIONS = ['In progress', 'Committed', 'Implemented']
+
   include WcmcComponents::Loadable
-  belongs_to :country, class_name: 'Country'
-  import_by country: :name
-  has_and_belongs_to_many :actors
-  import_by actors: :name
+  has_and_belongs_to_many :countries
+  import_by countries: :name
+  has_and_belongs_to_many :managers
+  import_by managers: :name
   has_and_belongs_to_many :objectives
   import_by objectives: :name
   has_and_belongs_to_many :governance_types
   import_by governance_types: :name
+  has_and_belongs_to_many :actions
+  has_and_belongs_to_many :threats
   has_many :progress_documents
+  has_many :links
   has_one_attached :spatial_data
 
   validates :spatial_data, 
@@ -18,6 +23,7 @@ class Commitment < ApplicationRecord
     size: { less_than: 25.megabytes }
 
   validates :name, presence: true
+  validates :stage, inclusion: { in: STAGE_OPTIONS }, allow_nil: true
 
   ignore_column 'TYPE'
 
@@ -44,7 +50,7 @@ class Commitment < ApplicationRecord
     }
   ].freeze
 
-  FILTERS = %w[actor country committed_year stage primary_objectives governance_type].freeze
+  FILTERS = %w[manager country committed_year stage primary_objectives governance_type].freeze
 
   # Filters moved to CommitmentPresenter to avoid repetition
   def self.filters_to_json
@@ -55,7 +61,7 @@ class Commitment < ApplicationRecord
 
   def self.commitments_to_json
     commitments = Commitment.all
-                            .includes(:country)
+                            .includes(:countries)
                             .order(id: :asc).to_a.map! do |commitment|
       {
         id: commitment.id,
@@ -89,17 +95,17 @@ class Commitment < ApplicationRecord
       title: name,
       description: description,
       committed: committed_year,
-      duration: duration,
+      duration: duration_years || duration,
       stage: stage,
       url: Rails.application.routes.url_helpers.commitment_path(id),
-      link: link
+      links: links
     }
   end
 
   def self.generate_query(page, filter_params)
     # if params are empty then return the paginated results without filtering
     if filter_params.empty?
-      return Commitment.includes(:country)
+      return Commitment.includes(:countries)
                        .order(id: :asc).paginate(page: page || 1, per_page: @items_per_page)
                        .to_a.map! do |commitment|
                commitment.to_hash
@@ -116,9 +122,9 @@ class Commitment < ApplicationRecord
 
   def self.parse_filters(filters)
     country_ids = []
-    actor_ids = []
     objective_ids = []
     governance_type_ids = []
+    manager_ids = []
     params = {}
     FILTERS.each { |filter| params[filter] = nil }
 
@@ -129,21 +135,19 @@ class Commitment < ApplicationRecord
       when 'country'
         countries = options
         country_ids << Country.where(name: countries).pluck(:id)
-        params['country'] = country_ids.flatten.empty? ? "" : "commitments.country_id IN (#{country_ids.join(',')})"
-      when 'actor'
-        actors = options
-        actor_ids << Actor.where(name: actors).pluck(:id)
-        params['actor'] = actor_ids.flatten.empty? ? "" : "ac.actor_id IN (#{actor_ids.join(',')})"
+        params['country'] = country_ids.flatten.empty? ? "" : "countries.id IN (#{country_ids.join(',')})"
+      when 'manager'
+        managers = options
+        manager_ids << Manager.where(name: managers).pluck(:id)
+        params['manager'] = manager_ids.flatten.empty? ? "" : "managers.id IN (#{manager_ids.join(',')})"
       when 'primary_objectives'
         objectives = options
         objective_ids << Objective.where(name: objectives).pluck(:id)
-        params['objective'] = objective_ids.flatten.empty? ? "" : "co.objective_id IN (#{objective_ids.join(',')})"
+        params['objective'] = objective_ids.flatten.empty? ? "" : "objectives.id IN (#{objective_ids.join(',')})"
       when 'governance_type'
         governance_types = options
         governance_type_ids << GovernanceType.where(name: governance_types).pluck(:id)
-        params['governance_type'] = governance_type_ids.flatten.empty? ? "" : "cgt.governance_type_id IN (#{governance_type_ids.join(',')})"
-
-
+        params['governance_type'] = governance_type_ids.flatten.empty? ? "" : "governance_types.id IN (#{governance_type_ids.join(',')})"
       else
         # Single quoted strings needed for the SQL queries to work properly
         params[name] = options.empty? ? "" : "commitments.#{name} IN (#{options.map { |op| "'#{op}'" }.join(',')})"
@@ -154,13 +158,10 @@ class Commitment < ApplicationRecord
   end
 
   def self.run_query(page, where_params)
-    Commitment
-      .from("commitments")
-      .joins("JOIN actors_commitments AS ac ON ac.commitment_id = commitments.id")
-      .joins("JOIN commitments_objectives AS co ON co.commitment_id = commitments.id")
-      .joins("JOIN commitments_governance_types AS cgt ON cgt.commitment_id = commitments.id")  
+    Commitment.left_outer_joins(:managers, :countries, :objectives, :governance_types)
+      .distinct  
       .where(where_params.values.join(' AND '))
-      .paginate(page: page || 1, per_page: @items_per_page).order('id ASC')
+      .paginate(page: page || 1, per_page: @items_per_page).order(id: :asc)
   end
 
   def self.sanitise_filters
