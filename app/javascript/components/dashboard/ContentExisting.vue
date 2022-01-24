@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-existing-commitments">
+  <div class="dashboard-content-existing">
     <p
       v-for="commitment in commitments"
       v-text="commitment.name"
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "DashboardExistingCommitments",
+  name: "DashboardContentExisting",
 
   props: {
     commitments: {

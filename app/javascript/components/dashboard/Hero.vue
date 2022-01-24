@@ -30,7 +30,7 @@ export default {
 
   props: {
     button: {
-      type: String,
+      type: Object,
       required: true
     },
 

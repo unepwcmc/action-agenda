@@ -17,10 +17,10 @@ import TurbolinksAdapter from 'vue-turbolinks'
 import store from '../store/store.js'
 
 // components
-import DashboardExistingCommitments from '../components/dashboard/ExistingCommitments'
+import DashboardContentExisting from '../components/dashboard/ContentExisting'
+import DashboardContentNone from '../components/dashboard/ContentNone'
 import DashboardHero from '../components/dashboard/Hero'
 import DashboardNavigation from '../components/dashboard/Navigation'
-import DashboardNoCommitments from '../components/dashboard/NoCommitments'
 import FilteredTable from '../components/table/FilteredTable'
 import SurveyForm from '../components/forms/SurveyForm'
 import MockProgressBar from '../components/progress/MockProgressBar'
@@ -51,10 +51,10 @@ document.addEventListener('turbolinks:load', () => {
       el: '#v-app',
       store,
       components: {
-        DashboardExistingCommitments,
+        DashboardContentExisting,
+        DashboardContentNone,
         DashboardHero,
         DashboardNavigation,
-        DashboardNoCommitments,
         FilteredTable,
         SurveyForm,
         MockProgressBar

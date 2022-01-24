@@ -8,10 +8,13 @@
 ></dashboard-hero>
 <div class="container spacer-medium--top spacer-large--bottom">
   <% if !@has_commitments %>
-    <dashboard-no-commitments></dashboard-no-commitments>
+    <dashboard-content-none
+      icon-path="<%= image_url('icons/climate.svg') %>" <%# to be updated to pencil icon once received %>
+      :text="<%= I18n.t('dashboard.content.none').to_json %>"
+    ></dashboard-content-none>
   <% else %>
-    <dashboard-existing-commitments
+    <dashboard-content-existing
       :commitments="<%= @commitments %>"
-    ></dashboard-existing-commitments>
+    ></dashboard-content-existing>
   <% end %>
 </div>

@@ -14,3 +14,8 @@ en:
       commitments:
         path: /commitments
         text: EXPLORE COMMITMENTS
+    content:
+      none:
+        icon_alt: Pencil icon
+        heading: You have no commitments added
+        sub: Start uploading your commitments today
