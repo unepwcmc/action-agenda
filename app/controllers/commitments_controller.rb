@@ -79,26 +79,26 @@ class CommitmentsController < ApplicationController
 
   def commitment_params
     params.require(:commitment).permit(
-      :latitude,
-      :longitude,
-      :current_area_ha,
       :committed_year,
-      :implementation_year,
-      :name,
+      :current_area_ha,
       :description,
       :duration_years,
-      :stage,
-      :responsible_group,
-      :state,
-      :joint_governance_description,
       :geospatial_file,
-      country_ids: [],
+      :implementation_year,
+      :joint_governance_description,
+      :latitude,
+      :longitude,
+      :name,
+      :responsible_group,
+      :stage,
+      :state,
       action_ids: [],
-      threat_ids: [],
+      country_ids: [],
       manager_ids: [],
       objective_ids: [],
-      links_attributes: [:url, :name],
-      progress_documents_attributes: [:id, :progress_notes, :document]
+      threat_ids: [],
+      links_attributes: [:id, :name, :url, :_destroy],
+      progress_documents_attributes: [:id, :document, :progress_notes, :_destroy]
     )
   end
 end

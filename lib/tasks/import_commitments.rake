@@ -39,6 +39,8 @@ namespace :import do
                                 )
         our_com.links.build(url: "https://www.cbd.int/action-agenda/contributions/action?action-id=#{cbd_id}")
         our_com.save!
+        our_com.state = :live
+        our_com.save
       end
     end
   end
