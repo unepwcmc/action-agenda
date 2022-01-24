@@ -33,22 +33,37 @@
           <span>{{ commitment.description | trimmed }}</span>
         </p>
         <p class="table__cell">{{ commitment.state }}</p>
-        <p class="table__cell table__cell--icons">
-          <img
-            class="table__cell-icon table__cell-icon--dashboard"
-            :src="iconPathDestroy"
-            :alt="text.icon_alts.destroy"
-          />
-          <img
-            class="table__cell-icon table__cell-icon--dashboard"
-            :src="iconPathShow"
-            :alt="text.icon_alts.show"
-          />
-          <img
-            class="table__cell-icon table__cell-icon--dashboard"
-            :src="iconPathEdit"
-            :alt="text.icon_alts.edit"
-          />
+        <p class="table__cell table__cell--actions">
+          <span
+            class="table__cell-action"
+            @click.prevent="destroy(commitment.id)"
+          >
+            <img
+              class="table__cell-action-icon table__cell-action-icon--dashboard"
+              :src="iconPathDestroy"
+              :alt="text.icon_alts.destroy"
+            />
+          </span>
+          <a
+            class="table__cell-action"
+            :href="showPath(commitment.id)"
+          >
+            <img
+              class="table__cell-action-icon table__cell-action-icon--dashboard"
+              :src="iconPathShow"
+              :alt="text.icon_alts.show"
+            />
+          </a>
+          <a
+            class="table__cell-action"
+            :href="editPath(commitment.id)"
+          >
+            <img
+              class="table__cell-action-icon table__cell-action-icon--dashboard"
+              :src="iconPathEdit"
+              :alt="text.icon_alts.edit"
+            />
+          </a>
         </p>
       </div>
     </table>
@@ -89,6 +104,20 @@ export default {
   filters: {
     trimmed (text) {
       return typeof text == 'string' ? text.substring(0,150) + '...' : ''
+    }
+  },
+
+  methods: {
+    destroy (id) {
+      console.log(`destroy ${id}; action to be implemented`)
+    },
+
+    editPath (id) {
+      return `/commitments/${id}/edit`
+    },
+
+    showPath (id) {
+      return `/commitments/${id}`
     }
   }
 }

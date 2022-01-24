@@ -57,7 +57,7 @@
     &:nth-child(4) { &:before { content: 'Stage:'; } }
     &:nth-child(5) { &:before { content: ''; } }
 
-    &--icons {
+    &--actions {
       padding-right: rem-calc(50);
 
       display: flex;
@@ -71,7 +71,7 @@
     display: block;
   }
 
-  &__cell-icon {
+  &__cell-action-icon {
     height: rem-calc(30);
 
     display: flex;
