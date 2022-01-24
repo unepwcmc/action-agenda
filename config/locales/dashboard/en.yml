@@ -4,3 +4,10 @@ en:
     hero:
       existing: My Dashboard
       none: Upload your Area-Based Commitments
+    navigation:
+      dashboard:
+        text: MY DASHBOARD
+        path: /dashboard
+      commitments:
+        text: EXPLORE COMMITMENTS
+        path: /commitments

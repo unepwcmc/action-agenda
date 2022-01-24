@@ -1,4 +1,6 @@
-<dashboard-navigation></dashboard-navigation>
+<dashboard-navigation
+  :navigation="<%= I18n.t('dashboard.navigation').to_json %>"
+></dashboard-navigation>
 <dashboard-hero
   :has-commitments="<%= @has_commitments %>"
   heading-text="<%= @has_commitments ? I18n.t('dashboard.hero.existing') : I18n.t('dashboard.hero.none') %>"
