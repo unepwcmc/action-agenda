@@ -4,6 +4,6 @@ indigenous:
   name: Indigenous peoples
   default_option: true
 
-custom:
-  name: Another manager name
-  default_option: false
+joint_governance:
+  name: Joint governance
+  default_option: true
