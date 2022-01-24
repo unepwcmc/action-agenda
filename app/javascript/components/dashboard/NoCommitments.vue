@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-no-commitments">
-    Dashboard navigation
+    No commitments
   </div>
 </template>
 

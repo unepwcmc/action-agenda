@@ -2,12 +2,12 @@
   :navigation="<%= I18n.t('dashboard.navigation').to_json %>"
 ></dashboard-navigation>
 <dashboard-hero
+  :button="<%= I18n.t('dashboard.hero.button').to_json %>"
   :has-commitments="<%= @has_commitments %>"
-  heading-text="<%= @has_commitments ? I18n.t('dashboard.hero.existing') : I18n.t('dashboard.hero.none') %>"
-  button-text="<%= I18n.t('dashboard.add_button') %>"
+  heading-text="<%= @has_commitments ? I18n.t('dashboard.hero.heading.existing') : I18n.t('dashboard.hero.heading.none') %>"
 ></dashboard-hero>
 <div class="container spacer-medium--top spacer-large--bottom">
-  <% if @commitments.empty? %>
+  <% if !@has_commitments %>
     <dashboard-no-commitments></dashboard-no-commitments>
   <% else %>
     <dashboard-existing-commitments

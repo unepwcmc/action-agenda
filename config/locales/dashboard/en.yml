@@ -1,13 +1,16 @@
 en:
   dashboard:
-    add_button: ADD A COMMITMENT
     hero:
-      existing: My Dashboard
-      none: Upload your Area-Based Commitments
+      heading:
+        existing: My Dashboard
+        none: Upload your Area-Based Commitments
+      button:
+        text: ADD A COMMITMENT
+        path: /criteria/new
     navigation:
       dashboard:
-        text: MY DASHBOARD
         path: /dashboard
+        text: MY DASHBOARD
       commitments:
-        text: EXPLORE COMMITMENTS
         path: /commitments
+        text: EXPLORE COMMITMENTS

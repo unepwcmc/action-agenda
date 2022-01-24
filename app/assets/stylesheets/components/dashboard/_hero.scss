@@ -1,0 +1,35 @@
+.dashboard-hero {
+  background-image: image_url('hero/amir-samoh-WgV0g05NQCM-unsplash.png');
+  background-size: cover;
+  color: $white;
+  width: 100%;
+
+  &.dashboard-hero--no-commitments {
+    padding-top: rem-calc(102);
+    padding-bottom: rem-calc(102);
+  }
+
+  &.dashboard-hero--existing-commitments {
+    padding-top: rem-calc(44);
+    padding-bottom: rem-calc(44);
+  }
+}
+
+.dashboard-hero__title {
+  font-size: rem-calc(48);
+
+  .dashboard-hero--existing-commitments & {
+    margin-bottom: 0;
+    margin-left: rem-calc(44);
+  }
+}
+
+.dashboard-hero__button {
+  @include button_accent;
+  min-width: rem-calc(235);
+  min-height: rem-calc(67);
+}
+
+.dashboard-hero__button-text{
+  font-size: rem-calc(18);
+}
