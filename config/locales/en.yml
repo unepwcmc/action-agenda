@@ -34,6 +34,9 @@ en:
 
   errors:
     format: "%{message}"
+    messages:
+      content_type_invalid: "has an invalid content type: %{content_type}"
+      file_size_out_of_range: "file size %{file_size} is too large"
 
   activerecord:
     errors:
@@ -53,6 +56,12 @@ en:
               blank: 'CBD Objective information missing'
             stakeholders:
               blank: 'Stakeholder information missing'
+        commitment:
+          attributes:
+            joint_governance_description:
+              description_blank: "cannot be blank if joint governance manager type is selected"
+            stage:
+              inclusion: "is not one of the allowed stage options"
 
   models:
     criterium:
