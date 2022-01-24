@@ -28,9 +28,9 @@ namespace :migrate_data do
   task set_existing_commitments_to_live: :environment do
     failed_to_set_live = []
     Commitment.find_each do |commitment|
-      commitment.state = :published
+      commitment.state = :live
       failed_to_set_live << commitment.id unless commitment.save
     end
-    puts failed_to_set_live.empty? ? "All commitments set to 'published'." : "Commitments #{ failed_to_set_live.join(', ')} could not be set to live"
+    puts failed_to_set_live.empty? ? "All commitments set to 'live'." : "Commitments #{ failed_to_set_live.join(', ')} could not be set to live"
   end
 end

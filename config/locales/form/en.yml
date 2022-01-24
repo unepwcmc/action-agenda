@@ -1,0 +1,50 @@
+en:
+  form:
+    criteria:
+      progress: 
+         title: 
+            active: Criteria
+            dormant: Commitment form
+      title: 'Form 1: criteria'
+      description: Form 1 will help establish whether this platform is the right place for your commitment. ‘Commitment’ refers to what you intend to do, for example, commitments to enhance/improve an existing area where new actions are planned or to establish a new area. ‘Area’ refers to the geographical area this is (or will be) under management as a result of this commitment.
+      none: None of the above
+      q1: 
+        label: Does/will the area have a clearly-defined boundary?
+        t: The area has, or will have, a clearly defined boundary
+        f: The area does not and will not have a clearly defined boundary
+      q2:
+        label: Please select the objectives of the Convention on Biological Diversity that your commitment contributes to
+      q3:
+        label: Who is making the commitment?
+      q4:
+        label: Is the duration of the commitment at least 5 years?
+        t: 'Yes'
+        f: 'No'
+      q5:
+        label: Are you able to submit annual progress reports to this platform?
+        t: 'Yes'
+        f: 'No'
+      modal:
+        question: Are you sure you want to exit this page?
+        p: You’ll lose any information you have entered so far.
+        continue: CONTINUE WITH CRITERIA FORM
+        exit: GO TO MY DASHBOARD
+      navigation:
+        exit: Exit
+        next: Next
+    commitments:
+      modal:
+        question: Are you sure you want to exit this page?
+        p1: If you still want to exit this page, selecting ‘Exit & Save’ will save any information you have entered so far*. Saved commitments will be accessible through your ‘My Dashboard’ page.
+        p2:
+          prefix: Note
+          content: Ensure you enter a commitment name in order to save
+        continue: CONTINUE WITH FORM
+        exit: SAVE & EXIT
+      navigation:
+        back: BACK
+        exit:
+          left: Exit & Save
+          right: Save & Exit
+        next: NEXT
+        save: SAVE

@@ -1,8 +1,14 @@
 class CriteriaController < ApplicationController
   before_action :set_criterium, only: [:ineligible]
-
+  
+  # GET /criteria/new
   def new
     @criterium = Criterium.new
+    @form_hash = Services::CriteriumProps.new(@criterium).call
+    @none_values = {
+      cbd_objective_ids: CbdObjective.find_by(name: 'None of the above').id,
+      stakeholder_ids: Stakeholder.find_by(name: 'None of the above').id
+    }
   end
 
   def create
@@ -15,7 +21,7 @@ class CriteriaController < ApplicationController
           json_response({ criterium: @criterium, redirect_path: redirect_path }, :created)
         }
       else
-        format.json { render json: { errors: @criterium.errors }, status: :unprocessable_entity }
+        format.json { json_response({ errors: @criterium.errors }, :unprocessable_entity) }
       end
     end
   end

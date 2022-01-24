@@ -2,8 +2,11 @@ require 'csv'
 require 'wcmc_components'
 class Commitment < ApplicationRecord
   STAGE_OPTIONS = ['In progress', 'Committed', 'Implemented']
+  enum state: [:draft, :live] 
 
   include WcmcComponents::Loadable
+  ignore_column 'criterium'
+
   has_and_belongs_to_many :countries
   import_by countries: :name
   has_and_belongs_to_many :managers
@@ -13,19 +16,32 @@ class Commitment < ApplicationRecord
   has_and_belongs_to_many :governance_types
   import_by governance_types: :name
   has_and_belongs_to_many :actions
+  import_by actions: :name
   has_and_belongs_to_many :threats
-  has_many :progress_documents
+  import_by threats: :name
   has_many :links
-  has_one_attached :spatial_data
+  import_by links: :url
+  has_many :progress_documents
+  has_one_attached :geospatial_file
 
-  validates :spatial_data, 
+  belongs_to :criterium, optional: true
+
+  accepts_nested_attributes_for :links, reject_if: ->(attributes){ attributes['url'].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :progress_documents, reject_if: ->(attributes){ attributes['document'].blank? }, allow_destroy: true
+  
+  validates :geospatial_file, 
     content_type: %w(application/vnd.google-earth.kml+xml application/vnd.google-earth.kmz application/zip), 
     size: { less_than: 25.megabytes }
 
   validates :name, presence: true
   validates :stage, inclusion: { in: STAGE_OPTIONS }, allow_nil: true
 
-  ignore_column 'TYPE'
+  validates_presence_of :description, :latitude, :longitude, :committed_year, :responsible_group, :duration_years,
+                        :objectives, :managers, :countries, :actions, :threats, :current_area_ha, if: :live?
+  
+  validate :has_joint_governance_description, if: :live?
+
+  before_save :clear_joint_governance_description_if_not_joint_governance_managed
 
   TABLE_ATTRIBUTES = [
     {
@@ -86,8 +102,6 @@ class Commitment < ApplicationRecord
 
     structure_data(page, items)
   end
-
-
   
   def to_hash
     {
@@ -195,5 +209,19 @@ class Commitment < ApplicationRecord
     end
 
     total_pages
+  end
+
+  private
+
+  def clear_joint_governance_description_if_not_joint_governance_managed
+    self.joint_governance_description = '' unless joint_governance?
+  end
+
+  def has_joint_governance_description
+    errors.add(:joint_governance_description, :description_blank) if joint_governance_description.blank? && joint_governance?
+  end
+
+  def joint_governance?
+    Manager.where(id: manager_ids).pluck(:name).include?('Joint governance')
   end
 end

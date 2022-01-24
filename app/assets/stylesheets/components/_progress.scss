@@ -1,0 +1,70 @@
+//--------------------------------------------------
+// variables
+//--------------------------------------------------
+
+//--------------------------------------------------
+// mixins
+//--------------------------------------------------
+
+//--------------------------------------------------
+// classes
+//--------------------------------------------------
+.progress {
+  @include flex;
+  @include flex-v-center;
+  background-color: $grey-mdlight;
+  font-size: rem-calc(20);
+  font-weight: bold;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  &__active {
+    background-color: $green-dark;
+    color: $white;
+    padding: rem-calc((68 - 23) / 2) 2rem;
+
+    &:after {
+      border-color: transparent transparent transparent $green-dark;
+      border-style: solid;
+      border-width: rem-calc(34) 0 rem-calc(34) rem-calc(45);
+      content: '';
+      margin-top: -(rem-calc((68 - 23) / 2));
+      margin-left: 2rem;
+      width: 0; height: 0;
+
+      position: absolute;
+      z-index: 1;
+    }
+  }
+
+  &__dormant {
+    margin-left: 4rem;
+    padding: rem-calc((68 - 23) / 2) 2rem;
+
+    &:before {
+      border-color: transparent transparent transparent $grey-xlight;
+      border-style: solid;
+      border-width: rem-calc(34) 0 rem-calc(34) rem-calc(45);
+      content: '';
+      margin-top: -(rem-calc((68 - 23) / 2));
+      margin-left: -5rem;
+      width: 0; height: 0;
+
+      position: absolute;
+      z-index: 0;
+    }
+
+    span:before {
+      background-color: $grey-xlight;
+      content: '';
+      margin-top: -(rem-calc((68 - 23) / 2));
+      margin-left: -6rem;
+      width: 1rem; height: rem-calc(68);
+
+      position: absolute;
+      z-index: 0;
+    }
+  }
+}
