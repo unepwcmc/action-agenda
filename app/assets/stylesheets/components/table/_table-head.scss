@@ -1,0 +1,66 @@
+//----------------------------------------
+// animations
+//----------------------------------------
+@keyframes showHeader {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+//----------------------------------------
+// classes
+//----------------------------------------
+.table-head {
+  margin-top: rem-calc(30);
+  height: rem-calc(56);
+
+  display: none;
+
+  @include breakpoint($medium) { display: block; }
+
+  &--stuck {
+    position: fixed;
+    top: 0;
+
+    width: rem-calc(1140);
+
+    animation: showHeader .25s forwards linear;
+  }
+
+  &__row {
+    @include table-grid-basic;
+  }
+
+  &__cell {
+    font-size: rem-calc(16);
+    font-weight: $bold;
+    height: rem-calc(57);
+    padding: rem-calc(16 18);
+
+    align-items: center;
+    display: grid;
+    justify-content: flex-start;
+
+    &:first-child { border-left: none; }
+
+    .table-head--basic & {
+      background-color: $primary;
+      color: $white;
+    }
+
+    .table-head--dashboard & {
+      background-color: $grey-mdmdlight;
+      color: $black;
+    }
+  }
+
+    &__title {
+      margin-right: rem-calc(2);
+      vertical-align: middle;
+
+      display: inline-block;
+    }
+}

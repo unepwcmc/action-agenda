@@ -2,7 +2,7 @@
   :navigation="<%= I18n.t('dashboard.navigation').to_json %>"
 ></dashboard-navigation>
 <dashboard-hero
-  :button="<%= I18n.t('dashboard.hero.button').to_json %>"
+  :button="<%= I18n.t('dashboard.button').to_json %>"
   :has-commitments="<%= @has_commitments %>"
   heading-text="<%= @has_commitments ? I18n.t('dashboard.hero.heading.existing') : I18n.t('dashboard.hero.heading.none') %>"
 ></dashboard-hero>
@@ -15,6 +15,10 @@
   <% else %>
     <dashboard-content-existing
       :commitments="<%= @commitments %>"
+      icon-path-destroy="<%= image_url('icons/destroy.png') %>"
+      icon-path-edit="<%= image_url('icons/edit.png') %>"
+      icon-path-show="<%= image_url('icons/show.png') %>"
+      :text="<%= I18n.t('dashboard.content.existing').to_json %>"
     ></dashboard-content-existing>
   <% end %>
 </div>

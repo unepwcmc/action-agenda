@@ -1,12 +1,12 @@
 en:
   dashboard:
+    button:
+      text: ADD A COMMITMENT
+      path: /criteria/new
     hero:
       heading:
         existing: My Dashboard
         none: Upload your Area-Based Commitments
-      button:
-        text: ADD A COMMITMENT
-        path: /criteria/new
     navigation:
       dashboard:
         path: /dashboard
@@ -15,6 +15,18 @@ en:
         path: /commitments
         text: EXPLORE COMMITMENTS
     content:
+      existing:
+        my_commitments:
+          heading: My Commitments
+        upload_status:
+          heading: Upload Status
+          published: Published
+          draft: Information still required
+          draft_explanation: All mandatory fields are required before a commitment can be published to the website. Select the edit icon to fill out missing fields.
+        icon_alts:
+          destroy: Delete icon
+          edit: Edit icon
+          show: View icon
       none:
         icon_alt: Pencil icon
         heading: You have no commitments added

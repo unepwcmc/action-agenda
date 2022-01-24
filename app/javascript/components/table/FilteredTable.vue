@@ -6,11 +6,11 @@
       :total-items="totalItems"
     />
 
-    <table class="table-head--basic">
+    <table class="table-head table-head--basic">
       <table-head :filters="attributes" />
     </table>
 
-    <table class="table--basic">
+    <table class="table-body table-body--basic">
       <row v-for="item in items"
         :key="item._uid"
         :item="item">
