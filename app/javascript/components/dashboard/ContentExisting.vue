@@ -25,84 +25,84 @@
 
     <table class="table-body table-body--dashboard">
       <div
-        class="table__row"
+        class="table-body__row"
         v-for="commitment in commitments"
       >
-        <p class="table__cell">
+        <p class="table-body__cell">
           <span
-            class="table__cell-title"
+            class="table-body__cell-title"
             v-text="commitment.name"
           />
           <span
-            class="table__cell-description"
+            class="table-body__cell-description"
           >
            {{ commitment.description | trimmed }}
           </span>
         </p>
         <p
           v-if="live(commitment)"
-          class="table__cell table__cell--live-state"
+          class="table-body__cell table-body__cell--live-state"
         >
           <span
-            class="table__cell-state"
+            class="table-body__cell-state"
             v-text="text.upload_status.published"
           />
         </p>
         <p
           v-else
-          class="table__cell table__cell--draft-state"
+          class="table-body__cell table-body__cell--draft-state"
         >
-          <span class="table__cell-content-wrapper">
+          <span class="table-body__cell-content-wrapper">
             <img
-              class="table__cell-icon table__cell-icon--warning"
+              class="table-body__cell-icon table-body__cell-icon--warning"
               :src="iconPathWarning"
               :alt="text.icon_alts.warning"
             />
             <br>
             <span
-              class="table__cell-state"
+              class="table-body__cell-state"
               v-text="text.upload_status.draft"
             />
             <span
-              class="table__cell-draft-info"
+              class="table-body__cell-draft-info"
               v-text="text.upload_status.draft_info"
             />
           </span>
         </p>
-        <p class="table__cell table__cell--actions">
+        <p class="table-body__cell table-body__cell--actions">
           <span
-            class="table__cell-action table__cell-action--destroy"
+            class="table-body__cell-action table-body__cell-action--destroy"
             @click.prevent="destroy(commitment)"
           >
             <img
-              class="table__cell-action-icon"
+              class="table-body__cell-action-icon"
               :src="iconPathDestroy"
               :alt="text.icon_alts.destroy"
             />
           </span>
           <a
             v-if="live(commitment)"
-            class="table__cell-action"
+            class="table-body__cell-action"
             :href="showPath(commitment)"
           >
             <img
-              class="table__cell-action-icon"
+              class="table-body__cell-action-icon"
               :src="iconPathShow"
               :alt="text.icon_alts.show"
             />
           </a>
           <img
             v-else
-            class="table__cell-action-icon"
+            class="table-body__cell-action-icon"
             :src="iconPathShowInactive"
             :alt="text.icon_alts.show_inactive"
           />
           <a
-            class="table__cell-action"
+            class="table-body__cell-action"
             :href="editPath(commitment)"
           >
             <img
-              class="table__cell-action-icon"
+              class="table-body__cell-action-icon"
               :src="iconPathEdit"
               :alt="text.icon_alts.edit"
             />

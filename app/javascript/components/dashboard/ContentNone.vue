@@ -2,6 +2,7 @@
   <div class="dashboard-content-none">
     <div class="dashboard-content-none__inner">
       <img
+        class="dashboard-content-none__icon"
         :src="iconPath"
         :alt="text.icon_alt"
       />
