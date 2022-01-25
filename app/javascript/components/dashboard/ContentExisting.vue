@@ -156,25 +156,27 @@ export default {
 
   filters: {
     trimmed (text) {
-      return typeof text == 'string' ? text.substring(0,150) + '...' : ''
+      return typeof text == "string" ? text.substring(0,150) + "..." : "";
     }
   },
 
   methods: {
     destroy (commitment) {
-      console.log(`destroy ${commitment.id}; action to be implemented`)
+      // to be updated to axios call once controller action is implemented
+      // on successful deletion, should remove the row (or just refresh the page?)
+      console.log(`destroy ${commitment.id}; action to be implemented`);
     },
 
     editPath (commitment) {
-      return `/commitments/${commitment.id}/edit`
+      return `/commitments/${commitment.id}/edit`;
     },
 
     live (commitment) {
-      return commitment.state === 'live'
+      return commitment.state === "live";
     },
 
     showPath (commitment) {
-      return `/commitments/${commitment.id}`
+      return `/commitments/${commitment.id}`;
     }
   }
 }
