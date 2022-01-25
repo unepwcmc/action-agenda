@@ -111,4 +111,12 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response 204
     assert commitment.reload.description == new_description
   end
+
+  test "should destroy a commitment" do
+    commitment_count_at_start = Commitment.count
+    commitment = commitments(:valid_commitment_1)
+    delete commitment_url(commitment), as: :json
+    assert_response 204
+    assert Commitment.count == commitment_count_at_start - 1
+  end
 end
