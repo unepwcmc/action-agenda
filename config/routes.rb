@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   post '/commitments/list', to: 'commitments#list'
 
   resources :criteria, only: [:new, :create]
+  resources :links, only: [:update, :destroy]
+  resources :progress_documents, only: [:update, :destroy]
 
   get '/criteria/:id/ineligible', to: 'criteria#ineligible', as: 'ineligible_criteria'
 
