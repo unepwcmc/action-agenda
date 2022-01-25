@@ -1,8 +1,8 @@
 class LinksController < ApplicationController
-  before_action :set_link, only: [:destroy, :update]
+  before_action :set_link, only: [:update, :destroy]
 
-  def destroy
-    if @link.destroy
+  def update
+    if @link.update(link_params)
       respond_to do |format|
         format.json { json_response({}, 204) }
       end
@@ -13,8 +13,8 @@ class LinksController < ApplicationController
     end
   end
 
-  def update
-    if @link.update(link_params)
+  def destroy
+    if @link.destroy
       respond_to do |format|
         format.json { json_response({}, 204) }
       end
