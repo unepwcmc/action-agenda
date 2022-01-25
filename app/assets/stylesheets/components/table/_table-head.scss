@@ -22,10 +22,10 @@
   @include breakpoint($medium) { display: block; }
 
   &--stuck {
+    width: rem-calc(1140);
+    
     position: fixed;
     top: 0;
-
-    width: rem-calc(1140);
 
     animation: showHeader .25s forwards linear;
   }
@@ -37,11 +37,11 @@
   &__cell {
     font-size: rem-calc(16);
     font-weight: $bold;
-    height: rem-calc(57);
     padding: rem-calc(16 18);
+    height: rem-calc(57);
 
-    align-items: center;
     display: grid;
+    align-items: center;
     justify-content: flex-start;
 
     &:first-child { border-left: none; }
