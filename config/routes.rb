@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root to: 'home#index'
-  get '/', to: 'home#index'
-
+  devise_for :users
 
   resources :commitments, only: [:show, :index, :new, :create, :edit, :update]
   post '/commitments/list', to: 'commitments#list'
