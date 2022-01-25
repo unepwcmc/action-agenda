@@ -4,7 +4,7 @@
     :class="modifierClass"
   >
     <div 
-      :class="{ 'container': !hasCommitments }"
+      :class="{ "container": !hasCommitments }"
     >
       <h2
         class="dashboard-hero__title"
