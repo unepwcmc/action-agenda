@@ -1,0 +1,7 @@
+pollution:
+  name: Pollution
+  default_option: true
+
+other:
+  name: Other
+  default_option: true

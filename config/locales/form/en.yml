@@ -24,6 +24,14 @@ en:
         label: Are you able to submit annual progress reports to this platform?
         t: 'Yes'
         f: 'No'
+      modal:
+        question: Are you sure you want to exit this page?
+        p: You’ll lose any information you have entered so far.
+        continue: CONTINUE WITH CRITERIA FORM
+        exit: GO TO MY DASHBOARD
+      navigation:
+        exit: Exit
+        next: Next
     commitments: 
       page1:
         name: '1. General Info'
@@ -96,21 +104,18 @@ en:
           description: (Optional field)
           add: Add another
           delete: Are you sure you want to delete this file?
-        q2:
-          title:
-          description: 
-        q3:
-          title:
-          description: 
-        q4:
-          title:
-          description: 
-        q5:
-          title:
-          description: 
-        q6:
-          title:
-          description: 
-        q7:
-          title:
-          description: 
+      modal:
+        question: Are you sure you want to exit this page?
+        p1: If you still want to exit this page, selecting ‘Exit & Save’ will save any information you have entered so far*. Saved commitments will be accessible through your ‘My Dashboard’ page.
+        p2:
+          prefix: Note
+          content: Ensure you enter a commitment name in order to save
+        continue: CONTINUE WITH FORM
+        exit: SAVE & EXIT
+      navigation:
+        back: BACK
+        exit:
+          left: Exit & Save
+          right: Save & Exit
+        next: NEXT
+        save: SAVE

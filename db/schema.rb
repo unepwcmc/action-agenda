@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_18_120611) do
+ActiveRecord::Schema.define(version: 2022_01_21_113607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "actions", force: :cascade do |t|
+    t.text "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "default_option", default: false
+  end
+
+  create_table "actions_commitments", force: :cascade do |t|
+    t.bigint "commitment_id"
+    t.bigint "action_id"
+    t.index ["action_id"], name: "index_actions_commitments_on_action_id"
+    t.index ["commitment_id"], name: "index_actions_commitments_on_commitment_id"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -34,19 +48,6 @@ ActiveRecord::Schema.define(version: 2022_01_18_120611) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "actors", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "actors_commitments", id: false, force: :cascade do |t|
-    t.bigint "commitment_id"
-    t.bigint "actor_id"
-    t.index ["actor_id"], name: "index_actors_commitments_on_actor_id"
-    t.index ["commitment_id"], name: "index_actors_commitments_on_commitment_id"
   end
 
   create_table "cbd_objectives", force: :cascade do |t|
@@ -83,7 +84,19 @@ ActiveRecord::Schema.define(version: 2022_01_18_120611) do
     t.string "stage"
     t.string "related_biodiversity_targets"
     t.string "review_method"
+    t.text "responsible_group"
+    t.integer "state", default: 0
+    t.integer "duration_years"
+    t.bigint "criterium_id"
+    t.text "joint_governance_description"
     t.index ["country_id"], name: "index_commitments_on_country_id"
+  end
+
+  create_table "commitments_countries", id: false, force: :cascade do |t|
+    t.bigint "commitment_id"
+    t.bigint "country_id"
+    t.index ["commitment_id"], name: "index_commitments_countries_on_commitment_id"
+    t.index ["country_id"], name: "index_commitments_countries_on_country_id"
   end
 
   create_table "commitments_governance_types", id: false, force: :cascade do |t|
@@ -93,11 +106,25 @@ ActiveRecord::Schema.define(version: 2022_01_18_120611) do
     t.index ["governance_type_id"], name: "index_commitments_governance_types_on_governance_type_id"
   end
 
+  create_table "commitments_managers", id: false, force: :cascade do |t|
+    t.bigint "commitment_id"
+    t.bigint "manager_id"
+    t.index ["commitment_id"], name: "index_commitments_managers_on_commitment_id"
+    t.index ["manager_id"], name: "index_commitments_managers_on_manager_id"
+  end
+
   create_table "commitments_objectives", id: false, force: :cascade do |t|
     t.bigint "commitment_id"
     t.bigint "objective_id"
     t.index ["commitment_id"], name: "index_commitments_objectives_on_commitment_id"
     t.index ["objective_id"], name: "index_commitments_objectives_on_objective_id"
+  end
+
+  create_table "commitments_threats", force: :cascade do |t|
+    t.bigint "commitment_id"
+    t.bigint "threat_id"
+    t.index ["commitment_id"], name: "index_commitments_threats_on_commitment_id"
+    t.index ["threat_id"], name: "index_commitments_threats_on_threat_id"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -128,10 +155,28 @@ ActiveRecord::Schema.define(version: 2022_01_18_120611) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "links", force: :cascade do |t|
+    t.text "name"
+    t.text "url", null: false
+    t.bigint "commitment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commitment_id"], name: "index_links_on_commitment_id"
+  end
+
+  create_table "managers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "default_option", default: false
+    t.index ["name"], name: "index_managers_on_name", unique: true
+  end
+
   create_table "objectives", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "default_option", default: false
   end
 
   create_table "progress_documents", force: :cascade do |t|
@@ -146,6 +191,16 @@ ActiveRecord::Schema.define(version: 2022_01_18_120611) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "threats", force: :cascade do |t|
+    t.text "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "default_option", default: false
+  end
+
+  create_table "threats_and_joins", force: :cascade do |t|
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

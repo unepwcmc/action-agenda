@@ -7,16 +7,17 @@ class Services::CommitmentProps
     {
       config:
       {
-        action: @commitment.new_record? ? '/commitments.json' : "/commitments/#{@commitment.id}.json",
+        action: @commitment.new_record? ? '/commitments' : "/commitments/#{@commitment.id}.json",
         method: @commitment.new_record? ? 'post' : 'put',
         root_key: 'commitment'
       },
       survey: {
-        showPrevButton: false,
-        showQuestionNumbers: 'onPage',
-        showProgressBar: 'top',
         progressBarType: 'buttons',
         requiredText: '',
+        showNavigationButtons: 'none',
+        showPrevButton: false,
+        showProgressBar: 'top',
+        showQuestionNumbers: 'onPage',
         pages: [
           {
             name: I18n.t('form.commitments.page1.name'),
