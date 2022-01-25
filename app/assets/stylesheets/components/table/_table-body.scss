@@ -33,8 +33,8 @@
     @include breakpoint($medium) {
       padding: rem-calc(16 18);
       
-      align-items: center;
       display: inline-grid;
+      align-items: center;
       justify-content: flex-start;
     }
 
