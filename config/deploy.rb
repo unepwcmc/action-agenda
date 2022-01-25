@@ -14,7 +14,10 @@ set :nvm_map_bins, %w{node npm yarn}
 
 set :deploy_user, 'wcmc'
 
-
+set :yarn_target_path, -> { release_path.join('client') } #
+set :yarn_flags, '--production --silent --no-progress --ignore-engines --ignore-scripts'    # default
+set :yarn_roles, :all                                     # default
+set :yarn_env_variables, {}
 
 set :backup_path, "/home/#{fetch(:deploy_user)}/Backup"
 
