@@ -29,37 +29,80 @@
         v-for="commitment in commitments"
       >
         <p class="table__cell">
-          <span class="table__cell-title">{{ commitment.name }}</span>
-          <span>{{ commitment.description | trimmed }}</span>
+          <span
+            class="table__cell-title"
+            v-text="commitment.name"
+          />
+          <span
+            class="table__cell-description"
+          >
+           {{ commitment.description | trimmed }}
+          </span>
         </p>
-        <p class="table__cell">{{ commitment.state }}</p>
+        <p
+          v-if="live(commitment)"
+          class="table__cell table__cell--live-state"
+        >
+          <span
+            class="table__cell-state"
+            v-text="text.upload_status.published"
+          />
+        </p>
+        <p
+          v-else
+          class="table__cell table__cell--draft-state"
+        >
+          <span class="table__cell-content-wrapper">
+            <img
+              class="table__cell-icon table__cell-icon--warning"
+              :src="iconPathWarning"
+              :alt="text.icon_alts.warning"
+            />
+            <br>
+            <span
+              class="table__cell-state"
+              v-text="text.upload_status.draft"
+            />
+            <span
+              class="table__cell-draft-info"
+              v-text="text.upload_status.draft_info"
+            />
+          </span>
+        </p>
         <p class="table__cell table__cell--actions">
           <span
-            class="table__cell-action"
-            @click.prevent="destroy(commitment.id)"
+            class="table__cell-action table__cell-action--destroy"
+            @click.prevent="destroy(commitment)"
           >
             <img
-              class="table__cell-action-icon table__cell-action-icon--dashboard"
+              class="table__cell-action-icon"
               :src="iconPathDestroy"
               :alt="text.icon_alts.destroy"
             />
           </span>
           <a
+            v-if="live(commitment)"
             class="table__cell-action"
-            :href="showPath(commitment.id)"
+            :href="showPath(commitment)"
           >
             <img
-              class="table__cell-action-icon table__cell-action-icon--dashboard"
+              class="table__cell-action-icon"
               :src="iconPathShow"
               :alt="text.icon_alts.show"
             />
           </a>
+          <img
+            v-else
+            class="table__cell-action-icon"
+            :src="iconPathShowInactive"
+            :alt="text.icon_alts.show_inactive"
+          />
           <a
             class="table__cell-action"
-            :href="editPath(commitment.id)"
+            :href="editPath(commitment)"
           >
             <img
-              class="table__cell-action-icon table__cell-action-icon--dashboard"
+              class="table__cell-action-icon"
               :src="iconPathEdit"
               :alt="text.icon_alts.edit"
             />
@@ -95,6 +138,16 @@ export default {
       required: true
     },
 
+    iconPathShowInactive: {
+      type: String,
+      required: true
+    },
+
+    iconPathWarning: {
+      type: String,
+      required: true
+    },
+
     text: {
       type: Object,
       required: true
@@ -108,16 +161,20 @@ export default {
   },
 
   methods: {
-    destroy (id) {
-      console.log(`destroy ${id}; action to be implemented`)
+    destroy (commitment) {
+      console.log(`destroy ${commitment.id}; action to be implemented`)
     },
 
-    editPath (id) {
-      return `/commitments/${id}/edit`
+    editPath (commitment) {
+      return `/commitments/${commitment.id}/edit`
     },
 
-    showPath (id) {
-      return `/commitments/${id}`
+    live (commitment) {
+      return commitment.state === 'live'
+    },
+
+    showPath (commitment) {
+      return `/commitments/${commitment.id}`
     }
   }
 }

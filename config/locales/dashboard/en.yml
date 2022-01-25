@@ -22,11 +22,13 @@ en:
           heading: Upload Status
           published: Published
           draft: Information still required
-          draft_explanation: All mandatory fields are required before a commitment can be published to the website. Select the edit icon to fill out missing fields.
+          draft_info: All mandatory fields are required before a commitment can be published to the website. Select the edit icon to fill out missing fields.
         icon_alts:
           destroy: Delete icon
           edit: Edit icon
           show: View icon
+          show-inactive: View icon (inactive)
+          warning: Warning icon
       none:
         icon_alt: Pencil icon
         heading: You have no commitments added

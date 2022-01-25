@@ -47,7 +47,11 @@
       @include breakpoint($medium){ display: none; }
     }
 
-    &:nth-child(n+2) { font-weight: $bold; }
+    &:nth-child(n+2) {
+      .table-body--basic & {
+        font-weight: $bold;
+      }
+    }
     // Add copy for the table header
     // These are shown on mobile and tablet
     // Check pame_evalutation.rb for the copy
@@ -63,12 +67,37 @@
       display: flex;
       justify-content: space-between;
     }
+
+    &--live-state {
+      color: $green;
+    }
+
+    &--draft-state {
+      max-width: rem-calc(280);
+    }
   }
 
   &__cell-title { 
     font-weight: $bold;
     
     display: block;
+  }
+
+  &__cell-state {
+    font-weight: $bold;
+  }
+
+  &__cell-draft-info {
+    font-size: rem-calc(10);
+    line-height: rem-calc(10);
+
+    display: block;
+  }
+
+  &__cell-action {
+    &--destroy {
+      cursor: pointer;
+    }
   }
 
   &__cell-action-icon {
