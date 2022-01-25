@@ -7,10 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Criteria and assicated records
-stakeholder_names = [ 'Local communities', 'Indigenous peoples', 'Non-governmental organisation (NGO)', 'Private sector (business and industry)', 'Sub-national or local government' ]
+stakeholder_names = [ 'Local communities', 'Indigenous peoples', 'Non-governmental organisation (NGO)', 'Private sector (business and industry)', 'Sub-national or local government', 'None of the above' ]
 Stakeholder.create!(stakeholder_names.map {|name| { name: name }})
 
-cbd_objective_names = [ 'Conservation of biological diversity', 'Sustainable use', 'Fair and equitable sharing of benefits from the utilization of genetic resources' ]
+cbd_objective_names = [ 'Conservation of biological diversity', 'Sustainable use', 'Fair and equitable sharing of benefits from the utilization of genetic resources', 'None of the above' ]
 CbdObjective.create!(cbd_objective_names.map {|name| { name: name }})
 
 criteria = [
@@ -35,8 +35,8 @@ commitments = [
     geographic_boundary: true, latitude: 0.002, longitude: 0.9, current_area_ha: 12, proposed_area_ha: 15, 
     committed_year: 2021, implementation_year: 2022, name: 'A commitment', 
     governance_authority: 'A governance authrity name', description: 'A description', duration_years: 5, 
-    stage: 'Implemented', responsible_group: 'The responsible group', state: 'live',
-    threats: Threat.all, actions: Action.all, managers: Manager.all, objectives: Objective.all
+    stage: 'Implemented', responsible_group: 'The responsible group', state: 'live', joint_governance_description: 'some managers',
+    threats: Threat.all, actions: Action.all, managers: Manager.all, countries: Country.where(id: 1..5), objectives: Objective.all
   }
 ]
 Commitment.create!(commitments)
