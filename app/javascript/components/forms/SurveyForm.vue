@@ -83,6 +83,7 @@ export default {
       isFirstPage: true,
       isLastPage: false,
       survey: model,
+      options: {}
     };
   },
 
@@ -100,8 +101,8 @@ export default {
       });
     },
 
-    axiosCall(options) {
-      axios(this.formData.config.action, options)
+    axiosCall() {
+      axios(this.formData.config.action, this.options)
         .then((response) => {
           this.redirect(response.data.redirect_path)
         })
@@ -130,19 +131,25 @@ export default {
       const data = sender.data;
       this.assignNoneValues(data);
 
-      const options = {
+      this.options = {
         method: this.formData.config.method,
         data: { [this.formData.config.root_key]: data },
       };
 
-      this.axiosCall(options);
+      this.axiosCall();
     },
 
     onCurrentPageChanged () {
-      this.isFirstPage = survey.isFirstPage;
-      this.isLastPage = survey.isLastPage;
+      this.isFirstPage = this.survey.isFirstPage;
+      this.isLastPage = this.survey.isLastPage;
       if (this.dataModel === "Commitment") {
-        // do the axios call
+        const data = this.survey.data
+        this.options = {
+          method: this.formData.config.method,
+          data: { [this.formData.config.root_key]: data },
+        }
+        this.axiosCall()
+        //
       }
     },
   

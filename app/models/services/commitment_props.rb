@@ -7,7 +7,7 @@ class Services::CommitmentProps
     {
       config:
       {
-        action: @commitment.new_record? ? '/commitments' : "/commitments/#{@commitment.id}.json",
+        action: @commitment.new_record? ? '/commitments.json' : "/commitments/#{@commitment.id}.json",
         method: @commitment.new_record? ? 'post' : 'put',
         root_key: 'commitment',
         hidden_field: @commitment.criterium_id
