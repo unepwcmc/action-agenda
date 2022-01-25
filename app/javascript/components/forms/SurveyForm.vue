@@ -1,6 +1,6 @@
 <template>
-  <div class="survey-commitment">
-    <survey :survey="survey" />
+  <div>
+    <survey class="survey-container" :survey="survey" />
     <form-navigation
       v-bind="{
         complete,
@@ -88,9 +88,28 @@ export default {
 
   mounted() {
     setAxiosHeaders(axios);
+    console.log(this.formData)
   },
 
   methods: {
+    assignNoneValues(data) {
+      Object.keys(this.noneValues).forEach((question) => {
+        if (data[question] && data[question][0] === "none") {
+          data[question][0] = this.noneValues[question];
+        }
+      });
+    },
+
+    axiosCall(options) {
+      axios(this.formData.config.action, options)
+        .then((response) => {
+          this.redirect(response.data.redirect_path)
+        })
+        .catch((error) => {
+          console.log("FAILED!", error.data);
+        })
+    },
+
     complete () {
       this.survey.completeLastPage();
     },
@@ -109,30 +128,22 @@ export default {
 
     onComplete(sender) {
       const data = sender.data;
-
-      Object.keys(this.noneValues).forEach((question) => {
-        if (data[question] && data[question][0] === "none") {
-          data[question][0] = this.noneValues[question];
-        }
-      });
+      this.assignNoneValues(data);
 
       const options = {
         method: this.formData.config.method,
         data: { [this.formData.config.root_key]: data },
       };
 
-      axios(this.formData.config.action, options)
-        .then((response) => {
-          this.redirect(response.data.redirect_path)
-        })
-        .catch((error) => {
-          console.log("FAILED!", error.data);
-        })
+      this.axiosCall(options);
     },
 
     onCurrentPageChanged () {
       this.isFirstPage = survey.isFirstPage;
       this.isLastPage = survey.isLastPage;
+      if (this.dataModel === "Commitment") {
+        // do the axios call
+      }
     },
   
     prevPage () {

@@ -1,4 +1,4 @@
-class Services::CommitmentProps
+class Services::CommitmentProps  
   def initialize(commitment)
     @commitment = commitment
   end
@@ -9,7 +9,8 @@ class Services::CommitmentProps
       {
         action: @commitment.new_record? ? '/commitments' : "/commitments/#{@commitment.id}.json",
         method: @commitment.new_record? ? 'post' : 'put',
-        root_key: 'commitment'
+        root_key: 'commitment',
+        hidden_field: @commitment.criterium_id
       },
       survey: {
         progressBarType: 'buttons',
