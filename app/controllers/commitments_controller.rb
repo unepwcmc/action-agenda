@@ -6,7 +6,8 @@ class CommitmentsController < ApplicationController
     filters: []
   }.to_json
 
-  before_action :set_commitment, only: [:show, :edit, :update]
+  skip_before_action :authenticate_user!, only: [:index, :list, :show]
+  before_action :set_commitment, only: [:show, :edit, :update, :destroy]
 
   def index
     @paginatedCommitments = Commitment.paginate_commitments(DEFAULT_PARAMS).to_json
@@ -63,6 +64,18 @@ class CommitmentsController < ApplicationController
     if @commitment.update(commitment_params)
       respond_to do |format|
         format.json { json_response({ commitment: @commitment }, 204) }
+      end
+    else
+      respond_to do |format|
+        format.json { json_response({ errors: @commitment.errors }, :unprocessable_entity) }
+      end
+    end
+  end
+
+  def destroy
+    if @commitment.destroy
+      respond_to do |format|
+        format.json { json_response({}, 204) }
       end
     else
       respond_to do |format|

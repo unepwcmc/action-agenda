@@ -28,10 +28,10 @@ class CriteriumTest < ActiveSupport::TestCase
 
   test "should give the correct failure messages" do
     assert_matched_arrays criteria(:valid_criterium).failure_messages, []
-    assert_matched_arrays criteria(:no_boundary).failure_messages, [I18n.t(:"criterium.failure_messages.boundary")]
-    assert_matched_arrays criteria(:no_five_year_commitment).failure_messages, [I18n.t(:"criterium.failure_messages.five_year_commitment")]
-    assert_matched_arrays criteria(:no_progress_report).failure_messages, [I18n.t(:"criterium.failure_messages.progress_report")]
-    assert_matched_arrays criteria(:government_stakeholder).failure_messages, [I18n.t(:"criterium.failure_messages.government_stakeholders")]
-    assert_matched_arrays criteria(:no_cbd_objectives).failure_messages, [I18n.t(:"criterium.failure_messages.no_cbd_objectives")]
+    assert_matched_arrays criteria(:no_boundary).failure_messages, [I18n.t(:"models.criterium.failure_messages.boundary")]
+    assert_matched_arrays criteria(:no_five_year_commitment).failure_messages, [I18n.t(:"models.criterium.failure_messages.five_year_commitment")]
+    assert_matched_arrays criteria(:no_progress_report).failure_messages, [I18n.t(:"models.criterium.failure_messages.progress_report")]
+    assert_matched_arrays criteria(:government_stakeholder).failure_messages, [I18n.t(:"models.criterium.failure_messages.government_stakeholders")]
+    assert_matched_arrays criteria(:no_cbd_objectives).failure_messages, [I18n.t(:"models.criterium.failure_messages.no_cbd_objectives")]
   end
 end

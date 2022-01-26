@@ -1,10 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# users
+users = [
+  { email: 'test@test.com', password: 'password', password_confirmation: 'password' },
+  { email: 'test2@test.com', password: 'password', password_confirmation: 'password' },
+]
+User.create!(users)
+User.first.confirm
 
 # Criteria and assicated records
 stakeholder_names = [ 'Local communities', 'Indigenous peoples', 'Non-governmental organisation (NGO)', 'Private sector (business and industry)', 'Sub-national or local government', 'None of the above' ]
@@ -18,7 +18,8 @@ criteria = [
   { boundary: false, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first] },
   { boundary: true, five_year_commitment: false, progress_report: true, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first] },
   { boundary: true, five_year_commitment: true, progress_report: false, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first] },
-  { boundary: true, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.last], cbd_objectives: [CbdObjective.last] }
+  { boundary: true, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.last], cbd_objectives: [CbdObjective.last] },
+  { boundary: false, five_year_commitment: false, progress_report: false, stakeholders: [Stakeholder.last], cbd_objectives: [CbdObjective.last] }
 ]
 Criterium.create!(criteria)
 
@@ -34,7 +35,7 @@ commitments = [
   {
     geographic_boundary: true, latitude: 0.002, longitude: 0.9, current_area_ha: 12, proposed_area_ha: 15, 
     committed_year: 2021, implementation_year: 2022, name: 'A commitment', 
-    governance_authority: 'A governance authrity name', description: 'A description', duration_years: 5, 
+    governance_authority: 'A governance authority name', description: 'A description', duration_years: 5, 
     stage: 'Implemented', responsible_group: 'The responsible group', state: 'live', joint_governance_description: 'some managers',
     threats: Threat.all, actions: Action.all, managers: Manager.all, countries: Country.where(id: 1..5), objectives: Objective.all
   }
