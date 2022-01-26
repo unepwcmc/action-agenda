@@ -75,6 +75,13 @@ $padding-medium: rem-calc(27);
   color: $colour;
 }
 
+@mixin button-outline-condensed-taller ($colour: $black, $border-size: 1px) {
+  @include button-outline($colour, $border-size);
+  font-family: $header-font;
+  line-height: $header-font-line-height;
+  min-height: rem-calc(67);
+}
+
 @mixin button-plain-black {
   @include button-basic;
   @include button-plain($black);
@@ -100,10 +107,20 @@ $padding-medium: rem-calc(27);
   text-transform: uppercase;
 }
 
+@mixin button-accent-condensed-taller {
+  @include button-accent;
+  font-family: $header-font;
+  line-height: $header-font-line-height;
+  min-height: rem-calc(67);
+}
+
 @mixin button-grey-light {
   @include button-block($grey-light, $black);
+  font-family: $header-font;
   font-weight: $bold;
+  line-height: $header-font-line-height;
   text-transform: uppercase;
+  min-height: rem-calc(67);
 }
 
 @mixin button-all($small: false) {

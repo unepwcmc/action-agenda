@@ -62,7 +62,7 @@
   }
 
   &.modal__button--continue {
-    @include button-accent;
+    @include button-accent-condensed-taller;
   }
 
   &.modal__button--exit {
