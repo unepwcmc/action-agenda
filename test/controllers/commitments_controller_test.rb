@@ -121,6 +121,15 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     assert commitment.reload.description == new_description
   end
 
+  test "should destroy a commitment" do
+    sign_in users(:user_1)
+    commitment_count_at_start = Commitment.count
+    commitment = commitments(:valid_commitment_1)
+    delete commitment_url(commitment), as: :json
+    assert_response 204
+    assert Commitment.count == commitment_count_at_start - 1
+  end
+
   test "GET edit should redirect to sign in unless signed in" do
     commitment = commitments(:valid_commitment_1) 
     get edit_commitment_url(commitment)
