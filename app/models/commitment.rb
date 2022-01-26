@@ -19,9 +19,9 @@ class Commitment < ApplicationRecord
   import_by actions: :name
   has_and_belongs_to_many :threats
   import_by threats: :name
-  has_many :links
+  has_many :links, dependent: :destroy
   import_by links: :url
-  has_many :progress_documents
+  has_many :progress_documents, dependent: :destroy
   has_one_attached :geospatial_file
 
   belongs_to :criterium, optional: true

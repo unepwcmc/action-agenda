@@ -3,10 +3,12 @@ Rails.application.routes.draw do
   get '/', to: 'home#index'
 
 
-  resources :commitments, only: [:show, :index, :new, :create, :edit, :update]
+  resources :commitments
   post '/commitments/list', to: 'commitments#list'
 
   resources :criteria, only: [:new, :create]
+  resources :links, only: [:update, :destroy]
+  resources :progress_documents, only: [:update, :destroy]
 
   get '/criteria/:id/ineligible', to: 'criteria#ineligible', as: 'ineligible_criteria'
 
