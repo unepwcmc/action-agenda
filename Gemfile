@@ -45,6 +45,7 @@ gem 'active_storage_validations', '~> 0.1' # validate upload types
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# authorisation
 gem 'devise'
 
 group :development, :test do
