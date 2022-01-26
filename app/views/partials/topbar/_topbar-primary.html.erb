@@ -1,4 +1,6 @@
 <div class="topbar--primary">
   <%= link_to 'Main Action Agenda', 'https://www.cbd.int/action-agenda/', title: 'Visit the Action Agenda website', target: '_blank' %>
-  <%= link_to I18n.t('views.buttons.login.button'), new_user_session_url, title: I18n.t('views.buttons.login.title') %>
+  <% unless current_user %>
+    <%= link_to I18n.t('views.buttons.login.button'), new_user_session_url, title: I18n.t('views.buttons.login.title') %>
+  <% end %>
 </div>
