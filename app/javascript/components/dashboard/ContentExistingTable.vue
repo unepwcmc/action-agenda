@@ -1,24 +1,30 @@
 <template>
   <div class="table table--dashboard">
     <table class="table-head table-head--dashboard">
-      <div class="table-head__row">
-        <div class="table-head__cell">
-          <span
-            class="table-head__title"
-            v-text="text.my_commitments.heading"
-          />
-        </div>
-        <div class="table-head__cell">
-          <span
-            class="table-head__title"
-            v-text="text.upload_status.heading"
-          />
-        </div>
-        <div class="table-head__cell">
-          <span
-            class="table-head__title"
-            v-text="''"
-          />
+      <div 
+        id="sticky"
+        class="table-head__sticky"
+        :class="{ 'table-head__sticky--stuck' : isSticky }"
+      >
+        <div class="table-head__row">
+          <div class="table-head__cell">
+            <span
+              class="table-head__title"
+              v-text="text.my_commitments.heading"
+            />
+          </div>
+          <div class="table-head__cell">
+            <span
+              class="table-head__title"
+              v-text="text.upload_status.heading"
+            />
+          </div>
+          <div class="table-head__cell">
+            <span
+              class="table-head__title"
+              v-text="''"
+            />
+          </div>
         </div>
       </div>
     </table>
@@ -154,6 +160,18 @@ export default {
     }
   },
 
+  data() {
+    return {
+      stickyTrigger: 0,
+      isSticky: false
+    }
+  },
+
+  mounted () {
+    this.setStickyTrigger()
+    this.scrollHandler()
+  },
+
   filters: {
     trimmed (description) {
       return typeof description === "string" ? description.substring(0,150) + "..." : "";
@@ -175,9 +193,24 @@ export default {
       return commitment.state === "live";
     },
 
+    scrollHandler () {
+      setInterval( () => {
+        let scrollY = window.pageYOffset
+
+        this.isSticky = scrollY > this.stickyTrigger ? true : false
+      }, 100)
+    },
+
+    setStickyTrigger () {
+      const stickyElement = document.getElementById('sticky')
+      const stickyElementHeight = stickyElement.clientHeight
+      const stickyYOffset = stickyElement.getBoundingClientRect().top + window.pageYOffset
+
+      this.stickyTrigger = stickyElementHeight + stickyYOffset
+    },
+
     showPath (commitment) {
       return `/commitments/${commitment.id}`;
     }
-  }
-}
+  }}
 </script>

@@ -1,7 +1,8 @@
 <template>
   <div 
     id="sticky" 
-    :class="{ 'table-head--stuck' : isSticky }"
+    class="table-head__sticky"
+    :class="{ 'table-head__sticky--stuck' : isSticky }"
   >
     <div class="table-head__row">
       <table-header 
