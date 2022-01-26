@@ -17,11 +17,11 @@ class Criterium < ApplicationRecord
 
   def failure_messages
     messages = []
-    messages << I18n.t(:"criterium.failure_messages.boundary") unless boundary
-    messages << I18n.t(:"criterium.failure_messages.five_year_commitment") unless five_year_commitment
-    messages << I18n.t(:"criterium.failure_messages.progress_report") unless progress_report
-    messages << I18n.t(:"criterium.failure_messages.government_stakeholders") if has_government_stakeholder?
-    messages << I18n.t(:"criterium.failure_messages.no_cbd_objectives") if has_none_of_the_above_cbd_objectives?
+    messages << I18n.t(:"models.criterium.failure_messages.boundary") unless boundary
+    messages << I18n.t(:"models.criterium.failure_messages.five_year_commitment") unless five_year_commitment
+    messages << I18n.t(:"models.criterium.failure_messages.progress_report") unless progress_report
+    messages << I18n.t(:"models.criterium.failure_messages.government_stakeholders") if has_government_stakeholder?
+    messages << I18n.t(:"models.criterium.failure_messages.no_cbd_objectives") if has_none_of_the_above_cbd_objectives?
     messages
   end
 
