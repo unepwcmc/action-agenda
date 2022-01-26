@@ -6,6 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# users
+users = [
+  { email: 'test@test.com', password: 'password', password_confirmation: 'password' },
+  { email: 'test2@test.com', password: 'password', password_confirmation: 'password' },
+]
+User.create!(users)
+
 # Criteria and assicated records
 stakeholder_names = [ 'Local communities', 'Indigenous peoples', 'Non-governmental organisation (NGO)', 'Private sector (business and industry)', 'Sub-national or local government', 'None of the above' ]
 Stakeholder.create!(stakeholder_names.map {|name| { name: name }})
