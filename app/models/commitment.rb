@@ -25,6 +25,7 @@ class Commitment < ApplicationRecord
   has_one_attached :geospatial_file
 
   belongs_to :criterium, optional: true
+  belongs_to :user, optional: true
 
   accepts_nested_attributes_for :links, reject_if: ->(attributes){ attributes['url'].blank? }, allow_destroy: true
   accepts_nested_attributes_for :progress_documents, reject_if: ->(attributes){ attributes['document'].blank? }, allow_destroy: true
