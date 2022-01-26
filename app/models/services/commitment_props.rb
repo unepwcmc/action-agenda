@@ -43,49 +43,45 @@ class Services::CommitmentProps
                 title: I18n.t('form.commitments.page1.q3.title'),
                 description: I18n.t('form.commitments.page1.q3.description'),
                 # defaultValue: [],
-                choices: [
-                  'Sustainable use',
-                  'Biodiversity conservation',
-                  'Equitable sharing of benefits from the use of genetic resources',
-                  'Restoration',
-                  'Climate change adaptation and mitigation',
-                  'Preservation of cultural values',
-                  'Preservation of spiritual values',
-                  'Preservation of traditional livelihoods',
-                  'Certification of products',
-                  'Recreation',
-                  'Academic research'
-                ]
+                choices: Objective.pluck(:id, :name).map do |id, name|
+                          if name != 'None of the above'
+                            {
+                              value: id,
+                              text: name
+                            }
+                          else
+                            nil
+                          end
+                         end.compact,
               },
               {
                 type: 'checkbox',
-                name: 'managerIds',
+                name: 'manager_ids',
                 title: I18n.t('form.commitments.page1.q4.title'),
                 description: I18n.t('form.commitments.page1.q3.description'),
                 # defaultValue: [],
-                choices: [
-                  'Indigenous peoples',
-                  'Local communities',
-                  'For-profit organisations',
-                  'Non-profit organisations',
-                  'Individual landowners',
-                  'Collaborative governance',
-                  'Joint governance',
-                  'Sub-national ministry or agency',
-                  'Other'
-                ],
+                choices: Manager.pluck(:id, :name).map do |id, name|
+                          if name != 'None of the above'
+                            {
+                              value: id,
+                              text: name
+                            }
+                          else
+                            nil
+                          end
+                         end.compact,
                 otherText: I18n.t('form.none')
               },
               {
                 type: 'comment',
-                name: 'jointGovernanceType',
-                visibleIf: "{ managerIds } contains 'Joint governance'",
+                name: 'joint_governance_description',
+                visibleIf: "{ manager_ids } contains 'Joint governance'",
                 title: I18n.t('form.commitments.page1.q5.title'),
                 hideNumber: true
               },
               {
                 type: 'text',
-                name: 'responsibleGroup',
+                name: 'responsible_group',
                 title: I18n.t('form.commitments.page1.q6.title')
               }
             ]
@@ -129,7 +125,7 @@ class Services::CommitmentProps
               },
               {
                 type: 'file',
-                name: 'geospatialFile',
+                name: 'geospatial_file',
                 title: I18n.t('form.commitments.page2.q5.title'),
                 description: I18n.t('form.commitments.page2.q5.tdescription'),
                 hideNumber: true,
@@ -148,7 +144,7 @@ class Services::CommitmentProps
             elements: [
               {
                 type: 'dropdown',
-                name: 'committedYear',
+                name: 'committed_year',
                 title: I18n.t('form.commitments.page3.q1.title'),
                 # defaultValue: [],
                 choices: (2012..Date.today.year).to_a.reverse,
@@ -156,7 +152,7 @@ class Services::CommitmentProps
               },
               {
                 type: 'dropdown',
-                name: 'duration',
+                name: 'duration_years',
                 title: I18n.t('form.commitments.page3.q2.title'),
                 # defaultValue: [],
                 choices: (5..15).to_a,
@@ -178,52 +174,49 @@ class Services::CommitmentProps
               },
               {
                 type: 'checkbox',
-                name: 'actionIds',
+                name: 'action_ids',
                 title: I18n.t('form.commitments.page4.q2.title'),
                 description: I18n.t('form.commitments.page4.q2.description'),
                 # defaultValue: [],
-                choices: [
-                  'Land/water protection',
-                  'Land/water management',
-                  'Species management',
-                  'Education & awareness',
-                  'Law & policy',
-                  'Livelihood, economic & other incentives',
-                  'Other'
-                ],
+                choices: Action.pluck(:id, :name).map do |id, name|
+                          if name != 'None of the above'
+                            {
+                              value: id,
+                              text: name
+                            }
+                          else
+                            nil
+                          end
+                         end.compact,
                 otherText: 'Other'
               },
               {
                 type: 'dropdown',
-                name: 'implementationYear',
+                name: 'implementation_year',
                 title: I18n.t('form.commitments.page4.q3.title'),
                 # defaultValue: [],
                 choices: (2012..Date.today.year).to_a.reverse
               },
               {
                 type: 'checkbox',
-                name: 'threatIds',
+                name: 'threat_ids',
                 title: I18n.t('form.commitments.page4.q4.title'),
                 description: I18n.t('form.commitments.page4.q4.description'),
                 # defaultValue: [],
-                choices: [
-                  'Residential & commercial development',
-                  'Agriculture & aquaculture',
-                  'Energy production & mining',
-                  'Transportation & service corridors',
-                  'Biological resource use',
-                  'Human intrusions & disturbance',
-                  'Natural system modifications',
-                  'Invasive & other problematic species, genes & diseases',
-                  'Pollution',
-                  'Geological events',
-                  'Climate change & severe weather',
-                  'Other'
-                ]
+                choices: Threat.pluck(:id, :name).map do |id, name|
+                          if name != 'None of the above'
+                            {
+                              value: id,
+                              text: name
+                            }
+                          else
+                            nil
+                          end
+                         end.compact,
               },
               {
                 type: 'paneldynamic',
-                name: 'linksAttributes',
+                name: 'links_attributes',
                 title: I18n.t('form.commitments.page4.q5.title'),
                 description: I18n.t('form.commitments.page4.q4.description'),
                 templateElements: [
@@ -249,22 +242,23 @@ class Services::CommitmentProps
           },
           {
             name: I18n.t('form.commitments.page5.name'),
+            title: 'Progress',
             elements: [
               {
                 type: 'paneldynamic',
-                name: 'progressItems',
+                name: 'progress_documents_attributes',
                 title: I18n.t('form.commitments.page5.q1.title'),
                 description: I18n.t('form.commitments.page5.q1.description'),
                 templateElements: [
                   {
                     type: 'file',
-                    name: 'progressItemFilename',
+                    name: 'document',
                     titleLocation: 'hidden',
                     maxSize: 26_214_400
                   },
                   {
                     type: 'comment',
-                    name: 'progressNotes',
+                    name: 'progress_notes',
                     title: 'Option to include progress notes',
                     description: '(Optional field)'
                   }
@@ -275,7 +269,6 @@ class Services::CommitmentProps
                 panelAddText: I18n.t('form.commitments.page5.q1.add')
               }
             ],
-            title: 'Progress'
           }
         ]
       }
