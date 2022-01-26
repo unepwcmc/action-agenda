@@ -31,8 +31,16 @@ $table-horizontal-scroll-row-width-desktop: 80vw;
   display: grid;
 
   @include breakpoint($medium){
-    grid-template-columns: 540px 1fr 1fr 1fr 1fr;
-  }
+    .table-head--basic &,
+    .table-body--basic & {
+      grid-template-columns: 540px 1fr 1fr 1fr 1fr;
+    }
+
+    .table-head--dashboard &,
+    .table-body--dashboard & {
+      grid-template-columns: 2fr 2fr 1fr;
+    }
+  }  
 }
 
 //--------------------------------------------------
@@ -45,9 +53,9 @@ $table-horizontal-scroll-row-width-desktop: 80vw;
 //--------------------------------------------------
 // table head
 //--------------------------------------------------
-@import './table/table-head-basic';
+@import './table/table-head';
 
 //--------------------------------------------------
 // table body
 //--------------------------------------------------
-@import './table/table-basic';
+@import './table/table-body';

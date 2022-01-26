@@ -1,0 +1,27 @@
+<dashboard-navigation
+  :navigation="<%= I18n.t('dashboard.navigation').to_json %>"
+></dashboard-navigation>
+<dashboard-hero
+  :button="<%= I18n.t('dashboard.button').to_json %>"
+  :has-commitments="<%= @has_commitments %>"
+  heading-text="<%= @has_commitments ? I18n.t('dashboard.hero.heading.existing') : I18n.t('dashboard.hero.heading.none') %>"
+></dashboard-hero>
+<div class="container spacer-medium--top spacer-large--bottom">
+  <% if @has_commitments %>
+    <dashboard-content-existing
+      :add-button="<%= I18n.t('dashboard.button').to_json %>"
+      :commitments="<%= @commitments %>"
+      icon-path-destroy="<%= image_url('icons/destroy.png') %>"
+      icon-path-edit="<%= image_url('icons/edit.png') %>"
+      icon-path-show="<%= image_url('icons/show.png') %>"
+      icon-path-show-inactive="<%= image_url('icons/show-inactive.png') %>"
+      icon-path-warning="<%= image_url('icons/warning.svg') %>"
+      :text="<%= I18n.t('dashboard.content.existing').to_json %>"
+    ></dashboard-content-existing>
+  <% else %>
+    <dashboard-content-none
+      icon-path="<%= image_url('icons/write.png') %>"
+      :text="<%= I18n.t('dashboard.content.none').to_json %>"
+    ></dashboard-content-none>
+  <% end %>
+</div>
