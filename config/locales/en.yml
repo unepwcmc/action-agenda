@@ -72,13 +72,15 @@ en:
         no_cbd_objectives: Your commitment doesn't contribute to any of the CBD commitments
         government_stakeholders: Your commitment is being made by a government
 
-
   views:
     titles:
       action_agenda: Action Agenda
     buttons:
       access: 'Access'
       my_dashboard: My dashboard
+      login:
+        button: Login
+        title: Sign in to your Action Agenda account
     criterium:
       ineligible:
         title: This platform might not be the best place to record your commitment

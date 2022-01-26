@@ -45,6 +45,10 @@ gem 'active_storage_validations', '~> 0.1' # validate upload types
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# authorisation
+gem 'devise', '~> 4.8', '>= 4.8.1'
+
+# allow newer key type to be used in deployment
 gem "ed25519"
 gem "bcrypt_pbkdf"
 
