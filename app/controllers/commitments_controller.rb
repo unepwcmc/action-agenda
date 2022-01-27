@@ -34,7 +34,7 @@ class CommitmentsController < ApplicationController
   end
 
   def new
-    if criterium_id_valid?
+    if params[:criterium_id] && criterium_id_valid?
       @commitment = Commitment.new(criterium_id: params[:criterium_id])
       # set @form_hash for use by vue component here
     else
