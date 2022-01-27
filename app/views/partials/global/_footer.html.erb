@@ -1,23 +1,25 @@
-<footer class="footer">
-  <div class="footer__container">
-    <nav class="nav--footer">
-      <ul class="nav__ul">
-        <% links.each do |link| %>
-          <li class="nav__li">
-            <%= link_to link[:title], link[:url], class: 'nav__a' %>
-          </li>
-        <% end %>
-      </ul>
-    </nav>
+<footer class="<%= reduced ? "footer footer--reduced" : "footer" %>">
+  <% if !reduced %>
+    <div class="footer__container">
+      <nav class="nav--footer">
+        <ul class="nav__ul">
+          <% links.each do |link| %>
+            <li class="nav__li">
+              <%= link_to link[:title], link[:url], class: 'nav__a' %>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
 
-    <div class="list--footer-logos">
-      <ul class="list__ul">
-        <% logos.each do |logo| %>
-          <li class="list__li">
-            <%= image_tag logo[:src], alt: logo[:alt], class: 'list__img' %>
-          </li>
-        <% end %>
-      </ul>
+      <div class="list--footer-logos">
+        <ul class="list__ul">
+          <% logos.each do |logo| %>
+            <li class="list__li">
+              <%= image_tag logo[:src], alt: logo[:alt], class: 'list__img' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
-  </div>
+  <% end %>
 </footer>

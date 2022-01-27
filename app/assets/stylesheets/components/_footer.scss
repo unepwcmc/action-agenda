@@ -7,6 +7,10 @@
   color: $white;
   height: rem-calc(170);
 
+  &--reduced {
+    height: 0;
+  }
+
   &__container {
     @include container;
     @include flex;

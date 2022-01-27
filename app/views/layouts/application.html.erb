@@ -1,3 +1,4 @@
+<% reduced_footer = content_for?(:reduced_footer) ? (yield :reduced_footer) : false %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,9 +16,10 @@
       
       <%= yield %>
       
-      <%= render partial:'partials/global/footer', locals: { 
+      <%= render partial:'partials/global/footer', locals: {
+        reduced: reduced_footer,
         links: footer_nav, 
-        logos: site_logos 
+        logos: site_logos
       } %>
     </div>
   </body>
