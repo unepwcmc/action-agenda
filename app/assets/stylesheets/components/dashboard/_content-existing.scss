@@ -1,0 +1,15 @@
+.dashboard-content-existing__add-button-wrapper {
+  text-align: right;
+
+  display: block;
+}
+
+.dashboard-content-existing__add-button {
+  @include button-accent-condensed-taller;
+  @include responsive(padding-right, rem-calc(43), rem-calc(43), rem-calc(43));
+  @include responsive(padding-left, rem-calc(43), rem-calc(43), rem-calc(43));
+}
+
+.dashboard-content-existing__add-button-text{
+  font-size: rem-calc(18);
+}
