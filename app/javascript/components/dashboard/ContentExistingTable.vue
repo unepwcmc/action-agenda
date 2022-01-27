@@ -120,6 +120,9 @@
 </template>
 
 <script>
+import axios from "axios";
+import { setAxiosHeaders } from "../../helpers/axios-helpers";
+
 export default {
   name: "DashboardContentExistingTable",
 
@@ -168,6 +171,7 @@ export default {
   },
 
   mounted () {
+    setAxiosHeaders(axios);
     this.setStickyTrigger()
     this.scrollHandler()
   },
@@ -180,9 +184,13 @@ export default {
 
   methods: {
     destroy (commitment) {
-      // to be updated to axios call once controller action is implemented
-      // on successful deletion, should remove the row (or just refresh the page?)
-      console.log(`destroy ${commitment.id}; action to be implemented`);
+      axios(`/commitments/${commitment.id}.json`, { method: 'delete' })
+        .then((response) => {
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log("FAILED!", error.data);
+        })
     },
 
     editPath (commitment) {

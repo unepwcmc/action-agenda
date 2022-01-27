@@ -17,6 +17,7 @@
 }
 
 .dashboard-hero__title {
+  font-family: $header-font;
   font-size: rem-calc(48);
 
   .dashboard-hero--existing-commitments & {
@@ -26,9 +27,9 @@
 }
 
 .dashboard-hero__button {
-  @include button_accent;
-  min-width: rem-calc(235);
-  min-height: rem-calc(67);
+  @include button-accent-condensed-taller;
+  @include responsive(padding-right, rem-calc(43), rem-calc(43), rem-calc(43));
+  @include responsive(padding-left, rem-calc(43), rem-calc(43), rem-calc(43));
 }
 
 .dashboard-hero__button-text{
