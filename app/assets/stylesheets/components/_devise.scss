@@ -83,6 +83,12 @@ $content-gutter: rem-calc(125);
     margin-bottom: rem-calc(32);
   }
 
+  &__flash-messages {
+    color: $red-warning;
+    font-style: italic;
+    margin-bottom: rem-calc(30);
+  }
+
   &__form {
     .field {
       label {
