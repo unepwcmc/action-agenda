@@ -94,8 +94,8 @@ class CommitmentsController < ApplicationController
   private
 
   def criterium_id_valid?
-    criterium = Criterium.find_by(id: params[:criterium_id])
-    criterium && criterium.commitment.nil? && criterium.user_id && criterium.user_id == current_user.id
+    criterium = Criterium.find(id: params[:criterium_id])
+    criterium.commitment.nil? && criterium.user_id == current_user.id
   end
 
   def set_commitment

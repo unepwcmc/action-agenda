@@ -31,7 +31,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_criterium_path
   end
 
-  test "should not GET new if the criterium_id matches a different criterium" do
+  test "should not GET new if the criterium_id is already associated with a commitment" do
     sign_in users(:user_1)
     commitment_with_criterium = commitments(:valid_commitment_1)
     get new_commitment_url(criterium_id: commitment_with_criterium.criterium_id)
