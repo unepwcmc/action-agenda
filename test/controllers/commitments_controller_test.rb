@@ -28,7 +28,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   test "should not GET new without a criterium_id" do
     sign_in users(:user_1)
     get new_commitment_url
-    assert_redirected_to new_criterium_path
+    assert_response :not_found
   end
 
   test "should not GET new if the criterium_id is already associated with a commitment" do
