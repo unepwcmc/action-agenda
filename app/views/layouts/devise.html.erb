@@ -1,7 +1,36 @@
-<% flash.each do |type, msg| %>
-  <div>
-    <%= msg %>
-  </div>
-<% end %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ActionAgenda</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-<%= yield %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="devise">
+      <div class="devise-panel">
+        <% flash.each do |type, msg| %>
+          <div>
+            <%= msg %>
+          </div>
+        <% end %>
+        <%= yield %>
+      </div>
+
+      <div class="devise-panel">
+        <div class="list--footer-logos">
+          <ul class="list__ul">
+            <% site_logos.each do |logo| %>
+              <li class="list__li">
+                <%= image_tag logo[:src], alt: logo[:alt], class: 'list__img' %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

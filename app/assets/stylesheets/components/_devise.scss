@@ -1,0 +1,18 @@
+//--------------------------------------------------
+// classes
+//--------------------------------------------------
+.devise {
+  min-height: 100vh;
+
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+}
+
+.devise-panel {
+  &:last-child {
+    background-color: rgba($green-dark, 0.84);
+
+    display: flex;
+    justify-content: center;
+  }
+}
