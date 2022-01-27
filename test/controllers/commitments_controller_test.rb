@@ -1,28 +1,32 @@
 require 'test_helper'
 
 class CommitmentsControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
+  include Devise::Test::IntegrationHelpers
+
+  test "should GET index" do
     get commitments_url
     assert_response :success
   end
 
-  test "should get not found on bad id" do
+  test "should GET not found on bad id" do
     commitment = commitments(:valid_commitment_1)
     get commitment_url(1111)
     assert_response :not_found
   end
 
-  test "should get show" do
+  test "should GET show" do
     get commitment_url(commitments(:valid_commitment_1).id)
     assert_response :success
   end
 
-  test "should get new" do
+  test "should GET new" do
+    sign_in users(:user_1)
     get new_commitment_url
     assert_response :success
   end
 
   test "should not create a new commitment without a name attribute" do
+    sign_in users(:user_1)
     commitment_count_at_start = Commitment.count
     invalid_params = {
       commitment: {
@@ -35,7 +39,8 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     assert commitment_count_at_start == Commitment.count
   end
 
-  test "should create a new draft commitment with a name" do
+  test "should POST create a new draft commitment with a name" do
+    sign_in users(:user_1)
     commitment_count_at_start = Commitment.count
     valid_params = {
       commitment: {
@@ -49,6 +54,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should save commitment as draft and return errors if attempt to create a live commitment fails" do
+    sign_in users(:user_1)
     commitment_count_at_start = Commitment.count
     valid_params = {
       commitment: {
@@ -64,6 +70,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should save a live commitment with valid params and return success" do
+    sign_in users(:user_1)
     commitment_count_at_start = Commitment.count
     valid_params = {
       commitment: {
@@ -97,18 +104,53 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     assert Commitment.last.state == "live"
   end
   
-  test "should get edit" do
+  test "should GET edit" do
+    sign_in users(:user_1)
     commitment = commitments(:valid_commitment_1) 
     get edit_commitment_url(commitment)
     assert_response :success
   end
 
-  test "should update a commitment" do
+  test "should PUT update a commitment" do
+    sign_in users(:user_1)
     new_description = "a new description"
     commitment = commitments(:valid_commitment_1)
     assert commitment.description != new_description 
     put commitment_url(commitment, params: { commitment: { description: new_description }}), as: :json
     assert_response 204
     assert commitment.reload.description == new_description
+  end
+
+  test "should destroy a commitment" do
+    sign_in users(:user_1)
+    commitment_count_at_start = Commitment.count
+    commitment = commitments(:valid_commitment_1)
+    delete commitment_url(commitment), as: :json
+    assert_response 204
+    assert Commitment.count == commitment_count_at_start - 1
+  end
+
+  test "GET edit should redirect to sign in unless signed in" do
+    commitment = commitments(:valid_commitment_1) 
+    get edit_commitment_url(commitment)
+    assert_redirected_to new_user_session_path
+  end
+
+  test "GET new should redirect to sign in unless signed in" do
+    get new_commitment_url
+    assert_redirected_to new_user_session_path
+  end
+
+  test "PUT update should redirect to sign in unless signed in" do
+    commitment = commitments(:valid_commitment_1)
+    put commitment_url(commitment), as: :json
+    assert_response :unauthorized
+    assert JSON.parse(response.body).dig('error') == I18n.t('devise.failure.unauthenticated')
+  end
+
+  test "POST create should redirect to sign in unless signed in" do
+    post commitments_url, as: :json
+    assert_response :unauthorized
+    assert JSON.parse(response.body).dig('error') == I18n.t('devise.failure.unauthenticated')
   end
 end

@@ -11,10 +11,12 @@ $black: #000000;
 
 $grey-xlight: #f4f4f4;
 $grey-mdlight: #E8E8E8;
+$grey-mdmdlight: #DDDDDD;
 $grey-light: #c8c8c8;
 $grey: #919191;
 $grey-dark: #666666;
 $grey-xdark: #404040;
+$grey-xxdark: #343434;
 $grey-black: #242424;
 
 $blue: #004DA8;
@@ -100,7 +102,7 @@ $button-radius: 3px;
 //--------------------------------------------------
 // fonts
 //--------------------------------------------------
-$header-font: Arial, sans-serif;
+$header-font: "Arial Narrow", Arial, sans-serif;
 $header-font-color: $grey-black;
 $header-font-line-height: 1.1;
 $h1-size: rem-calc(48);

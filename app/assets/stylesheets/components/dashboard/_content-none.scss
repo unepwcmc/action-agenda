@@ -1,0 +1,24 @@
+.dashboard-content-none {
+  background-color: $grey-mdlight;
+  color: $grey-xxdark;
+}
+
+.dashboard-content-none__inner {
+  padding: rem-calc(53) rem-calc(155) rem-calc(86) rem-calc(155);
+  text-align: center;
+}
+
+.dashboard-content-none__icon {
+  height: rem-calc(44);
+}
+
+.dashboard-content-none__heading {
+  font-size: rem-calc(48);
+  margin-top: rem-calc(10);
+  margin-bottom: rem-calc(5);
+}
+
+.dashboard-content-none__sub {
+  font-size: rem-calc(22);
+  margin: 0;
+}

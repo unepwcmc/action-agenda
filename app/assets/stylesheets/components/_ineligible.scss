@@ -1,0 +1,92 @@
+//--------------------------------------------------
+// variables
+//--------------------------------------------------
+
+//--------------------------------------------------
+// mixins
+//--------------------------------------------------
+
+//--------------------------------------------------
+// classes
+//--------------------------------------------------
+.ineligible {
+  @include flex;
+
+  background: $grey-xlight;
+  padding: rem-calc(165) rem-calc(400);
+  padding-bottom: rem-calc(80);
+
+  &__icon {
+    background-image: image_url('icons/group66.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    min-width: rem-calc(126); 
+    min-height: rem-calc(126);
+  }
+
+  h1 {
+    font-family: $header-font;
+    font-stretch: condensed;
+  }
+
+  p,
+  li {
+    font-size: rem-calc(20);
+    line-height: $p-font-line-height;
+  }
+
+  li {
+    color: $grey-dark;
+  }
+
+  ul {
+    margin-bottom: rem-calc(60);
+    padding-left: rem-calc(20);
+  }
+ 
+  .container {
+    a {
+      margin-top: rem-calc(60);
+      font-family: $header-font;
+      font-stretch: condensed;
+    }
+
+    .blurb {
+      margin-bottom: rem-calc(40);
+    }    
+  }
+
+  &__links {
+    @include flex;
+
+    margin-bottom: rem-calc(40);
+
+    justify-content: space-between;
+
+    p {
+      margin: 0;
+
+      align-self: flex-end;
+
+      a {
+        color: $green-dark;
+        font-family: $header-font;
+        font-stretch: condensed;
+        font-weight: bold;
+        text-decoration: none;
+
+        span {
+          background-image: image_url('icons/link.svg');
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: right;
+          font-family: $header-font;
+          font-size: rem-calc(18);
+          font-stretch: condensed;
+          padding-right: rem-calc(35);
+          width: rem-calc(20); height: rem-calc(20);
+        }
+      }
+    }
+  }
+}
