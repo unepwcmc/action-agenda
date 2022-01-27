@@ -6,20 +6,26 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email, I18n.t('devise.labels.email') %><br />
+    <%= f.label :email, I18n.t('devise.labels.email') %>
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
-    <%= f.label :password, I18n.t('devise.labels.password') %>
-    <% if @minimum_password_length %>
-    <em><%= "(#{@minimum_password_length} #{I18n.t('devise.labels.characters_minimum')})" %></em>
-    <% end %><br />
+      <% if @minimum_password_length %>
+        <div class="field__label-with-extra-text">
+          <%= f.label :password, I18n.t('devise.labels.password'), class: "field__label-with-extra-text-item" %>
+          <div class="field__label-with-extra-text-item field__label-with-extra-text-item--info">
+            <%= "(#{@minimum_password_length} #{I18n.t('devise.labels.characters_minimum')})" %>
+          </div>
+        </div>
+      <% else %>
+        <%= f.label :password, I18n.t('devise.labels.password') %>
+      <% end %>
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation, I18n.t('devise.labels.password_confirmation') %><br />
+    <%= f.label :password_confirmation, I18n.t('devise.labels.password_confirmation') %>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
