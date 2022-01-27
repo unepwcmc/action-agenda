@@ -85,16 +85,12 @@ export default {
 
     return {
       errors: {},
+      hasNoErrors: false,
       isFirstPage: true,
       isLastPage: false,
       options: {},
       survey: model,
     };
-  },
-  computed: {
-    hasErrors() {
-      return Object.keys(this.errors).length > 0
-    }
   },
 
   mounted() {
@@ -117,11 +113,12 @@ export default {
     axiosCall() {
       axios(this.formData.config.action, this.options)
         .then((response) => {
-          this.errors = {}
+          this.hasNoErrors = true
           this.redirect(response.data.redirect_path);
         })
         .catch((error) => {
           console.log('FAILED!', error.response.data.errors);
+          this.hasNoErrors = false
           this.errors = error.response.data.errors;
         });
     },
@@ -143,11 +140,25 @@ export default {
     },
 
     onComplete(sender) {
-      const data = sender.data
+      this.send(sender.data)
+    },
+
+    async onCompleting(sender, options) {
       if (this.dataModel === 'Commitment') {
-        data['state'] = 'live';
+        this.send(sender.data, true)
+        options.allowComplete = this.hasNoErrors
       } else {
-        this.assignNoneValues(data);
+        options.allowComplete = true;
+      }
+    },
+
+    send(data, validate=false) {
+      if (validate) {
+        if (this.dataModel === 'Commitment') {
+          data['state'] = 'live';
+        } else {
+          this.assignNoneValues(data);
+        }
       }
       this.options = {
         method: this.formData.config.method,
@@ -156,36 +167,11 @@ export default {
       this.axiosCall();
     },
 
-    async onCompleting(sender, options) {
-      if (this.dataModel === 'Commitment') {
-        let data = sender.data;
-        data['state'] = 'live';
-        this.options = {
-          method: this.formData.config.method,
-          data: { [this.formData.config.root_key]: data },
-        };
-        await this.axiosCall();
-        console.log("errors", this.errors)
-        options.allowComplete = this.hasErrors
-      } else {
-        options.allowComplete = true;
-      }
-    },
-
     onCurrentPageChanged() {
       this.isFirstPage = this.survey.isFirstPage;
       this.isLastPage = this.survey.isLastPage;
 
-      if (this.dataModel === 'Commitment') {
-        const data = this.survey.data;
-
-        this.options = {
-          method: this.formData.config.method,
-          data: { [this.formData.config.root_key]: data },
-        };
-        this.axiosCall();
-        //
-      }
+      this.send(this.survey.data)
     },
 
     prevPage() {
