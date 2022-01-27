@@ -85,7 +85,8 @@ export default {
 
     return {
       errors: {},
-      hasNoErrors: false,
+      hasNoErrors: Boolean,
+      axiosDone: false,
       isFirstPage: true,
       isLastPage: false,
       options: {},
@@ -113,7 +114,7 @@ export default {
     axiosCall() {
       axios(this.formData.config.action, this.options)
         .then((response) => {
-          this.hasNoErrors = true
+          this.isLastPage && this.axiosDone ? this.hasNoErrors = true : this.hasNoErrors = false
           this.redirect(response.data.redirect_path);
         })
         .catch((error) => {
@@ -140,15 +141,19 @@ export default {
     },
 
     onComplete(sender) {
+      console.log("complete")
       this.send(sender.data)
     },
 
-    async onCompleting(sender, options) {
-      if (this.dataModel === 'Commitment') {
-        this.send(sender.data, true)
-        options.allowComplete = this.hasNoErrors
-      } else {
+    onCompleting(sender, options) {
+      this.send(sender.data, true)
+      this.axiosDone = true
+      if (this.dataModel !== 'Commitment' || this.hasNoErrors) {
+        console.log('no errors')
         options.allowComplete = true;
+      } else {
+        options.allowComplete = false
+        console.log('errors')  
       }
     },
 
