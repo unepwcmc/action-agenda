@@ -52,22 +52,22 @@ export default {
 
     modalQuestionBody: {
       type: String,
-      // required: true
+      required: true
     },
 
     modalText: {
       type: Object,
-      // required: true
+      required: true
     },
 
     dataModel: {
       type: String,
-      // required: true
+      required: true
     },
 
     navigationText: {
       type: Object,
-      // required: true
+      required: true
     },
 
     noneValues: {
@@ -115,7 +115,7 @@ export default {
       axios(this.formData.config.action, this.options)
         .then((response) => {
           this.isLastPage && this.axiosDone ? this.hasNoErrors = true : this.hasNoErrors = false
-          this.redirect(response.data.redirect_path);
+          Turbolinks.visit(response.data.redirect_path);
         })
         .catch((error) => {
           console.log('FAILED!', error.response.data.errors);
@@ -132,7 +132,7 @@ export default {
       if (this.dataModel === 'Commitment') {
         this.survey.completeLastPage();
       } else {
-        this.redirect('/dashboard');
+        Turbolinks.visit('/dashboard');
       }
     },
 
@@ -181,12 +181,6 @@ export default {
 
     prevPage() {
       this.survey.prevPage();
-    },
-
-    redirect(link) {
-      if (link) {
-        Turbolinks.visit(link);
-      }
     },
   },
 };
