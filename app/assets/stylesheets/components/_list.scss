@@ -90,7 +90,7 @@
   @include list-site-logos;
 
   .list__ul {
-    .devise-panel & {
+    .devise__panel & {
       display: flex;
       align-items: center;
     }
@@ -101,7 +101,7 @@
       margin: rem-calc(10) 0;
     }
 
-    .devise-panel & {
+    .devise__panel & {
       display: flex;
 
       &:first-child {
@@ -110,7 +110,7 @@
     }
   }
 
-  .devise-panel & {
+  .devise__panel & {
     margin-bottom: rem-calc(38);
 
     position: absolute;

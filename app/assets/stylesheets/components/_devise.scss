@@ -6,30 +6,66 @@
 
   display: grid;
   grid-template-columns: 7fr 5fr;
-}
-
-.devise-panel {
-  &:last-child {
-    background-color: $green-dark;
-
-    display: flex;
-    justify-content: center;
-
-    position: relative;
-
-    .devise-panel__background-image {
-      opacity: 0.16;
-      width: 100%;
-      height: 100%;
-
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      -o-object-fit: cover;
-      object-fit: cover;
-      z-index: 1;
+  
+  &__panel {
+    &:last-child {
+      background-color: $green-dark;
+  
+      display: flex;
+      justify-content: center;
+  
+      position: relative;
+  
+      .devise__panel-background-image {
+        opacity: 0.16;
+        width: 100%;
+        height: 100%;
+  
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        -o-object-fit: cover;
+        object-fit: cover;
+        z-index: 1;
+      }
     }
   }
+
+  &__header-nav {
+    margin: rem-calc(25) rem-calc(25) 0 rem-calc(25);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &-link {
+      &--home {
+        font-family: $header-font;
+        font-size: rem-calc(18);
+        font-weight: $bold;
+        // line-height: $header-font-line-height;
+        text-decoration: none;
+    
+        &::before {
+          background-image: image-url('icons/home.svg');
+          content: '';
+          margin-right: rem-calc(5);
+          width: rem-calc(15); height: rem-calc(15);
+          
+          display: inline-block;
+        }
+      }
+
+      &--other {
+        color: $green-dark;
+      }
+    }
+  }
+
+  &__content {
+    padding: rem-calc(185) rem-calc(125) 0 rem-calc(125);
+  }
+
 }
