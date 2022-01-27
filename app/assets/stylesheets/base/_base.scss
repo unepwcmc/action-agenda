@@ -149,3 +149,10 @@ input {
 .spacer-large--bottom {
   @include spacer-bottom($spacer-large-mobile, $spacer-large-tablet, $spacer-large-desktop);
 }
+
+#v-app {
+  display: grid;
+  grid-template-rows: 1fr auto;
+
+  min-height: 100vh;
+}
