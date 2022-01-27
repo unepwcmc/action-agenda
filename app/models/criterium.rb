@@ -3,6 +3,7 @@ class Criterium < ApplicationRecord
   has_and_belongs_to_many :stakeholders
   
   has_one :commitment
+  belongs_to :user
 
   validates_inclusion_of :boundary, :five_year_commitment, :progress_report, in: [true, false], message: :nil_value
 

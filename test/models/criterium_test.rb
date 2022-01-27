@@ -4,7 +4,7 @@ class CriteriumTest < ActiveSupport::TestCase
   test "should not save criteria with missing attributes" do
     criterium = Criterium.new
     assert_not criterium.save
-    assert criterium.errors.count == 5
+    assert criterium.errors.count == 6
   end
 
   test "should not save with both 'none of the above' other options" do

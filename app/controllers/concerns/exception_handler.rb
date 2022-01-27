@@ -1,6 +1,8 @@
 module ExceptionHandler
   extend ActiveSupport::Concern
 
+  class ForbiddenError < StandardError; end
+
   included do
     rescue_from ActiveRecord::RecordNotFound do |e|
       respond_to do |format|
@@ -13,6 +15,13 @@ module ExceptionHandler
       respond_to do |format|
         format.json { json_response({ message: e.message }, :unprocessable_entity) }
         format.html { }
+      end
+    end
+
+    rescue_from ForbiddenError do |e|
+      respond_to do |format|
+        format.json { json_response({ message: I18n.t('errors.messages.forbidden_resource') }, :forbidden) }
+        format.html { redirect_back fallback_location: root_path, notice: I18n.t('errors.messages.forbidden_resource') }
       end
     end
   end

@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  root to: 'home#index'
   devise_for :users
+  unauthenticated :user do
+    root to: 'home#index', as: :unauthenticated_root
+  end
+  authenticated :user do
+    root to: 'users#dashboard', as: :root
+  end
 
   resources :commitments
   post '/commitments/list', to: 'commitments#list'
