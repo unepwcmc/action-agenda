@@ -34,12 +34,16 @@ class CommitmentsController < ApplicationController
   end
 
   def new
-    @commitment = Commitment.new(criterium_id: params[:criterium_id])
-    # set @form_hash for use by vue component here
+    if criterium_id_valid?
+      @commitment = Commitment.new(criterium_id: params[:criterium_id])
+      # set @form_hash for use by vue component here
+    else
+      redirect_to new_criterium_url
+    end
   end
 
   def create
-    @commitment = Commitment.new(commitment_params)
+    @commitment = Commitment.new(commitment_params.merge(user: current_user))
     if @commitment.save
       respond_to do |format|
         format.json { json_response({ commitment: @commitment }, :created) }
@@ -57,10 +61,12 @@ class CommitmentsController < ApplicationController
   end
 
   def edit
+    raise ForbiddenError unless @commitment.user == current_user
     # set @form_hash for use by vue component here
   end
 
   def update
+    raise ForbiddenError unless @commitment.user == current_user
     if @commitment.update(commitment_params)
       respond_to do |format|
         format.json { json_response({ commitment: @commitment }, 204) }
@@ -73,6 +79,7 @@ class CommitmentsController < ApplicationController
   end
 
   def destroy
+    raise ForbiddenError unless @commitment.user == current_user
     if @commitment.destroy
       respond_to do |format|
         format.json { json_response({}, 204) }
@@ -85,6 +92,11 @@ class CommitmentsController < ApplicationController
   end
 
   private
+
+  def criterium_id_valid?
+    criterium = Criterium.find(params[:criterium_id])
+    criterium.commitment.nil? && criterium.user_id == current_user.id
+  end
 
   def set_commitment
     @commitment = Commitment.find(params[:id])

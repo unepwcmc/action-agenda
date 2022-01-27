@@ -4,6 +4,7 @@ valid_criterium:
   progress_report: true
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
   stakeholders: local_communities, indigenous_peoples
+  user: user_1
 
 no_boundary:
   boundary: false
@@ -11,6 +12,7 @@ no_boundary:
   progress_report: true
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
   stakeholders: local_communities, indigenous_peoples
+  user: user_1
 
 no_five_year_commitment:
   boundary: true
@@ -18,6 +20,7 @@ no_five_year_commitment:
   progress_report: true
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
   stakeholders: local_communities, indigenous_peoples
+  user: user_1
 
 no_progress_report:
   boundary: true
@@ -25,6 +28,7 @@ no_progress_report:
   progress_report: false
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
   stakeholders: local_communities, indigenous_peoples
+  user: user_1
 
 government_stakeholder:
   boundary: true
@@ -32,6 +36,7 @@ government_stakeholder:
   progress_report: true
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
   stakeholders: local_communities, indigenous_peoples, local_government
+  user: user_1
 
 no_cbd_objectives:
   boundary: true
@@ -39,6 +44,7 @@ no_cbd_objectives:
   progress_report: true
   cbd_objectives: none_of_the_above
   stakeholders: local_communities, indigenous_peoples
+  user: user_1
 
 invalid_none_of_the_above_options:
   boundary: true
@@ -46,3 +52,12 @@ invalid_none_of_the_above_options:
   progress_report: true
   cbd_objectives: none_of_the_above, sustainable_use
   stakeholders: none_of_the_above, local_communities
+  user: user_1
+
+valid_criterium_without_commitment:
+  boundary: true
+  five_year_commitment: true
+  progress_report: true
+  cbd_objectives: conservation_of_biological_diversity, sustainable_use
+  stakeholders: local_communities, indigenous_peoples
+  user: user_1

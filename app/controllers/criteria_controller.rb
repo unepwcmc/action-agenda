@@ -12,7 +12,7 @@ class CriteriaController < ApplicationController
   end
 
   def create
-    @criterium = Criterium.new(criterium_params)
+    @criterium = Criterium.new(criterium_params.merge(user: current_user))
 
     respond_to do |format|
       if @criterium.save

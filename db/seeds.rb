@@ -14,12 +14,12 @@ cbd_objective_names = [ 'Conservation of biological diversity', 'Sustainable use
 CbdObjective.create!(cbd_objective_names.map {|name| { name: name }})
 
 criteria = [
-  { boundary: true, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first] },
-  { boundary: false, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first] },
-  { boundary: true, five_year_commitment: false, progress_report: true, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first] },
-  { boundary: true, five_year_commitment: true, progress_report: false, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first] },
-  { boundary: true, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.last], cbd_objectives: [CbdObjective.last] },
-  { boundary: false, five_year_commitment: false, progress_report: false, stakeholders: [Stakeholder.last], cbd_objectives: [CbdObjective.last] }
+  { boundary: true, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first], user: User.first },
+  { boundary: false, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first], user: User.first },
+  { boundary: true, five_year_commitment: false, progress_report: true, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first], user: User.first },
+  { boundary: true, five_year_commitment: true, progress_report: false, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first], user: User.first },
+  { boundary: true, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.last], cbd_objectives: [CbdObjective.last], user: User.first },
+  { boundary: false, five_year_commitment: false, progress_report: false, stakeholders: [Stakeholder.last], cbd_objectives: [CbdObjective.last], user: User.first }
 ]
 Criterium.create!(criteria)
 
@@ -35,7 +35,16 @@ commitments = [
   {
     geographic_boundary: true, latitude: 0.002, longitude: 0.9, current_area_ha: 12, proposed_area_ha: 15, 
     committed_year: 2021, implementation_year: 2022, name: 'A commitment', 
-    governance_authority: 'A governance authority name', description: 'A description', duration_years: 5, 
+    governance_authority: 'A governance authority name', description: 'A description',
+    duration_years: 5, user: User.first, criterium: Criterium.first,
+    stage: 'Implemented', responsible_group: 'The responsible group', state: 'live', joint_governance_description: 'some managers',
+    threats: Threat.all, actions: Action.all, managers: Manager.all, countries: Country.where(id: 1..5), objectives: Objective.all
+  },
+  {
+    geographic_boundary: true, latitude: 0.002, longitude: 0.9, current_area_ha: 12, proposed_area_ha: 15, 
+    committed_year: 2021, implementation_year: 2022, name: 'A commitment', 
+    governance_authority: 'A governance authority name', description: 'A description',
+    duration_years: 5, user: User.second, criterium: Criterium.first,
     stage: 'Implemented', responsible_group: 'The responsible group', state: 'live', joint_governance_description: 'some managers',
     threats: Threat.all, actions: Action.all, managers: Manager.all, countries: Country.where(id: 1..5), objectives: Objective.all
   }
