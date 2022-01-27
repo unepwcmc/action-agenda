@@ -96,54 +96,55 @@ export default {
     assignNoneValues(data) {
       Object.keys(this.noneValues).forEach((question) => {
         if (data[question] && data[question][0] === "none") {
-          data[question][0] = this.noneValues[question];
+          data[question][0] = this.noneValues[question]
         }
       });
     },
 
     axiosCall() {
       axios(this.formData.config.action, this.options)
-        .then((response) => {
+       .then((response) => {
           this.redirect(response.data.redirect_path)
         })
         .catch((error) => {
-          console.log("FAILED!", error.data);
+          console.log("FAILED!", error.data)
         })
     },
 
     complete () {
-      this.survey.completeLastPage();
+      this.survey.completeLastPage()
     },
 
     exit () {
       if (this.dataModel === "Commitment") {
-        this.survey.completeLastPage();
+        this.survey.completeLastPage()
       } else {
-        Turbolinks.visit("/dashboard");
+        Turbolinks.visit("/dashboard")
       }
     },
 
     nextPage () {
-      this.survey.nextPage();
+      this.survey.nextPage()
     },
 
     onComplete(sender) {
       const data = sender.data;
       this.assignNoneValues(data);
-
       this.options = {
         method: this.formData.config.method,
         data: { [this.formData.config.root_key]: data },
-      };
+      }
 
-      this.axiosCall();
+      this.axiosCall()
     },
 
     onCurrentPageChanged () {
       this.isFirstPage = this.survey.isFirstPage;
       this.isLastPage = this.survey.isLastPage;
+
       if (this.dataModel === "Commitment") {
         const data = this.survey.data
+
         this.options = {
           method: this.formData.config.method,
           data: { [this.formData.config.root_key]: data },
@@ -159,7 +160,7 @@ export default {
 
     redirect(link) {
       if (link) {
-        Turbolinks.visit(link);
+        Turbolinks.visit(link)
       }
     }
   }

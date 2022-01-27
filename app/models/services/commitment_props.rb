@@ -10,7 +10,6 @@ class Services::CommitmentProps
         action: @commitment.new_record? ? '/commitments.json' : "/commitments/#{@commitment.id}.json",
         method: @commitment.new_record? ? 'post' : 'put',
         root_key: 'commitment',
-        hidden_field: @commitment.criterium_id
       },
       survey: {
         progressBarType: 'buttons',
@@ -25,6 +24,14 @@ class Services::CommitmentProps
             title: I18n.t('form.commitments.page1.title'),
             description: I18n.t('form.commitments.page1.description'),
             elements: [
+              {
+                type: 'text',
+                title: 'hidden field',
+                name: 'criterium_id',
+                defaultValue: @commitment.criterium_id,
+                # a bit of a hacky way to make it work
+                visibleIf: "{ criterium_id } contains '-1'"
+              },
               {
                 type: 'text',
                 name: 'name',
