@@ -4,11 +4,11 @@
 
     <div 
       v-if="hasOptions" 
-      class="table__sorting" 
+      class="table-body__sorting" 
       @click="sort()"
     >
-      <span alt="Sort results" class="table__sort table__sort--ascending"></span>
-      <span alt="Sort results" class="table__sort table__sort--descending"></span>
+      <span alt="Sort results" class="table-body__sort table-body__sort--ascending"></span>
+      <span alt="Sort results" class="table-body__sort table-body__sort--descending"></span>
     </div>
   </div>
 </template>

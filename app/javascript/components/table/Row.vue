@@ -1,20 +1,20 @@
 <template>
-  <div class="table__row">
-    <p class="table__cell">
-      <span class="table__cell-title">{{ item.title }}</span>
+  <div class="table-body__row">
+    <p class="table-body__cell">
+      <span class="table-body__cell-title">{{ item.title }}</span>
       <span>{{ item.description | trimmed }}</span>
     </p>
-    <p class="table__cell">{{ item.committed }}</p>
-    <p class="table__cell">{{ item.duration_years || item.duration }}</p>
-    <p class="table__cell">{{ item.stage }}</p>
-    <p class="table__cell">
+    <p class="table-body__cell">{{ item.committed }}</p>
+    <p class="table-body__cell">{{ item.duration_years || item.duration }}</p>
+    <p class="table-body__cell">{{ item.stage }}</p>
+    <p class="table-body__cell">
       <a 
         :href="item.url" 
         :title="item.title"
-        class="table__button"
+        class="table-body__button"
       >View</a>
     </p>
-    <!-- <p class="table__cell">{{ checkForMultiples('country') }}</p> -->
+    <!-- <p class="table-body__cell">{{ checkForMultiples('country') }}</p> -->
   </div>
 </template>
 

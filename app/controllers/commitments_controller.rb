@@ -6,6 +6,7 @@ class CommitmentsController < ApplicationController
     filters: []
   }.to_json
 
+  skip_before_action :authenticate_user!, only: [:index, :list, :show]
   before_action :set_commitment, only: [:show, :edit, :update, :destroy]
 
   def index

@@ -38,7 +38,7 @@
         />
         <button
           v-if="dataModel === 'Commitment' && !isLastPage"
-          class="form-navigation__item form-navigation__item--rightmost form-navigation__item--commitment-next"
+          class="form-navigation__item form-navigation__item--rightmost form-navigation__item--next-commitment"
           v-text="navigationText.next"
           @click.prevent="nextPage"
         />

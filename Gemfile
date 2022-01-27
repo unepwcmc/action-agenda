@@ -45,12 +45,17 @@ gem 'active_storage_validations', '~> 0.1' # validate upload types
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# authorisation
+gem 'devise', '~> 4.8', '>= 4.8.1'
+
+# allow newer key type to be used in deployment
 gem "ed25519"
 gem "bcrypt_pbkdf"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'letter_opener', '~> 1.7'
 end
 
 group :development do
