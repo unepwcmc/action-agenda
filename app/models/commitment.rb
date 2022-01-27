@@ -66,7 +66,7 @@ class Commitment < ApplicationRecord
     }
   ].freeze
 
-  FILTERS = %w[manager country committed_year stage primary_objectives governance_type].freeze
+  FILTERS = %w[actor country committed_year stage primary_objectives governance_type].freeze
 
   # Filters moved to CommitmentPresenter to avoid repetition
   def self.filters_to_json
@@ -150,7 +150,7 @@ class Commitment < ApplicationRecord
         countries = options
         country_ids << Country.where(name: countries).pluck(:id)
         params['country'] = country_ids.flatten.empty? ? "" : "countries.id IN (#{country_ids.join(',')})"
-      when 'manager'
+      when 'actor'
         managers = options
         manager_ids << Manager.where(name: managers).pluck(:id)
         params['manager'] = manager_ids.flatten.empty? ? "" : "managers.id IN (#{manager_ids.join(',')})"
