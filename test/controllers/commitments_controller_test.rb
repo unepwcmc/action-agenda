@@ -21,8 +21,21 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should GET new" do
     sign_in users(:user_1)
-    get new_commitment_url
+    get new_commitment_url(criterium_id: criteria(:valid_criterium_without_commitment).id)
     assert_response :success
+  end
+
+  test "should not GET new without a criterium_id" do
+    sign_in users(:user_1)
+    get new_commitment_url
+    assert_redirected_to new_criterium_path
+  end
+
+  test "should not GET new if the criterium_id matches a different criterium" do
+    sign_in users(:user_1)
+    commitment_with_criterium = commitments(:valid_commitment_1)
+    get new_commitment_url(criterium_id: commitment_with_criterium.criterium_id)
+    assert_redirected_to new_criterium_path
   end
 
   test "should not create a new commitment without a name attribute" do
