@@ -166,4 +166,33 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unauthorized
     assert JSON.parse(response.body).dig('error') == I18n.t('devise.failure.unauthenticated')
   end
+
+  test "should not allow GET edit if commitment does not belong to current_user" do
+    sign_in users(:user_2)
+    commitment = commitments(:valid_commitment_1) 
+    get edit_commitment_url(commitment)
+    assert_redirected_to root_path
+    assert flash.notice == I18n.t('errors.messages.forbidden_resource')
+  end
+
+  test "should not allow PUT update if commitment does not belong to current_user" do
+    sign_in users(:user_2)
+    new_description = "a new description"
+    commitment = commitments(:valid_commitment_1)
+    assert commitment.description != new_description 
+    put commitment_url(commitment, params: { commitment: { description: new_description }}), as: :json
+    assert_response :forbidden
+    assert commitment.reload.description != new_description
+    assert JSON.parse(response.body).dig('message') == I18n.t('errors.messages.forbidden_resource')
+  end
+
+  test "should not allow DELETE destroy if commitment does not belong to current_user" do
+    sign_in users(:user_2)
+    commitment_count_at_start = Commitment.count
+    commitment = commitments(:valid_commitment_1)
+    delete commitment_url(commitment), as: :json
+    assert_response :forbidden
+    assert Commitment.count == commitment_count_at_start
+    assert JSON.parse(response.body).dig('message') == I18n.t('errors.messages.forbidden_resource')
+  end
 end

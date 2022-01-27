@@ -61,10 +61,12 @@ class CommitmentsController < ApplicationController
   end
 
   def edit
+    raise ForbiddenError unless @commitment.user == current_user
     # set @form_hash for use by vue component here
   end
 
   def update
+    raise ForbiddenError unless @commitment.user == current_user
     if @commitment.update(commitment_params)
       respond_to do |format|
         format.json { json_response({ commitment: @commitment }, 204) }
@@ -77,6 +79,7 @@ class CommitmentsController < ApplicationController
   end
 
   def destroy
+    raise ForbiddenError unless @commitment.user == current_user
     if @commitment.destroy
       respond_to do |format|
         format.json { json_response({}, 204) }

@@ -23,6 +23,7 @@ valid_commitment_1:
   threats: pollution, other
   objectives: sustainable_use, biodiversity_conservation
   criterium: valid_criterium
+  user: user_1
 
 valid_commitment_2:
   responsible_group: another group name 
