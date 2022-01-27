@@ -9,7 +9,7 @@ class Services::CommitmentProps
       {
         action: @commitment.new_record? ? '/commitments.json' : "/commitments/#{@commitment.id}.json",
         method: @commitment.new_record? ? 'post' : 'put',
-        root_key: 'commitment',
+        root_key: 'commitment'
       },
       survey: {
         progressBarType: 'buttons',
@@ -229,13 +229,13 @@ class Services::CommitmentProps
                 templateElements: [
                   {
                     type: 'text',
-                    name: 'linkName',
+                    name: 'name',
                     titleLocation: 'hidden',
                     placeHolder: 'Website name'
                   },
                   {
                     type: 'text',
-                    name: 'linkUrl',
+                    name: 'url',
                     titleLocation: 'hidden',
                     placeHolder: 'https://www.example.com'
                   }

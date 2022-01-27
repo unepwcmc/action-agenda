@@ -15,6 +15,7 @@
         nextPage,
       }"
     />
+    <error-banner :errors="errors"/>
   </div>
 </template>
 
@@ -26,6 +27,7 @@ import axios from "axios";
 import { setAxiosHeaders } from "../../helpers/axios-helpers";
 import "survey-vue/modern.css";
 import FormNavigation from "./Navigation"
+import ErrorBanner from '../banners/ErrorBanner'
 
 SurveyVue.StylesManager.applyTheme("modern");
 
@@ -37,8 +39,9 @@ export default {
   name: "SurveyForm",
 
   components: { 
+    ErrorBanner,
     FormNavigation,
-    Survey
+    Survey,
   },
 
   props: {
@@ -80,10 +83,11 @@ export default {
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
 
     return {
+      errors: {},
       isFirstPage: true,
       isLastPage: false,
-      survey: model,
-      options: {}
+      options: {},
+      survey: model
     };
   },
 
@@ -95,7 +99,10 @@ export default {
   methods: {
     assignNoneValues(data) {
       Object.keys(this.noneValues).forEach((question) => {
+        console.log(data[question])
         if (data[question] && data[question][0] === "none") {
+          console.log(data[question][0])
+          console.log(this.noneValues[question])
           data[question][0] = this.noneValues[question]
         }
       });
@@ -107,7 +114,10 @@ export default {
           this.redirect(response.data.redirect_path)
         })
         .catch((error) => {
-          console.log("FAILED!", error.data)
+          console.log("FAILED!", error.response.data.errors)
+                    this.survey.options.allowComplete = false
+          this.errors = error.response.data.errors
+          // this.survey.options.allowComplete = false
         })
     },
 
@@ -129,7 +139,11 @@ export default {
 
     onComplete(sender) {
       const data = sender.data;
-      this.assignNoneValues(data);
+      if (this.dataModel === "Commitment") {
+        data["state"] = "live"
+      } else {
+        this.assignNoneValues(data);
+      }
       this.options = {
         method: this.formData.config.method,
         data: { [this.formData.config.root_key]: data },
