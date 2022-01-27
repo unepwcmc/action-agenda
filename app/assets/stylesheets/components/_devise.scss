@@ -1,4 +1,9 @@
 //--------------------------------------------------
+// variables
+//--------------------------------------------------
+$content-gutter: rem-calc(125);
+
+//--------------------------------------------------
 // classes
 //--------------------------------------------------
 .devise {
@@ -68,8 +73,8 @@
 
   &__content {
     color: $grey-xxdark;
-    padding: rem-calc(185) rem-calc(125) 0 rem-calc(125);
-    max-width: rem-calc(575 + 250);
+    padding: rem-calc(185) rem-calc($content-gutter) 0 rem-calc($content-gutter);
+    max-width: rem-calc(575 + $content-gutter * 2);
   }
 
   &__title {
@@ -89,8 +94,8 @@
       }
 
       input {
+        border: rem-calc(1) solid $grey-xxdark;
         color: $grey-xxdark;
-        border: 1px solid $grey-xxdark;
         font-size: rem-calc(16);
         padding: rem-calc(20);
         margin-bottom: rem-calc(30);
