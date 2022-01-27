@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_25_164541) do
+ActiveRecord::Schema.define(version: 2022_01_26_153526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 2022_01_25_164541) do
     t.integer "duration_years"
     t.bigint "criterium_id"
     t.text "joint_governance_description"
+    t.bigint "user_id"
     t.index ["country_id"], name: "index_commitments_on_country_id"
   end
 
@@ -140,6 +141,7 @@ ActiveRecord::Schema.define(version: 2022_01_25_164541) do
     t.boolean "progress_report", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
   end
 
   create_table "criteria_stakeholders", force: :cascade do |t|
