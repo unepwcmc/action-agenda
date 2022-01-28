@@ -150,18 +150,6 @@ export default {
       this.send(data)
     },
 
-    // onCompleting(sender, options) {
-    //   this.send(sender.data, true)
-    //   this.axiosDone = true
-    //   if (this.dataModel !== 'Commitment' || this.hasNoErrors) {
-    //     console.log('no errors')
-    //     options.allowComplete = true;
-    //   } else {
-    //     options.allowComplete = false
-    //     console.log('errors')  
-    //   }
-    // },
-
     onCurrentPageChanged() {
       this.isFirstPage = this.survey.isFirstPage;
       this.isLastPage = this.survey.isLastPage;

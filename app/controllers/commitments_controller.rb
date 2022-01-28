@@ -69,7 +69,7 @@ class CommitmentsController < ApplicationController
     raise ForbiddenError unless @commitment.user == current_user
     if @commitment.update(commitment_params)
       respond_to do |format|
-        format.json { json_response({ commitment: @commitment, redirect_path: dashboard_url }, 204) }
+        format.json { json_response({ commitment: @commitment, redirect_path: dashboard_url }, 201) }
       end
     else
       respond_to do |format|
