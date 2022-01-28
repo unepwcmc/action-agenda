@@ -44,4 +44,10 @@
     font-size: rem-calc(21);
     font-weight: $bold;
   }
+
+  .hero__button {
+    @include button-accent-condensed-taller;
+    @include responsive(padding-right, rem-calc(43), rem-calc(43), rem-calc(43));
+    @include responsive(padding-left, rem-calc(43), rem-calc(43), rem-calc(43));
+  }
 }

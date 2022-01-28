@@ -1,8 +1,20 @@
 <header class="hero--home">
   <div class="hero__container">
     <div class="hero__content">
-      <h1>Capturing Area-Based Commitments</h1>
-      <p class="hero__subtitle">Capturing Area-Based Commitments</p>
+      <h1>
+        <%= I18n.t('views.home.hero.title') %>
+      </h1>
+      <p class="hero__subtitle">
+        <%= I18n.t('views.home.hero.subtitle') %>
+      </p>
+
+      <a
+        class="hero__button"
+        href="/criteria/new"
+        title="<%= I18n.t('views.home.hero.button') %>"
+      >
+        <%= I18n.t('views.home.hero.button').upcase %>
+      </a>
       
       <div class="list--hero-logos">
         <ul class="list__ul">
