@@ -1,4 +1,3 @@
-<% reduced_footer = content_for?(:reduced_footer) ? (yield :reduced_footer) : false %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,12 +14,15 @@
       <%= render partial: '/partials/topbar/topbar-primary' %>
       
       <%= yield %>
-      
-      <%= render partial:'partials/global/footer', locals: {
-        reduced: reduced_footer,
-        links: footer_nav, 
-        logos: site_logos
-      } %>
+
+      <% if content_for?(:reduced_footer) && (yield :reduced_footer) %>
+        <%= render partial:'partials/global/reduced_footer' %>
+      <% else %>
+        <%= render partial:'partials/global/footer', locals: {
+          links: footer_nav, 
+          logos: site_logos
+        } %>
+      <% end %>
     </div>
   </body>
 </html>
