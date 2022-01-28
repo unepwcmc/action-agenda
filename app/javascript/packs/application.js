@@ -24,6 +24,7 @@ import DashboardNavigation from '../components/dashboard/Navigation'
 import FilteredTable from '../components/table/FilteredTable'
 import SurveyForm from '../components/forms/SurveyForm'
 import MockProgressBar from '../components/progress/MockProgressBar'
+import NavDropdown from '../components/nav/NavDropdown'
 
 Vue.config.productionTip = false
 Vue.use(TurbolinksAdapter)
@@ -57,7 +58,8 @@ document.addEventListener('turbolinks:load', () => {
         DashboardNavigation,
         FilteredTable,
         SurveyForm,
-        MockProgressBar
+        MockProgressBar,
+        NavDropdown
       }
     })
   }
