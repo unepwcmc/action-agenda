@@ -7,7 +7,7 @@
       <p><%= @commitment.description %></p>
 
       <h3>Planned actions:</h3>
-      <p><%= @commitment.planned_actions %></p>
+      <p><%= @commitment.actions %></p>
       
     </div>
 
@@ -80,7 +80,7 @@
 
     <div class="list--governance">
       <h3 class="list__title">Governance Authority</h3>
-      <p><%= @commitment.governance_authority %></p>
+      <p><%= @commitment.governance_authority || @commitment.responsible_group %></p>
       <p class="bold">Governance type</p>
       <span><%= @commitment.governance_types.pluck(:name).join(', ') %></span>
     </div>
