@@ -40,8 +40,20 @@
     width: 60%;
   }
 
+  .hero__title {
+    margin-bottom: rem-calc(15);
+  }
+
   .hero__subtitle {
     font-size: rem-calc(21);
     font-weight: $bold;
+    margin-top: 0;
+    margin-bottom: rem-calc(40);
+  }
+
+  .hero__button {
+    @include button-accent-condensed-taller;
+    @include responsive(padding-right, rem-calc(43), rem-calc(43), rem-calc(43));
+    @include responsive(padding-left, rem-calc(43), rem-calc(43), rem-calc(43));
   }
 }

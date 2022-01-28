@@ -90,3 +90,8 @@ en:
         links:
           action_agenda:
             description: For other biodiversity related commitments
+    home:
+      hero:
+        button: Make a commitment
+        subtitle: Capturing Area-Based Commitments
+        title: Capturing Area-Based Commitments
