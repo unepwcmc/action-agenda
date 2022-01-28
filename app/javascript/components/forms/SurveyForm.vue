@@ -81,7 +81,6 @@ export default {
     // call methods on library-provided events here
     model.onComplete.add(this.onComplete);
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
-    // model.onCompleting.add(this.onCompleting);
 
     return {
       errors: {},
@@ -114,7 +113,7 @@ export default {
         .then((response) => {
           console.log(response.data)
           if (response.data.redirect_path) {
-             Turbolinks.visit(response.data.redirect_path)
+            window.location.replace(window.location.origin + response.data.redirect_path)
           }
         })
         .catch((error) => {
