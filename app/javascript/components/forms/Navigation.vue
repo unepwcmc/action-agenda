@@ -31,7 +31,7 @@
           @click.prevent="complete"
         />
         <button
-          v-if="isMiddlePage"
+          v-if="!isFirstPage"
           class="form-navigation__item form-navigation__item--save-middle-page"
           v-text="navigationText.exit.right"
           @click.prevent="openModal"
@@ -127,12 +127,6 @@ export default {
   data () {
     return {
       showModal: false
-    }
-  },
-
-  computed: {
-    isMiddlePage () {
-      return !this.isFirstPage && !this.isLastPage;
     }
   },
 

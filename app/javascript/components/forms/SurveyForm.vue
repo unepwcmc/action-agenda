@@ -131,7 +131,7 @@ export default {
     exit() {
       if (this.dataModel === 'Commitment') {
         console.log(this.isLastPage)
-        this.survey.completeLastPage();
+        this.send(this.survey.data)
       } else {
         Turbolinks.visit('/dashboard');
       }
@@ -142,8 +142,12 @@ export default {
     },
 
     onComplete(sender) {
+      const data = sender.data
+      if (this.dataModel === 'Commitment') {
+        data['state'] = 'live';
+      }
       console.log("complete")
-      this.send(sender.data)
+      this.send(data)
     },
 
     // onCompleting(sender, options) {
@@ -168,12 +172,9 @@ export default {
     },
 
     send(data) {
-      // if (this.dataModel === 'Commitment' && this.isLastPage) {
-      //   data['state'] = 'live';
-      // } else 
       if (this.dataModel === 'Criteria') {
         this.assignNoneValues(data);
-      }
+      } 
       this.options = {
         method: this.formData.config.method,
         data: { [this.formData.config.root_key]: data },

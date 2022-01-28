@@ -34,7 +34,9 @@ class CommitmentsController < ApplicationController
   end
 
   def new
-    if params[:criterium_id] && criterium_id_valid?
+    if true
+      
+      # params[:criterium_id] && criterium_id_valid?
       @commitment = Commitment.new(criterium_id: params[:criterium_id])
       @form_hash = Services::CommitmentProps.new(@commitment).call
     else
@@ -52,8 +54,6 @@ class CommitmentsController < ApplicationController
       respond_to do |format|
         format.json {
           error_messages = @commitment.errors.messages.dup
-          @commitment.state = :draft
-          @commitment.save
           json_response({ errors: error_messages }, :unprocessable_entity) 
         }
       end
@@ -69,11 +69,7 @@ class CommitmentsController < ApplicationController
     raise ForbiddenError unless @commitment.user == current_user
     if @commitment.update(commitment_params)
       respond_to do |format|
-        format.json {
-            byebug
-
-           json_response({ commitment: @commitment, redirect_path: dashboard_url }, 201) 
-          }
+        format.json { json_response({ commitment: @commitment, redirect_path: dashboard_url }, 204) }
       end
     else
       respond_to do |format|
