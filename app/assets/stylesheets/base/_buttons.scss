@@ -301,3 +301,9 @@ $padding-medium: rem-calc(27);
   &--outline-white { @include button-outline($white); }
   &--primary { @include button-primary; }
 }
+
+.bg {
+  &-danger {
+    background-color: $danger;
+  }
+}

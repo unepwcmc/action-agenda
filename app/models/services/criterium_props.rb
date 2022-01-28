@@ -53,7 +53,7 @@ class Services::CriteriumProps
                           end
                          end.compact,
                 hasNone: true,
-                noneText: I18n.t('form.criteria.none')
+                noneText: I18n.t('form.none')
               },
               {
                 type: 'checkbox',
@@ -71,7 +71,7 @@ class Services::CriteriumProps
                           end
                          end.compact,
                 hasNone: true,
-                noneText: I18n.t('form.criteria.none')
+                noneText: I18n.t('form.none')
               },
               {
                 type: 'radiogroup',

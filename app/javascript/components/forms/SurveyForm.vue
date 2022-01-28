@@ -1,12 +1,12 @@
 <template>
-  <div class="survey-commitment">
-    <survey :survey="survey" />
+  <div>
+    <survey class="survey-container" :survey="survey" />
     <form-navigation
       v-bind="{
         complete,
         dataModel,
         exit,
-        isFirstPage, 
+        isFirstPage,
         isLastPage,
         modalQuestionBody,
         modalText,
@@ -15,27 +15,33 @@
         nextPage,
       }"
     />
+    <error-banner :errors="errors" />
   </div>
 </template>
 
 <script>
-import * as SurveyVue from "survey-vue";
-import Turbolinks from "turbolinks";
-import axios from "axios";
-import { setAxiosHeaders } from "../../helpers/axios-helpers";
-import "survey-vue/modern.css";
-import FormNavigation from "./Navigation"
+import * as SurveyVue from 'survey-vue';
+import * as widgets from 'surveyjs-widgets';
+import Turbolinks from 'turbolinks';
+import axios from 'axios';
+import { setAxiosHeaders } from '../../helpers/axios-helpers';
+import 'survey-vue/modern.css';
+import FormNavigation from './Navigation';
+import ErrorBanner from '../banners/ErrorBanner';
 
-SurveyVue.StylesManager.applyTheme("modern");
+SurveyVue.StylesManager.applyTheme('modern');
+
+widgets.select2tagbox(SurveyVue);
 
 const Survey = SurveyVue.Survey;
 
 export default {
-  name: "SurveyForm",
+  name: 'SurveyForm',
 
-  components: { 
+  components: {
+    ErrorBanner,
     FormNavigation,
-    Survey
+    Survey,
   },
 
   props: {
@@ -48,7 +54,7 @@ export default {
       type: String,
       required: true
     },
-  
+
     modalText: {
       type: Object,
       required: true
@@ -66,81 +72,116 @@ export default {
 
     noneValues: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
 
-  data () {
+  data() {
     const model = new SurveyVue.Model(this.formData.survey);
     // call methods on library-provided events here
     model.onComplete.add(this.onComplete);
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
+    model.onCompleting.add(this.onCompleting);
 
     return {
+      errors: {},
+      hasNoErrors: Boolean,
+      axiosDone: false,
       isFirstPage: true,
       isLastPage: false,
+      options: {},
       survey: model,
     };
   },
 
   mounted() {
     setAxiosHeaders(axios);
+    console.log(this.formData);
   },
 
   methods: {
-    complete () {
+    assignNoneValues(data) {
+      Object.keys(this.noneValues).forEach((question) => {
+        console.log(data[question]);
+        if (data[question] && data[question][0] === 'none') {
+          console.log(data[question][0]);
+          console.log(this.noneValues[question]);
+          data[question][0] = this.noneValues[question];
+        }
+      });
+    },
+
+    axiosCall() {
+      axios(this.formData.config.action, this.options)
+        .then((response) => {
+          this.isLastPage && this.axiosDone ? this.hasNoErrors = true : this.hasNoErrors = false
+          Turbolinks.visit(response.data.redirect_path);
+        })
+        .catch((error) => {
+          console.log('FAILED!', error.response.data.errors);
+          this.hasNoErrors = false
+          this.errors = error.response.data.errors;
+        });
+    },
+
+    complete() {
       this.survey.completeLastPage();
     },
 
-    exit () {
-      if (this.dataModel === "Commitment") {
+    exit() {
+      if (this.dataModel === 'Commitment') {
         this.survey.completeLastPage();
       } else {
-        Turbolinks.visit("/dashboard");
+        Turbolinks.visit('/dashboard');
       }
     },
 
-    nextPage () {
+    nextPage() {
       this.survey.nextPage();
     },
 
     onComplete(sender) {
-      const data = sender.data;
+      console.log("complete")
+      this.send(sender.data)
+    },
 
-      Object.keys(this.noneValues).forEach((question) => {
-        if (data[question] && data[question][0] === "none") {
-          data[question][0] = this.noneValues[question];
+    onCompleting(sender, options) {
+      this.send(sender.data, true)
+      this.axiosDone = true
+      if (this.dataModel !== 'Commitment' || this.hasNoErrors) {
+        console.log('no errors')
+        options.allowComplete = true;
+      } else {
+        options.allowComplete = false
+        console.log('errors')  
+      }
+    },
+
+    send(data, validate=false) {
+      if (validate) {
+        if (this.dataModel === 'Commitment') {
+          data['state'] = 'live';
+        } else {
+          this.assignNoneValues(data);
         }
-      });
-
-      const options = {
+      }
+      this.options = {
         method: this.formData.config.method,
         data: { [this.formData.config.root_key]: data },
       };
-
-      axios(this.formData.config.action, options)
-        .then((response) => {
-          this.redirect(response.data.redirect_path)
-        })
-        .catch((error) => {
-          console.log("FAILED!", error.data);
-        })
+      this.axiosCall();
     },
 
-    onCurrentPageChanged () {
-      this.isFirstPage = survey.isFirstPage;
-      this.isLastPage = survey.isLastPage;
+    onCurrentPageChanged() {
+      this.isFirstPage = this.survey.isFirstPage;
+      this.isLastPage = this.survey.isLastPage;
+
+      this.send(this.survey.data)
     },
-  
-    prevPage () {
+
+    prevPage() {
       this.survey.prevPage();
     },
-
-    redirect(link) {
-      if (link) {
-        Turbolinks.visit(link);
-      }
-    }
-  }
-}
+  },
+};
 </script>
