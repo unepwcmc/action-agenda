@@ -1,0 +1,52 @@
+//--------------------------------------------------
+// variables
+//--------------------------------------------------
+
+//--------------------------------------------------
+// mixins
+//--------------------------------------------------
+@mixin fade-in-out($totaltime: 15s) {
+    -webkit-animation: $totaltime ease 0s normal forwards 1 fadeout;
+    animation: $totaltime ease 0s normal forwards 1 fadeout;
+}
+
+@-webkit-keyframes fadeout {
+    0% { opacity:0; }
+    10% { opacity:1; }
+    50% { opacity:1; }
+    100% { opacity:0; }
+}
+
+@keyframes fadeout {
+    0% { opacity:0; }
+    10% { opacity:1; }
+    50% { opacity:1; }
+    100% { opacity:0; }
+}
+
+//--------------------------------------------------
+// classes
+//--------------------------------------------------
+.error {
+  &.animated-banner {
+    @include fade-in-out(10s);
+    
+    display: flex;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+  }
+
+  &.bg-danger {
+    background-color: $danger;
+    color: white;
+    font-weight: $bold;
+    padding: rem-calc(20);
+  }
+
+  &__message {
+    padding-left: rem-calc(20);
+  }
+}

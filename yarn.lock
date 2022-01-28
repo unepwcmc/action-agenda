@@ -1665,6 +1665,11 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
 
+bootstrap-slider@^10.0.0:
+  version "10.6.2"
+  resolved "https://registry.npmjs.org/bootstrap-slider/-/bootstrap-slider-10.6.2.tgz#7341f468c012bdaa6a1d8625d989fdeb8ed7dd38"
+  integrity sha512-8JTPZB9QVOdrGzYF3YgC3YW6ssfPeBvBwZnXffiZ7YH/zz1D0EKlZvmQsm/w3N0XjVNYQEoQ0ax+jHrErV4K1Q==
+
 brace-expansion@^1.1.7:
   version "1.1.11"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.11.tgz#3c7fcbf529d87226f3d2f52b966ff5271eb441dd"
@@ -2879,6 +2884,13 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
 
+easy-autocomplete@^1.3.5:
+  version "1.3.5"
+  resolved "https://registry.npmjs.org/easy-autocomplete/-/easy-autocomplete-1.3.5.tgz#2a2d2df699f13ddc48661c9375b9437acf1a0a9c"
+  integrity sha1-Ki0t9pnxPdxIZhyTdblDes8aCpw=
+  dependencies:
+    jquery "*"
+
 ecc-jsbn@~0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.2.tgz#3a83a904e54353287874c564b7549386849a98c9"
@@ -2924,6 +2936,11 @@ emojis-list@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-3.0.0.tgz#5570662046ad29e2e916e71aae260abdff4f6a78"
   integrity sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==
+
+emotion-ratings@^2.0.1:
+  version "2.0.2"
+  resolved "https://registry.npmjs.org/emotion-ratings/-/emotion-ratings-2.0.2.tgz#9440e1bc02d59b727166e162f31240711201d1ba"
+  integrity sha512-b+HR3kMOC2biuF/nrQk35IuSrEt8jAIay8clGqa4oVmbS8BHkpBnNS5wofly2ArA9Tvzek+3qFt9sK6FMhDuPA==
 
 encodeurl@~1.0.2:
   version "1.0.2"
@@ -3992,6 +4009,11 @@ https-browserify@^1.0.0:
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
 
+icheck@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/icheck/-/icheck-1.0.2.tgz#06d08da3d47ae448c153b2639b86e9ad7fdf7128"
+  integrity sha1-BtCNo9R65EjBU7Jjm4bprX/fcSg=
+
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
@@ -4118,6 +4140,11 @@ ini@^1.3.4, ini@^1.3.5:
   version "1.3.8"
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.8.tgz#a29da425b48806f34767a4efce397269af28432c"
   integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
+
+inputmask@^5.0.3:
+  version "5.0.7"
+  resolved "https://registry.npmjs.org/inputmask/-/inputmask-5.0.7.tgz#b04d5d4e1c85018893c3c8edb1a9f074b051007f"
+  integrity sha512-rUxbRDS25KEib+c/Ow+K01oprU/+EK9t9SOPC8ov94/ftULGDqj1zOgRU/Hko6uzoKRMdwCfuhAafJ/Wk2wffQ==
 
 inquirer@^7.0.0:
   version "7.3.3"
@@ -4531,7 +4558,21 @@ jest-worker@^25.4.0:
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
-jquery@^3.1.1:
+jquery-bar-rating@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.npmjs.org/jquery-bar-rating/-/jquery-bar-rating-1.2.2.tgz#9594d662cff9deb0fe7b372511bb2492a436f392"
+  integrity sha1-lZTWYs/53rD+ezclEbskkqQ285I=
+  dependencies:
+    jquery ">=1.7.2"
+
+jquery-ui@^1.12.1:
+  version "1.13.1"
+  resolved "https://registry.npmjs.org/jquery-ui/-/jquery-ui-1.13.1.tgz#d0b7a42e73a04c31bb5706adf86f6f8942f64eaa"
+  integrity sha512-2VlU59N5P4HaumDK1Z3XEVjSvegFbEOQRgpHUBaB2Ak98Axl3hFhJ6RFcNQNuk9SfL6WxIbuLst8dW/U56NSiA==
+  dependencies:
+    jquery ">=1.8.0 <4.0.0"
+
+jquery@*, jquery@>=1.7.2, "jquery@>=1.8.0 <4.0.0", jquery@^3.1.1, jquery@^3.2.1:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
   integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
@@ -5275,6 +5316,11 @@ normalize-url@^3.0.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
   integrity sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
+
+nouislider@^14.6.3:
+  version "14.7.0"
+  resolved "https://registry.npmjs.org/nouislider/-/nouislider-14.7.0.tgz#a71db0587c92567b6da1df57d251d3696d942362"
+  integrity sha512-4RtQ1+LHJKesDCNJrXkQcwXAWCrC2aggdLYMstS/G5fEWL+fXZbUA9pwVNHFghMGuFGRATlDLNInRaPeRKzpFQ==
 
 npm-run-path@^2.0.0:
   version "2.0.2"
@@ -6420,6 +6466,11 @@ prepend-http@^1.0.0:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.5.1.tgz#fff75fa9d519c54cf0fce328c1017d94546bc56a"
   integrity sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==
 
+pretty-checkbox@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.npmjs.org/pretty-checkbox/-/pretty-checkbox-3.0.3.tgz#d49c8013a8fc08ee0c2d6ebde453464bfdbc428e"
+  integrity sha1-1JyAE6j8CO4MLW695FNGS/28Qo4=
+
 printj@~1.1.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/printj/-/printj-1.1.2.tgz#d90deb2975a8b9f600fb3a1c94e3f4c53c78a222"
@@ -6659,6 +6710,11 @@ readdirp@~3.6.0:
   integrity sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==
   dependencies:
     picomatch "^2.2.1"
+
+recordrtc@^5.4.6:
+  version "5.6.2"
+  resolved "https://registry.npmjs.org/recordrtc/-/recordrtc-5.6.2.tgz#48fc214b35084973ccce82c6251198b5742bc327"
+  integrity sha512-1QNKKNtl7+KcwD1lyOgP3ZlbiJ1d0HtXnypUy7yq49xEERxk31PHvE9RCciDrulPCY7WJ+oz0R9hpNxgsIurGQ==
 
 redent@^1.0.0:
   version "1.0.0"
@@ -6994,6 +7050,11 @@ select-hose@^2.0.0:
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
   integrity sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
 
+select2@^4.0.4:
+  version "4.0.13"
+  resolved "https://registry.npmjs.org/select2/-/select2-4.0.13.tgz#0dbe377df3f96167c4c1626033e924372d8ef44d"
+  integrity sha512-1JeB87s6oN/TDxQQYCvS5EFoQyvV6eYMZZ0AeA4tdFDYWN3BAGZ8npr17UBFddU0lgAt3H0yjX3X6/ekOj1yjw==
+
 selfsigned@^1.10.8:
   version "1.10.14"
   resolved "https://registry.yarnpkg.com/selfsigned/-/selfsigned-1.10.14.tgz#ee51d84d9dcecc61e07e4aba34f229ab525c1574"
@@ -7221,6 +7282,11 @@ sort-keys@^1.0.0:
   integrity sha1-RBttTTRnmPG05J6JIK37oOVD+a0=
   dependencies:
     is-plain-obj "^1.0.0"
+
+sortablejs@^1.6.1:
+  version "1.14.0"
+  resolved "https://registry.npmjs.org/sortablejs/-/sortablejs-1.14.0.tgz#6d2e17ccbdb25f464734df621d4f35d4ab35b3d8"
+  integrity sha512-pBXvQCs5/33fdN1/39pPL0NZF20LeRbLQ5jtnheIPN9JQAaufGjKdWduZn4U7wCtVuzKhmRkI0DFYHYRbB2H1w==
 
 source-list-map@^2.0.0:
   version "2.0.1"
@@ -7591,6 +7657,25 @@ survey-vue@latest:
   integrity sha512-PjYwDW+UN4L+MlrwxjcY/0ympP93ZgPKtcTae0e+IdsmTll7ZYMPtQYH2Dtk6KDVS77FkxsROQnfOmX6HPGlXA==
   dependencies:
     vue "^2.1.10"
+
+surveyjs-widgets@^1.9.6:
+  version "1.9.6"
+  resolved "https://registry.npmjs.org/surveyjs-widgets/-/surveyjs-widgets-1.9.6.tgz#9ed4e46baed88a4d8bb75f1cb470fc0782c9f446"
+  integrity sha512-HhF+sViuyeCAuyb3imkSjTGk+8HQrnQWIBOBfXkzUOCGuba+ZNC5xDq+tEoFIG1wMoE2IbJbLJ6dp5dWRivfag==
+  dependencies:
+    bootstrap-slider "^10.0.0"
+    easy-autocomplete "^1.3.5"
+    emotion-ratings "^2.0.1"
+    icheck "^1.0.2"
+    inputmask "^5.0.3"
+    jquery "^3.2.1"
+    jquery-bar-rating "^1.2.2"
+    jquery-ui "^1.12.1"
+    nouislider "^14.6.3"
+    pretty-checkbox "^3.0.3"
+    recordrtc "^5.4.6"
+    select2 "^4.0.4"
+    sortablejs "^1.6.1"
 
 svgo@^1.0.0:
   version "1.3.2"
@@ -8089,6 +8174,11 @@ vue-loader@^15.9.5:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
+
+vue-select2@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.npmjs.org/vue-select2/-/vue-select2-0.2.6.tgz#d3dbbff656d7ab755b3acee48a725efd1fd0fc1b"
+  integrity sha1-09u/9lbXq3VbOs7kinJe/R/Q/Bs=
 
 vue-style-loader@^4.1.0:
   version "4.1.3"

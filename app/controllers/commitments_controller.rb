@@ -36,7 +36,7 @@ class CommitmentsController < ApplicationController
   def new
     if criterium_id_valid?
       @commitment = Commitment.new(criterium_id: params[:criterium_id])
-      # set @form_hash for use by vue component here
+    @form_hash = Services::CommitmentProps.new(@commitment).call
     else
       redirect_to new_criterium_url
     end
@@ -62,7 +62,7 @@ class CommitmentsController < ApplicationController
 
   def edit
     raise ForbiddenError unless @commitment.user == current_user
-    # set @form_hash for use by vue component here
+    @form_hash = Services::CommitmentProps.new(@commitment).call
   end
 
   def update
@@ -104,6 +104,7 @@ class CommitmentsController < ApplicationController
 
   def commitment_params
     params.require(:commitment).permit(
+      :commitment_id,
       :committed_year,
       :current_area_ha,
       :description,
