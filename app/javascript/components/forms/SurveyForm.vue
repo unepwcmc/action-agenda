@@ -81,7 +81,7 @@ export default {
     // call methods on library-provided events here
     model.onComplete.add(this.onComplete);
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
-    model.onCompleting.add(this.onCompleting);
+    // model.onCompleting.add(this.onCompleting);
 
     return {
       errors: {},
@@ -104,8 +104,6 @@ export default {
       Object.keys(this.noneValues).forEach((question) => {
         console.log(data[question]);
         if (data[question] && data[question][0] === 'none') {
-          console.log(data[question][0]);
-          console.log(this.noneValues[question]);
           data[question][0] = this.noneValues[question];
         }
       });
@@ -114,8 +112,10 @@ export default {
     axiosCall() {
       axios(this.formData.config.action, this.options)
         .then((response) => {
-          this.isLastPage && this.axiosDone ? this.hasNoErrors = true : this.hasNoErrors = false
-          Turbolinks.visit(response.data.redirect_path);
+          console.log(response.data)
+          if (response.data.redirect_path) {
+             Turbolinks.visit(response.data.redirect_path)
+          }
         })
         .catch((error) => {
           console.log('FAILED!', error.response.data.errors);
@@ -125,11 +125,12 @@ export default {
     },
 
     complete() {
-      this.survey.completeLastPage();
+      this.onComplete(this.survey)
     },
 
     exit() {
       if (this.dataModel === 'Commitment') {
+        console.log(this.isLastPage)
         this.survey.completeLastPage();
       } else {
         Turbolinks.visit('/dashboard');
@@ -145,42 +146,39 @@ export default {
       this.send(sender.data)
     },
 
-    onCompleting(sender, options) {
-      this.send(sender.data, true)
-      this.axiosDone = true
-      if (this.dataModel !== 'Commitment' || this.hasNoErrors) {
-        console.log('no errors')
-        options.allowComplete = true;
-      } else {
-        options.allowComplete = false
-        console.log('errors')  
-      }
+    // onCompleting(sender, options) {
+    //   this.send(sender.data, true)
+    //   this.axiosDone = true
+    //   if (this.dataModel !== 'Commitment' || this.hasNoErrors) {
+    //     console.log('no errors')
+    //     options.allowComplete = true;
+    //   } else {
+    //     options.allowComplete = false
+    //     console.log('errors')  
+    //   }
+    // },
+
+    onCurrentPageChanged() {
+      this.isFirstPage = this.survey.isFirstPage;
+      this.isLastPage = this.survey.isLastPage;
     },
 
-    send(data, validate=false) {
-      if (validate) {
-        if (this.dataModel === 'Commitment') {
-          data['state'] = 'live';
-        } else {
-          this.assignNoneValues(data);
-        }
+    prevPage() {
+      this.survey.prevPage();
+    },
+
+    send(data) {
+      // if (this.dataModel === 'Commitment' && this.isLastPage) {
+      //   data['state'] = 'live';
+      // } else 
+      if (this.dataModel === 'Criteria') {
+        this.assignNoneValues(data);
       }
       this.options = {
         method: this.formData.config.method,
         data: { [this.formData.config.root_key]: data },
       };
       this.axiosCall();
-    },
-
-    onCurrentPageChanged() {
-      this.isFirstPage = this.survey.isFirstPage;
-      this.isLastPage = this.survey.isLastPage;
-
-      this.send(this.survey.data)
-    },
-
-    prevPage() {
-      this.survey.prevPage();
     },
   },
 };
