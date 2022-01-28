@@ -21,7 +21,7 @@ class CommitmentPresenter
       Country.pluck(:name).sort
     when 'committed_year'
       Commitment.where.not(committed_year: nil).distinct.pluck(:committed_year)
-    when 'manager'
+    when 'actor'
       Manager.pluck(:name).sort
     when 'primary_objectives'
       Objective.pluck(:name).sort
