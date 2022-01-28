@@ -1,0 +1,143 @@
+//--------------------------------------------------
+// variables
+//--------------------------------------------------
+$content-gutter: rem-calc(125);
+
+//--------------------------------------------------
+// classes
+//--------------------------------------------------
+.devise {
+  min-height: 100vh;
+
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  
+  &__panel {
+    &:last-child {
+      background-color: $green-dark;
+  
+      display: flex;
+      justify-content: center;
+  
+      position: relative;
+  
+      .devise__panel-background-image {
+        opacity: 0.16;
+        width: 100%;
+        height: 100%;
+  
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        -o-object-fit: cover;
+        object-fit: cover;
+        z-index: 1;
+      }
+    }
+  }
+
+  &__header-nav {
+    margin: rem-calc(25) rem-calc(25) 0 rem-calc(25);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &-link {
+      &--home {
+        color: $grey-xxdark;
+        font-family: $header-font;
+        font-size: rem-calc(18);
+        font-weight: $bold;
+        line-height: $header-font-line-height;
+        text-decoration: none;
+    
+        &::before {
+          background-image: image-url('icons/home.svg');
+          content: '';
+          margin-right: rem-calc(5);
+          width: rem-calc(15); height: rem-calc(15);
+          
+          display: inline-block;
+        }
+      }
+
+      &--other {
+        color: $green-dark;
+        line-height: $header-font-line-height;
+      }
+    }
+  }
+
+  &__content {
+    color: $grey-xxdark;
+    padding: rem-calc(185) rem-calc($content-gutter) 0 rem-calc($content-gutter);
+    max-width: rem-calc(575 + $content-gutter * 2);
+  }
+
+  &__title {
+    font-family: $header-font;
+    font-size: rem-calc(48);
+    margin-bottom: rem-calc(32);
+  }
+
+  &__flash-messages {
+    color: $red-warning;
+    font-style: italic;
+    margin-bottom: rem-calc(30);
+  }
+
+  &__form {
+    .field {
+      label {
+        font-size: rem-calc(20);
+        font-weight: $bold;
+        margin-bottom: rem-calc(20);
+  
+        display: block;
+      }
+
+      input {
+        border: rem-calc(1) solid $grey-xxdark;
+        color: $grey-xxdark;
+        font-size: rem-calc(16);
+        padding: rem-calc(20);
+        margin-bottom: rem-calc(30);
+        width: 100%;
+        height: rem-calc(60);
+      }
+
+      &__label-with-extra-text {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+
+        &-item {
+          display: flex;
+
+          &--link {
+            color: $green-dark;
+          }
+
+          &--info {
+            font-style: italic;
+          }
+        }
+      }
+    }
+
+    .actions {
+      input {
+        @include button-accent;
+        font-family: $header-font;
+        margin-bottom: rem-calc(30);
+      }
+    }
+  }
+
+  &__post-form-link {
+    color: $green-dark;
+  }
+}

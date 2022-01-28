@@ -7,7 +7,9 @@
   }
 
   .list__li:first-child .list__img {
-    opacity: 0.7;
+    #v-app & {
+      opacity: 0.7;
+    }
   }
 
   .list__img {
@@ -87,8 +89,32 @@
 .list--footer-logos {
   @include list-site-logos;
 
+  .list__ul {
+    .devise__panel & {
+      display: flex;
+      align-items: center;
+    }
+  }
+
   .list__li {
-    margin: rem-calc(10) 0;
+    #v-app & {
+      margin: rem-calc(10) 0;
+    }
+
+    .devise__panel & {
+      display: flex;
+
+      &:first-child {
+        margin-right: rem-calc(38);
+      }
+    }
+  }
+
+  .devise__panel & {
+    margin-bottom: rem-calc(38);
+
+    position: absolute;
+    bottom: 0;
   }
 }
 
@@ -106,7 +132,7 @@
 //--------------------------------------------------
 .list--hero-logos {
   @include list-site-logos;
-  margin-top: rem-calc(40);
+  margin-top: rem-calc(50);
 
   .list__li {
     margin-right: rem-calc(40);
