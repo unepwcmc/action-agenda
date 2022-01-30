@@ -41,6 +41,8 @@ class Commitment < ApplicationRecord
                         :objectives, :managers, :countries, :actions, :threats, :current_area_ha, if: :live?
   
   validate :has_joint_governance_description, if: :live?
+  validates_numericality_of :latitude, greater_than_or_equal_to: -90, less_than_or_equal_to: 90
+  validates_numericality_of :longitude, greater_than_or_equal_to: -180, less_than_or_equal_to: 180
 
   before_save :clear_joint_governance_description_if_not_joint_governance_managed
 
