@@ -1,11 +1,12 @@
 <div class="topbar--primary">
   <%= link_to 'Main Action Agenda', 'https://www.cbd.int/action-agenda/', title: 'Visit the Action Agenda website', target: '_blank' %>
   <% if current_user %>
-    <li class="nav"><nav-dropdown
-      :my-account="<%= (link_to 'My Dashboard', dashboard_url).to_json %>"
-      :logout="<%= (link_to 'Log Out', destroy_user_session_path, method: :delete).to_json %>"
-      icon-path="<%= image_url('icons/user-circle.png') %>"
-    ></nav-dropdown>
+    <li class="nav">
+      <nav-dropdown
+        :my-account="<%= (link_to 'My Dashboard', dashboard_url).to_json %>"
+        :logout="<%= (link_to 'Log Out', destroy_user_session_path, method: :delete).to_json %>"
+        icon-path="<%= image_url('icons/user-circle.png') %>"
+      ></nav-dropdown>
     </li>
   <% else %>
   <li class="nav nav-item__last">
