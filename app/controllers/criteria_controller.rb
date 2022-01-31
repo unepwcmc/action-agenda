@@ -17,7 +17,7 @@ class CriteriaController < ApplicationController
     respond_to do |format|
       if @criterium.save
         format.json {
-          redirect_path = @criterium.criteria_valid_for_commitment? ? new_commitment_path(criterium_id: @criterium.id) : ineligible_criteria_url(@criterium)
+          redirect_path = @criterium.criteria_valid_for_commitment? ? new_commitment_path(criterium_id: @criterium.id) : ineligible_criteria_path(@criterium)
           json_response({ criterium: @criterium, redirect_path: redirect_path }, :created)
         }
       else

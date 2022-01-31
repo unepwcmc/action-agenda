@@ -7,6 +7,7 @@
   @include gutters;
   background-color: $primary;
   color: $white;
+  font-family: $header-font;
   font-weight: $bold;
   height: rem-calc(44); 
 }

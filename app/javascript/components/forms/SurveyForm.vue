@@ -84,7 +84,6 @@ export default {
 
     return {
       errors: {},
-      hasNoErrors: Boolean,
       axiosDone: false,
       isFirstPage: true,
       isLastPage: false,
@@ -95,13 +94,11 @@ export default {
 
   mounted() {
     setAxiosHeaders(axios);
-    console.log(this.formData);
   },
 
   methods: {
     assignNoneValues(data) {
       Object.keys(this.noneValues).forEach((question) => {
-        console.log(data[question]);
         if (data[question] && data[question][0] === 'none') {
           data[question][0] = this.noneValues[question];
         }
@@ -111,15 +108,15 @@ export default {
     axiosCall() {
       axios(this.formData.config.action, this.options)
         .then((response) => {
-          console.log(response.data)
           if (response.data.redirect_path) {
-            window.location.replace(window.location.origin + response.data.redirect_path)
+            // preferred to turbolink so JQery reloads on the commitment form
+            window.location.replace(response.data.redirect_path)
           }
         })
         .catch((error) => {
-          console.log('FAILED!', error.response.data.errors);
-          this.hasNoErrors = false
-          this.errors = error.response.data.errors;
+          if (error.response) {
+            this.errors = error.response.data.errors;
+          }
         });
     },
 
@@ -128,12 +125,10 @@ export default {
     },
 
     exit() {
-      if (this.dataModel === 'Commitment') {
-        console.log(this.isLastPage)
+      if (this.dataModel === "Commitment") {
         this.send(this.survey.data)
-      } else {
-        Turbolinks.visit('/dashboard');
       }
+      Turbolinks.visit("/dashboard")
     },
 
     nextPage() {
@@ -145,7 +140,6 @@ export default {
       if (this.dataModel === 'Commitment') {
         data['state'] = 'live';
       }
-      console.log("complete")
       this.send(data)
     },
 
@@ -153,13 +147,13 @@ export default {
       this.isFirstPage = this.survey.isFirstPage;
       this.isLastPage = this.survey.isLastPage;
     },
-
+    
     prevPage() {
       this.survey.prevPage();
     },
-
+    
     send(data) {
-      if (this.dataModel === 'Criteria') {
+      if (this.dataModel === 'Criterium') {
         this.assignNoneValues(data);
       } 
       this.options = {
@@ -168,6 +162,7 @@ export default {
       };
       this.axiosCall();
     },
+
   },
 };
 </script>

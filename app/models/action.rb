@@ -4,6 +4,8 @@ class Action < ApplicationRecord
     'Law & policy', 'Livelihood', 'Economic & other incentives' , 'Other'
   ]
 
+  scope :commitment_form_options, -> { where(default_option: true) }
+  
   has_and_belongs_to_many :commitments
   
   validates_presence_of :name

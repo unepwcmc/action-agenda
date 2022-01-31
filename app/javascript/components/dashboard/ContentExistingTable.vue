@@ -105,7 +105,7 @@
           />
           <a
             class="table-body__cell-action"
-            :href="editPath(commitment)"
+            @click="goToEditPath(commitment)"
           >
             <img
               class="table-body__cell-action-icon"
@@ -193,8 +193,8 @@ export default {
         })
     },
 
-    editPath (commitment) {
-      return `/commitments/${commitment.id}/edit`;
+    goToEditPath (commitment) {
+      window.location.replace(`/commitments/${commitment.id}/edit`);
     },
 
     live (commitment) {

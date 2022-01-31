@@ -1,4 +1,4 @@
-class Services::CommitmentProps  
+class Services::CommitmentProps
   def initialize(commitment)
     @commitment = commitment
   end
@@ -37,14 +37,14 @@ class Services::CommitmentProps
                 name: 'name',
                 title: I18n.t('form.commitments.page1.q1.title'),
                 description: I18n.t('form.commitments.page1.q1.description'),
-                isRequired: true, 
-                defaultValue: @commitment.name || ""
+                isRequired: true,
+                defaultValue: @commitment.name || ''
               },
               {
                 type: 'comment',
                 name: 'description',
                 title: I18n.t('form.commitments.page1.q2.title'),
-                defaultValue: @commitment.description || ""
+                defaultValue: @commitment.description || ''
               },
               {
                 type: 'checkbox',
@@ -52,7 +52,7 @@ class Services::CommitmentProps
                 title: I18n.t('form.commitments.page1.q3.title'),
                 description: I18n.t('form.commitments.page1.q3.description'),
                 defaultValue: @commitment.objective_ids || [],
-                choices: Objective.pluck(:id, :name).map do |id, name|
+                choices: Objective.commitment_form_options.pluck(:id, :name).map do |id, name|
                           if name != 'None of the above'
                             {
                               value: id,
@@ -69,7 +69,7 @@ class Services::CommitmentProps
                 title: I18n.t('form.commitments.page1.q4.title'),
                 description: I18n.t('form.commitments.page1.q3.description'),
                 defaultValue: @commitment.manager_ids || [],
-                choices: Manager.pluck(:id, :name).map do |id, name|
+                choices: Manager.commitment_form_options.pluck(:id, :name).map do |id, name|
                           if name != 'None of the above'
                             {
                               value: id,
@@ -87,13 +87,13 @@ class Services::CommitmentProps
                 visibleIf: "{ manager_ids } contains 'Joint governance'",
                 title: I18n.t('form.commitments.page1.q5.title'),
                 hideNumber: true,
-                defaultValue: @commitment.joint_governance_description || ""
+                defaultValue: @commitment.joint_governance_description || ''
               },
               {
                 type: 'text',
                 name: 'responsible_group',
                 title: I18n.t('form.commitments.page1.q6.title'),
-                defaultValue: @commitment.responsible_group || ""
+                defaultValue: @commitment.responsible_group || ''
               }
             ]
           },
@@ -119,7 +119,7 @@ class Services::CommitmentProps
               {
                 type: 'expression',
                 name: 'latlong_heading',
-                title: I18n.t('form.commitments.page2.q2.title'),
+                title: I18n.t('form.commitments.page2.q2.title')
               },
               {
                 type: 'text',
@@ -127,7 +127,7 @@ class Services::CommitmentProps
                 title: I18n.t('form.commitments.page2.q3.title'),
                 titleLocation: 'left',
                 hideNumber: true,
-                defaultValue: @commitment.latitude || ""
+                defaultValue: @commitment.latitude || ''
               },
               {
                 type: 'text',
@@ -135,7 +135,7 @@ class Services::CommitmentProps
                 title: I18n.t('form.commitments.page2.q4.title'),
                 titleLocation: 'left',
                 hideNumber: true,
-                defaultValue: @commitment.longitude || ""
+                defaultValue: @commitment.longitude || ''
               },
               {
                 type: 'file',
@@ -150,7 +150,7 @@ class Services::CommitmentProps
                 type: 'text',
                 name: 'current_area_ha',
                 title: I18n.t('form.commitments.page2.q6.title'),
-                defaultValue: @commitment.current_area_ha || ""
+                defaultValue: @commitment.current_area_ha || ''
               }
             ]
           },
@@ -161,7 +161,7 @@ class Services::CommitmentProps
                 type: 'dropdown',
                 name: 'committed_year',
                 title: I18n.t('form.commitments.page3.q1.title'),
-                defaultValue: @commitment.committed_year || "",
+                defaultValue: @commitment.committed_year || '',
                 choices: (2012..Date.today.year).to_a.reverse,
                 optionsCaption: I18n.t('form.commitments.page3.q1.caption')
               },
@@ -169,7 +169,7 @@ class Services::CommitmentProps
                 type: 'dropdown',
                 name: 'duration_years',
                 title: I18n.t('form.commitments.page3.q2.title'),
-                defaultValue: @commitment.duration_years || "",
+                defaultValue: @commitment.duration_years || '',
                 choices: (5..15).to_a,
                 optionsCaption: I18n.t('form.commitments.page3.q2.caption')
               }
@@ -193,7 +193,7 @@ class Services::CommitmentProps
                 title: I18n.t('form.commitments.page4.q2.title'),
                 description: I18n.t('form.commitments.page4.q2.description'),
                 defaultValue: @commitment.action_ids || [],
-                choices: Action.pluck(:id, :name).map do |id, name|
+                choices: Action.commitment_form_options.pluck(:id, :name).map do |id, name|
                           if name != 'None of the above'
                             {
                               value: id,
@@ -209,7 +209,7 @@ class Services::CommitmentProps
                 type: 'dropdown',
                 name: 'implementation_year',
                 title: I18n.t('form.commitments.page4.q3.title'),
-                defaultValue: @commitment.implementation_year || "",
+                defaultValue: @commitment.implementation_year || '',
                 choices: (2012..Date.today.year).to_a.reverse
               },
               {
@@ -218,7 +218,7 @@ class Services::CommitmentProps
                 title: I18n.t('form.commitments.page4.q4.title'),
                 description: I18n.t('form.commitments.page4.q4.description'),
                 defaultValue: @commitment.threat_ids || [],
-                choices: Threat.pluck(:id, :name).map do |id, name|
+                choices: Threat.commitment_form_options.pluck(:id, :name).map do |id, name|
                           if name != 'None of the above'
                             {
                               value: id,
@@ -283,7 +283,7 @@ class Services::CommitmentProps
                 confirmDeleteText: I18n.t('form.commitments.page5.q1.delete'),
                 panelAddText: I18n.t('form.commitments.page5.q1.add')
               }
-            ],
+            ]
           }
         ]
       }
