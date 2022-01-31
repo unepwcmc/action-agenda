@@ -15,7 +15,7 @@
         nextPage,
       }"
     />
-    <error-banner :errors="errors" />
+    <error-banner :errors="errors" :key="errorKey"/>
   </div>
 </template>
 
@@ -88,6 +88,7 @@ export default {
       isFirstPage: true,
       isLastPage: false,
       options: {},
+      errorKey: Math.random(),
       survey: model,
     };
   },
@@ -140,6 +141,7 @@ export default {
       if (this.dataModel === 'Commitment') {
         data['state'] = 'live';
       }
+      this.errorKey++
       this.send(data)
     },
 
@@ -162,7 +164,6 @@ export default {
       };
       this.axiosCall();
     },
-
   },
 };
 </script>
