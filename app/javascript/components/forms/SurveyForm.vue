@@ -81,11 +81,9 @@ export default {
     // call methods on library-provided events here
     model.onComplete.add(this.onComplete);
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
-    // model.onCompleting.add(this.onCompleting);
 
     return {
       errors: {},
-      hasNoErrors: Boolean,
       axiosDone: false,
       isFirstPage: true,
       isLastPage: false,
