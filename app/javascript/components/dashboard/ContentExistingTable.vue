@@ -33,6 +33,7 @@
       <div
         class="table-body__row"
         v-for="commitment in commitments"
+        :key="commitment.id"
       >
         <p class="table-body__cell">
           <span

@@ -116,6 +116,7 @@ export default {
         })
         .catch((error) => {
           if (error.response) {
+            this.errorKey++
             this.errors = error.response.data.errors;
           }
         });
@@ -141,7 +142,6 @@ export default {
       if (this.dataModel === 'Commitment') {
         data['state'] = 'live';
       }
-      this.errorKey++
       this.send(data)
     },
 
