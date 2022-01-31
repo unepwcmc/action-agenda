@@ -50,7 +50,7 @@ class Services::CommitmentProps
                 title: I18n.t('form.commitments.page1.q3.title'),
                 description: I18n.t('form.commitments.page1.q3.description'),
                 # defaultValue: [],
-                choices: Objective.pluck(:id, :name).map do |id, name|
+                choices: Objective.commitment_form_options.pluck(:id, :name).map do |id, name|
                           if name != 'None of the above'
                             {
                               value: id,
@@ -67,7 +67,7 @@ class Services::CommitmentProps
                 title: I18n.t('form.commitments.page1.q4.title'),
                 description: I18n.t('form.commitments.page1.q3.description'),
                 # defaultValue: [],
-                choices: Manager.pluck(:id, :name).map do |id, name|
+                choices: Manager.commitment_form_options.pluck(:id, :name).map do |id, name|
                           if name != 'None of the above'
                             {
                               value: id,
@@ -185,7 +185,7 @@ class Services::CommitmentProps
                 title: I18n.t('form.commitments.page4.q2.title'),
                 description: I18n.t('form.commitments.page4.q2.description'),
                 # defaultValue: [],
-                choices: Action.pluck(:id, :name).map do |id, name|
+                choices: Action.commitment_form_options.pluck(:id, :name).map do |id, name|
                           if name != 'None of the above'
                             {
                               value: id,
@@ -210,7 +210,7 @@ class Services::CommitmentProps
                 title: I18n.t('form.commitments.page4.q4.title'),
                 description: I18n.t('form.commitments.page4.q4.description'),
                 # defaultValue: [],
-                choices: Threat.pluck(:id, :name).map do |id, name|
+                choices: Threat.commitment_form_options.pluck(:id, :name).map do |id, name|
                           if name != 'None of the above'
                             {
                               value: id,
