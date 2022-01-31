@@ -114,11 +114,12 @@ export default {
         .then((response) => {
           if (response.data.redirect_path) {
             window.location.replace(window.location.origin + response.data.redirect_path)
-          }
+          } else {
+            window.location.replace(window.location.origin +'/dashboard')
+          }          
         })
         .catch((error) => {
-          console.log('FAILED!', error.response.data.errors);
-          if (error.response.data.errors) {
+          if (error.response) {
             this.errors = error.response.data.errors;
           }
         });
@@ -150,8 +151,6 @@ export default {
     onCurrentPageChanged() {
       this.isFirstPage = this.survey.isFirstPage;
       this.isLastPage = this.survey.isLastPage;
-
-      this.send(this.survey.data)
     },
     
     prevPage() {
