@@ -31,7 +31,7 @@
           @click.prevent="complete"
         />
         <button
-          v-if="isMiddlePage"
+          v-if="!firstPage"
           class="form-navigation__item form-navigation__item--save-middle-page"
           v-text="navigationText.exit.right"
           @click.prevent="openModal"
