@@ -110,7 +110,9 @@ export default {
     axiosCall() {
       axios(this.formData.config.action, this.options)
         .then((response) => {
-          window.location.replace(response.data.redirect_path)
+          if (response.data.redirect_path) {
+            window.location.replace(response.data.redirect_path)
+          }
         })
         .catch((error) => {
           if (error.response) {
