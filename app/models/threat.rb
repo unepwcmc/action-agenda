@@ -5,6 +5,8 @@ class Threat < ApplicationRecord
     'Genes & diseases', 'Pollution', 'Geological events', 'Climate change & severe weather', 'Other'
   ]
 
+  scope :commitment_form_options, -> { where(default_option: true) }
+
   has_and_belongs_to_many :commitments
   
   validates_presence_of :name
