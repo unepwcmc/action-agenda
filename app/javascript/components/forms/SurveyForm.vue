@@ -111,6 +111,7 @@ export default {
       axios(this.formData.config.action, this.options)
         .then((response) => {
           if (response.data.redirect_path) {
+            // preferred to turbolink so JQery reloads on the commitment form
             window.location.replace(response.data.redirect_path)
           }
         })
@@ -129,7 +130,7 @@ export default {
       if (this.dataModel === "Commitment") {
         this.send(this.survey.data)
       }
-      window.location.replace(response.data.redirect_path)
+      Turbolinks.visit("/dashboard")
     },
 
     nextPage() {
