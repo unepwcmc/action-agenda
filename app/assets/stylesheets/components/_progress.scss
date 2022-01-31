@@ -32,8 +32,7 @@
       content: '';
       margin-top: -(rem-calc((68 - 23) / 2));
       margin-left: 2rem;
-      width: 0;
-      height: 0;
+      width: 0; height: 0;
 
       position: absolute;
       z-index: 1;
@@ -51,8 +50,7 @@
       content: '';
       margin-top: -(rem-calc((68 - 23) / 2));
       margin-left: -5rem;
-      width: 0;
-      height: 0;
+      width: 0; height: 0;
 
       position: absolute;
       z-index: 0;
@@ -63,8 +61,7 @@
       content: '';
       margin-top: -(rem-calc((68 - 23) / 2));
       margin-left: -6rem;
-      width: 1rem;
-      height: rem-calc(68);
+      width: 1rem; height: rem-calc(68);
 
       position: absolute;
       z-index: 0;
