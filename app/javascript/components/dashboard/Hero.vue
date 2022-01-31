@@ -12,7 +12,7 @@
       />
       <a
         v-if="!hasCommitments"
-        :href="button.path"
+        @click="goTo(button.path)"
         class="dashboard-hero__button"
       >
         <span
@@ -48,6 +48,12 @@ export default {
   computed: {
     modifierClass () {
       return this.hasCommitments ? "dashboard-hero--existing-commitments" : "dashboard-hero--no-commitments"
+    }
+  },
+
+  methods: {
+    goTo(path) {
+      window.location.replace(path);
     }
   }
 }
