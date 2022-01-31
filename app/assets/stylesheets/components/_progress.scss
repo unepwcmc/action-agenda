@@ -32,7 +32,8 @@
       content: '';
       margin-top: -(rem-calc((68 - 23) / 2));
       margin-left: 2rem;
-      width: 0; height: 0;
+      width: 0;
+      height: 0;
 
       position: absolute;
       z-index: 1;
@@ -50,7 +51,8 @@
       content: '';
       margin-top: -(rem-calc((68 - 23) / 2));
       margin-left: -5rem;
-      width: 0; height: 0;
+      width: 0;
+      height: 0;
 
       position: absolute;
       z-index: 0;
@@ -61,10 +63,115 @@
       content: '';
       margin-top: -(rem-calc((68 - 23) / 2));
       margin-left: -6rem;
-      width: 1rem; height: rem-calc(68);
+      width: 1rem;
+      height: rem-calc(68);
 
       position: absolute;
       z-index: 0;
+    }
+  }
+}
+
+//--------------------------------------------------
+// SurveyJs
+//--------------------------------------------------
+.sv-root-modern {
+  .sv-body {
+    .sv_progress-buttons__image-button-left,
+    .sv_progress-buttons__image-button-right {
+      display: none;
+    }
+
+    .sv_progress-buttons__list-container {
+      all: initial;
+      font-family: $body-font;
+      overflow: hidden;
+      width: 100%;
+
+      display: flex;
+      justify-content: space-between;
+
+      .sv_progress-buttons__container-center {
+        text-align: left;
+      }
+    }
+    .sv_progress-buttons__list {
+      display: flex;
+      font-family: $body-font;
+      width: 100%;
+      
+      justify-content: space-around;
+
+      li {
+        @include flex;
+        @include flex-v-center;
+        background-color: $grey-mdlight;
+        font-size: rem-calc(20);
+        font-weight: bold;
+        font-family: $body-font;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+
+        &:before {
+          all: initial;
+        }
+
+        &:after {
+          display: none;
+        }
+
+        .sv_progress-buttons__page-title {
+          font-family: $body-font;
+          font-size: rem-calc(20);
+          font-weight: bold;
+          padding-left: 4rem;
+          min-width: fit-content;
+        }
+
+        .sv_progress-buttons__list {
+          &li::before {
+            all: unset;
+          }
+        }
+
+        &.sv_progress-buttons__list-element--passed {
+          &::after {
+            all: unset;
+          }
+        }
+
+        &.sv_progress-buttons__list-element--current {
+          all: unset;
+          position: inherit;
+          z-index: 3;
+
+          &:before {
+            all: initial;
+          }
+          .sv_progress-buttons__page-title {
+            background-color: $green-dark;
+            padding: rem-calc((68 - 23) / 2 0 (68 - 23) / 2 2rem);
+            color: $white;
+            font-family: $body-font;
+
+            &:after {
+              all: unset;
+              border-color: transparent transparent transparent $green-dark;
+              border-style: solid;
+              border-width: rem-calc(34) 0 rem-calc(34) rem-calc(45);
+              content: '';
+              margin-top: -(rem-calc((68 - 24) / 2));
+              width: 0;
+              height: 0;
+
+              position: absolute;
+              z-index: 1;
+            }
+          }
+        }
+      }
     }
   }
 }
