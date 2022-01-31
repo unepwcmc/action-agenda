@@ -24,6 +24,108 @@
 // primary
 //--------------------------------------------------
 .nav--primary {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .nav {
+    &__item {
+      display: flex;
+      align-items: center;
+
+      &:not(:first-child) {
+        .nav__link {
+          text-decoration: none;
+        }
+      }
+
+      &:last-child {
+        background-color: $green;
+        color: $black;
+        height: 100%;
+        
+        .nav__link {
+          line-height: rem-calc(44);
+          padding: 0 rem-calc(33);
+        }
+      }
+    }
+
+    &-dropdown {
+      background-color: $green;
+      cursor: pointer;
+      padding: 0 rem-calc(33);
+      height: 100%;
+  
+      display: flex;
+      align-items: center;
+
+      position: relative;
+    
+      &__icon {
+        display: flex;
+
+        &--user {
+          margin-right: rem-calc(9);
+          width: rem-calc(28);
+          height: rem-calc(28);  
+        }
+
+        &--chevron {
+          width: rem-calc(15.4);
+
+          transform: rotate(0);
+          transition: transform 0.3s ease;
+          
+        }
+
+        &--chevron-open {
+          transform: rotate(180deg);
+        }          
+      }
+  
+      &__list {
+        background-color: $green;
+        padding: 0;
+        min-width: rem-calc(196);
+  
+        position: absolute;
+        top: rem-calc(44);
+        right: 0;
+        z-index: 50;
+      }
+      
+      &__list-item {
+        color: $black;
+        list-style: none;
+        width: 100%;
+
+        &:hover {
+          background-color: $green-light;
+        }
+      }
+
+      &__link {
+        padding: rem-calc(10) 0 rem-calc(10) rem-calc(29);
+        text-decoration: none;
+        width: 100%;
+
+        display: flex;
+      }
+    }
+  }
+}
+
+//--------------------------------------------------
+// secondary
+//--------------------------------------------------
+.nav--secondary {
   @include nav-basic;
   text-align: center;
   width: 100%;
@@ -44,71 +146,6 @@
         display: inline-block;
       }
     }
-  }
-}
-
-.nav {
-  background-color: $green;
-  color: $black;
-  font-family: $header-font;
-  list-style: none;
-
-  a {
-    text-decoration: none;
-  }
-
-  &-dropdown {
-    margin-right: rem-calc(30);
-    padding: 0 rem-calc(30);
-
-    display: flex;
-    flex-direction: column;
-
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 100;
-
-    &:hover,
-    &:active {
-      background-color: $green;
-    }
-
-    img {
-      margin-top: rem-calc(3);
-      width: rem-calc(34);
-      height: rem-calc(34);
-    }
-
-    &__list {
-      background-color: $green;
-      margin-top: rem-calc(44);
-      padding: rem-calc(20) 0;
-      min-width: rem-calc(160);
-
-      position: absolute;
-      right: 0;
-      z-index: 50;
-
-      li {
-        color: $black;
-        list-style: none;
-        padding: 0 rem-calc(20);
-      }
-
-      li:hover {
-        background-color: $green-light;
-      }
-    }
-  }
-
-  &-item__last {
-    list-style: none;
-    padding: rem-calc(9.2) rem-calc(20);
-
-    position: absolute;
-    top: 0;
-    right: rem-calc(30);
   }
 }
 
