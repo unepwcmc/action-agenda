@@ -96,13 +96,11 @@ export default {
 
   mounted() {
     setAxiosHeaders(axios);
-    console.log(this.formData);
   },
 
   methods: {
     assignNoneValues(data) {
       Object.keys(this.noneValues).forEach((question) => {
-        console.log(data[question]);
         if (data[question] && data[question][0] === 'none') {
           data[question][0] = this.noneValues[question];
         }
@@ -112,11 +110,7 @@ export default {
     axiosCall() {
       axios(this.formData.config.action, this.options)
         .then((response) => {
-          if (response.data.redirect_path) {
-            window.location.replace(window.location.origin + response.data.redirect_path)
-          } else {
-            window.location.replace(window.location.origin +'/dashboard')
-          }          
+          window.location.replace(response.data.redirect_path)
         })
         .catch((error) => {
           if (error.response) {
@@ -133,7 +127,7 @@ export default {
       if (this.dataModel === "Commitment") {
         this.send(this.survey.data)
       }
-      Turbolinks.visit('/dashboard');
+      window.location.replace(response.data.redirect_path)
     },
 
     nextPage() {
