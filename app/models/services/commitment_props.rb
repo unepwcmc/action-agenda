@@ -38,7 +38,8 @@ class Services::CommitmentProps
                 title: I18n.t('form.commitments.page1.q1.title'),
                 description: I18n.t('form.commitments.page1.q1.description'),
                 isRequired: true,
-                defaultValue: @commitment.name || ''
+                defaultValue: @commitment.name || '',
+                popupdescription: ''
               },
               {
                 type: 'comment',
