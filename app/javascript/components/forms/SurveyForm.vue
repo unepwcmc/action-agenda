@@ -45,6 +45,11 @@ export default {
   },
 
   props: {
+    draftErrors: {
+      type: Object,
+      default: () => ({})
+    },
+
     formData: {
       type: Object,
       required: true,
@@ -72,7 +77,7 @@ export default {
 
     noneValues: {
       type: Object,
-      default: () => ({}),
+      default: () => ({})
     },
   },
 
@@ -81,7 +86,7 @@ export default {
     // call methods on library-provided events here
     model.onComplete.add(this.onComplete);
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
-
+    
     return {
       errors: {},
       axiosDone: false,
@@ -94,6 +99,14 @@ export default {
 
   mounted() {
     setAxiosHeaders(axios);
+
+    this.survey
+      .onUpdateQuestionCssClasses
+      .add((survey, options) => {
+          if (this.draftErrors[options.question.name]) {
+              options.cssClasses.mainRoot += " form__question--errors";
+          }
+      });
   },
 
   methods: {

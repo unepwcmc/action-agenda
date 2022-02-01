@@ -7,3 +7,13 @@
 // form navigation
 //--------------------------------------------------
 @import './form/navigation';
+//--------------------------------------------------
+// classes
+//--------------------------------------------------
+.form__question--errors {
+  .sv-question__title {
+    &:not(.sv-question__title--answer) {
+      color: $danger;
+    }
+  }
+}

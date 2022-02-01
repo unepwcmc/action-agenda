@@ -67,6 +67,14 @@ class Commitment < ApplicationRecord
     }
   ].freeze
 
+  def draft_errors
+    self.state = :live
+    valid?
+    draft_errors = errors.messages
+    self.state = :draft
+    draft_errors
+  end
+
   FILTERS = %w[actor country committed_year stage primary_objectives governance_type].freeze
 
   # Filters moved to CommitmentPresenter to avoid repetition
