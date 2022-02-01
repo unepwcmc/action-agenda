@@ -12,18 +12,29 @@ en:
         label: Does/will the area have a clearly-defined boundary?
         t: The area has, or will have, a clearly defined boundary
         f: The area does not and will not have a clearly defined boundary
+        popupdescription_html:
+          Note that the boundary does not need to be a physical barrier/visible on the ground.</br></br>
+          Each commitment can be either represented as a polygon boundary, or if unavailable, a point location.
       q2:
         label: Please select the objectives of the Convention on Biological Diversity that your commitment contributes to
+        popupdescription_html:  <a href='https://www.https://www.cbd.int/'>More details on CBD Objectives</a>
       q3:
         label: Who is making the commitment?
+        popupdescription_html: The individual or organization making the commitment
       q4:
         label: Is the duration of the commitment at least 5 years?
         t: 'Yes'
         f: 'No'
+        popupdescription_html: Will the conservation actions you are committing to be carried out for a period of at least 5 years?
       q5:
         label: Are you able to submit annual progress reports to this platform?
         t: 'Yes'
         f: 'No'
+        popupdescription_html: 
+          We are interested in knowing how your commitment progresses once it has been added to the platform. 
+          You will be sent periodic reminders asking you to submit progress reports. There is no specific format for these. 
+          If you already produce progress reports for another purpose, you are welcome to share these. 
+          If not, we will ask you to provide a few sentences detailing the steps taken to date.
       modal:
         question: Are you sure you want to exit this page?
         p: You’ll lose any information you have entered so far.
@@ -42,16 +53,25 @@ en:
           description: (To save or continue with this form, you’ll need to provide a name for your commitment)
         q2:
           title: Please provide a description for your commitment
+          popupdescription_html: 
+            Please provide information on the biodiversity in the area and, if possible, its status (is it declining, stable or improving?).
+            What are your specific objectives and how do you plan to achieve these? How will you measure whether you are achieving your objectives? Plus any other relevant information! 
         q3:
           title: Please select the primary management objectives for the area
           description: Multi select option
+          popupdescription_html: Objectives can be defined as what the commitment is trying to accomplish.
         q4:
           title: Who will be responsible for deciding how the area is being managed?
           description: Multi select option
+          popupdescription_html: 
+            We would like to understand who is accountable for how the area is or will be managed. Management refers to the actions carried out.</br></br>
+            <strong>Example of joint governance:</strong></br>
+            NGO in collaboration with a private landowner
         q5:
           title: Specify the type of joint governance
         q6:
           title: Name of the group responsible for decisions
+          popupdescription_html: For example, the name of a local community, NGO or local council
       page2:
         name: '2. Location'
         q1:
@@ -60,6 +80,9 @@ en:
           caption: -Select a country-
         q2:
           title: Please provide the latitude and longitude of the area
+          popupdescription_html:
+            "The latitude and longitude that the measure geographically resides (or will reside) within.
+            If unknown, please use this website: <a href='https://www.latlong.net/'>https://www.latlong.net/</a>" 
         q3:
           title: Latitude
         q4:
@@ -67,31 +90,51 @@ en:
         q5:
           title: If you have spatial data you would like to share, please upload it here.
           description: (Optional field)
+          popupdescription_html: 
+            The spatial data should be the geographical boundary of the area once the commitment has been implemented. 
+            For example, if your commitment is to expand an existing area, please provide the boundary as it will be once the expansion is complete.
         q6:
           title: How many hectares does/will the area cover?
+          popupdescription_html: If the commitment is to expand an existing area, please provide the area in ha that will be covered once the commitment is implemented
       page3:
         name: '3. Duration'
         q1:
           title: Please state the year the commitment was made
           caption: -Select-
+          popupdescription_html:
+            The year in which the commitment was pledged and not when it was registered in the platform. 
+            This could be in the past if the commitment is already in progress when it is submitted to the platform.
         q2:
           title: How many years do you expect the commitment to be in place for?
           caption: -Select-
-        q3:
-          title: Please select the stage of implementation of your commitment
-
+          popupdescription_html:
+            For how many years will you carry out the activities you are committing to? 
+            If this is dependent on factors outside your control, 
+            enter the number of years you intend to carry out activities assuming these factors do not present a problem
       page4:
         name: '4. Stage'
         q1:
           title: Please select the stage of implementation of your commitment
+          popupdescription_html:
+            Stage of the commitment. Is it a future commitment or has it already been implemented? 
+            Most commitments will be added to the platform at the 'committed' or 'in progress' stage, 
+            but data-providers will be encouraged to update the status of their commitment to 'implemented' when appropriate.
         q2:
           title: What actions do you intend/or have taken to implement the commitment?
           description: Multi select option
+          popupdescription_html:
+            Planned actions can be defined as measures undertaken to reach the primary management objectives and ultimate biodiversity outcomes. 
+            These actions have been identified using the IUCN CMP Classification of conservation actions.
         q3:
           title: Please state the first year of commitment actions
+          popupdescription_html:
+            This helps provide realistic expectations as to when planned actions are likely to start
         q4:
           title: What are the main threats that your commitment is seeking to address?
           description: Multi select option
+          popupdescription_html:
+            Direct threats are the proximate human activities or processes that have impacted, or are impacting the area. 
+            These actions have been identified using the IUNC CMP Classification of direct threats
         q5:
           title: Please provide the name and URL of any other websites containing information on your commitment.
           description: (Optional field)
@@ -104,6 +147,7 @@ en:
           description: (Optional field)
           add: Add another
           delete: Are you sure you want to delete this file?
+          popupdescription_html: The responsible enitity or organisation making or delivering the commitment.
       modal:
         question: Are you sure you want to exit this page?
         p1: If you still want to exit this page, selecting ‘Exit & Save’ will save any information you have entered so far*. Saved commitments will be accessible through your ‘My Dashboard’ page.
