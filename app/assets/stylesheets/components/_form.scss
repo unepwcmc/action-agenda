@@ -7,3 +7,75 @@
 // form navigation
 //--------------------------------------------------
 @import './form/navigation';
+
+//--------------------------------------------------
+// variables
+//--------------------------------------------------
+$radio-checkbox-width-height: rem-calc(39);
+
+//--------------------------------------------------
+// classes
+//--------------------------------------------------
+#v-app {
+  .sv-row {
+    &:not(:last-child) {
+      margin-bottom: rem-calc(71);
+      padding-bottom: 0;
+    }
+  }
+  .sv-question {
+    &__header {
+      margin-bottom: rem-calc(31);
+    }
+  
+    &__content {
+      margin-left: 0;
+    }
+  }
+
+  .sv-item {
+    &:not(:last-child) {
+      margin-bottom: rem-calc(19);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &__decorator {
+      border: none;
+      width: rem-calc($radio-checkbox-width-height);
+      height: rem-calc($radio-checkbox-width-height);
+  
+      left: rem-calc(-($radio-checkbox-width-height + rem-calc(23)));
+    }
+
+    &__svg {
+      background-color: $white;
+      border: rem-calc(1) solid $grey-md-dark;
+      width: rem-calc($radio-checkbox-width-height);
+      height: rem-calc($radio-checkbox-width-height);
+    }
+
+    &__control-label {
+      line-height: $radio-checkbox-width-height;
+
+      top: 0;
+    }
+  }
+
+  .sv-checkbox--checked, .sv-radio--checked {
+    .sv-item__svg {
+      fill: $grey-md-dark;
+    }
+  }
+  
+  .sv-selectbase {
+    margin-bottom: 0;
+      
+    &__label {
+      margin-left: rem-calc($radio-checkbox-width-height + rem-calc(23));
+      min-height: rem-calc($radio-checkbox-width-height);
+    }
+  }
+}
