@@ -35,7 +35,7 @@ class Commitment < ApplicationRecord
     size: { less_than: 25.megabytes }
 
   validates :name, presence: true
-  validates :stage, inclusion: { in: STAGE_OPTIONS }, allow_nil: true
+  validates :stage, inclusion: { in: STAGE_OPTIONS }, if: :live?
 
   validates_presence_of :description, :latitude, :longitude, :committed_year, :responsible_group, :duration_years,
                         :objectives, :managers, :countries, :actions, :threats, :current_area_ha, if: :live?
