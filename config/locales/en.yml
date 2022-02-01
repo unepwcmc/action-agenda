@@ -78,10 +78,11 @@ en:
       action_agenda: Action Agenda
     buttons:
       access: 'Access'
-      my_dashboard: My dashboard
-      login:
-        button: Login
+      my_dashboard: My Dashboard
+      log_in:
+        button: Log In
         title: Sign in to your Action Agenda account
+      log_out: Log Out 
     criterium:
       ineligible:
         title: This platform might not be the best place to record your commitment
