@@ -2,7 +2,7 @@
   <div class="dashboard-content-existing">
     <div class="dashboard-content-existing__add-button-wrapper">
       <a
-        :href="addButton.path"
+        @click="goTo(addButton.path)"
         class="dashboard-content-existing__add-button"
       >
         <span
@@ -74,6 +74,12 @@ export default {
     text: {
       type: Object,
       required: true
+    }
+  },
+  
+  methods: {
+    goTo(path) {
+      window.location.replace(path);
     }
   }
 }
