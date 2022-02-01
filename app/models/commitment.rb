@@ -38,7 +38,7 @@ class Commitment < ApplicationRecord
   validates :stage, inclusion: { in: STAGE_OPTIONS }, if: :live?
 
   validates_presence_of :description, :latitude, :longitude, :committed_year, :responsible_group, :implementation_year,
-                        :duration_years, :objectives, :managers, :countries, :actions, :threats, :current_area_ha, if: :live?
+                        :duration_years, :objectives, :managers, :countries, :actions, :threats, if: :live?
   
   validate :has_joint_governance_description, if: :live?
 
