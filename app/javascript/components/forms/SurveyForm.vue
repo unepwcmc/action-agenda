@@ -15,7 +15,7 @@
         nextPage,
       }"
     />
-    <error-banner :errors="errors" />
+    <error-banner :errors="errors" :key="errorKey"/>
   </div>
 </template>
 
@@ -88,6 +88,7 @@ export default {
       isFirstPage: true,
       isLastPage: false,
       options: {},
+      errorKey: Math.random(),
       survey: model,
     };
   },
@@ -115,6 +116,7 @@ export default {
         })
         .catch((error) => {
           if (error.response) {
+            this.errorKey++
             this.errors = error.response.data.errors;
           }
         });
@@ -162,7 +164,6 @@ export default {
       };
       this.axiosCall();
     },
-
   },
 };
 </script>
