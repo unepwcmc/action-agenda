@@ -72,7 +72,7 @@ class Commitment < ApplicationRecord
     valid?
     self.state = :draft
     errors.messages.map do |key, value|
-      if key.in?([:objectives, :managers, :countries, :actions])
+      if key.in?(%i(actions countries managers objectives threats))
         :"#{key.to_s.singularize}_ids"
       else
         key
