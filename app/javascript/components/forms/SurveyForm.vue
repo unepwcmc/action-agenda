@@ -30,7 +30,8 @@ import FormNavigation from './Navigation';
 import ErrorBanner from '../banners/ErrorBanner';
 
 SurveyVue.StylesManager.applyTheme('modern');
-
+SurveyVue.Serializer.addProperty('question', 'popupdescription:text');
+SurveyVue.Serializer.addProperty('page', 'popupdescription:text');
 widgets.select2tagbox(SurveyVue);
 
 const Survey = SurveyVue.Survey;
@@ -41,7 +42,7 @@ export default {
   components: {
     ErrorBanner,
     FormNavigation,
-    Survey,
+    Survey
   },
 
   props: {
@@ -52,22 +53,22 @@ export default {
 
     modalQuestionBody: {
       type: String,
-      required: true
+      required: true,
     },
 
     modalText: {
       type: Object,
-      required: true
+      required: true,
     },
 
     dataModel: {
       type: String,
-      required: true
+      required: true,
     },
 
     navigationText: {
       type: Object,
-      required: true
+      required: true,
     },
 
     noneValues: {
@@ -81,6 +82,7 @@ export default {
     // call methods on library-provided events here
     model.onComplete.add(this.onComplete);
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
+    model.onAfterRenderQuestion.add(this.onAfterRenderQuestion);
 
     return {
       errors: {},
@@ -110,7 +112,7 @@ export default {
         .then((response) => {
           if (response.data.redirect_path) {
             // preferred to turbolink so JQery reloads on the commitment form
-            window.location.replace(response.data.redirect_path)
+            window.location.replace(response.data.redirect_path);
           }
         })
         .catch((error) => {
@@ -121,14 +123,14 @@ export default {
     },
 
     complete() {
-      this.onComplete(this.survey)
+      this.onComplete(this.survey);
     },
 
     exit() {
-      if (this.dataModel === "Commitment") {
-        this.send(this.survey.data)
+      if (this.dataModel === 'Commitment') {
+        this.send(this.survey.data);
       }
-      Turbolinks.visit("/dashboard")
+      Turbolinks.visit('/dashboard');
     },
 
     nextPage() {
@@ -136,33 +138,50 @@ export default {
     },
 
     onComplete(sender) {
-      const data = sender.data
+      const data = sender.data;
       if (this.dataModel === 'Commitment') {
         data['state'] = 'live';
       }
-      this.send(data)
+      this.send(data);
     },
 
     onCurrentPageChanged() {
       this.isFirstPage = this.survey.isFirstPage;
       this.isLastPage = this.survey.isLastPage;
     },
-    
+
+    onAfterRenderQuestion(survey, options) {
+      //Return if there is no description to show in popup
+      if (!options.question.popupdescription) return;
+
+      //Add a button and description div;
+      let btn = document.createElement('button');
+      let description = document.createElement('div')
+      let header = options.htmlElement.querySelector('h5');
+
+      btn.type = 'button';
+      btn.className = 'tooltip trigger';
+      description.className = 'tooltip popup'
+      description.innerHTML = options.question.popupdescription;
+
+      header.appendChild(btn);
+      btn.onclick = () => header.lastChild == description ? header.removeChild(description) : header.appendChild(description);
+    },
+
     prevPage() {
       this.survey.prevPage();
     },
-    
+
     send(data) {
       if (this.dataModel === 'Criterium') {
         this.assignNoneValues(data);
-      } 
+      }
       this.options = {
         method: this.formData.config.method,
         data: { [this.formData.config.root_key]: data },
       };
       this.axiosCall();
     },
-
   },
 };
 </script>
