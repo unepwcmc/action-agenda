@@ -17,6 +17,21 @@ $radio-checkbox-width-height: rem-calc(39);
 // classes
 //--------------------------------------------------
 #v-app {
+  .survey-container {
+    margin-bottom: rem-calc(100);
+  }
+
+  .sv-container-modern__title, .sv-body__page {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .sv-container-modern__title {
+    margin-top: rem-calc(50);
+    margin-bottom: rem-calc(70);
+    padding: 0;
+  }
+
   .sv-row {
     &:not(:last-child) {
       margin-bottom: rem-calc(71);
@@ -76,6 +91,14 @@ $radio-checkbox-width-height: rem-calc(39);
     &__label {
       margin-left: rem-calc($radio-checkbox-width-height + rem-calc(23));
       min-height: rem-calc($radio-checkbox-width-height);
+    }
+
+    &__column {
+      min-width: 0;
+
+      &:not(:last-child) {
+        padding-right: rem-calc(65);
+      }
     }
   }
 }
