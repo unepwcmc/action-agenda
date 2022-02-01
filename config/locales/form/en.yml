@@ -69,6 +69,8 @@ en:
           description: (Optional field)
         q6:
           title: How many hectares does/will the area cover?
+        q7:
+          title: Hectares
       page3:
         name: '3. Duration'
         q1:

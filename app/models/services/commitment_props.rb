@@ -147,9 +147,16 @@ class Services::CommitmentProps
                 maxSize: 26_214_400
               },
               {
+                type: 'expression',
+                name: 'current_area_ha_heading',
+                title: I18n.t('form.commitments.page2.q6.title')
+              },
+              {
                 type: 'text',
                 name: 'current_area_ha',
-                title: I18n.t('form.commitments.page2.q6.title'),
+                title: I18n.t('form.commitments.page2.q7.title'),
+                titleLocation: 'left',
+                hideNumber: true,
                 defaultValue: @commitment.current_area_ha || ''
               }
             ]
