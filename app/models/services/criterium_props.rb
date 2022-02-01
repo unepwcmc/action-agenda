@@ -26,6 +26,7 @@ class Services::CriteriumProps
                 name: 'boundary',
                 title: I18n.t('form.criteria.q1.label'),
                 isRequired: true,
+                popupdescription: I18n.t('form.criteria.q1.popupdescription_html'),
                 choices: [
                   {
                     value: 'true',
@@ -42,6 +43,7 @@ class Services::CriteriumProps
                 name: 'cbd_objective_ids',
                 title: I18n.t('form.criteria.q2.label'),
                 isRequired: true,
+                popupdescription: I18n.t('form.criteria.q2.popupdescription_html'),
                 choices: CbdObjective.pluck(:id, :name).map do |id, name|
                           if name != 'None of the above'
                             {
@@ -60,6 +62,7 @@ class Services::CriteriumProps
                 name: 'stakeholder_ids',
                 title: I18n.t('form.criteria.q3.label'),
                 isRequired: true,
+                popupdescription: I18n.t('form.criteria.q3.popupdescription_html'),
                 choices: Stakeholder.pluck(:id, :name).map do |id, name|
                           if name != 'None of the above'
                             {
@@ -78,6 +81,7 @@ class Services::CriteriumProps
                 name: 'five_year_commitment',
                 title: I18n.t('form.criteria.q4.label'),
                 isRequired: true,
+                popupdescription: I18n.t('form.criteria.q4.popupdescription_html'),
                 choices: [
                   {
                     value: 'true',
@@ -95,6 +99,7 @@ class Services::CriteriumProps
                 name: 'progress_report',
                 title: I18n.t('form.criteria.q5.label'),
                 isRequired: true,
+                popupdescription: I18n.t('form.criteria.q5.popupdescription_html'),
                 choices: [
                   {
                     value: 'true',
