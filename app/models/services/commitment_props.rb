@@ -144,7 +144,7 @@ class Services::CommitmentProps
                 description: I18n.t('form.commitments.page2.q5.tdescription'),
                 hideNumber: true,
                 allowImagesPreview: false,
-                maxSize: 26_214_400,
+                maxSize: 26_214_400
               },
               {
                 type: 'text',
@@ -269,7 +269,7 @@ class Services::CommitmentProps
                     type: 'file',
                     name: 'document',
                     titleLocation: 'hidden',
-                    maxSize: 26_214_400,
+                    maxSize: 26_214_400
                   },
                   {
                     type: 'comment',

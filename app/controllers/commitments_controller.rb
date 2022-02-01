@@ -33,9 +33,7 @@ class CommitmentsController < ApplicationController
   end
 
   def new
-    if true
-      
-      # params[:criterium_id] && criterium_id_valid?
+    if params[:criterium_id] && criterium_id_valid?
       @commitment = Commitment.new(criterium_id: params[:criterium_id])
       @form_hash = Services::CommitmentProps.new(@commitment).call
     else
