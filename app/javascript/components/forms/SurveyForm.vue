@@ -80,9 +80,9 @@ export default {
   data() {
     const model = new SurveyVue.Model(this.formData.survey);
     // call methods on library-provided events here
+    model.onAfterRenderQuestion.add(this.onAfterRenderQuestion);
     model.onComplete.add(this.onComplete);
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
-    model.onAfterRenderQuestion.add(this.onAfterRenderQuestion);
 
     return {
       errors: {},
@@ -145,11 +145,6 @@ export default {
       this.send(data);
     },
 
-    onCurrentPageChanged() {
-      this.isFirstPage = this.survey.isFirstPage;
-      this.isLastPage = this.survey.isLastPage;
-    },
-
     onAfterRenderQuestion(survey, options) {
       //Return if there is no description to show in popup
       if (!options.question.popupdescription) return;
@@ -166,6 +161,11 @@ export default {
 
       header.appendChild(btn);
       btn.onclick = () => header.lastChild == description ? header.removeChild(description) : header.appendChild(description);
+    },
+
+    onCurrentPageChanged() {
+      this.isFirstPage = this.survey.isFirstPage;
+      this.isLastPage = this.survey.isLastPage;
     },
 
     prevPage() {
