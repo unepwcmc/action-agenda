@@ -130,12 +130,6 @@ export default {
     }
   },
 
-  computed: {
-    isMiddlePage () {
-      return !this.isFirstPage && !this.isLastPage;
-    }
-  },
-
   methods: {
     closeModal () {
       this.showModal = false
