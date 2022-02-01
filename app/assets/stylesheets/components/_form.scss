@@ -42,9 +42,38 @@ $radio-checkbox-width-height: rem-calc(39);
     &__header {
       margin-bottom: rem-calc(31);
     }
+
+    &__title {
+      &--answer {
+        background: none;
+      }
+    }
   
     &__content {
+      color: $grey-xxdark;
       margin-left: 0;
+    }
+
+    &[data-name="latitude"], &[data-name="longitude"], &[data-name="current_area_ha"] {
+      display: flex;
+      align-items: center;
+
+      .sv-question__header {
+        float: none;
+        margin: 0 0 0 rem-calc(17);
+        padding: 0;
+        width: auto;
+        
+        order: 2;
+      }
+
+      .sv-question__content {
+        order: 1;
+
+        .sv-text {
+          width: rem-calc(281);
+        }
+      }
     }
   }
 
@@ -79,10 +108,42 @@ $radio-checkbox-width-height: rem-calc(39);
     }
   }
 
-  .sv-checkbox--checked, .sv-radio--checked {
-    .sv-item__svg {
-      fill: $grey-md-dark;
+  .sv-text, .sv-comment, .select2-selection {
+    background-color: $white;
+    border: rem-calc(1) solid $grey-md-dark;
+    border-radius: 0;
+    width: rem-calc(670);
+  }
+
+  .sv-text, .select2-selection {
+    height: rem-calc(64);
+
+    display: flex;
+    align-items: center;
+  }
+
+  .select2 {    
+    &-selection {
+      padding: 0.25rem 0 0.25rem 0.87rem;
+  
+      &__rendered {
+        padding: 0;
+        height: rem-calc(21);
+      }
+  
+      &__choice {
+        margin-top: rem-calc(0);
+      }
     }
+
+    &-search__field {
+      margin-top: rem-calc(0);
+    }
+  }
+
+
+  .sv-comment {
+    height: rem-calc(160);
   }
   
   .sv-selectbase {
@@ -99,6 +160,16 @@ $radio-checkbox-width-height: rem-calc(39);
       &:not(:last-child) {
         padding-right: rem-calc(65);
       }
+    }
+  }
+
+  .sv-checkbox__svg {
+    border-radius: 0;
+  }
+
+  .sv-checkbox--checked, .sv-radio--checked {
+    .sv-item__svg {
+      fill: $grey-md-dark;
     }
   }
 }
