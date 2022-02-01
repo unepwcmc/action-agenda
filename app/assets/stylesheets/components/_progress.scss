@@ -145,9 +145,10 @@
 
         &.sv_progress-buttons__list-element--current {
           all: unset;
+          padding-left: 0;
+          
           position: inherit;
           z-index: 3;
-          padding-left: 0;
 
           &:before {
             all: initial;
@@ -171,14 +172,14 @@
         }
 
         &.sv_progress-buttons__list-element--current ~ li {
-          padding-left: 4rem;
+          color: $grey-xdark;
           background-color: $grey-mdlight;
           font-size: rem-calc(20);
           font-weight: bold;
           font-family: $body-font;
-          color: $grey-xdark;
           list-style: none;
           margin: 0;
+          padding-left: 4rem;
           width: 100%;
 
           &:before {
@@ -209,8 +210,8 @@
           }
           .sv_progress-buttons__page-title {
             all: inherit;
-            margin-left: -3rem;
             background: transparent;
+            margin-left: -3rem;
             min-width: fit-content;
 
             &:after {
