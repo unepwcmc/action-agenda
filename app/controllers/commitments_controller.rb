@@ -59,7 +59,6 @@ class CommitmentsController < ApplicationController
 
   def edit
     raise ForbiddenError unless @commitment.user == current_user
-    @draft_errors = @commitment.draft_errors
     @form_hash = Services::CommitmentProps.new(@commitment).call
   end
 

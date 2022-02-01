@@ -45,11 +45,6 @@ export default {
   },
 
   props: {
-    draftErrors: {
-      type: Object,
-      default: () => ({})
-    },
-
     formData: {
       type: Object,
       required: true,
@@ -87,7 +82,7 @@ export default {
     model.onComplete.add(this.onComplete);
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
     model.onUpdateQuestionCssClasses.add((survey, options) => {
-      if (this.draftErrors[options.question.name]) {
+      if (this.formData.errors.includes(options.question.name)) {
         options.cssClasses.mainRoot += " form__question--errors";
       }
     });

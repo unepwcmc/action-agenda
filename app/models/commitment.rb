@@ -71,7 +71,13 @@ class Commitment < ApplicationRecord
     self.state = :live
     valid?
     self.state = :draft
-    errors.messages
+    errors.messages.map do |key, value|
+      if key.in?([:objectives, :managers, :countries, :actions])
+        :"#{key.to_s.singularize}_ids"
+      else
+        key
+      end
+    end
   end
 
   FILTERS = %w[actor country committed_year stage primary_objectives governance_type].freeze
