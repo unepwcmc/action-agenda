@@ -11,7 +11,7 @@
 //--------------------------------------------------
 .sv-body {
   font-family: $body-font;
-  
+  min-height: 75vh;
   .sv-title {
     font-family: $header-font;
   }
