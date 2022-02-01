@@ -47,7 +47,7 @@ en:
       page1:
         name: '1. General Info'
         title: General Info
-        description: Commitment’ refers to what you intend to do, for example establishing a new protected area, or working to improve the management of an existing area. ‘Area’ refers to the geographical area that is (or will be) under management as a result of this commitment.
+        description: ‘Commitment’ refers to what you intend to do, for example establishing a new protected area, or working to improve the management of an existing area. ‘Area’ refers to the geographical area that is (or will be) under management as a result of this commitment.
         q1:
           title: Enter commitment name
           description: (To save or continue with this form, you’ll need to provide a name for your commitment)
@@ -81,7 +81,7 @@ en:
         q2:
           title: Please provide the latitude and longitude of the area
           popupdescription_html:
-            "The latitude an longitude that the measure geographically resides (or will reside) within.
+            "The latitude and longitude that the measure geographically resides (or will reside) within.
             If unknown, please use this website: <a href='https://www.latlong.net/'>https://www.latlong.net/</a>" 
         q3:
           title: Latitude
@@ -133,7 +133,7 @@ en:
           title: What are the main threats that your commitment is seeking to address?
           description: Multi select option
           popupdescription_html:
-            Direct threats are the proximate human actiivites or processes that have impacted, are impacting the area. 
+            Direct threats are the proximate human activities or processes that have impacted, or are impacting the area. 
             These actions have been identified using the IUNC CMP Classification of direct threats
         q5:
           title: Please provide the name and URL of any other websites containing information on your commitment.

@@ -90,7 +90,7 @@ class Services::CommitmentProps
                 visibleIf: "{ manager_ids } contains 'Joint governance'",
                 title: I18n.t('form.commitments.page1.q5.title'),
                 hideNumber: true,
-                defaultValue: @commitment.joint_governance_description || '',
+                defaultValue: @commitment.joint_governance_description || ''
               },
               {
                 type: 'text',
