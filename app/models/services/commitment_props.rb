@@ -5,12 +5,12 @@ class Services::CommitmentProps
 
   def call
     {
-      config:
-      {
+      config: {
         action: @commitment.new_record? ? '/commitments.json' : "/commitments/#{@commitment.id}.json",
         method: @commitment.new_record? ? 'post' : 'put',
         root_key: 'commitment'
       },
+      errors: @commitment.new_record? ? [] : @commitment.draft_errors,
       survey: {
         progressBarType: 'buttons',
         requiredText: '',

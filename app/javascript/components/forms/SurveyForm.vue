@@ -72,7 +72,7 @@ export default {
 
     noneValues: {
       type: Object,
-      default: () => ({}),
+      default: () => ({})
     },
   },
 
@@ -81,6 +81,11 @@ export default {
     // call methods on library-provided events here
     model.onComplete.add(this.onComplete);
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
+    model.onUpdateQuestionCssClasses.add((survey, options) => {
+      if (this.formData.errors?.includes(options.question.name)) {
+        options.cssClasses.mainRoot += " form__question--errors";
+      }
+    });
 
     return {
       errors: {},

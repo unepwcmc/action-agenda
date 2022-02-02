@@ -16,6 +16,15 @@ $radio-checkbox-width-height: rem-calc(39);
 //--------------------------------------------------
 // classes
 //--------------------------------------------------
+
+.form__question--errors {
+  .sv-question__title {
+    &:not(.sv-question__title--answer) {
+      color: $danger;
+    }
+  }
+}
+
 #v-app {
   .survey-container {
     margin-bottom: rem-calc(100);
