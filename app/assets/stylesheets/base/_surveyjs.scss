@@ -1,21 +1,193 @@
 //--------------------------------------------------
 // variables
 //--------------------------------------------------
-
-//--------------------------------------------------
-// mixins
-//--------------------------------------------------
+$radio-checkbox-width-height: rem-calc(39);
 
 //--------------------------------------------------
 // classes
 //--------------------------------------------------
-.sv-body {
-  font-family: $body-font;
-  min-height: 75vh;
+.form__question--errors {
+  .sv-question__title {
+    &:not(.sv-question__title--answer) {
+      color: $danger;
+    }
+  }
+}
+
+.select2-dropdown {
+  width: rem-calc(670) !important;
+}
+
+#v-app {
+  .survey-container {
+    margin-bottom: rem-calc(100);
+  }
+
+  .sv-body {
+    font-family: $body-font;
+    min-height: 60vh;
+  }
+
   .sv-title {
     font-family: $header-font;
   }
-}
-.sv-question {
-  overflow: visible;
+  
+  .sv-container-modern__title, .sv-body__page {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .sv-container-modern__title {
+    margin-top: rem-calc(50);
+    margin-bottom: rem-calc(70);
+    padding: 0;
+  }
+
+  .sv-row {
+    &:not(:last-child) {
+      margin-bottom: rem-calc(71);
+      padding-bottom: 0;
+    }
+  }
+  .sv-question {
+    overflow: visible;
+
+    &__header {
+      margin-bottom: rem-calc(31);
+    }
+
+    &__title {
+      &--answer {
+        background: none;
+      }
+    }
+  
+    &__content {
+      color: $grey-xxdark;
+      margin-left: 0;
+    }
+
+    &[data-name="latitude"], &[data-name="longitude"], &[data-name="current_area_ha"] {
+      display: flex;
+      align-items: center;
+
+      .sv-question__header {
+        float: none;
+        margin: 0 0 0 rem-calc(17);
+        padding: 0;
+        width: auto;
+        
+        order: 2;
+      }
+
+      .sv-question__content {
+        order: 1;
+
+        .sv-text {
+          width: rem-calc(281);
+        }
+      }
+    }
+  }
+
+  .sv-item {
+    &:not(:last-child) {
+      margin-bottom: rem-calc(19);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &__decorator {
+      border: none;
+      width: rem-calc($radio-checkbox-width-height);
+      height: rem-calc($radio-checkbox-width-height);
+  
+      left: rem-calc(-($radio-checkbox-width-height + rem-calc(23)));
+    }
+
+    &__svg {
+      background-color: $white;
+      border: rem-calc(1) solid $grey-md-dark;
+      width: rem-calc($radio-checkbox-width-height);
+      height: rem-calc($radio-checkbox-width-height);
+    }
+
+    &__control-label {
+      line-height: $radio-checkbox-width-height;
+
+      top: 0;
+    }
+  }
+
+  .sv-text, .sv-comment, .sv-dropdown, .select2-selection {
+    background-color: $white;
+    border: rem-calc(1) solid $grey-md-dark;
+    border-radius: 0;
+  }
+
+  .sv-text, .sv-comment, .select2-selection {
+    padding: 0.87rem;
+    width: rem-calc(670);
+  }
+
+  .sv-text, .sv-dropdown, .select2-selection {
+    height: rem-calc(64);
+  }
+
+  .sv-comment {
+    height: rem-calc(160);
+  }
+
+  .select2 {    
+    &-selection {
+      display: flex;
+      align-items: center;
+  
+      &__rendered {
+        padding: 0;
+        height: rem-calc(21);
+      }
+  
+      &__choice {
+        margin-top: rem-calc(0);
+      }
+    }
+
+    &-search__field {
+      margin-top: rem-calc(0);
+    }
+  }
+  
+  .sv-dropdown {
+    width: rem-calc(180);
+  }
+
+  .sv-selectbase {
+    margin-bottom: 0;
+      
+    &__label {
+      margin-left: rem-calc($radio-checkbox-width-height + rem-calc(23));
+      min-height: rem-calc($radio-checkbox-width-height);
+    }
+
+    &__column {
+      min-width: 0;
+
+      &:not(:last-child) {
+        padding-right: rem-calc(65);
+      }
+    }
+  }
+
+  .sv-checkbox__svg {
+    border-radius: 0;
+  }
+
+  .sv-checkbox--checked, .sv-radio--checked {
+    .sv-item__svg {
+      fill: $grey-md-dark;
+    }
+  }
 }
