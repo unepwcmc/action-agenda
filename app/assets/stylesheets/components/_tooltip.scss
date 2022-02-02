@@ -1,0 +1,56 @@
+//--------------------------------------------------
+// variables
+//--------------------------------------------------
+
+//--------------------------------------------------
+// mixins
+//--------------------------------------------------
+
+//--------------------------------------------------
+// classes
+//--------------------------------------------------
+.tooltip {
+  position: relative;
+    
+  &.popup {
+    background-color: $white;
+    font-family: $body-font;
+    font-size: rem-calc(12);
+    font-weight: 500;
+    line-height: 1.2;
+    padding: rem-calc(20);
+    max-width: 80%;
+
+    position: absolute;
+    top: 0;
+    right: rem-calc(52);
+    z-index: 3;
+    
+    &:after {
+      border: rem-calc(12) solid transparent;
+      border-left-color: $white;
+      border-right: 0;
+      content: '';
+      margin-top: -(rem-calc(2));
+      margin-right: -(rem-calc(10));
+      width: 0;
+      height: 0;
+
+      position: absolute;
+      top: 2%;
+      right: 0;
+    }
+  }
+  &.trigger {
+    background-image: image-url('icons/tooltip.svg');
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: rem-calc(40); height: rem-calc(40);
+
+    position: absolute;
+    top: 0;
+    right: 0;
+  } 
+}

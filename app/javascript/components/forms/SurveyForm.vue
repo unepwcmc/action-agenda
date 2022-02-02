@@ -15,7 +15,7 @@
         nextPage,
       }"
     />
-    <error-banner :errors="errors" :key="errorKey"/>
+    <error-banner :errors="errors" :key="errorKey" />
   </div>
 </template>
 
@@ -30,7 +30,8 @@ import FormNavigation from './Navigation';
 import ErrorBanner from '../banners/ErrorBanner';
 
 SurveyVue.StylesManager.applyTheme('modern');
-
+SurveyVue.Serializer.addProperty('question', 'popupdescription:text');
+SurveyVue.Serializer.addProperty('page', 'popupdescription:text');
 widgets.select2tagbox(SurveyVue);
 
 const Survey = SurveyVue.Survey;
@@ -52,38 +53,39 @@ export default {
 
     modalQuestionBody: {
       type: String,
-      required: true
+      required: true,
     },
 
     modalText: {
       type: Object,
-      required: true
+      required: true,
     },
 
     dataModel: {
       type: String,
-      required: true
+      required: true,
     },
 
     navigationText: {
       type: Object,
-      required: true
+      required: true,
     },
 
     noneValues: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
   },
 
   data() {
     const model = new SurveyVue.Model(this.formData.survey);
     // call methods on library-provided events here
+    model.onAfterRenderQuestion.add(this.onAfterRenderQuestion);
     model.onComplete.add(this.onComplete);
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
     model.onUpdateQuestionCssClasses.add((survey, options) => {
       if (this.formData.errors?.includes(options.question.name)) {
-        options.cssClasses.mainRoot += " form__question--errors";
+        options.cssClasses.mainRoot += ' form__question--errors';
       }
     });
 
@@ -116,26 +118,26 @@ export default {
         .then((response) => {
           if (response.data.redirect_path) {
             // preferred to turbolink so JQery reloads on the commitment form
-            window.location.replace(response.data.redirect_path)
+            window.location.replace(response.data.redirect_path);
           }
         })
         .catch((error) => {
           if (error.response) {
-            this.errorKey++
+            this.errorKey++;
             this.errors = error.response.data.errors;
           }
         });
     },
 
     complete() {
-      this.onComplete(this.survey)
+      this.onComplete(this.survey);
     },
 
     exit() {
-      if (this.dataModel === "Commitment") {
-        this.send(this.survey.data)
+      if (this.dataModel === 'Commitment') {
+        this.send(this.survey.data);
       }
-      Turbolinks.visit("/dashboard")
+      Turbolinks.visit('/dashboard');
     },
 
     nextPage() {
@@ -143,26 +145,47 @@ export default {
     },
 
     onComplete(sender) {
-      const data = sender.data
+      const data = sender.data;
       if (this.dataModel === 'Commitment') {
         data['state'] = 'live';
       }
-      this.send(data)
+      this.send(data);
+    },
+
+    onAfterRenderQuestion(survey, options) {
+      //Return if there is no description to show in popup
+      if (!options.question.popupdescription) return;
+
+      //Add a button and description div;
+      const btn = document.createElement('button');
+      const description = document.createElement('div');
+      const header = options.htmlElement.querySelector('h5');
+
+      btn.type = 'button';
+      btn.className = 'tooltip trigger';
+      description.className = 'tooltip popup';
+      description.innerHTML = options.question.popupdescription;
+
+      header.appendChild(btn);
+      btn.onclick = () =>
+        header.lastChild === description
+          ? header.removeChild(description)
+          : header.appendChild(description);
     },
 
     onCurrentPageChanged() {
       this.isFirstPage = this.survey.isFirstPage;
       this.isLastPage = this.survey.isLastPage;
     },
-    
+
     prevPage() {
       this.survey.prevPage();
     },
-    
+
     send(data) {
       if (this.dataModel === 'Criterium') {
         this.assignNoneValues(data);
-      } 
+      }
       this.options = {
         method: this.formData.config.method,
         data: { [this.formData.config.root_key]: data },

@@ -81,20 +81,25 @@
     .sv_progress-buttons__image-button-right {
       display: none;
     }
-
-    .sv_progress-buttons__list-container {
-      all: initial;
-      overflow: hidden;
-      width: 100%;
-    }
     
     .sv_progress-buttons__container-center { 
       text-align: left;
+
+      .sv_progress-buttons__container {
+        max-width: none;
+      }
+
+      .sv_progress-buttons__list-container {
+        all: unset;
+        width: 100%;
+      }
     }
 
     .sv_progress-buttons__list {
       display: flex;
       width: 100%;
+      margin: 0;
+      padding: 0;
 
       .sv_progress-buttons__page-title {
         color: unset;
@@ -126,7 +131,6 @@
           color: white;
           cursor: pointer;
           font-family: $body-font;
-          margin-left: -3rem;
           padding: rem-calc((68 - 23) / 2 0 (68 - 23) / 2 4rem);
 
           font-size: rem-calc(20);
