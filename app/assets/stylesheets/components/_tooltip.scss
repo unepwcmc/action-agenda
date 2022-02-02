@@ -22,8 +22,8 @@
     max-width: 80%;
 
     position: absolute;
-    right: rem-calc(52);
     top: 0;
+    right: rem-calc(52);
     z-index: 3;
     
     &:after {
@@ -37,8 +37,8 @@
       height: 0;
 
       position: absolute;
-      right: 0;
       top: 2%;
+      right: 0;
     }
   }
   &.trigger {
@@ -50,7 +50,7 @@
     width: rem-calc(40); height: rem-calc(40);
 
     position: absolute;
-    right: 0;
     top: 0;
+    right: 0;
   } 
 }
