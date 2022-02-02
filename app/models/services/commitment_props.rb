@@ -155,7 +155,7 @@ class Services::CommitmentProps
               {
                 type: 'expression',
                 name: 'current_area_ha_heading',
-                title: I18n.t('form.commitments.page2.q6.title')
+                title: I18n.t('form.commitments.page2.q6.title'),
                 popupdescription: I18n.t('form.commitments.page2.q6.popupdescription_html')
               },
               {
