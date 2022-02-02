@@ -1,34 +1,73 @@
 <template>
-  <div class="nav-dropdown">
-    <a @click="optionsDropdown">
-      <img :src="iconPath" alt="User navigation icon" />
-      <span
-        class="nav-dropdown__icon text-center"
-      />
-    </a>
+  <span
+    class="nav-dropdown"
+    @click="toggleDropdown"
+  >
+    <img
+      :src="userIconPath"
+      alt="User navigation icon"
+      class="nav-dropdown__icon nav-dropdown__icon--user"
+    />
+    <img
+      :src="chevronIconPath"
+      alt="Chevron icon"
+      class="nav-dropdown__icon nav-dropdown__icon--chevron"
+      :class="{ 'nav-dropdown__icon--chevron-open': showDropdown }"
+    />
     <ul
       class="nav-dropdown__list"
-      v-show="isOpen"
+      v-show="showDropdown"
     >
-      <li v-html="myAccount" />
-      <li v-html="logout" />
+      <li class="nav-dropdown__list-item">
+        <a
+          :href="myDashboardPath"
+          v-text="myDashboardText"
+          class="nav-dropdown__link"
+        />
+      </li>
+      <li class="nav-dropdown__list-item">
+        <a
+          :href="logOutPath"
+          data-method="delete"
+          rel="nofollow"
+          v-text="logOutText"
+          class="nav-dropdown__link"
+        />
+      </li>
     </ul>
-  </div>
+  </span>
 </template>
 
 <script>
 export default {
   name: 'NavDropdown',
   props: {
-    iconPath: {
+    chevronIconPath: {
       type: String,
       required: true,
     },
-    myAccount: {
+
+    logOutPath: {
       type: String,
       required: true,
     },
-    logout: {
+
+    logOutText: {
+      type: String,
+      required: true,
+    },
+
+    myDashboardPath: {
+      type: String,
+      required: true,
+    },
+
+    myDashboardText: {
+      type: String,
+      required: true,
+    },
+
+    userIconPath: {
       type: String,
       required: true,
     },
@@ -36,22 +75,14 @@ export default {
 
   data() {
     return {
-      isOpen: false,
-      itemsArray: [],
+      showDropdown: false
     };
   },
 
-  mounted() {
-    this.populateItems();
-  },
-
   methods: {
-    optionsDropdown() {
-      this.isOpen ? (this.isOpen = false) : (this.isOpen = true);
-    },
-    populateItems() {
-      this.itemsArray.push(this.myAccount, this.logout);
-    },
-  },
+    toggleDropdown() {
+      this.showDropdown = this.showDropdown ? false : true
+    }
+  }
 };
 </script>
