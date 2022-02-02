@@ -15,7 +15,7 @@
         nextPage,
       }"
     />
-    <error-banner :errors="errors" :key="errorKey"/>
+    <error-banner :errors="errors" :key="errorKey" />
   </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
   components: {
     ErrorBanner,
     FormNavigation,
-    Survey
+    Survey,
   },
 
   props: {
@@ -73,7 +73,7 @@ export default {
 
     noneValues: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
   },
 
@@ -85,7 +85,7 @@ export default {
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
     model.onUpdateQuestionCssClasses.add((survey, options) => {
       if (this.formData.errors?.includes(options.question.name)) {
-        options.cssClasses.mainRoot += " form__question--errors";
+        options.cssClasses.mainRoot += ' form__question--errors';
       }
     });
 
@@ -123,7 +123,7 @@ export default {
         })
         .catch((error) => {
           if (error.response) {
-            this.errorKey++
+            this.errorKey++;
             this.errors = error.response.data.errors;
           }
         });
@@ -157,17 +157,20 @@ export default {
       if (!options.question.popupdescription) return;
 
       //Add a button and description div;
-      let btn = document.createElement('button');
-      let description = document.createElement('div')
-      let header = options.htmlElement.querySelector('h5');
+      const btn = document.createElement('button');
+      const description = document.createElement('div');
+      const header = options.htmlElement.querySelector('h5');
 
       btn.type = 'button';
       btn.className = 'tooltip trigger';
-      description.className = 'tooltip popup'
+      description.className = 'tooltip popup';
       description.innerHTML = options.question.popupdescription;
 
       header.appendChild(btn);
-      btn.onclick = () => header.lastChild == description ? header.removeChild(description) : header.appendChild(description);
+      btn.onclick = () =>
+        header.lastChild === description
+          ? header.removeChild(description)
+          : header.appendChild(description);
     },
 
     onCurrentPageChanged() {

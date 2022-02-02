@@ -17,7 +17,7 @@ en:
           Each commitment can be either represented as a polygon boundary, or if unavailable, a point location.
       q2:
         label: Please select the objectives of the Convention on Biological Diversity that your commitment contributes to
-        popupdescription_html:  <a href='https://www.https://www.cbd.int/'>More details on CBD Objectives</a>
+        popupdescription_html: <a href='https://www.cbd.int/'>More details on CBD Objectives</a>
       q3:
         label: Who is making the commitment?
         popupdescription_html: The individual or organization making the commitment
