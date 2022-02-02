@@ -96,6 +96,8 @@ en:
         q6:
           title: How many hectares does/will the area cover?
           popupdescription_html: If the commitment is to expand an existing area, please provide the area in ha that will be covered once the commitment is implemented
+        q7:
+          title: Hectares
       page3:
         name: '3. Duration'
         q1:

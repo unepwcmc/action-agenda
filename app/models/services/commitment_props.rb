@@ -5,12 +5,12 @@ class Services::CommitmentProps
 
   def call
     {
-      config:
-      {
+      config: {
         action: @commitment.new_record? ? '/commitments.json' : "/commitments/#{@commitment.id}.json",
         method: @commitment.new_record? ? 'post' : 'put',
         root_key: 'commitment'
       },
+      errors: @commitment.new_record? ? [] : @commitment.draft_errors,
       survey: {
         progressBarType: 'buttons',
         requiredText: '',
@@ -153,11 +153,18 @@ class Services::CommitmentProps
                 popupdescription: I18n.t('form.commitments.page2.q5.popupdescription_html')
               },
               {
+                type: 'expression',
+                name: 'current_area_ha_heading',
+                title: I18n.t('form.commitments.page2.q6.title'),
+                popupdescription: I18n.t('form.commitments.page2.q6.popupdescription_html')
+              },
+              {
                 type: 'text',
                 name: 'current_area_ha',
-                title: I18n.t('form.commitments.page2.q6.title'),
-                defaultValue: @commitment.current_area_ha || '',
-                popupdescription: I18n.t('form.commitments.page2.q6.popupdescription_html')
+                title: I18n.t('form.commitments.page2.q7.title'),
+                titleLocation: 'left',
+                hideNumber: true,
+                defaultValue: @commitment.current_area_ha || ''
               }
             ]
           },

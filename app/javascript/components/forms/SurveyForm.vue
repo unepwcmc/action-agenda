@@ -15,7 +15,7 @@
         nextPage,
       }"
     />
-    <error-banner :errors="errors" />
+    <error-banner :errors="errors" :key="errorKey"/>
   </div>
 </template>
 
@@ -73,7 +73,7 @@ export default {
 
     noneValues: {
       type: Object,
-      default: () => ({}),
+      default: () => ({})
     },
   },
 
@@ -83,6 +83,11 @@ export default {
     model.onAfterRenderQuestion.add(this.onAfterRenderQuestion);
     model.onComplete.add(this.onComplete);
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
+    model.onUpdateQuestionCssClasses.add((survey, options) => {
+      if (this.formData.errors?.includes(options.question.name)) {
+        options.cssClasses.mainRoot += " form__question--errors";
+      }
+    });
 
     return {
       errors: {},
@@ -90,6 +95,7 @@ export default {
       isFirstPage: true,
       isLastPage: false,
       options: {},
+      errorKey: Math.random(),
       survey: model,
     };
   },
@@ -117,6 +123,7 @@ export default {
         })
         .catch((error) => {
           if (error.response) {
+            this.errorKey++
             this.errors = error.response.data.errors;
           }
         });

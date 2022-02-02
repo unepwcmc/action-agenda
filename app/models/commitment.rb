@@ -35,10 +35,10 @@ class Commitment < ApplicationRecord
     size: { less_than: 25.megabytes }
 
   validates :name, presence: true
-  validates :stage, inclusion: { in: STAGE_OPTIONS }, allow_nil: true
+  validates :stage, inclusion: { in: STAGE_OPTIONS }, if: :live?
 
-  validates_presence_of :description, :latitude, :longitude, :committed_year, :responsible_group, :duration_years,
-                        :objectives, :managers, :countries, :actions, :threats, :current_area_ha, if: :live?
+  validates_presence_of :description, :latitude, :longitude, :committed_year, :responsible_group, :implementation_year,
+                        :duration_years, :objectives, :managers, :countries, :actions, :threats, if: :live?
   
   validate :has_joint_governance_description, if: :live?
 
@@ -66,6 +66,19 @@ class Commitment < ApplicationRecord
       field: 'id'
     }
   ].freeze
+
+  def draft_errors
+    self.state = :live
+    valid?
+    self.state = :draft
+    errors.messages.map do |key, value|
+      if key.in?(%i(actions countries managers objectives threats))
+        :"#{key.to_s.singularize}_ids"
+      else
+        key
+      end
+    end
+  end
 
   FILTERS = %w[actor country committed_year stage primary_objectives governance_type].freeze
 
