@@ -14,6 +14,10 @@ $radio-checkbox-width-height: rem-calc(39);
   }
 }
 
+.select2-dropdown {
+  width: rem-calc(670) !important;
+}
+
 #v-app {
   .survey-container {
     margin-bottom: rem-calc(100);
