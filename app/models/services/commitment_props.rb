@@ -284,6 +284,7 @@ class Services::CommitmentProps
                 name: 'progress_documents_attributes',
                 title: I18n.t('form.commitments.page5.q1.title'),
                 description: I18n.t('form.commitments.page5.q1.description'),
+                popupdescription: I18n.t('form.commitments.page5.q1.popupdescription_html'),
                 templateElements: [
                   {
                     type: 'file',
