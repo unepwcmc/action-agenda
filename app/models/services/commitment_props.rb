@@ -10,7 +10,7 @@ class Services::CommitmentProps
         method: @commitment.new_record? ? 'post' : 'put',
         root_key: 'commitment'
       },
-      errors: @commitment.draft_errors,
+      errors: @commitment.new_record? ? [] : @commitment.draft_errors,
       survey: {
         progressBarType: 'buttons',
         requiredText: '',
