@@ -48,6 +48,7 @@ $radio-checkbox-width-height: rem-calc(39);
 }
 
 .select2-dropdown {
+  @include input-standard-font-size;
   width: rem-calc(670) !important;
 }
 
@@ -200,7 +201,6 @@ $radio-checkbox-width-height: rem-calc(39);
   
       &__rendered {
         padding: 0;
-        height: rem-calc(21);
       }
   
       &__choice {
