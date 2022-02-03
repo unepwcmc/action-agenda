@@ -151,6 +151,9 @@ $radio-checkbox-width-height: rem-calc(39);
 
   .sv-text {
     @include input-standard;
+    &::placeholder {
+      color: $grey;
+    }
   }
 
   .sv-comment {
