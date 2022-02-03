@@ -13,15 +13,11 @@
     <div id="v-app">
       <%= render partial: '/partials/topbar/topbar-primary' %>
 
-      <% if content_for?(:grey_bg) && (yield :grey_bg) %>
-        <div class="content bg--grey-xlight">
-      <% else %>
-        <div class="content">
-      <% end %>
+      <div class="content<%= " bg--grey-xlight" if @grey_bg %>">
         <%= yield %>
       </div>
 
-      <% if content_for?(:reduced_footer) && (yield :reduced_footer) %>
+      <% if @reduced_footer %>
         <%= render partial:'partials/global/reduced_footer' %>
       <% else %>
         <%= render partial:'partials/global/footer', locals: {
