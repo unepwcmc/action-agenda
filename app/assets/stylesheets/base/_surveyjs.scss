@@ -3,6 +3,7 @@
 //--------------------------------------------------
 @mixin input-standard {
   @include input-standard-background-border;
+  @include input-standard-font-size;
   @include input-standard-padding;
   @include input-standard-width;
   @include input-standard-height;
@@ -12,6 +13,10 @@
   background-color: $white;
   border: rem-calc(1) solid $grey-md-dark;
   border-radius: 0;
+}
+
+@mixin input-standard-font-size {
+  font-size: rem-calc(20);
 }
 
 @mixin input-standard-padding {
@@ -102,12 +107,6 @@ $radio-checkbox-width-height: rem-calc(39);
 
     &__header {
       margin-bottom: rem-calc(31);
-
-      // &--location--left {
-      //   .sv-question__title {
-      //     font-size: rem-calc(20);
-      //   }
-      // }
     }
 
     &__title {
@@ -171,6 +170,7 @@ $radio-checkbox-width-height: rem-calc(39);
     }
 
     &__control-label {
+      @include input-standard-font-size;
       line-height: $radio-checkbox-width-height;
 
       top: 0;
@@ -186,6 +186,7 @@ $radio-checkbox-width-height: rem-calc(39);
 
   .sv-comment {
     @include input-standard-background-border;
+    @include input-standard-font-size;
     @include input-standard-padding;
     @include input-standard-width;
     height: rem-calc(160);
@@ -214,6 +215,7 @@ $radio-checkbox-width-height: rem-calc(39);
   
   .sv-dropdown {
     @include input-standard-background-border;
+    @include input-standard-font-size;
     @include input-standard-padding;
     @include input-standard-height;
     width: rem-calc(180);
@@ -243,6 +245,113 @@ $radio-checkbox-width-height: rem-calc(39);
   .sv-checkbox--checked, .sv-radio--checked {
     .sv-item__svg {
       fill: $grey-md-dark;
+    }
+  }
+
+  .sv-file {
+    @include input-standard-width;
+    background-color: $white;
+    border: rem-calc(1) solid $grey-md-dark;
+    padding: rem-calc(7) rem-calc(7) rem-calc(7) rem-calc(22);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;   
+    
+    // file upload button and placeholder text outer div
+    &__decorator {
+      padding: 0;
+
+      display: flex;
+      order: 2;
+    }
+
+    // file upload button and placeholder text inner div
+    &__wrapper {
+      background-color: $white;
+      margin: 0;
+
+      display: flex;
+      align-items: center;
+
+      transform: none;
+    }
+
+    // file upload button
+    &__choose-btn {
+      @include button-accent-condensed-taller;
+      border-radius: 0;
+      width: rem-calc(235);
+  
+      justify-content: center;
+      order: 2;
+    }
+
+    // placeholder text
+    &__no-file-chosen {
+      font-size: rem-calc(20);
+      margin-right: rem-calc(20);
+      margin-left: 0;
+      color: $grey;
+
+      order: 1;
+    }
+
+    // uploaded file name with delete button outer div
+    &> div:not(.sv-file__decorator) {
+      margin-right: rem-calc(30);
+
+      order: 1;
+    }
+
+    // uploaded file name with delete button inner span
+    &__preview {
+      margin-top: 0;
+      padding-right: 0;
+
+      display: flex;
+      align-items: center;
+
+      // uploaded file name
+      .sv-file__sign {
+        font-size: rem-calc(20);
+        margin-right: rem-calc(10);
+
+        order: 1;
+      }
+
+      // delete button outer div
+      &> :not(.sv-file__sign) {
+        order: 2;
+      }
+    }
+
+    // delete button icon
+    &__remove-svg {
+      fill: $danger-dark;
+
+      display: flex;
+
+      position: static;
+    }
+
+    // unnecessary "clean" button that also deletes uploaded file
+    &__clean-btn {
+      display: none;
+    }
+  }
+
+  // makes flex work when no file is chosen
+  // specificity here is to make it work for file uploads within panels
+  .sv-question:not(.sv-question--answered) > * > * > .sv-file {
+    &__decorator {
+      width: 100%;
+    
+      .sv-file__wrapper {
+        width: 100%;
+  
+        justify-content: space-between;
+      }
     }
   }
 }
