@@ -84,8 +84,16 @@ export default {
     model.onComplete.add(this.onComplete);
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
     model.onUpdateQuestionCssClasses.add((survey, options) => {
+      // errors
       if (this.formData.errors?.includes(options.question.name)) {
         options.cssClasses.mainRoot += ' form__question--errors';
+      }
+
+      // multiselect
+      const multiselectQs = ["cbd_objective_ids", "stakeholder_ids", "objective_ids", "manager_ids", "country_ids", "action_ids", "threat_ids"]
+
+      if (multiselectQs.includes(options.question.name)) {
+        options.cssClasses.mainRoot += ' form__question--multiselect';
       }
     });
 
