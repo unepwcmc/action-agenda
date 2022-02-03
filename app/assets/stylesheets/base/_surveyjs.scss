@@ -4,6 +4,17 @@
 $radio-checkbox-width-height: rem-calc(39);
 
 //--------------------------------------------------
+// mixins
+//--------------------------------------------------
+@mixin survey-body-text {
+  color: $grey-xxdark;
+  font-family: $body-font;
+  line-height: 2;
+  font-weight: initial;
+  font-size: rem-calc(20);
+}
+
+//--------------------------------------------------
 // classes
 //--------------------------------------------------
 .form__question--errors {
@@ -23,8 +34,40 @@ $radio-checkbox-width-height: rem-calc(39);
     margin-bottom: rem-calc(100);
   }
 
+  .sv-header {
+    &__text {
+      color: $grey-xxdark;
+      
+      h3 {
+        font-size: rem-calc(48);
+      }
+
+      h5 {
+        @include survey-body-text;
+        
+        padding-top: rem-calc(20);
+      }
+    }
+  }
+
+  .sv-page__description {
+    @include survey-body-text;
+    margin: rem-calc(40) 0 rem-calc(20);
+    padding: 0;
+  }
+
   .sv-body {
     font-family: $body-font;
+    font-size: rem-calc(20);
+
+    h4 {
+      display: none;
+    }
+
+    h5 {
+      font-size: rem-calc(30);
+      padding: 0;
+    }
   }
 
   .sv-title {
@@ -38,21 +81,30 @@ $radio-checkbox-width-height: rem-calc(39);
 
   .sv-container-modern__title {
     margin-top: rem-calc(50);
-    margin-bottom: rem-calc(70);
+    margin-bottom: rem-calc(20);
     padding: 0;
   }
 
   .sv-row {
     &:not(:last-child) {
-      margin-bottom: rem-calc(71);
+      margin-bottom: rem-calc(30);
       padding-bottom: 0;
     }
   }
+  
   .sv-question {
     overflow: visible;
+    margin-bottom: rem-calc(30);
 
     &__header {
       margin-bottom: rem-calc(31);
+      
+      .sv-question__description {
+        color: $grey-xxdark;
+        font-style: italic;
+        padding: 0;
+        padding-top: rem-calc(10);
+      }
     }
 
     &__title {
