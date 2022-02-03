@@ -1,4 +1,32 @@
 //--------------------------------------------------
+// mixins
+//--------------------------------------------------
+@mixin input-standard {
+  @include input-standard-background-border;
+  @include input-standard-padding;
+  @include input-standard-width;
+  @include input-standard-height;
+}
+
+@mixin input-standard-background-border {
+  background-color: $white;
+  border: rem-calc(1) solid $grey-md-dark;
+  border-radius: 0;
+}
+
+@mixin input-standard-padding {
+  padding: 0.87rem;
+}
+
+@mixin input-standard-width {
+  width: rem-calc(670);
+}
+
+@mixin input-standard-height {
+  height: rem-calc(64);
+}
+
+//--------------------------------------------------
 // variables
 //--------------------------------------------------
 $radio-checkbox-width-height: rem-calc(39);
@@ -121,27 +149,20 @@ $radio-checkbox-width-height: rem-calc(39);
     }
   }
 
-  .sv-text, .sv-comment, .sv-dropdown, .select2-selection {
-    background-color: $white;
-    border: rem-calc(1) solid $grey-md-dark;
-    border-radius: 0;
-  }
-
-  .sv-text, .sv-comment, .select2-selection {
-    padding: 0.87rem;
-    width: rem-calc(670);
-  }
-
-  .sv-text, .sv-dropdown, .select2-selection {
-    height: rem-calc(64);
+  .sv-text {
+    @include input-standard;
   }
 
   .sv-comment {
+    @include input-standard-background-border;
+    @include input-standard-padding;
+    @include input-standard-width;
     height: rem-calc(160);
   }
 
   .select2 {    
     &-selection {
+      @include input-standard;
       display: flex;
       align-items: center;
   
@@ -161,6 +182,9 @@ $radio-checkbox-width-height: rem-calc(39);
   }
   
   .sv-dropdown {
+    @include input-standard-background-border;
+    @include input-standard-padding;
+    @include input-standard-height;
     width: rem-calc(180);
   }
 
