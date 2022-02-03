@@ -88,6 +88,7 @@ export default {
         options.cssClasses.mainRoot += ' form__question--errors';
       }
     });
+    model.onUpdatePageCssClasses.add(this.onUpdatePageCssClasses);
 
     return {
       errors: {},
@@ -176,6 +177,12 @@ export default {
     onCurrentPageChanged() {
       this.isFirstPage = this.survey.isFirstPage;
       this.isLastPage = this.survey.isLastPage;
+    },
+
+    onUpdatePageCssClasses(survey, options) {
+      if (options.page.num > 1) {
+        options.cssClasses.page.root += ' form__page--not-first';
+      }
     },
 
     prevPage() {
