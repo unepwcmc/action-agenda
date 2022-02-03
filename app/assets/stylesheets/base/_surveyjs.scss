@@ -91,11 +91,13 @@ $radio-checkbox-width-height: rem-calc(39);
     &__header {
       margin-bottom: rem-calc(25);
       
-      .sv-question__description {
-        color: $grey-xxdark;
-        font-style: italic;
-        margin-top: rem-calc(20);
-        padding: 0;
+      &:not(.sv-question__header--location--left) {
+        .sv-question__description {
+          color: $grey-xxdark;
+          font-style: italic;
+          margin-top: rem-calc(20);
+          padding: 0;
+        }
       }
     }
 
@@ -243,26 +245,28 @@ $radio-checkbox-width-height: rem-calc(39);
   }
   
   .form__question--multiselect {
-    .sv-question__description {
-      color: $grey-md-dark;
-      font-style: normal;
-      font-weight: $bold;
-
-      position: relative;
-
-      .sv-string-viewer {
-        display: flex;
-        align-items: center;
-
-        &:before {
-          background-image: image_url("icons/multiselect.svg");
-          background-repeat: no-repeat;
-          background-size: contain;
-          content: '';
-          margin-right: rem-calc(10);
-          width: rem-calc(24);
-          height: rem-calc(24);
-        }  
+    .sv-question__header--location--top {
+      .sv-question__description {
+        color: $grey-md-dark;
+        font-style: normal;
+        font-weight: $bold;
+  
+        position: relative;
+  
+        .sv-string-viewer {
+          display: flex;
+          align-items: center;
+  
+          &:before {
+            background-image: image_url("icons/multiselect.svg");
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: '';
+            margin-right: rem-calc(10);
+            width: rem-calc(24);
+            height: rem-calc(24);
+          }  
+        }
       }
     }
   }
