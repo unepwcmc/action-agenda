@@ -9,9 +9,9 @@ $radio-checkbox-width-height: rem-calc(39);
 @mixin survey-body-text {
   color: $grey-xxdark;
   font-family: $body-font;
-  line-height: 2;
-  font-weight: initial;
   font-size: rem-calc(20);
+  font-weight: initial;
+  line-height: 2;
 }
 
 //--------------------------------------------------
@@ -29,7 +29,8 @@ $radio-checkbox-width-height: rem-calc(39);
   .sv-header {
     &__text {
       color: $grey-xxdark;
-      
+      max-width: 85%;
+
       h3 {
         font-size: rem-calc(48);
       }
@@ -46,6 +47,7 @@ $radio-checkbox-width-height: rem-calc(39);
     @include survey-body-text;
     margin: rem-calc(40) 0 rem-calc(20);
     padding: 0;
+    max-width: 85%;
   }
 
   .sv-body {
@@ -59,6 +61,8 @@ $radio-checkbox-width-height: rem-calc(39);
     h5 {
       font-size: rem-calc(30);
       padding: 0;
+      padding-right: rem-calc(40);
+      max-width: rem-calc(780);
     }
   }
 
@@ -95,7 +99,7 @@ $radio-checkbox-width-height: rem-calc(39);
         .sv-question__description {
           color: $grey-xxdark;
           font-style: italic;
-          margin-top: rem-calc(20);
+          margin-top: rem-calc(18);
           padding: 0;
         }
       }
