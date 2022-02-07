@@ -24,7 +24,7 @@ class Services::CriteriumProps
               {
                 type: 'radiogroup',
                 name: 'boundary',
-                title: I18n.t('form.criteria.q1.label'),
+                title: I18n.t('form.criteria.q1.title'),
                 isRequired: true,
                 popupdescription: I18n.t('form.criteria.q1.popupdescription_html'),
                 choices: [
@@ -41,7 +41,8 @@ class Services::CriteriumProps
               {
                 type: 'checkbox',
                 name: 'cbd_objective_ids',
-                title: I18n.t('form.criteria.q2.label'),
+                title: I18n.t('form.criteria.q2.title'),
+                description: I18n.t('form.criteria.q2.description'),
                 isRequired: true,
                 popupdescription: I18n.t('form.criteria.q2.popupdescription_html'),
                 choices: CbdObjective.pluck(:id, :name).map do |id, name|
@@ -60,7 +61,8 @@ class Services::CriteriumProps
               {
                 type: 'checkbox',
                 name: 'stakeholder_ids',
-                title: I18n.t('form.criteria.q3.label'),
+                title: I18n.t('form.criteria.q3.title'),
+                description: I18n.t('form.criteria.q3.description'),
                 isRequired: true,
                 popupdescription: I18n.t('form.criteria.q3.popupdescription_html'),
                 choices: Stakeholder.pluck(:id, :name).map do |id, name|
@@ -79,7 +81,7 @@ class Services::CriteriumProps
               {
                 type: 'radiogroup',
                 name: 'five_year_commitment',
-                title: I18n.t('form.criteria.q4.label'),
+                title: I18n.t('form.criteria.q4.title'),
                 isRequired: true,
                 popupdescription: I18n.t('form.criteria.q4.popupdescription_html'),
                 choices: [
@@ -97,7 +99,7 @@ class Services::CriteriumProps
               {
                 type: 'radiogroup',
                 name: 'progress_report',
-                title: I18n.t('form.criteria.q5.label'),
+                title: I18n.t('form.criteria.q5.title'),
                 isRequired: true,
                 popupdescription: I18n.t('form.criteria.q5.popupdescription_html'),
                 choices: [

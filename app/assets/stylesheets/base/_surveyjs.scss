@@ -37,16 +37,19 @@
 $radio-checkbox-width-height: rem-calc(39);
 
 //--------------------------------------------------
-// classes
+// mixins
 //--------------------------------------------------
-.form__question--errors {
-  .sv-question__title {
-    &:not(.sv-question__title--answer) {
-      color: $danger;
-    }
-  }
+@mixin survey-body-text {
+  color: $grey-xxdark;
+  font-family: $body-font;
+  font-size: rem-calc(20);
+  font-weight: initial;
+  line-height: 2;
 }
 
+//--------------------------------------------------
+// classes
+//--------------------------------------------------
 .select2-dropdown {
   @include input-standard-font-size;
   width: rem-calc(670) !important;
@@ -57,9 +60,44 @@ $radio-checkbox-width-height: rem-calc(39);
     margin-bottom: rem-calc(100);
   }
 
+  .sv-header {
+    &__text {
+      color: $grey-xxdark;
+      max-width: 85%;
+
+      h3 {
+        font-size: rem-calc(48);
+      }
+
+      h5 {
+        @include survey-body-text;
+        
+        padding-top: rem-calc(20);
+      }
+    }
+  }
+
+  .sv-page__description {
+    @include survey-body-text;
+    margin: rem-calc(40) 0 rem-calc(20);
+    padding: 0;
+    max-width: 85%;
+  }
+
   .sv-body {
     font-family: $body-font;
-    min-height: 60vh;
+    font-size: rem-calc(20);
+
+    h4 {
+      display: none;
+    }
+
+    h5 {
+      font-size: rem-calc(30);
+      padding: 0;
+      padding-right: rem-calc(40);
+      max-width: rem-calc(780);
+    }
   }
 
   .sv-title {
@@ -73,17 +111,16 @@ $radio-checkbox-width-height: rem-calc(39);
 
   .sv-container-modern__title {
     margin-top: rem-calc(50);
-    margin-bottom: rem-calc(70);
+    margin-bottom: rem-calc(20);
     padding: 0;
   }
 
   .sv-page > .sv-row {
     &:not(:last-child) {
-      margin-bottom: rem-calc(71);
+      margin-bottom: rem-calc(30);
       padding-bottom: 0;
     }
   }
-
 
   :not(.sv-paneldynamic__panel-wrapper) > .sv-panel {
     .sv-row {
@@ -105,9 +142,20 @@ $radio-checkbox-width-height: rem-calc(39);
 
   .sv-question {
     overflow: visible;
+    margin-bottom: rem-calc(30);
 
     &__header {
-      margin-bottom: rem-calc(31);
+      margin-bottom: rem-calc(25);
+      
+      &:not(.sv-question__header--location--left) {
+        .sv-question__description {
+          color: $grey-xxdark;
+          font-style: italic;
+          font-size: rem-calc(18);
+          margin-top: rem-calc(20);
+          padding: 0;
+        }
+      }
     }
 
     &__title {
@@ -350,6 +398,45 @@ $radio-checkbox-width-height: rem-calc(39);
         width: 100%;
   
         justify-content: space-between;
+      }
+    }
+  }
+
+  .form__page--not-first {
+    margin-top: rem-calc(90);
+  }
+
+  .form__question--errors {
+    .sv-question__title {
+      &:not(.sv-question__title--answer) {
+        color: $danger;
+      }
+    }
+  }
+  
+  .form__question--multiselect {
+    .sv-question__header--location--top {
+      .sv-question__description {
+        color: $grey-md-dark;
+        font-style: normal;
+        font-weight: $bold;
+  
+        position: relative;
+  
+        .sv-string-viewer {
+          display: flex;
+          align-items: center;
+  
+          &:before {
+            background-image: image_url("icons/multiselect.svg");
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: '';
+            margin-right: rem-calc(10);
+            width: rem-calc(24);
+            height: rem-calc(24);
+          }  
+        }
       }
     }
   }
