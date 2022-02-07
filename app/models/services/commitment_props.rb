@@ -302,6 +302,7 @@ class Services::CommitmentProps
                     type: 'file',
                     name: 'document',
                     titleLocation: 'hidden',
+                    allowImagesPreview: false,
                     maxSize: 26_214_400
                   },
                   {
