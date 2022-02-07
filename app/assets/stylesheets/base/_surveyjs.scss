@@ -122,9 +122,9 @@ $radio-checkbox-width-height: rem-calc(39);
     }
   }
 
-  :not(.sv-paneldynamic__panel-wrapper) > .sv-panel {
+  .sv-panel {
     .sv-row {
-      &:first-child {
+      &:not(:last-child) {
         padding-bottom: 0;
       }
 
