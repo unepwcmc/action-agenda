@@ -265,7 +265,7 @@ class Services::CommitmentProps
                 type: 'paneldynamic',
                 name: 'links_attributes',
                 title: I18n.t('form.commitments.page4.q5.title'),
-                description: I18n.t('form.commitments.page4.q4.description'),
+                description: I18n.t('form.commitments.page4.q5.description'),
                 templateElements: [
                   {
                     type: 'text',
