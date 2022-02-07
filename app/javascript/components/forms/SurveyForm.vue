@@ -83,11 +83,7 @@ export default {
     model.onAfterRenderQuestion.add(this.onAfterRenderQuestion);
     model.onComplete.add(this.onComplete);
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
-    model.onUpdateQuestionCssClasses.add((survey, options) => {
-      if (this.formData.errors?.includes(options.question.name)) {
-        options.cssClasses.mainRoot += ' form__question--errors';
-      }
-    });
+    model.onUpdateQuestionCssClasses.add(this.onUpdateQuestionCssClasses);
     model.onUpdatePageCssClasses.add(this.onUpdatePageCssClasses);
 
     return {
@@ -177,6 +173,20 @@ export default {
     onCurrentPageChanged() {
       this.isFirstPage = this.survey.isFirstPage;
       this.isLastPage = this.survey.isLastPage;
+    },
+
+    onUpdateQuestionCssClasses(survey, options) {
+      // errors
+      if (this.formData.errors?.includes(options.question.name)) {
+        options.cssClasses.mainRoot += ' form__question--errors';
+      }
+
+      // multiselect
+      const multiselectQs = ["cbd_objective_ids", "stakeholder_ids", "objective_ids", "manager_ids", "country_ids", "action_ids", "threat_ids"];
+
+      if (multiselectQs.includes(options.question.name)) {
+        options.cssClasses.mainRoot += ' form__question--multiselect';
+      }
     },
 
     onUpdatePageCssClasses(survey, options) {
