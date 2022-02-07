@@ -121,50 +121,62 @@ class Services::CommitmentProps
                 defaultValue: @commitment.country_ids || []
               },
               {
-                type: 'expression',
-                name: 'latlong_heading',
-                title: I18n.t('form.commitments.page2.q2.title'),
-                popupdescription: I18n.t('form.commitments.page2.q2.popupdescription_html')
+                type: 'panel',
+                name: 'latlong_geospatial_panel',
+                elements: [
+                  {
+                    type: 'expression',
+                    name: 'latlong_heading',
+                    title: I18n.t('form.commitments.page2.q2.title'),
+                    popupdescription: I18n.t('form.commitments.page2.q2.popupdescription_html')
+                  },
+                  {
+                    type: 'text',
+                    name: 'latitude',
+                    title: I18n.t('form.commitments.page2.q3.title'),
+                    titleLocation: 'left',
+                    hideNumber: true,
+                    defaultValue: @commitment.latitude || ''
+                  },
+                  {
+                    type: 'text',
+                    name: 'longitude',
+                    title: I18n.t('form.commitments.page2.q4.title'),
+                    titleLocation: 'left',
+                    hideNumber: true,
+                    defaultValue: @commitment.longitude || ''
+                  },
+                  {
+                    type: 'file',
+                    name: 'geospatial_file',
+                    title: I18n.t('form.commitments.page2.q5.title'),
+                    description: I18n.t('form.commitments.page2.q5.description'),
+                    hideNumber: true,
+                    allowImagesPreview: false,
+                    maxSize: 26_214_400,
+                    popupdescription: I18n.t('form.commitments.page2.q5.popupdescription_html')
+                  }
+                ]
               },
               {
-                type: 'text',
-                name: 'latitude',
-                title: I18n.t('form.commitments.page2.q3.title'),
-                titleLocation: 'left',
-                hideNumber: true,
-                defaultValue: @commitment.latitude || ''
-              },
-              {
-                type: 'text',
-                name: 'longitude',
-                title: I18n.t('form.commitments.page2.q4.title'),
-                titleLocation: 'left',
-                hideNumber: true,
-                defaultValue: @commitment.longitude || ''
-              },
-              {
-                type: 'file',
-                name: 'geospatial_file',
-                title: I18n.t('form.commitments.page2.q5.title'),
-                description: I18n.t('form.commitments.page2.q5.description'),
-                hideNumber: true,
-                allowImagesPreview: false,
-                maxSize: 26_214_400,
-                popupdescription: I18n.t('form.commitments.page2.q5.popupdescription_html')
-              },
-              {
-                type: 'expression',
-                name: 'current_area_ha_heading',
-                title: I18n.t('form.commitments.page2.q6.title'),
-                popupdescription: I18n.t('form.commitments.page2.q6.popupdescription_html')
-              },
-              {
-                type: 'text',
-                name: 'current_area_ha',
-                title: I18n.t('form.commitments.page2.q7.title'),
-                titleLocation: 'left',
-                hideNumber: true,
-                defaultValue: @commitment.current_area_ha || ''
+                type: 'panel',
+                name: 'current_area_ha_panel',
+                elements: [
+                  {
+                    type: 'expression',
+                    name: 'current_area_ha_heading',
+                    title: I18n.t('form.commitments.page2.q6.title'),
+                    popupdescription: I18n.t('form.commitments.page2.q6.popupdescription_html')
+                  },
+                  {
+                    type: 'text',
+                    name: 'current_area_ha',
+                    title: I18n.t('form.commitments.page2.q7.title'),
+                    titleLocation: 'left',
+                    hideNumber: true,
+                    defaultValue: @commitment.current_area_ha || ''
+                  }    
+                ]
               }
             ]
           },
@@ -253,7 +265,7 @@ class Services::CommitmentProps
                 type: 'paneldynamic',
                 name: 'links_attributes',
                 title: I18n.t('form.commitments.page4.q5.title'),
-                description: I18n.t('form.commitments.page4.q4.description'),
+                description: I18n.t('form.commitments.page4.q5.description'),
                 templateElements: [
                   {
                     type: 'text',
@@ -290,6 +302,7 @@ class Services::CommitmentProps
                     type: 'file',
                     name: 'document',
                     titleLocation: 'hidden',
+                    allowImagesPreview: false,
                     maxSize: 26_214_400
                   },
                   {
