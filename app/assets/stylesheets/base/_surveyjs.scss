@@ -99,7 +99,8 @@ $radio-checkbox-width-height: rem-calc(39);
         .sv-question__description {
           color: $grey-xxdark;
           font-style: italic;
-          margin-top: rem-calc(18);
+          font-size: rem-calc(18);
+          margin-top: rem-calc(20);
           padding: 0;
         }
       }
