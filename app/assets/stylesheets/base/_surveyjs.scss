@@ -241,6 +241,10 @@ $radio-checkbox-width-height: rem-calc(39);
     }
   }
 
+  .form__page--not-first {
+    margin-top: rem-calc(90);
+  }
+
   .form__question--errors {
     .sv-question__title {
       &:not(.sv-question__title--answer) {

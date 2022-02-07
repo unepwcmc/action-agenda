@@ -84,6 +84,7 @@ export default {
     model.onComplete.add(this.onComplete);
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
     model.onUpdateQuestionCssClasses.add(this.onUpdateQuestionCssClasses);
+    model.onUpdatePageCssClasses.add(this.onUpdatePageCssClasses);
 
     return {
       errors: {},
@@ -181,10 +182,16 @@ export default {
       }
 
       // multiselect
-      const multiselectQs = ["cbd_objective_ids", "stakeholder_ids", "objective_ids", "manager_ids", "country_ids", "action_ids", "threat_ids"]
+      const multiselectQs = ["cbd_objective_ids", "stakeholder_ids", "objective_ids", "manager_ids", "country_ids", "action_ids", "threat_ids"];
 
       if (multiselectQs.includes(options.question.name)) {
         options.cssClasses.mainRoot += ' form__question--multiselect';
+      }
+    },
+
+    onUpdatePageCssClasses(survey, options) {
+      if (options.page.num > 1) {
+        options.cssClasses.page.root += ' form__page--not-first';
       }
     },
 
