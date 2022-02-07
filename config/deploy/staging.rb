@@ -1,5 +1,5 @@
 set :stage, :staging
-set :branch, "add_emails_for_staging"
+set :branch, "staging"
 
 
 server "web-supported-staging.linode.unep-wcmc.org", user: 'wcmc', roles: %w{app web db}
