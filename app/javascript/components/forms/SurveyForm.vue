@@ -20,27 +20,26 @@
 </template>
 
 <script>
-import * as SurveyVue from 'survey-vue';
-import * as widgets from 'surveyjs-widgets';
-import Turbolinks from 'turbolinks';
-import axios from 'axios';
-import { setAxiosHeaders } from '../../helpers/axios-helpers';
-import 'survey-vue/modern.css';
-import FormNavigation from './Navigation';
-import ErrorBanner from '../banners/ErrorBanner';
-import { DirectUpload } from 'activestorage'
+import * as SurveyVue from "survey-vue";
+import * as widgets from "surveyjs-widgets";
+import Turbolinks from "turbolinks";
+import axios from "axios";
+import { setAxiosHeaders } from "../../helpers/axios-helpers";
+import "survey-vue/modern.css";
+import FormNavigation from "./Navigation";
+import ErrorBanner from "../banners/ErrorBanner";
+import { DirectUpload } from "activestorage";
 
-
-SurveyVue.StylesManager.applyTheme('modern');
-SurveyVue.Serializer.addProperty('question', 'popupdescription:text');
-SurveyVue.Serializer.addProperty('page', 'popupdescription:text');
+SurveyVue.StylesManager.applyTheme("modern");
+SurveyVue.Serializer.addProperty("question", "popupdescription:text");
+SurveyVue.Serializer.addProperty("page", "popupdescription:text");
 
 widgets.select2tagbox(SurveyVue);
 
 const Survey = SurveyVue.Survey;
 
 export default {
-  name: 'SurveyForm',
+  name: "SurveyForm",
 
   components: {
     ErrorBanner,
@@ -88,18 +87,19 @@ export default {
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
     model.onUpdateQuestionCssClasses.add(this.onUpdateQuestionCssClasses);
     model.onUpdatePageCssClasses.add(this.onUpdatePageCssClasses);
-    model.onUploadFiles.add(this.onUploadFiles)
+    model.onUploadFiles.add(this.onUploadFiles);
 
     return {
-      errors: {},
       axiosDone: false,
+      counter: 0,
+      errors: {},
       isFirstPage: true,
       isLastPage: false,
       options: {},
       errorKey: Math.random(),
       survey: model,
-      uploads: [],
-      geospatialFile: ''
+      progressFiles: {},
+      geospatialFile: "",
     };
   },
 
@@ -110,7 +110,7 @@ export default {
   methods: {
     assignNoneValues(data) {
       Object.keys(this.noneValues).forEach((question) => {
-        if (data[question] && data[question][0] === 'none') {
+        if (data[question] && data[question][0] === "none") {
           data[question][0] = this.noneValues[question];
         }
       });
@@ -137,10 +137,10 @@ export default {
     },
 
     exit() {
-      if (this.dataModel === 'Commitment') {
+      if (this.dataModel === "Commitment") {
         this.send(this.survey.data);
       }
-      Turbolinks.visit('/dashboard');
+      Turbolinks.visit("/dashboard");
     },
 
     nextPage() {
@@ -149,9 +149,11 @@ export default {
 
     onComplete(sender) {
       const data = sender.data;
-      if (this.dataModel === 'Commitment') {
-        data['state'] = 'live';
-        data['geospatial_file'] = this.geospatialFile;
+      if (this.dataModel === "Commitment") {
+        data["state"] = "live";
+        if (this.geospatialFile) { data["geospatial_file"] = this.geospatialFile };
+        data["progress_documents_attributes"].forEach(progressDoc => { [progressDoc]["document"] = this.progressFiles[progressDoc] })
+        console.log('submit', this.progressFiles, data)
       }
       this.send(data);
     },
@@ -161,13 +163,13 @@ export default {
       if (!options.question.popupdescription) return;
 
       //Add a button and description div;
-      const btn = document.createElement('button');
-      const description = document.createElement('div');
-      const header = options.htmlElement.querySelector('h5');
+      const btn = document.createElement("button");
+      const description = document.createElement("div");
+      const header = options.htmlElement.querySelector("h5");
 
-      btn.type = 'button';
-      btn.className = 'tooltip trigger';
-      description.className = 'tooltip popup';
+      btn.type = "button";
+      btn.className = "tooltip trigger";
+      description.className = "tooltip popup";
       description.innerHTML = options.question.popupdescription;
 
       header.appendChild(btn);
@@ -185,41 +187,62 @@ export default {
     onUpdateQuestionCssClasses(survey, options) {
       // errors
       if (this.formData.errors?.includes(options.question.name)) {
-        options.cssClasses.mainRoot += ' form__question--errors';
+        options.cssClasses.mainRoot += " form__question--errors";
       }
 
       // multiselect
-      const multiselectQs = ["cbd_objective_ids", "stakeholder_ids", "objective_ids", "manager_ids", "country_ids", "action_ids", "threat_ids"];
+      const multiselectQs = [
+        "cbd_objective_ids",
+        "stakeholder_ids",
+        "objective_ids",
+        "manager_ids",
+        "country_ids",
+        "action_ids",
+        "threat_ids",
+      ];
 
       if (multiselectQs.includes(options.question.name)) {
-        options.cssClasses.mainRoot += ' form__question--multiselect';
+        options.cssClasses.mainRoot += " form__question--multiselect";
       }
     },
 
     onUpdatePageCssClasses(survey, options) {
       if (options.page.num > 1) {
-        options.cssClasses.page.root += ' form__page--not-first';
+        options.cssClasses.page.root += " form__page--not-first";
       }
     },
 
     onUploadFiles(survey, options) {
-
       //TODO set cors settings on the bucket for this to work with S3
-      console.log('UPLOADING FILES') 
-      if (options.name === 'geospatial_file') {
-      const file = options.files[0]
-      const upload = new DirectUpload(file, '/rails/active_storage/direct_uploads')
-      this.uploads.push({ file, upload })
-      upload.create((error, blob) => {
-          if (error) {
-            console.log(error)
-          } else {
-            this.uploads = this.uploads.filter(payload => payload.file.filename !== file.filename)
-            this.geospatialFile = blob.signed_id
-            console.log('FILES', this.uploads, file, blob.signed_id, options, survey) 
-          }
+      console.log("UPLOADING FILES");
+      const file = options.files[0];
+      const upload = new DirectUpload(
+        file,
+        "/rails/active_storage/direct_uploads"
+      );
+      options.callback(
+        "success",
+        options.files.map(function (file) {
+          return {
+            file: file,
+            content: file.filename,
+          };
         })
-      }
+      );
+      console.log("FILE", file, options);
+      upload.create((error, blob) => {
+        if (error) {
+          console.log(error);
+        } else {
+          if (options.name === "geospatial_file") {
+            this.geospatialFile = blob.signed_id;
+          } else {
+            this.progressFiles[this.counter] = {}
+            this.progressFiles[this.counter] = blob.signed_id;
+            this.counter++
+          }
+        }
+      });
     },
 
     prevPage() {
@@ -227,7 +250,7 @@ export default {
     },
 
     send(data) {
-      if (this.dataModel === 'Criterium') {
+      if (this.dataModel === "Criterium") {
         this.assignNoneValues(data);
       }
       this.options = {
