@@ -152,8 +152,8 @@ export default {
       if (this.dataModel === "Commitment") {
         data["state"] = "live";
         if (this.geospatialFile) { data["geospatial_file"] = this.geospatialFile };
-        data["progress_documents_attributes"].forEach(progressDoc => { [progressDoc]["document"] = this.progressFiles[progressDoc] })
-        console.log('submit', this.progressFiles, data)
+        data["progress_documents_attributes"].forEach((progressDoc, key) => { Object.assign( data["progress_documents_attributes"][key]["document"], this.progressFiles) })
+        console.log('submit', data)
       }
       this.send(data);
     },
