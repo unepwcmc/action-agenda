@@ -62,9 +62,22 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "action-agenda_#{Rails.env}"
-  config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  config.action_mailer.perform_deliveries = false
+  config.action_mailer.perform_caching = false
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :sendmail
+  
+  mailer_credentials = Rails.application.credentials.staging.dig(:mailer)
+  config.action_mailer.default_url_options = { host: mailer_credentials.dig(:host) }
+  config.action_mailer.default_options = { from: mailer_credentials.dig(:from), reply_to:  mailer_credentials.dig(:from)}
+  config.action_mailer.smtp_settings = {
+    address:              mailer_credentials.dig(:address),
+    port:                 587,
+    domain:               mailer_credentials.dig(:password),
+    user_name:            mailer_credentials.dig(:user_name),
+    password:             mailer_credentials.dig(:password),
+    authentication:       :login,
+    enable_starttls_auto: true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
