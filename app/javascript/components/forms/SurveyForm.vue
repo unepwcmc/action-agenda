@@ -28,10 +28,13 @@ import { setAxiosHeaders } from '../../helpers/axios-helpers';
 import 'survey-vue/modern.css';
 import FormNavigation from './Navigation';
 import ErrorBanner from '../banners/ErrorBanner';
+import { DirectUpload } from 'activestorage'
+
 
 SurveyVue.StylesManager.applyTheme('modern');
 SurveyVue.Serializer.addProperty('question', 'popupdescription:text');
 SurveyVue.Serializer.addProperty('page', 'popupdescription:text');
+
 widgets.select2tagbox(SurveyVue);
 
 const Survey = SurveyVue.Survey;
@@ -85,6 +88,7 @@ export default {
     model.onCurrentPageChanged.add(this.onCurrentPageChanged);
     model.onUpdateQuestionCssClasses.add(this.onUpdateQuestionCssClasses);
     model.onUpdatePageCssClasses.add(this.onUpdatePageCssClasses);
+    model.onUploadFiles.add(this.onUploadFiles)
 
     return {
       errors: {},
@@ -94,6 +98,8 @@ export default {
       options: {},
       errorKey: Math.random(),
       survey: model,
+      uploads: [],
+      geospatialFile: ''
     };
   },
 
@@ -145,6 +151,7 @@ export default {
       const data = sender.data;
       if (this.dataModel === 'Commitment') {
         data['state'] = 'live';
+        data['geospatial_file'] = this.geospatialFile;
       }
       this.send(data);
     },
@@ -192,6 +199,26 @@ export default {
     onUpdatePageCssClasses(survey, options) {
       if (options.page.num > 1) {
         options.cssClasses.page.root += ' form__page--not-first';
+      }
+    },
+
+    onUploadFiles(survey, options) {
+
+      //TODO set cors settings on the bucket for this to work with S3
+      console.log('UPLOADING FILES') 
+      if (options.name === 'geospatial_file') {
+      const file = options.files[0]
+      const upload = new DirectUpload(file, '/rails/active_storage/direct_uploads')
+      this.uploads.push({ file, upload })
+      upload.create((error, blob) => {
+          if (error) {
+            console.log(error)
+          } else {
+            this.uploads = this.uploads.filter(payload => payload.file.filename !== file.filename)
+            this.geospatialFile = blob.signed_id
+            console.log('FILES', this.uploads, file, blob.signed_id, options, survey) 
+          }
+        })
       }
     },
 

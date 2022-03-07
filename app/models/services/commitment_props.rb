@@ -152,6 +152,7 @@ class Services::CommitmentProps
                     title: I18n.t('form.commitments.page2.q5.title'),
                     description: I18n.t('form.commitments.page2.q5.description'),
                     hideNumber: true,
+                    storeDataAsText: false,
                     allowImagesPreview: false,
                     maxSize: 26_214_400,
                     popupdescription: I18n.t('form.commitments.page2.q5.popupdescription_html')
@@ -303,6 +304,7 @@ class Services::CommitmentProps
                     name: 'document',
                     titleLocation: 'hidden',
                     allowImagesPreview: false,
+                    storeDataAsText: false,
                     maxSize: 26_214_400
                   },
                   {
