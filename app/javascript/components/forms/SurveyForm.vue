@@ -101,15 +101,14 @@ export default {
       survey: model,
       progressFilesSignedIds: [],
       geospatialFile: "",
+      destroyedIds: []
     };
   },
 
   mounted() {
     setAxiosHeaders(axios);
-    console.log(this.formData.config.progress_document_json)
     this.survey.data = { ...this.survey.data, 'progress_documents_attributes': this.formData.config.progress_document_json }
     this.progressFilesSignedIds = this.formData.config.progress_document_json.map(progress_document => progress_document.signed_id)
-    console.log(this.progressFilesSignedIds)
   },
 
   methods: {
@@ -159,6 +158,9 @@ export default {
       if (this.dataModel === "Commitment") {
         data["state"] = "live";
         this.appendFileSignedIds(data);
+        if (this.destroyedIds.length > 0) {
+          this.destroyedIds.forEach( id => { data['progress_documents_attributes'].push({id: id, _destroy: true}) })
+        }
       }
       this.send(data);
     },
@@ -168,6 +170,12 @@ export default {
       this.progressFilesSignedIds.forEach((signedId, index) => {
         data['progress_documents_attributes'][index]['document'] = signedId;
       });
+    },
+
+    appendDestoy() {
+      const documentJsonIds = this.formData.config.progress_document_json.map(element => element.id)
+      const documentSurveyIds = this.survey.data['progress_documents_attributes'].map(element => element.id)
+      this.destroyedIds = documentJsonIds.filter(item => !documentSurveyIds.includes(item))
     },
 
     onAfterRenderQuestion(survey, options) {
@@ -198,6 +206,7 @@ export default {
 
     onDynamicPanelRemoved(survey, options) {
       this.progressFilesSignedIds.splice(options.panelIndex, 1)
+      this.appendDestoy()
     },
 
     onUpdateQuestionCssClasses(survey, options) {
@@ -229,8 +238,6 @@ export default {
     },
 
     onUploadFiles(survey, options) {
-
-     console.log(this.survey.data['progress_documents_attributes'])
       //TODO set cors settings on the bucket for this to work with S3
       const file = options.files[0];
       const upload = new DirectUpload(
