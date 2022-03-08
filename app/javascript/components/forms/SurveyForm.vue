@@ -89,6 +89,7 @@ export default {
     model.onUpdatePageCssClasses.add(this.onUpdatePageCssClasses);
     model.onUploadFiles.add(this.onUploadFiles);
     model.onDynamicPanelRemoved.add(this.onDynamicPanelRemoved);
+    model.onClearFiles.add(this.onClearFiles);
 
     return {
       axiosDone: false,
@@ -100,7 +101,7 @@ export default {
       errorKey: Math.random(),
       survey: model,
       progressFilesSignedIds: [],
-      geospatialFile: "",
+      geospatialFileSignedId: this.formData.config.geospatial_file,
       destroyedIds: []
     };
   },
@@ -166,7 +167,7 @@ export default {
     },
 
     appendFileSignedIds(data) {
-      if (this.geospatialFile) { data["geospatial_file"] = this.geospatialFile };
+      if (this.geospatialFileSignedId) { data["geospatial_file"] = this.geospatialFileSignedId };
       this.progressFilesSignedIds.forEach((signedId, index) => {
         data['progress_documents_attributes'][index]['document'] = signedId;
       });
@@ -237,6 +238,14 @@ export default {
       }
     },
 
+    onClearFiles(survey, options) {
+      console.log(options.name)
+      if(options.name === 'geospatial_file') {
+        this.geospatialFileSignedId = ''
+      survey.data
+      }
+    },
+
     onUploadFiles(survey, options) {
       //TODO set cors settings on the bucket for this to work with S3
       const file = options.files[0];
@@ -258,7 +267,7 @@ export default {
           console.log(error);
         } else {
           if (options.name === "geospatial_file") {
-            this.geospatialFile = blob.signed_id;
+            this.geospatialFileSignedId = blob.signed_id;
           } else {
             this.progressFilesSignedIds.push(blob.signed_id);
           }

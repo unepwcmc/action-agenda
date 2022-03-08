@@ -9,10 +9,11 @@ class Services::CommitmentProps
         action: @commitment.new_record? ? '/commitments.json' : "/commitments/#{@commitment.id}.json",
         method: @commitment.new_record? ? 'post' : 'put',
         root_key: 'commitment',
+        geospatial_file: @commitment.geospatial_file.attached? ? @commitment.geospatial_file.signed_id : '',
         progress_document_json: @commitment.progress_documents.map do |progress_document|
           {
             id: progress_document.id,
-            document: [{ name: progress_document.document.filename, type: progress_document.document.blob.content_type }],
+            document: [{ name: progress_document.document.filename, type: progress_document.document.content_type }],
             signed_id: progress_document.document.blob.signed_id,
             progress_notes: progress_document.progress_notes
           }
@@ -158,7 +159,8 @@ class Services::CommitmentProps
                     storeDataAsText: false,
                     allowImagesPreview: false,
                     maxSize: 26_214_400,
-                    popupdescription: I18n.t('form.commitments.page2.q5.popupdescription_html')
+                    popupdescription: I18n.t('form.commitments.page2.q5.popupdescription_html'),
+                    defaultValue: @commitment.geospatial_file.attached? ? [{name: @commitment.geospatial_file.filename, type: @commitment.geospatial_file.content_type }] : [],
                   }
                 ]
               },
