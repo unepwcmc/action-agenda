@@ -11,6 +11,7 @@ class Services::CommitmentProps
         root_key: 'commitment',
         progress_document_json: @commitment.progress_documents.map do |progress_document|
           {
+            id: progress_document.id,
             document: [{ name: progress_document.document.filename, type: progress_document.document.blob.content_type }],
             signed_id: progress_document.document.blob.signed_id,
             progress_notes: progress_document.progress_notes
@@ -297,6 +298,13 @@ class Services::CommitmentProps
                 description: I18n.t('form.commitments.page5.q1.description'),
                 popupdescription: I18n.t('form.commitments.page5.q1.popupdescription_html'),
                 templateElements: [
+                  {
+                    type: 'text',
+                    title: 'hidden field',
+                    name: 'id',
+                    # a bit of a hacky way to make it work
+                    visibleIf: "{ id } contains '-1'"
+                  },
                   {
                     type: 'file',
                     name: 'document',
