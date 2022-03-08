@@ -8,7 +8,14 @@ class Services::CommitmentProps
       config: {
         action: @commitment.new_record? ? '/commitments.json' : "/commitments/#{@commitment.id}.json",
         method: @commitment.new_record? ? 'post' : 'put',
-        root_key: 'commitment'
+        root_key: 'commitment',
+        progress_document_json: @commitment.progress_documents.map do |progress_document|
+          {
+            document: [{ name: progress_document.document.filename, type: progress_document.document.blob.content_type }],
+            signed_id: progress_document.document.blob.signed_id,
+            progress_notes: progress_document.progress_notes
+          }
+        end
       },
       errors: @commitment.new_record? ? [] : @commitment.draft_errors,
       survey: {
@@ -55,15 +62,13 @@ class Services::CommitmentProps
                 defaultValue: @commitment.objective_ids || [],
                 popupdescription: I18n.t('form.commitments.page1.q3.popupdescription_html'),
                 choices: Objective.commitment_form_options.pluck(:id, :name).map do |id, name|
-                          if name != 'None of the above'
-                            {
-                              value: id,
-                              text: name
-                            }
-                          else
-                            nil
-                          end
-                         end.compact,
+                           next unless name != 'None of the above'
+
+                           {
+                             value: id,
+                             text: name
+                           }
+                         end.compact
               },
               {
                 type: 'checkbox',
@@ -73,14 +78,11 @@ class Services::CommitmentProps
                 defaultValue: @commitment.manager_ids || [],
                 popupdescription: I18n.t('form.commitments.page1.q4.popupdescription_html'),
                 choices: Manager.commitment_form_options.pluck(:id, :name).map do |id, name|
-                          if name != 'None of the above'
-                            {
-                              value: id,
-                              text: name
-                            }
-                          else
-                            nil
-                          end
+                           next unless name != 'None of the above'
+                           {
+                             value: id,
+                             text: name
+                           }
                          end.compact,
                 otherText: I18n.t('form.none')
               },
@@ -176,7 +178,7 @@ class Services::CommitmentProps
                     titleLocation: 'left',
                     hideNumber: true,
                     defaultValue: @commitment.current_area_ha || ''
-                  }    
+                  }
                 ]
               }
             ]
@@ -225,14 +227,12 @@ class Services::CommitmentProps
                 defaultValue: @commitment.action_ids || [],
                 popupdescription: I18n.t('form.commitments.page4.q2.popupdescription_html'),
                 choices: Action.commitment_form_options.pluck(:id, :name).map do |id, name|
-                          if name != 'None of the above'
-                            {
-                              value: id,
-                              text: name
-                            }
-                          else
-                            nil
-                          end
+                           next unless name != 'None of the above'
+
+                           {
+                             value: id,
+                             text: name
+                           }
                          end.compact,
                 otherText: 'Other'
               },
@@ -252,15 +252,13 @@ class Services::CommitmentProps
                 defaultValue: @commitment.threat_ids || [],
                 popupdescription: I18n.t('form.commitments.page4.q4.popupdescription_html'),
                 choices: Threat.commitment_form_options.pluck(:id, :name).map do |id, name|
-                          if name != 'None of the above'
-                            {
-                              value: id,
-                              text: name
-                            }
-                          else
-                            nil
-                          end
-                         end.compact,
+                           next unless name != 'None of the above'
+
+                           {
+                             value: id,
+                             text: name
+                           }
+                         end.compact
               },
               {
                 type: 'paneldynamic',
@@ -314,7 +312,7 @@ class Services::CommitmentProps
                     description: '(Optional field)'
                   }
                 ],
-                panelCount: 1,
+                minPanelCount: 1,
                 confirmDelete: true,
                 confirmDeleteText: I18n.t('form.commitments.page5.q1.delete'),
                 panelAddText: I18n.t('form.commitments.page5.q1.add')

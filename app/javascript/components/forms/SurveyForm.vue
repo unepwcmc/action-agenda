@@ -106,6 +106,10 @@ export default {
 
   mounted() {
     setAxiosHeaders(axios);
+    console.log(this.formData.config.progress_document_json)
+    this.survey.data = { ...this.survey.data, 'progress_documents_attributes': this.formData.config.progress_document_json }
+    console.log(this.survey.data)
+
   },
 
   methods: {
@@ -225,6 +229,8 @@ export default {
     },
 
     onUploadFiles(survey, options) {
+
+     console.log(this.survey.data['progress_documents_attributes'])
       //TODO set cors settings on the bucket for this to work with S3
       const file = options.files[0];
       const upload = new DirectUpload(
@@ -240,7 +246,6 @@ export default {
           };
         })
       );
-      console.log("FILE", file, options);
       upload.create((error, blob) => {
         if (error) {
           console.log(error);
