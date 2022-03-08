@@ -88,6 +88,7 @@ export default {
     model.onUpdateQuestionCssClasses.add(this.onUpdateQuestionCssClasses);
     model.onUpdatePageCssClasses.add(this.onUpdatePageCssClasses);
     model.onUploadFiles.add(this.onUploadFiles);
+    model.onDynamicPanelRemoved.add(this.onDynamicPanelRemoved);
 
     return {
       axiosDone: false,
@@ -191,6 +192,10 @@ export default {
       this.isLastPage = this.survey.isLastPage;
     },
 
+    onDynamicPanelRemoved(survey, options) {
+      this.progressFilesSignedIds.splice(options.panelIndex, 1)
+    },
+
     onUpdateQuestionCssClasses(survey, options) {
       // errors
       if (this.formData.errors?.includes(options.question.name)) {
@@ -221,7 +226,6 @@ export default {
 
     onUploadFiles(survey, options) {
       //TODO set cors settings on the bucket for this to work with S3
-      console.log("UPLOADING FILES");
       const file = options.files[0];
       const upload = new DirectUpload(
         file,
