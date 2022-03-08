@@ -108,8 +108,8 @@ export default {
     setAxiosHeaders(axios);
     console.log(this.formData.config.progress_document_json)
     this.survey.data = { ...this.survey.data, 'progress_documents_attributes': this.formData.config.progress_document_json }
-    console.log(this.survey.data)
-
+    this.progressFilesSignedIds = this.formData.config.progress_document_json.map(progress_document => progress_document.signed_id)
+    console.log(this.progressFilesSignedIds)
   },
 
   methods: {
