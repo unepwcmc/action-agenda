@@ -98,7 +98,7 @@ export default {
       options: {},
       errorKey: Math.random(),
       survey: model,
-      progressFiles: {},
+      progressFilesSignedIds: [],
       geospatialFile: "",
     };
   },
@@ -138,7 +138,9 @@ export default {
 
     exit() {
       if (this.dataModel === "Commitment") {
-        this.send(this.survey.data);
+        const data = this.survey.data;
+        this.appendFileSignedIds(data);
+        this.send(data);
       }
       Turbolinks.visit("/dashboard");
     },
@@ -151,11 +153,16 @@ export default {
       const data = sender.data;
       if (this.dataModel === "Commitment") {
         data["state"] = "live";
-        if (this.geospatialFile) { data["geospatial_file"] = this.geospatialFile };
-        data["progress_documents_attributes"].forEach(progressDoc => { [progressDoc]["document"] = this.progressFiles[progressDoc] })
-        console.log('submit', this.progressFiles, data)
+        this.appendFileSignedIds(data);
       }
       this.send(data);
+    },
+
+    appendFileSignedIds(data) {
+      if (this.geospatialFile) { data["geospatial_file"] = this.geospatialFile };
+      this.progressFilesSignedIds.forEach((signedId, index) => {
+        data['progress_documents_attributes'][index]['document'] = signedId;
+      });
     },
 
     onAfterRenderQuestion(survey, options) {
@@ -237,9 +244,7 @@ export default {
           if (options.name === "geospatial_file") {
             this.geospatialFile = blob.signed_id;
           } else {
-            this.progressFiles[this.counter] = {}
-            this.progressFiles[this.counter] = blob.signed_id;
-            this.counter++
+            this.progressFilesSignedIds.push(blob.signed_id);
           }
         }
       });
