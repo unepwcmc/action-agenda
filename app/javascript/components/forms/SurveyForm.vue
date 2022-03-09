@@ -89,7 +89,6 @@ export default {
     model.onUpdatePageCssClasses.add(this.onUpdatePageCssClasses);
     model.onUploadFiles.add(this.onUploadFiles);
     model.onDynamicPanelRemoved.add(this.onDynamicPanelRemoved);
-    // model.onClearFiles.add(this.onClearFiles);
 
     return {
       axiosDone: false,
@@ -100,7 +99,7 @@ export default {
       options: {},
       errorKey: Math.random(),
       survey: model,
-      progressFilesSignedIds: [],
+      progressFilesSignedIds: {},
       geospatialFileSignedId: this.formData.config.geospatial_file,
       destroyedIds: []
     };
@@ -109,7 +108,11 @@ export default {
   mounted() {
     setAxiosHeaders(axios);
     this.survey.data = { ...this.survey.data, 'progress_documents_attributes': this.formData.config.progress_document_json }
-    this.progressFilesSignedIds = this.formData.config.progress_document_json.map(progress_document => progress_document.signed_id)
+
+    this.formData.config.progress_document_json.forEach((question) => {
+      this.progressFilesSignedIds[question.document[0].name] = question.signed_id
+    })
+    console.log(this.progressFilesSignedIds)
   },
 
   methods: {
@@ -175,14 +178,16 @@ export default {
     appendFileSignedIds(data) {
       this.appendFileSignedId(data, 'geospatial_file', this.geospatialFileSignedId)
 
-      this.progressFilesSignedIds.forEach((signedId, index) => {
-        console.log(index)
-        this.appendFileSignedId(data['progress_documents_attributes'][index], 'document', signedId);
-      });
+      data['progress_documents_attributes'].forEach(progress_documents_attributes => {
+        let signedId = '';
+        if (progress_documents_attributes.document) {
+          signedId = this.progressFilesSignedIds[progress_documents_attributes.document[0].name];
+        }
+        this.appendFileSignedId(progress_documents_attributes, 'document', signedId);
+      })
     },
 
     appendFileSignedId(data, field, signedId) {
-      console.log(!!data[field])
       if(data[field]) {
         data[field] = signedId;
       } else {
@@ -223,7 +228,6 @@ export default {
     },
 
     onDynamicPanelRemoved(survey, options) {
-      this.progressFilesSignedIds.splice(options.panelIndex, 1)
       this.appendDestroy()
     },
 
@@ -278,7 +282,10 @@ export default {
           if (options.name === "geospatial_file") {
             this.geospatialFileSignedId = blob.signed_id;
           } else {
-            this.progressFilesSignedIds.push(blob.signed_id);
+            // console.log(options.question.id)
+            // this.progressFilesSignedIds.push(blob.signed_id);
+            this.progressFilesSignedIds[blob.filename] = blob.signed_id
+      console.log(this.progressFilesSignedIds)
           }
         }
       });

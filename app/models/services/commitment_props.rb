@@ -159,6 +159,7 @@ class Services::CommitmentProps
                     storeDataAsText: false,
                     allowImagesPreview: false,
                     maxSize: 26_214_400,
+                    acceptedTypes: '.zip,.kml,.kml+xml',
                     popupdescription: I18n.t('form.commitments.page2.q5.popupdescription_html'),
                     defaultValue: @commitment.geospatial_file.attached? ? [{name: @commitment.geospatial_file.filename, type: @commitment.geospatial_file.content_type }] : [],
                   }
@@ -313,7 +314,8 @@ class Services::CommitmentProps
                     titleLocation: 'hidden',
                     allowImagesPreview: false,
                     storeDataAsText: false,
-                    maxSize: 26_214_400
+                    maxSize: 26_214_400,
+                    acceptedTypes: '.doc,.docx,.pdf'
                   },
                   {
                     type: 'comment',

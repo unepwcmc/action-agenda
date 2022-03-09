@@ -63,10 +63,6 @@ en:
               description_blank: "cannot be blank if joint governance manager type is selected"
             stage:
               inclusion: "is not one of the allowed stage options"
-        progress_document:
-          attributes:
-            document:
-              missing: 'Progress documents must have a file atachment'
 
   models:
     criterium:
