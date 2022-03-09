@@ -2,6 +2,7 @@ module ExceptionHandler
   extend ActiveSupport::Concern
 
   class ForbiddenError < StandardError; end
+  class MissingProgressDocumentFileError < StandardError; end
 
   included do
     rescue_from ActiveRecord::RecordNotFound do |e|
@@ -22,6 +23,13 @@ module ExceptionHandler
       respond_to do |format|
         format.json { json_response({ message: I18n.t('errors.messages.forbidden_resource') }, :forbidden) }
         format.html { redirect_back fallback_location: root_path, notice: I18n.t('errors.messages.forbidden_resource') }
+      end
+    end
+
+    rescue_from MissingProgressDocumentFileError do |e|
+      respond_to do |format|
+        format.json { json_response({ errors: { progress_documents: [I18n.t('errors.messages.forbidden_resource')] }}, :forbidden) }
+        format.html { }
       end
     end
   end

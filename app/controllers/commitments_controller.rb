@@ -8,6 +8,7 @@ class CommitmentsController < ApplicationController
 
   skip_before_action :authenticate_user!, only: [:index, :list, :show]
   before_action :set_commitment, only: [:show, :edit, :update, :destroy]
+  before_action :purge_attachments, only: [:update]
 
   def index
     @paginatedCommitments = Commitment.paginate_commitments(DEFAULT_PARAMS).to_json
@@ -89,6 +90,20 @@ class CommitmentsController < ApplicationController
   end
 
   private
+
+  def purge_attachments
+    if @commitment.geospatial_file.attached? && commitment_params[:geospatial_file].blank?
+      @commitment.geospatial_file.purge 
+      commitment_params.delete(:geospatial_file)
+    end
+
+    commitment_params[:progress_documents_attributes].each do |progress_document_params|
+      progress_document = @commitment.progress_documents.find_by(id: progress_document_params[:id])
+      if progress_document_params[:document].blank? && progress_document.document.attached?
+        raise MissingProgressDocumentFileError
+      end
+    end
+  end
 
   def criterium_id_valid?
     criterium = Criterium.find(params[:criterium_id])

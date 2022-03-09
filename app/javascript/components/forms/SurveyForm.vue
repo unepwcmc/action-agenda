@@ -89,7 +89,7 @@ export default {
     model.onUpdatePageCssClasses.add(this.onUpdatePageCssClasses);
     model.onUploadFiles.add(this.onUploadFiles);
     model.onDynamicPanelRemoved.add(this.onDynamicPanelRemoved);
-    model.onClearFiles.add(this.onClearFiles);
+    // model.onClearFiles.add(this.onClearFiles);
 
     return {
       axiosDone: false,
@@ -145,6 +145,7 @@ export default {
       if (this.dataModel === "Commitment") {
         const data = this.survey.data;
         this.appendFileSignedIds(data);
+        this.addDestroyKeys(data);
         this.send(data);
       }
       Turbolinks.visit("/dashboard");
@@ -159,21 +160,37 @@ export default {
       if (this.dataModel === "Commitment") {
         data["state"] = "live";
         this.appendFileSignedIds(data);
-        if (this.destroyedIds.length > 0) {
-          this.destroyedIds.forEach( id => { data['progress_documents_attributes'].push({id: id, _destroy: true}) })
-        }
+        this.addDestroyKeys(data);
+
       }
       this.send(data);
     },
 
+    addDestroyKeys(data) {
+      if (this.destroyedIds.length > 0) {
+        this.destroyedIds.forEach( id => { data['progress_documents_attributes'].push({id: id, _destroy: true}) })
+      }
+    },
+
     appendFileSignedIds(data) {
-      if (this.geospatialFileSignedId) { data["geospatial_file"] = this.geospatialFileSignedId };
+      this.appendFileSignedId(data, 'geospatial_file', this.geospatialFileSignedId)
+
       this.progressFilesSignedIds.forEach((signedId, index) => {
-        data['progress_documents_attributes'][index]['document'] = signedId;
+        console.log(index)
+        this.appendFileSignedId(data['progress_documents_attributes'][index], 'document', signedId);
       });
     },
 
-    appendDestoy() {
+    appendFileSignedId(data, field, signedId) {
+      console.log(!!data[field])
+      if(data[field]) {
+        data[field] = signedId;
+      } else {
+        data[field] = '';
+      }
+    },
+
+    appendDestroy() {
       const documentJsonIds = this.formData.config.progress_document_json.map(element => element.id)
       const documentSurveyIds = this.survey.data['progress_documents_attributes'].map(element => element.id)
       this.destroyedIds = documentJsonIds.filter(item => !documentSurveyIds.includes(item))
@@ -207,7 +224,7 @@ export default {
 
     onDynamicPanelRemoved(survey, options) {
       this.progressFilesSignedIds.splice(options.panelIndex, 1)
-      this.appendDestoy()
+      this.appendDestroy()
     },
 
     onUpdateQuestionCssClasses(survey, options) {
@@ -235,14 +252,6 @@ export default {
     onUpdatePageCssClasses(survey, options) {
       if (options.page.num > 1) {
         options.cssClasses.page.root += " form__page--not-first";
-      }
-    },
-
-    onClearFiles(survey, options) {
-      console.log(options.name)
-      if(options.name === 'geospatial_file') {
-        this.geospatialFileSignedId = ''
-      survey.data
       }
     },
 
