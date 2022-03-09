@@ -88,7 +88,6 @@ export default {
     model.onUpdateQuestionCssClasses.add(this.onUpdateQuestionCssClasses);
     model.onUpdatePageCssClasses.add(this.onUpdatePageCssClasses);
     model.onUploadFiles.add(this.onUploadFiles);
-    // model.onDownloadFile.add(this.onDownloadFile);
     model.onDynamicPanelRemoved.add(this.onDynamicPanelRemoved);
 
     return {
@@ -164,7 +163,6 @@ export default {
         data["state"] = "live";
         this.appendFileSignedIds(data);
         this.addDestroyKeys(data);
-
       }
       this.send(data);
     },
@@ -277,7 +275,7 @@ export default {
             this.progressFilesSignedIds[blob.filename] = blob.signed_id
           }
 
-          // set file conteent as url to allow file download
+          // set file content as url to allow file download
           const url = `/rails/active_storage/blobs/${blob.signed_id}/${blob.filename}`
           options.files[0]['content'] = url;
 
