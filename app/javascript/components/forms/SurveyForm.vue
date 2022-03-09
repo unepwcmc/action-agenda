@@ -88,6 +88,7 @@ export default {
     model.onUpdateQuestionCssClasses.add(this.onUpdateQuestionCssClasses);
     model.onUpdatePageCssClasses.add(this.onUpdatePageCssClasses);
     model.onUploadFiles.add(this.onUploadFiles);
+    model.onDynamicPanelRemoved.add(this.onDynamicPanelRemoved);
 
     return {
       axiosDone: false,
@@ -98,13 +99,19 @@ export default {
       options: {},
       errorKey: Math.random(),
       survey: model,
-      progressFiles: {},
-      geospatialFile: "",
+      progressFilesSignedIds: {},
+      geospatialFileSignedId: this.formData.config.geospatial_file,
+      destroyedIds: []
     };
   },
 
   mounted() {
     setAxiosHeaders(axios);
+    this.survey.data = { ...this.survey.data, 'progress_documents_attributes': this.formData.config.progress_document_json }
+
+    this.formData.config.progress_document_json.forEach((question) => {
+      this.progressFilesSignedIds[question.document[0].name] = question.signed_id
+    })
   },
 
   methods: {
@@ -138,7 +145,10 @@ export default {
 
     exit() {
       if (this.dataModel === "Commitment") {
-        this.send(this.survey.data);
+        const data = this.survey.data;
+        this.appendFileSignedIds(data);
+        this.addDestroyKeys(data);
+        this.send(data);
       }
       Turbolinks.visit("/dashboard");
     },
@@ -151,11 +161,42 @@ export default {
       const data = sender.data;
       if (this.dataModel === "Commitment") {
         data["state"] = "live";
-        if (this.geospatialFile) { data["geospatial_file"] = this.geospatialFile };
-        data["progress_documents_attributes"].forEach((progressDoc, key) => { Object.assign( data["progress_documents_attributes"][key]["document"], this.progressFiles) })
-        console.log('submit', data)
+        this.appendFileSignedIds(data);
+        this.addDestroyKeys(data);
       }
       this.send(data);
+    },
+
+    addDestroyKeys(data) {
+      if (this.destroyedIds.length > 0) {
+        this.destroyedIds.forEach( id => { data['progress_documents_attributes'].push({id: id, _destroy: true}) })
+      }
+    },
+
+    appendFileSignedIds(data) {
+      this.appendFileSignedId(data, 'geospatial_file', this.geospatialFileSignedId)
+
+      data['progress_documents_attributes'].forEach(progress_documents_attributes => {
+        let signedId = '';
+        if (progress_documents_attributes.document) {
+          signedId = this.progressFilesSignedIds[progress_documents_attributes.document[0].name];
+        }
+        this.appendFileSignedId(progress_documents_attributes, 'document', signedId);
+      })
+    },
+
+    appendFileSignedId(data, field, signedId) {
+      if(data[field]) {
+        data[field] = signedId;
+      } else {
+        data[field] = '';
+      }
+    },
+
+    appendDestroy() {
+      const documentJsonIds = this.formData.config.progress_document_json.map(element => element.id)
+      const documentSurveyIds = this.survey.data['progress_documents_attributes'].map(element => element.id)
+      this.destroyedIds = documentJsonIds.filter(item => !documentSurveyIds.includes(item))
     },
 
     onAfterRenderQuestion(survey, options) {
@@ -182,6 +223,10 @@ export default {
     onCurrentPageChanged() {
       this.isFirstPage = this.survey.isFirstPage;
       this.isLastPage = this.survey.isLastPage;
+    },
+
+    onDynamicPanelRemoved(survey, options) {
+      this.appendDestroy()
     },
 
     onUpdateQuestionCssClasses(survey, options) {
@@ -214,33 +259,35 @@ export default {
 
     onUploadFiles(survey, options) {
       //TODO set cors settings on the bucket for this to work with S3
-      console.log("UPLOADING FILES");
       const file = options.files[0];
       const upload = new DirectUpload(
         file,
         "/rails/active_storage/direct_uploads"
       );
-      options.callback(
-        "success",
-        options.files.map(function (file) {
-          return {
-            file: file,
-            content: file.filename,
-          };
-        })
-      );
-      console.log("FILE", file, options);
+
       upload.create((error, blob) => {
         if (error) {
           console.log(error);
         } else {
           if (options.name === "geospatial_file") {
-            this.geospatialFile = blob.signed_id;
+            this.geospatialFileSignedId = blob.signed_id;
           } else {
-            this.progressFiles[this.counter] = {}
-            this.progressFiles[this.counter] = blob.signed_id;
-            this.counter++
+            this.progressFilesSignedIds[blob.filename] = blob.signed_id
           }
+
+          // set file content as url to allow file download
+          const url = `/rails/active_storage/blobs/${blob.signed_id}/${blob.filename}`
+          options.files[0]['content'] = url;
+
+          options.callback(
+            "success",
+            options.files.map(function (file) {
+              return {
+                file: file,
+                content: file.content,
+              };
+            })
+          );
         }
       });
     },
