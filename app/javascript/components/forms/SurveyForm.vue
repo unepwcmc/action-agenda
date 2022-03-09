@@ -88,6 +88,7 @@ export default {
     model.onUpdateQuestionCssClasses.add(this.onUpdateQuestionCssClasses);
     model.onUpdatePageCssClasses.add(this.onUpdatePageCssClasses);
     model.onUploadFiles.add(this.onUploadFiles);
+    // model.onDownloadFile.add(this.onDownloadFile);
     model.onDynamicPanelRemoved.add(this.onDynamicPanelRemoved);
 
     return {
@@ -112,7 +113,6 @@ export default {
     this.formData.config.progress_document_json.forEach((question) => {
       this.progressFilesSignedIds[question.document[0].name] = question.signed_id
     })
-    console.log(this.progressFilesSignedIds)
   },
 
   methods: {
@@ -266,15 +266,7 @@ export default {
         file,
         "/rails/active_storage/direct_uploads"
       );
-      options.callback(
-        "success",
-        options.files.map(function (file) {
-          return {
-            file: file,
-            content: file.filename,
-          };
-        })
-      );
+
       upload.create((error, blob) => {
         if (error) {
           console.log(error);
@@ -282,11 +274,22 @@ export default {
           if (options.name === "geospatial_file") {
             this.geospatialFileSignedId = blob.signed_id;
           } else {
-            // console.log(options.question.id)
-            // this.progressFilesSignedIds.push(blob.signed_id);
             this.progressFilesSignedIds[blob.filename] = blob.signed_id
-      console.log(this.progressFilesSignedIds)
           }
+
+          // set file conteent as url to allow file download
+          const url = `/rails/active_storage/blobs/${blob.signed_id}/${blob.filename}`
+          options.files[0]['content'] = url;
+
+          options.callback(
+            "success",
+            options.files.map(function (file) {
+              return {
+                file: file,
+                content: file.content,
+              };
+            })
+          );
         }
       });
     },

@@ -1,4 +1,6 @@
 class Services::CommitmentProps
+  include Rails.application.routes.url_helpers
+
   def initialize(commitment)
     @commitment = commitment
   end
@@ -13,7 +15,7 @@ class Services::CommitmentProps
         progress_document_json: @commitment.progress_documents.map do |progress_document|
           {
             id: progress_document.id,
-            document: [{ name: progress_document.document.filename, type: progress_document.document.content_type }],
+            document: [{ name: progress_document.document.filename, content: rails_blob_path(progress_document.document, only_path: true) }],
             signed_id: progress_document.document.blob.signed_id,
             progress_notes: progress_document.progress_notes
           }
