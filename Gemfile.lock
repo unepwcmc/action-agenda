@@ -43,6 +43,9 @@ GEM
       activemodel (= 5.2.6)
       activesupport (= 5.2.6)
       arel (>= 9.0)
+    activerecord-postgis-adapter (5.2.3)
+      activerecord (~> 5.1)
+      rgeo-activerecord (~> 6.0)
     activestorage (5.2.6)
       actionpack (= 5.2.6)
       activerecord (= 5.2.6)
@@ -218,6 +221,10 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.5)
+    rgeo (2.4.0)
+    rgeo-activerecord (6.2.2)
+      activerecord (>= 5.0)
+      rgeo (>= 1.0.0)
     ruby_dep (1.5.0)
     rubyzip (2.3.2)
     sass (3.7.4)
@@ -283,6 +290,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_storage_validations (~> 0.1)
+  activerecord-postgis-adapter (~> 5.2)
   aws-sdk-s3
   bcrypt_pbkdf
   bootsnap (>= 1.1.0)
