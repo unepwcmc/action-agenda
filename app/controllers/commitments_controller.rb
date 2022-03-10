@@ -8,6 +8,7 @@ class CommitmentsController < ApplicationController
 
   skip_before_action :authenticate_user!, only: [:index, :list, :show]
   before_action :set_commitment, only: [:show, :edit, :update, :destroy]
+  before_action :purge_geospatial_file, only: [:update, :create]
 
   def index
     @paginatedCommitments = Commitment.paginate_commitments(DEFAULT_PARAMS).to_json
@@ -89,6 +90,13 @@ class CommitmentsController < ApplicationController
   end
 
   private
+
+  def purge_geospatial_file
+    if commitment_params[:geospatial_file].blank?
+      params[:commitment] = params[:commitment].except(:geospatial_file)
+      @commitment.geospatial_file.purge if @commitment && @commitment.geospatial_file.attached?
+    end
+  end
 
   def criterium_id_valid?
     criterium = Criterium.find(params[:criterium_id])
