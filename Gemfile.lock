@@ -181,6 +181,8 @@ GEM
     puma (3.12.6)
     racc (1.6.0)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-proxy (0.7.2)
       rack
     rack-test (1.1.0)
@@ -305,6 +307,7 @@ DEPENDENCIES
   mini_magick (~> 4.8)
   pg (~> 0.18)
   puma (~> 3.11)
+  rack-cors (~> 1.1)
   rails (~> 5.2.0)
   sass-rails (~> 5.0)
   selenium-webdriver
