@@ -111,6 +111,7 @@ class CommitmentsController < ApplicationController
     params.require(:commitment).permit(
       :commitment_id,
       :committed_year,
+      :criterium_id,
       :current_area_ha,
       :description,
       :duration_years,
