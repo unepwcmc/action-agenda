@@ -8,6 +8,7 @@ class CommitmentsController < ApplicationController
 
   skip_before_action :authenticate_user!, only: [:index, :list, :show]
   before_action :set_commitment, only: [:show, :edit, :update, :destroy]
+  before_action :purge_geospatial_file, only: [:update]
 
   def index
     # WARNING! Do not remove the live option, because this will show unpublished Commitments people might not want public
@@ -95,6 +96,13 @@ class CommitmentsController < ApplicationController
 
   private
 
+  def purge_geospatial_file
+    if commitment_params[:geospatial_file].blank?
+      params[:commitment] = params[:commitment].except(:geospatial_file)
+      @commitment.geospatial_file.purge if @commitment.geospatial_file.attached? 
+    end
+  end
+
   def criterium_id_valid?
     criterium = Criterium.find(params[:criterium_id])
     criterium.commitment.nil? && criterium.user_id == current_user.id
@@ -108,6 +116,7 @@ class CommitmentsController < ApplicationController
     params.require(:commitment).permit(
       :commitment_id,
       :committed_year,
+      :criterium_id,
       :current_area_ha,
       :description,
       :duration_years,
