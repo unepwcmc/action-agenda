@@ -12,4 +12,8 @@ class Country < ApplicationRecord
   ignore_column 'language'
   ignore_column 'region'
   ignore_column 'bounding_box'
+
+  def commitment_count
+    commitments.where(state: 'live').count
+  end
 end

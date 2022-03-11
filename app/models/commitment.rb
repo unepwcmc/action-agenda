@@ -35,12 +35,12 @@ class Commitment < ApplicationRecord
     size: { less_than: 25.megabytes }
 
   validates :name, presence: true
-  validates :stage, inclusion: { in: STAGE_OPTIONS }, if: :live?
+  validates :stage, inclusion: { in: STAGE_OPTIONS }, if: :user_created_and_live?
 
   validates_presence_of :description, :latitude, :longitude, :committed_year, :responsible_group, :implementation_year,
-                        :duration_years, :objectives, :managers, :countries, :actions, :threats, if: :live?
+                        :duration_years, :objectives, :managers, :countries, :actions, :threats, if: :user_created_and_live?
   
-  validate :has_joint_governance_description, if: :live?
+  validate :has_joint_governance_description, if: :user_created_and_live?
 
   before_save :clear_joint_governance_description_if_not_joint_governance_managed
 
@@ -237,5 +237,9 @@ class Commitment < ApplicationRecord
 
   def joint_governance?
     Manager.where(id: manager_ids).pluck(:name).include?('Joint governance')
+  end
+
+  def user_created_and_live?
+    live? && user_created?
   end
 end
