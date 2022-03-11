@@ -13,11 +13,8 @@ class CountryCommitmentsController < ApplicationController
 
   def show
     respond_to do |format|
-      format.json { 
-        # return json object with:
-          # boundary coordinates to allow zoom on country
-          # commitment count
-          # % of projects with each of the manager types
+      format.json {
+        render json: @country.country_commitments_json
       }
     end
   end

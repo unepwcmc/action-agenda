@@ -13,7 +13,18 @@ class Country < ApplicationRecord
   ignore_column 'region'
   ignore_column 'bounding_box'
 
-  def commitment_count
-    commitments.where(state: 'live').count
+  def country_commitments_json
+    boundary_coordinates = boundary.coordinates
+    commitment_count_for_country = commitments.live.count
+    managers = commitments
+                .joins(:managers)
+                .group('managers.name')
+                .select("ROUND((COUNT(*)*100.0/#{ commitment_count_for_country }), 0) AS percentage")
+                .select('managers.name AS name')
+                .select("COUNT(*) AS count")
+                .as_json(only: [:name, :percentage, :count])
+    
+    { country_name: name, commitment_count: commitment_count_for_country, managers: managers, boundary: boundary_coordinates }
   end
+
 end
