@@ -88,25 +88,30 @@
       <span><%= @commitment.governance_types.pluck(:name).join(', ') %></span>
     </div>
 
-    <div class="list--targets-biodiversity">
-      <h3 class="list__title">Related Biodiversity Targets</h3>
-      <ul class="list__ul">
-        <% @targets_biodiversity.each do |target| %>
-          <li class="list__li">
-            <% begin %>
-              <%= image_tag "icons/aichi-#{target}.svg", class: 'icon--aichi', alt: "Aichi target #{target} icon" %>
-            <% rescue Sprockets::Rails::Helper::AssetNotFound  %>
-              <% Rails.logger.info("Aichi icon not found") %>
-            <% end %>
-            <span class="list__subtitle">Aichi target <%= target %></span>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+    <% if false # section removed for now, will eventually be replaced by different targets %>
+      <div class="list--targets-biodiversity">
+        <h3 class="list__title">Related Biodiversity Targets</h3>
+        <ul class="list__ul">
+          <% @targets_biodiversity.each do |target| %>
+            <li class="list__li">
+              <% begin %>
+                <%= image_tag "icons/aichi-#{target}.svg", class: 'icon--aichi', alt: "Aichi target #{target} icon" %>
+              <% rescue Sprockets::Rails::Helper::AssetNotFound  %>
+                <% Rails.logger.info("Aichi icon not found") %>
+              <% end %>
+              <span class="list__subtitle">Aichi target <%= target %></span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
     <div class="list--targets-additional">
       <h3 class="list__title">Additional Details</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur Qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate</p>
+      <% @commitment.progress_documents.each do |progress_document| %>
+
+        <%= link_to "Download file", rails_blob_path(progress_document.document, disposition: "attachment") %>
+      <% end %>
     </div>
   </section>
 </div>
