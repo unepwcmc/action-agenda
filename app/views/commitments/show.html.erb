@@ -9,8 +9,13 @@
       <p><%= @commitment.description %></p>
 
       <h3>Planned actions:</h3>
-      <p><%= @commitment.planned_actions %></p>
-      
+      <% if @commitment.actions.present? %>
+        <% @commitment.actions.each do |action| %>
+          <p><%= action.name %></p>
+        <% end %>
+      <% else %>
+        <p><%= @commitment.planned_actions %></p>
+      <% end %>
     </div>
 
     <div class="list--commitment-info">
@@ -41,10 +46,6 @@
         <li class="list__li">
           <span class="list__subtitle">Expected duration once fully implemented:</span>
           <span class="list__text"><%= @commitment.duration_years ? "#{ @commitment.duration_years } years" : @commitment.duration %></span>
-        </li>
-        <li class="list__li">
-          <span class="list__subtitle">Review method:</span>
-          <span class="list__text"><%= @commitment.review_method %></span>
         </li>
         <li class="list__li">
           <span class="list__subtitle">Country Location:</span>

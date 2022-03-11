@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_26_153526) do
+ActiveRecord::Schema.define(version: 2022_03_10_164315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2022_01_26_153526) do
     t.bigint "criterium_id"
     t.text "joint_governance_description"
     t.bigint "user_id"
+    t.boolean "user_created", default: false, null: false
     t.index ["country_id"], name: "index_commitments_on_country_id"
   end
 

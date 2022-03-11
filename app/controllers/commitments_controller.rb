@@ -10,12 +10,16 @@ class CommitmentsController < ApplicationController
   before_action :set_commitment, only: [:show, :edit, :update, :destroy]
 
   def index
-    @paginatedCommitments = Commitment.paginate_commitments(DEFAULT_PARAMS).to_json
+    # WARNING! Do not remove the live option, because this will show unpublished Commitments people might not want public
+    @paginatedCommitments = Commitment.live.paginate_commitments(DEFAULT_PARAMS).to_json
     @filters = Commitment.filters_to_json
     @table_attributes = Commitment::TABLE_ATTRIBUTES.to_json
   end
 
   def show
+    # only allow the Commitment owner to see the Commitment unless it has been published
+    redirect_to commitments_path unless @commitment.live? || @commitment.user == current_user
+    
     @primary_objectives = @commitment.objectives.pluck(:name).map do |name|
       {
         icon: name.downcase.squish.gsub(' ', '-'),
@@ -28,7 +32,8 @@ class CommitmentsController < ApplicationController
   end
   
   def list
-    @commitments = Commitment.paginate_commitments(params.to_json)
+    # WARNING! Do not remove the live option, because this will show unpublished Commitments people might not want public
+    @commitments = Commitment.live.paginate_commitments(params.to_json)
     render json: @commitments
   end
 
@@ -42,7 +47,7 @@ class CommitmentsController < ApplicationController
   end
 
   def create
-    @commitment = Commitment.new(commitment_params.merge(user: current_user))
+    @commitment = Commitment.new(commitment_params.merge(user: current_user, user_created: true))
     if @commitment.save
       respond_to do |format|
         format.json { json_response({ commitment: @commitment, redirect_path: dashboard_path }, :created) }
@@ -66,7 +71,7 @@ class CommitmentsController < ApplicationController
     raise ForbiddenError unless @commitment.user == current_user
     if @commitment.update(commitment_params)
       respond_to do |format|
-        format.json { json_response({ commitment: @commitment, redirect_path: dashboard_path }, 201) }
+        format.json { json_response({ commitment: @commitment, redirect_path: dashboard_path }, 200) }
       end
     else
       respond_to do |format|
