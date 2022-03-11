@@ -14,7 +14,9 @@ class CountryCommitmentsController < ApplicationController
   def show
     respond_to do |format|
       format.json {
-        render json: @country.country_commitments_json
+        render json: @country.country_commitments_json.merge(
+          country_commitments_params: { filters: { name: 'country', options: [@country.name], type: 'multiple' }}
+        )
       }
     end
   end

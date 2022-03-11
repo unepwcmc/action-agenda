@@ -4,13 +4,14 @@ class CommitmentsController < ApplicationController
     items_per_page: 10,
     requested_page: 1,
     filters: []
-  }.to_json
+  }
 
   skip_before_action :authenticate_user!, only: [:index, :list, :show]
   before_action :set_commitment, only: [:show, :edit, :update, :destroy]
 
   def index
-    @paginatedCommitments = Commitment.paginate_commitments(DEFAULT_PARAMS).to_json
+    DEFAULT_PARAMS[:filters] << params[:filters] if params[:filters].present?  
+    @paginatedCommitments = Commitment.paginate_commitments(DEFAULT_PARAMS.to_json).to_json
     @filters = Commitment.filters_to_json
     @table_attributes = Commitment::TABLE_ATTRIBUTES.to_json
   end
