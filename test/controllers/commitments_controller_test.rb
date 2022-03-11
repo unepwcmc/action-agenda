@@ -194,4 +194,12 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     assert Commitment.count == commitment_count_at_start
     assert JSON.parse(response.body).dig('message') == I18n.t('errors.messages.forbidden_resource')
   end
+
+  test 'should not return draft commitments in the index' do
+    # write this test
+  end
+
+  test 'GET show should only show draft commitments to the owner' do
+    # write this test
+  end
 end
