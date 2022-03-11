@@ -1,10 +1,12 @@
 <template>
   <div>
+    <div v-if="showProgressBar" class="progress-bar"></div>
     <survey class="survey-container" :survey="survey" />
     <form-navigation
       v-bind="{
         complete,
         dataModel,
+        disabled,
         exit,
         isFirstPage,
         isLastPage,
@@ -14,6 +16,7 @@
         prevPage,
         nextPage,
       }"
+      :key="randomKey"
     />
     <error-banner :errors="errors" :key="errorKey" />
   </div>
@@ -93,6 +96,7 @@ export default {
     return {
       axiosDone: false,
       counter: 0,
+      disabled: false,
       errors: {},
       isFirstPage: true,
       isLastPage: false,
@@ -100,18 +104,25 @@ export default {
       errorKey: Math.random(),
       survey: model,
       progressFilesSignedIds: {},
+      randomKey: Math.random(),
       geospatialFileSignedId: this.formData.config.geospatial_file,
-      destroyedIds: []
+      destroyedIds: [],
+      showProgressBar: false,
     };
   },
 
   mounted() {
     setAxiosHeaders(axios);
-    this.survey.data = { ...this.survey.data, 'progress_documents_attributes': this.formData.config.progress_document_json }
+    this.survey.data = {
+      ...this.survey.data,
+      progress_documents_attributes:
+        this.formData.config.progress_document_json,
+    };
 
     this.formData.config.progress_document_json.forEach((question) => {
-      this.progressFilesSignedIds[question.document[0].name] = question.signed_id
-    })
+      this.progressFilesSignedIds[question.document[0].name] =
+        question.signed_id;
+    });
   },
 
   methods: {
@@ -169,34 +180,58 @@ export default {
 
     addDestroyKeys(data) {
       if (this.destroyedIds.length > 0) {
-        this.destroyedIds.forEach( id => { data['progress_documents_attributes'].push({id: id, _destroy: true}) })
+        this.destroyedIds.forEach((id) => {
+          data["progress_documents_attributes"].push({
+            id: id,
+            _destroy: true,
+          });
+        });
       }
     },
 
     appendFileSignedIds(data) {
-      this.appendFileSignedId(data, 'geospatial_file', this.geospatialFileSignedId)
+      this.appendFileSignedId(
+        data,
+        "geospatial_file",
+        this.geospatialFileSignedId
+      );
 
-      data['progress_documents_attributes'].forEach(progress_documents_attributes => {
-        let signedId = '';
-        if (progress_documents_attributes.document) {
-          signedId = this.progressFilesSignedIds[progress_documents_attributes.document[0].name];
+      data["progress_documents_attributes"].forEach(
+        (progress_documents_attributes) => {
+          let signedId = "";
+          if (progress_documents_attributes.document) {
+            signedId =
+              this.progressFilesSignedIds[
+                progress_documents_attributes.document[0].name
+              ];
+          }
+          this.appendFileSignedId(
+            progress_documents_attributes,
+            "document",
+            signedId
+          );
         }
-        this.appendFileSignedId(progress_documents_attributes, 'document', signedId);
-      })
+      );
     },
 
     appendFileSignedId(data, field, signedId) {
-      if(data[field]) {
+      if (data[field]) {
         data[field] = signedId;
       } else {
-        data[field] = '';
+        data[field] = "";
       }
     },
 
     appendDestroy() {
-      const documentJsonIds = this.formData.config.progress_document_json.map(element => element.id)
-      const documentSurveyIds = this.survey.data['progress_documents_attributes'].map(element => element.id)
-      this.destroyedIds = documentJsonIds.filter(item => !documentSurveyIds.includes(item))
+      const documentJsonIds = this.formData.config.progress_document_json.map(
+        (element) => element.id
+      );
+      const documentSurveyIds = this.survey.data[
+        "progress_documents_attributes"
+      ].map((element) => element.id);
+      this.destroyedIds = documentJsonIds.filter(
+        (item) => !documentSurveyIds.includes(item)
+      );
     },
 
     onAfterRenderQuestion(survey, options) {
@@ -226,7 +261,7 @@ export default {
     },
 
     onDynamicPanelRemoved(survey, options) {
-      this.appendDestroy()
+      this.appendDestroy();
     },
 
     onUpdateQuestionCssClasses(survey, options) {
@@ -257,7 +292,23 @@ export default {
       }
     },
 
+    onfileUploading() {
+      this.randomKey++;
+      this.disabled = true;
+      this.showProgressBar = true;
+    },
+
+    onfileUploaded() {
+      setTimeout(() => {
+        this.randomKey++;
+        this.disabled = false;
+        this.showProgressBar = false;
+      }, 2100);
+      clearTimeout();
+    },
+
     onUploadFiles(survey, options) {
+      this.onfileUploading();
       //TODO set cors settings on the bucket for this to work with S3
       const file = options.files[0];
       const upload = new DirectUpload(
@@ -272,12 +323,12 @@ export default {
           if (options.name === "geospatial_file") {
             this.geospatialFileSignedId = blob.signed_id;
           } else {
-            this.progressFilesSignedIds[blob.filename] = blob.signed_id
+            this.progressFilesSignedIds[blob.filename] = blob.signed_id;
           }
 
           // set file content as url to allow file download
-          const url = `/rails/active_storage/blobs/${blob.signed_id}/${blob.filename}`
-          options.files[0]['content'] = url;
+          const url = `/rails/active_storage/blobs/${blob.signed_id}/${blob.filename}`;
+          options.files[0]["content"] = url;
 
           options.callback(
             "success",
@@ -290,6 +341,7 @@ export default {
           );
         }
       });
+      this.onfileUploaded();
     },
 
     prevPage() {
