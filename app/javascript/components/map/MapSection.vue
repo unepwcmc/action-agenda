@@ -62,21 +62,13 @@ export default {
 
   created() {
     this.mapbox = Mapbox;
-    this.getMarkerValues();
+    this.setMaxValue();
   },
 
   methods: {
-    getMarkerValues() {
+    setMaxValue() {
       this.spatialData.forEach(marker => this.markerValues.push(marker.commitment_count));
-      this.setMinMax()
-    },
-
-    setMinMax() {
       this.maxValue = Math.max(...this.markerValues)
-    },
-
-    setMarkerSize(value) {
-      Math.trunc(((100 * value) / this.maxValue) / 20) + 1
     }
   },
 };
