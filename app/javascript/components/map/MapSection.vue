@@ -1,24 +1,12 @@
 <template>
-  <!-- <div id="map" class="map"> -->
   <MglMap
     container="map-test"
     :center.sync="center"
+    :zoom.sync="zoom"
     :accessToken="accessToken"
     :mapStyle="mapStyle"
   >
-    <!-- <MglMarker
-      :coordinates.sync="markerCoordinates"
-      color='green'
-    /> -->
-    <!-- <MglGeojsonLayer
-      type="fill"
-      :sourceId="sourceId"
-      :layerId="layerId"
-      :source="geojson"
-      @click="handleClick"
-    /> -->
   </MglMap>
-  <!-- </div> -->
 </template>
 
 <script>
@@ -35,10 +23,10 @@ export default {
   data() {
     return {
       accessToken:
-        "pk.eyJ1IjoidW5lcHdjbWMiLCJhIjoiRXg1RERWRSJ9.taTsSWwtAfFX_HMVGo2Cug",
-      mapStyle: "mapbox://styles/mapbox/streets-v11",
-      center: [-74.5, 40], // starting position [lng, lat]
-      zoom: 9, // starting zoom
+        "pk.eyJ1IjoidW5lcHdjbWMiLCJhIjoiY2wwcXd5bzJ4MmFjMzNicHd2MzI2dTZmbyJ9.1IhTncWca2v8OEwBGImx9Q",
+      mapStyle: "mapbox://styles/unepwcmc/cl0qvsu6a00ag14n223a8bwr7",
+      center: [2, 30],
+      zoom: 2,
     };
   },
 

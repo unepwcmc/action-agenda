@@ -1,0 +1,8 @@
+.map {
+  display: block;
+  min-height: 70vh;
+}
+
+.mapboxgl-ctrl-bottom-left, .mapboxgl-ctrl-bottom-right, .mapboxgl-ctrl-top-left, .mapboxgl-ctrl-top-right {
+display: none;
+}
