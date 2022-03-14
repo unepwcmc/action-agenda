@@ -1,23 +1,51 @@
 <template>
   <MglMap
+    class="map"
     container="map-test"
     :center.sync="center"
     :zoom.sync="zoom"
     :accessToken="accessToken"
     :mapStyle="mapStyle"
   >
+    <template v-for="(marker, index) in spatialData">
+      <MglMarker :coordinates="[marker.long, marker.lat]" :key="index">
+        <MglPopup>
+          <MapPopup :content="marker"/>
+        </MglPopup>
+        <CustomMarker
+          slot="marker"
+          class="map__marker"
+          :size="Math.trunc(((100 * marker.commitment_count) / maxValue) / 20) + 1"
+          :content="marker.commitment_count"
+          :key="index + 0.8"
+        />
+      </MglMarker>
+    </template>
   </MglMap>
 </template>
 
 <script>
+import CustomMarker from "../marker/CustomMarker";
+import MapPopup from "./MapPopup";
 import Mapbox from "mapbox-gl";
-import { MglMap } from "vue-mapbox";
+import { MglMap, MglMarker, MglPopup } from "vue-mapbox";
 
 export default {
   name: "MapSection",
 
   components: {
-    MglMap
+    CustomMarker,
+    MapPopup,
+    MglMap,
+    MglMarker,
+    MglPopup,
+  },
+
+  props: {
+    spatialData: {
+      type: Array,
+      required: true,
+    },
   },
 
   data() {
@@ -27,12 +55,29 @@ export default {
       mapStyle: "mapbox://styles/unepwcmc/cl0qvsu6a00ag14n223a8bwr7",
       center: [2, 30],
       zoom: 2,
+      markerValues: [],
+      maxValue: 0
     };
   },
 
   created() {
-    // We need to set mapbox-gl library here in order to use it in template
     this.mapbox = Mapbox;
-  }
+    this.getMarkerValues();
+  },
+
+  methods: {
+    getMarkerValues() {
+      this.spatialData.forEach(marker => this.markerValues.push(marker.commitment_count));
+      this.setMinMax()
+    },
+
+    setMinMax() {
+      this.maxValue = Math.max(...this.markerValues)
+    },
+
+    setMarkerSize(value) {
+      Math.trunc(((100 * value) / this.maxValue) / 20) + 1
+    }
+  },
 };
 </script>

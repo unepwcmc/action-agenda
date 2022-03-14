@@ -15,7 +15,7 @@ class Country < ApplicationRecord
 
   def country_commitments_json
     boundary_coordinates = boundary.coordinates
-    commitment_count_for_country = commitments.live.count
+    commitment_count_for_country = commitment_count
     managers = commitments
                 .joins(:managers)
                 .group('managers.name')
@@ -27,4 +27,7 @@ class Country < ApplicationRecord
     { country_name: name, commitment_count: commitment_count_for_country, managers: managers, boundary: boundary_coordinates }
   end
 
+  def commitment_count
+    commitments.live.count
+  end
 end
