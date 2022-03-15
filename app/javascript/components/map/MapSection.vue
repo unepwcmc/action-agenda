@@ -8,14 +8,16 @@
     :mapStyle="mapStyle"
   >
     <template v-for="(marker, index) in spatialData">
-      <MglMarker :coordinates="[marker.long, marker.lat]" :key="index">
-        <MglPopup>
-          <MapPopup :content="marker"/>
+      <MglMarker @click="onPopUp(marker.id)" :coordinates="[marker.long, marker.lat]" :key="index">
+        <MglPopup >
+          <MapPopup :content="marker" />
         </MglPopup>
         <CustomMarker
           slot="marker"
           class="map__marker"
-          :size="Math.trunc(((100 * marker.commitment_count) / maxValue) / 20) + 1"
+          :size="
+            Math.trunc((100 * marker.commitment_count) / maxValue / 20) + 1
+          "
           :content="marker.commitment_count"
           :key="index + 0.8"
         />
@@ -56,19 +58,26 @@ export default {
       center: [2, 30],
       zoom: 2,
       markerValues: [],
-      maxValue: 0
+      maxValue: 0,
     };
   },
 
   created() {
     this.mapbox = Mapbox;
+
     this.setMaxValue();
   },
 
   methods: {
     setMaxValue() {
-      this.spatialData.forEach(marker => this.markerValues.push(marker.commitment_count));
-      this.maxValue = Math.max(...this.markerValues)
+      this.spatialData.forEach((marker) =>
+        this.markerValues.push(marker.commitment_count)
+      );
+      this.maxValue = Math.max(...this.markerValues);
+    },
+
+    onPopUp(id) {
+      this.$root.$emit(`popup:${id}`, id)
     }
   },
 };
