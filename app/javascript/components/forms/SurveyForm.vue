@@ -303,11 +303,11 @@ export default {
         this.randomKey++;
         this.disabled = false;
         this.showProgressBar = false;
-      }, 2100);
+      }, 100);
       clearTimeout();
     },
 
-    onUploadFiles(survey, options) {
+    async onUploadFiles(survey, options) {
       this.onfileUploading();
       //TODO set cors settings on the bucket for this to work with S3
       const file = options.files[0];
@@ -316,7 +316,7 @@ export default {
         "/rails/active_storage/direct_uploads"
       );
 
-      upload.create((error, blob) => {
+      await upload.create((error, blob) => {
         if (error) {
           console.log(error);
         } else {
@@ -337,11 +337,11 @@ export default {
                 file: file,
                 content: file.content,
               };
-            })
-          );
+            }),
+            this.onfileUploaded()
+          )
         }
       });
-      this.onfileUploaded();
     },
 
     prevPage() {
