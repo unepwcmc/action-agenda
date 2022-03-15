@@ -13,6 +13,8 @@ class Country < ApplicationRecord
   ignore_column 'region'
   ignore_column 'bounding_box'
 
+  scope :displayable, -> { where('lat IS NOT NULL AND long IS NOT NULL') }
+
   def country_commitments_json
     boundary_coordinates = boundary.coordinates
     commitment_count_for_country = commitment_count

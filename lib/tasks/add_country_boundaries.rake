@@ -9,10 +9,6 @@ task add_country_boundaries: :environment do
       puts "Adding boundary for #{ country.name }"
       country.boundary = boundary
       country.save!
-
-      country.lat = country.boundary.centroid.lat
-      country.long = country.boundary.centroid.lon
-      country.save!
     end
   end
 end
