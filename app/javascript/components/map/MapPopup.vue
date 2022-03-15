@@ -79,6 +79,7 @@ export default {
   methods: {
     getChartData(id) {
       const url = `/country_commitments/${id}.json`;
+      // TODO handle error
       axios
         .get(url)
         .then((response) => {
@@ -98,11 +99,6 @@ export default {
           this.data.datasets[0].data.push(item.count),
           console.log(item.count);
       });
-      console.log(
-        this.data,
-        this.maxValue,
-        this.options.scales.yAxes[0].ticks.stepSize
-      );
     },
   },
 };

@@ -1,4 +1,7 @@
 <template>
+<div>
+  <MapFilter></MapFilter>
+
   <MglMap
     class="map"
     container="map-test"
@@ -8,7 +11,7 @@
     :mapStyle="mapStyle"
   >
     <template v-for="(marker, index) in spatialData">
-      <MglMarker @click="onPopUp(marker.id)" :coordinates="[marker.long, marker.lat]" :key="index">
+      <MglMarker @click="onPopup(marker.id)" :coordinates="[marker.long, marker.lat]" :key="index">
         <MglPopup >
           <MapPopup :content="marker" />
         </MglPopup>
@@ -24,10 +27,12 @@
       </MglMarker>
     </template>
   </MglMap>
+</div>
 </template>
 
 <script>
 import CustomMarker from "../marker/CustomMarker";
+import MapFilter from "./MapFilter"
 import MapPopup from "./MapPopup";
 import Mapbox from "mapbox-gl";
 import { MglMap, MglMarker, MglPopup } from "vue-mapbox";
@@ -37,6 +42,7 @@ export default {
 
   components: {
     CustomMarker,
+    MapFilter,
     MapPopup,
     MglMap,
     MglMarker,
@@ -76,8 +82,16 @@ export default {
       this.maxValue = Math.max(...this.markerValues);
     },
 
-    onPopUp(id) {
+    onPopup(id) {
       this.$root.$emit(`popup:${id}`, id)
+    },
+
+    // in MapFilter onSelect event 
+    zoomIn () {
+      // pickup the country id match with the bounries
+      // stuff and things - https://docs.mapbox.com/mapbox-gl-js/example/zoomto-linestring/ 
+
+      // onPopup - with country id
     }
   },
 };
