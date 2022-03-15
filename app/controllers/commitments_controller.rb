@@ -8,7 +8,8 @@ class CommitmentsController < ApplicationController
 
   skip_before_action :authenticate_user!, only: [:index, :list, :show]
   before_action :set_commitment, only: [:show, :edit, :update, :destroy]
-  before_action :purge_geospatial_file, only: [:update]
+  before_action :purge_geospatial_file, only: [:update, :create]
+  before_action :clean_progress_document_attachment_params, only: [:update, :create]
 
   def index
     @paginatedCommitments = Commitment.paginate_commitments(DEFAULT_PARAMS).to_json
@@ -94,7 +95,26 @@ class CommitmentsController < ApplicationController
   def purge_geospatial_file
     if commitment_params[:geospatial_file].blank?
       params[:commitment] = params[:commitment].except(:geospatial_file)
-      @commitment.geospatial_file.purge if @commitment.geospatial_file.attached? 
+      @commitment.geospatial_file.purge if @commitment && @commitment.geospatial_file.attached?
+    end
+  end
+
+  def clean_progress_document_attachment_params
+    new_progress_document_attributes = []
+    invalid_progress_document_attributes = []
+
+    commitment_params[:progress_documents_attributes].each do |progress_document_attributes|
+      if progress_document_attributes[:document].present?
+        new_progress_document_attributes << progress_document_attributes
+      elsif progress_document_attributes[:progress_notes].present?
+        invalid_progress_document_attributes << progress_document_attributes
+      end
+    end
+
+    if invalid_progress_document_attributes.present?
+      raise MissingProgressDocumentAttachmentError
+    else
+      commitment_params[:progress_documents_attributes] = new_progress_document_attributes
     end
   end
 
