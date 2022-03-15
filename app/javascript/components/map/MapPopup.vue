@@ -1,7 +1,7 @@
 <template>
   <div>
-    {{ content }}
-    <BarChart :chartData="data" :options="options" />
+    <p>{{ content.name}}, <strong>{{ content.commitment_count }}</strong> commitments</p>
+    <BarChart :chartData="data" :options="options" :key="randomKey" />
   </div>
 </template>
 
@@ -25,24 +25,11 @@ export default {
     return {
       id: this.content.id,
       chartData: Object,
-      colours: [
-        "rgb(255, 99, 132)",
-        "rgb(255, 159, 64)",
-        "rgb(255, 205, 86)",
-        "rgb(75, 192, 192)",
-        "rgb(54, 162, 235)",
-        "rgb(153, 102, 255)",
-        "rgb(201, 203, 207)",
-        "rgb(255, 99, 132)",
-        "rgb(255, 159, 64)",
-        "rgb(75, 192, 192)",
-        "rgb(54, 162, 235)",
-      ],
       data: {
         labels: [],
         datasets: [
           {
-            label: "My First Dataset",
+            label: this.content.name,
             data: [],
             backgroundColor: [
               "rgb(255, 99, 132)",
@@ -56,6 +43,10 @@ export default {
               "rgb(255, 159, 64)",
               "rgb(75, 192, 192)",
               "rgb(54, 162, 235)",
+              "rgb(255, 99, 132)",
+              "rgb(255, 159, 64)",
+              "rgb(75, 192, 192)",
+              "rgb(54, 162, 235)",
             ],
           },
         ],
@@ -65,14 +56,17 @@ export default {
           yAxes: [
             {
               ticks: {
-                min: 0,
-                max: 10,
-                stepSize: 2,
+                display: false,
               },
             },
           ],
         },
+        legend: {
+          display: false,
+          // position: 'right'
+        },
       },
+      randomKey: Math.random(),
     };
   },
 
@@ -96,6 +90,7 @@ export default {
 
     populateChartData() {
       //reset the data array so it doesn't add to it on each click
+      this.randomKey += 1;
       this.data.labels = [];
       this.data.datasets[0].data = [];
       this.chartData.forEach((item) => {
@@ -103,7 +98,11 @@ export default {
           this.data.datasets[0].data.push(item.count),
           console.log(item.count);
       });
-      console.log(this.data);
+      console.log(
+        this.data,
+        this.maxValue,
+        this.options.scales.yAxes[0].ticks.stepSize
+      );
     },
   },
 };
