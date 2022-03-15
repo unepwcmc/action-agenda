@@ -32,4 +32,8 @@ class Country < ApplicationRecord
   def commitment_count
     commitments.live.count
   end
+
+  def coordinates
+    boundary&.coordinates
+  end
 end
