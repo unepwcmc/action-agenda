@@ -16,7 +16,6 @@ class Country < ApplicationRecord
   scope :displayable, -> { where('lat IS NOT NULL AND long IS NOT NULL') }
 
   def country_commitments_json
-    boundary_coordinates = boundary&.coordinates
     commitment_count_for_country = commitment_count
     managers = commitments
                 .joins(:managers)
@@ -26,7 +25,7 @@ class Country < ApplicationRecord
                 .select("COUNT(*) AS count")
                 .as_json(only: [:name, :percentage, :count])
     
-    { country_name: name, commitment_count: commitment_count_for_country, managers: managers, boundary: boundary_coordinates }
+    { country_name: name, commitment_count: commitment_count_for_country, managers: managers }
   end
 
   def commitment_count
@@ -34,6 +33,6 @@ class Country < ApplicationRecord
   end
 
   def coordinates
-    boundary&.coordinates
+    boundary&.coordinates&.first
   end
 end
