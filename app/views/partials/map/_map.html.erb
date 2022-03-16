@@ -1,6 +1,10 @@
 <section>
   <h2 class="h2--full-width">Explore Commitments</h2>
   
-  <map-section class="map" :spatial-data="<%= @commitments_spatial_data.to_json %>">
+  <map-section 
+    class="map" 
+    :spatial-data="<%= @commitments_spatial_data.to_json %>"
+    :countries="<%= @countries.to_json %>"
+  >
   </map-section>
 </section>

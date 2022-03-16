@@ -61,6 +61,7 @@ export default {
             },
           ],
         },
+        //TODO pass the vars to the legend
         legend: {
           display: false,
           // position: 'right'
