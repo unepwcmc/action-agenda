@@ -28,7 +28,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   test "should not GET new without a criterium_id" do
     sign_in users(:user_1)
     get new_commitment_url
-    assert_response :not_found
+    assert_redirected_to new_criterium_path
   end
 
   test "should not GET new if the criterium_id is already associated with a commitment" do
@@ -66,7 +66,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     assert Commitment.last.state == "draft"
   end
 
-  test "should save commitment as draft and return errors if attempt to create a live commitment fails" do
+  test "should return errors if attempt to create a live commitment fails" do
     sign_in users(:user_1)
     commitment_count_at_start = Commitment.count
     valid_params = {
@@ -77,8 +77,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     }
     post commitments_url(params: valid_params), as: :json
     assert_response :unprocessable_entity
-    assert Commitment.count == commitment_count_at_start + 1
-    assert Commitment.last.state == "draft"
+    assert Commitment.count == commitment_count_at_start
     assert JSON.parse(response.body).dig("errors").count > 1
   end
 
@@ -130,7 +129,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     commitment = commitments(:valid_commitment_1)
     assert commitment.description != new_description 
     put commitment_url(commitment, params: { commitment: { description: new_description }}), as: :json
-    assert_response 204
+    assert_response :success
     assert commitment.reload.description == new_description
   end
 
@@ -194,5 +193,13 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :forbidden
     assert Commitment.count == commitment_count_at_start
     assert JSON.parse(response.body).dig('message') == I18n.t('errors.messages.forbidden_resource')
+  end
+
+  test 'should not return draft commitments in the index' do
+    # write this test
+  end
+
+  test 'GET show should only show draft commitments to the owner' do
+    # write this test
   end
 end
