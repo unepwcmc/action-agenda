@@ -117,10 +117,10 @@
         <h3 class="list__title">Additional Details</h3>
         <% @commitment.progress_documents.each do |progress_document| %>
           <p>
-              <%= progress_document.progress_notes %> 
             <strong class="link__download">
               <%= link_to progress_document.document.filename, rails_blob_path(progress_document.document, disposition: "attachment"), target: "_blank" %>
             </strong>
+             <p><%= progress_document.progress_notes %> </p>
           </p>
         <% end %>
       </div>
