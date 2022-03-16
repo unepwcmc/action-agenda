@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :criteria, only: [:new, :create]
   resources :links, only: [:update, :destroy]
   resources :progress_documents, only: [:update, :destroy]
-  
+
   get '/criteria/:id/ineligible', to: 'criteria#ineligible', as: 'ineligible_criteria'
 
   get '/dashboard', to: 'users#dashboard', as: 'dashboard'
