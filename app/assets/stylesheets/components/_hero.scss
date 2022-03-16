@@ -57,3 +57,18 @@
     @include responsive(padding-left, rem-calc(43), rem-calc(43), rem-calc(43));
   }
 }
+
+//--------------------------------------------------
+// about
+//--------------------------------------------------
+.hero--about {
+  @include flex;
+  @include flex-v-center;
+  @include hero-background('hero/amir-samoh-WgV0g05NQCM-unsplash.png');
+  text-align: center;
+  height: rem-calc(340);
+
+  .hero__container {
+    @include container;
+  }
+}

@@ -1,0 +1,18 @@
+<%= render partial: '/partials/topbar/topbar-secondary', locals: { links: header_nav } %>
+
+<%= render partial: '/partials/hero/hero_about', locals: { title: I18n.t('about.hero') } %>
+
+<div>
+  <%= I18n.t('about.body') %>
+</div>
+
+<div>
+  <div>
+    <%= I18n.t('about.footer.left') %>
+  </div>
+
+  <div>
+    <%= I18n.t('about.footer.right') %>
+  </div>
+</div>
+

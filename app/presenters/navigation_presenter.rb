@@ -20,7 +20,7 @@ class NavigationPresenter
       },
       {
         title: 'About',
-        url: '#'
+        url: about_path
       }
     ]
   end
