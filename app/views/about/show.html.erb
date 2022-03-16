@@ -2,16 +2,16 @@
 
 <%= render partial: '/partials/hero/hero_about', locals: { title: I18n.t('about.hero') } %>
 
-<div>
-  <%= I18n.t('about.body') %>
+<div class="about__header-secondary">
+  <h3><%= I18n.t('about.body') %></h3>
 </div>
 
-<div>
-  <div>
+<div class="about__cards">
+  <div class="about__cards-card">
     <%= I18n.t('about.footer.left') %>
   </div>
 
-  <div>
+  <div class="about__cards-card">
     <%= I18n.t('about.footer.right') %>
   </div>
 </div>

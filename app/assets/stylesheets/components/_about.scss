@@ -1,0 +1,28 @@
+//--------------------------------------------------
+// about
+//--------------------------------------------------
+//--------------------------------------------------
+// classes
+//--------------------------------------------------
+.about {
+  &__header-secondary {
+    background-color: $grey-xlight;
+    font-family: $header-font;
+    line-height: 2;
+    padding: rem-calc(60) rem-calc(220);
+  }
+
+  &__cards {
+    @include flex;
+    margin: rem-calc(60) rem-calc(200);
+    padding-bottom: rem-calc(20);
+
+    &-card {
+      font-family: $body-font;
+      margin: rem-calc(20);
+      line-height: 2;
+      
+      flex-grow: 1;
+    }
+  }
+}
