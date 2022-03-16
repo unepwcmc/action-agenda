@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   get '/criteria/:id/ineligible', to: 'criteria#ineligible', as: 'ineligible_criteria'
 
   get '/dashboard', to: 'users#dashboard', as: 'dashboard'
+  get '/about', to: 'about#show', as: 'about'
 end
