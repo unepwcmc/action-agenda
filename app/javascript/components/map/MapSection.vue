@@ -4,8 +4,8 @@
     <MglMap
       class="map"
       container="map-test"
+      ref="MglMap"
       :center.sync="center"
-      :bounds="[[0.1, 0.1], [0.5, 0.5]]"
       :zoom.sync="zoom"
       :accessToken="accessToken"
       :mapStyle="mapStyle"
@@ -76,14 +76,12 @@ export default {
     };
   },
 
-
-
   created() {
     this.mapbox = Mapbox;
     this.setMaxValue();
   },
 
-  updated() {
+  mounted() {
     this.$root.$on("selected", this.zoomIn);
   },
 
@@ -101,23 +99,20 @@ export default {
 
     // in MapFilter onSelect event
     zoomIn(selected) {
-      console.log("SELECTED", selected);
       // Create a 'LngLatBounds' with both corners at the first coordinate - https://docs.mapbox.com/mapbox-gl-js/example/zoomto-linestring/
       this.bounds = new Mapbox.LngLatBounds(
-[[-73.9876, 40.7661], [-73.9397, 40.8002]]
-      );
-
+        selected.coordinates[0],
+        selected.coordinates[0]
+      )
       // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
-      // for (const coord of selected.coordinates) {
-      //   this.bounds.extend(coord);
-      // }
-      this.zoom = 6
-      console.log("bounds", this.bounds);
+      for (const coord of selected.coordinates) {
+        this.bounds.extend(coord);
+      }
 
-      // this.bounds.fitBounds(bounds, {
-      //   padding: 20,
-      // });
-      // onPopup - with country id
+      this.$refs.MglMap.map.fitBounds(this.bounds, {
+        padding: 50,
+      });
+      this.onPopup(selected.id)
     },
   },
 };

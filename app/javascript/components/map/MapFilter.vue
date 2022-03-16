@@ -4,7 +4,7 @@
       <div>
         <input
           v-model="search"
-          @input="onChange()"
+          @input="onChange"
           placeholder="placeholder"
           @keydown.down.prevent="onArrowDown"
           @keydown.up.prevent="onArrowUp"
@@ -59,6 +59,10 @@ export default {
     resultsLengthZero() {
       return this.results.length === 0
     },
+
+    keyResult() {
+      return this.results[this.arrowCounter]
+    },
   },
 
   updated() {
@@ -66,7 +70,6 @@ export default {
   },
 
   methods: {
-    
     filterResults() {
       this.results = this.items.filter((item) => {
         return (
@@ -75,6 +78,18 @@ export default {
             .indexOf(this.search.toLowerCase()) > -1
         );
       });
+    },
+
+    onArrowUp() {
+      this.arrowCounter > 0
+        ? (this.arrowCounter = this.arrowCounter - 1)
+        : (this.arrowCounter = this.results.length - 1)
+    },
+    
+    onArrowDown() {
+      this.arrowCounter < this.results.length
+        ? (this.arrowCounter = this.arrowCounter + 1)
+        : (this.arrowCounter = 0)
     },
 
     onChange() {
