@@ -154,7 +154,7 @@ class CommitmentsController < ApplicationController
       manager_ids: [],
       objective_ids: [],
       threat_ids: [],
-      links_attributes: [:id, :name, :url, :_destroy],
+      links_attributes: [:id, :url, :_destroy],
       progress_documents_attributes: [:id, :document, :progress_notes, :_destroy]
     )
   end
