@@ -1,5 +1,5 @@
  <template>
-  <div>
+  <div class="map__filter">
     <form>
       <div>
         <input
@@ -14,7 +14,7 @@
         <span @click="toggleDropdown" />
       </div>
       <ul
-        class="relative z-10 border max-h-64 p-3 bg-white overflow-auto"
+        class="map__filter-dropdown"
         v-show="isOpen"
       >
         <li v-if="resultsLengthZero">No results</li>

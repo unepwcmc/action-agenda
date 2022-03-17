@@ -3,8 +3,11 @@ display: none;
 }
 
 .map {
-  display: flex;
   min-height: 70vh;
+  
+  display: flex;
+
+  position: relative;
 
   &__marker {
     background-color: $green-dark;
@@ -59,6 +62,16 @@ display: none;
   .mapboxgl-map {
     .mapboxgl-popup {
       max-width: rem-calc(320)!important;
+      position: fixed;
+
+      z-index: 100!important;
+    }
+
+    .mapboxgl-popup-content {
+      overflow: visible;
+
+      position: absolute;
+      top: 0;
     }
   }
 
@@ -71,5 +84,32 @@ display: none;
     margin-top: rem-calc(30);
     padding: rem-calc(7) rem-calc(10);
     text-transform: uppercase;
+  }
+
+  &__filter {
+    font-family: $body-font;
+    font-size: medium;
+    margin: rem-calc(20);
+
+    position: absolute;
+    z-index: 10;
+
+    input {
+      font-family: $body-font;
+      font-size: medium;
+      padding: rem-calc(12) rem-calc(14);
+    }
+  
+    &-dropdown {
+      background-color: white;
+      list-style: none;
+      padding: rem-calc(12) rem-calc(14);
+      margin: 0;
+    
+    }
+    
+    .is-active {
+      background-color: $grey-xlight;
+    }
   }
 }
