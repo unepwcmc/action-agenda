@@ -7,7 +7,7 @@ class Post2020Target < ApplicationRecord
   validates_uniqueness_of :name
 
   def commitment_activities
-    (objectives + threats).unique
+    (objectives + threats).uniq
   end
 
   def commitment_statistics
