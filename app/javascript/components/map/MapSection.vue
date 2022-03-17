@@ -15,8 +15,9 @@
           @click="onPopup(marker.id)"
           :coordinates="[marker.long, marker.lat]"
           :key="index"
+          :ref="`marker${marker.id}`"
         >
-          <MglPopup>
+          <MglPopup closeOnClick>
             <MapPopup :content="marker" />
           </MglPopup>
           <CustomMarker
@@ -71,6 +72,7 @@ export default {
       bounds: [],
       center: [2, 30],
       zoom: 2,
+      showed: false,
       markerValues: [],
       maxValue: 0,
     };
@@ -97,7 +99,12 @@ export default {
       this.$root.$emit(`popup:${id}`, id);
     },
 
-    // in MapFilter onSelect event
+    openPopup(id) {
+      const marker = this.$refs[`marker${id}`]
+      marker[0].togglePopup()
+      this.onPopup(id)
+    },
+    
     zoomIn(selected) {
       // Create a 'LngLatBounds' with both corners at the first coordinate - https://docs.mapbox.com/mapbox-gl-js/example/zoomto-linestring/
       this.bounds = new Mapbox.LngLatBounds(
@@ -112,7 +119,7 @@ export default {
       this.$refs.MglMap.map.fitBounds(this.bounds, {
         padding: 50,
       });
-      this.onPopup(selected.id)
+      this.openPopup(selected.id)
     },
   },
 };
