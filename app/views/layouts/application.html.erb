@@ -11,8 +11,10 @@
 
   <body>
     <div id="v-app">
-      <% flash.each do |key, value| %>
-        <%= render partial: '/devise/notice', locals: { notice: value } %>
+`     <% flash.each do |key, value| %>
+        <% if value == I18n.t('devise.registrations.signed_up_but_unconfirmed') %>
+          <%= render partial: '/devise/notice', locals: { notice: value } %>
+        <% end %>
       <% end %>
 
       <%= render partial: '/partials/topbar/topbar-primary' %>

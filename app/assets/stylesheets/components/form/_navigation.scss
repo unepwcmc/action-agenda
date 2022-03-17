@@ -8,7 +8,6 @@
 
 .form-navigation__items-side {
   display: flex;
-  justify-items: center;
 
   &.form-navigation__items-side--right {
     align-items: center;
@@ -70,42 +69,5 @@
     width: rem-calc(235);
 
     justify-content: center;
-  }
-}
-
-.flash-notice {
-  display: flex;
-
-  &__container {
-    background-color: rgba(44, 44, 44, 0.6);
-    height: 100vh; width: 100vw;
-    
-    position: fixed;
-    z-index: 4;
-
-    &.closed {
-      display: none;
-      all: none;
-    }
-  }
-  
-  &__card {
-    background-color: white;
-    margin: 20% 30%;
-    padding: rem-calc(50);
-    
-    display: flex;
-    flex-direction: column;
-    
-    position: absolute;
-  }
-
-  &__close-btn {
-    color: $green-dark;
-    padding-bottom: rem-calc(10);
-    text-decoration: none;
-    cursor: pointer;
-
-    align-self: flex-end;
   }
 }
