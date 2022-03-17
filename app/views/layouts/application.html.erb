@@ -11,6 +11,10 @@
 
   <body>
     <div id="v-app">
+      <% flash.each do |key, value| %>
+        <%= render partial: '/devise/notice', locals: { notice: value } %>
+      <% end %>
+
       <%= render partial: '/partials/topbar/topbar-primary' %>
 
       <div class="content<%= " bg--grey-xlight" if @grey_bg %>">
