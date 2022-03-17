@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 2022_03_17_100209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
 
   create_table "actions", force: :cascade do |t|
     t.text "name", null: false
@@ -130,8 +129,12 @@ ActiveRecord::Schema.define(version: 2022_03_17_100209) do
     t.index ["threat_id"], name: "index_commitments_threats_on_threat_id"
   end
 
-# Could not dump table "countries" because of following StandardError
-#   Unknown type 'geography(Geometry,4326)' for column 'boundary'
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "iso"
+  end
 
   create_table "criteria", force: :cascade do |t|
     t.boolean "boundary", null: false
@@ -201,13 +204,6 @@ ActiveRecord::Schema.define(version: 2022_03_17_100209) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commitment_id"], name: "index_progress_documents_on_commitment_id"
-  end
-
-  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, default: nil, force: :cascade do |t|
-    t.string "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string "srtext", limit: 2048
-    t.string "proj4text", limit: 2048
   end
 
   create_table "stakeholders", force: :cascade do |t|
