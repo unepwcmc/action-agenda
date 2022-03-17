@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_10_164315) do
+ActiveRecord::Schema.define(version: 2022_03_17_100209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "actions", force: :cascade do |t|
     t.text "name", null: false
@@ -129,12 +130,8 @@ ActiveRecord::Schema.define(version: 2022_03_10_164315) do
     t.index ["threat_id"], name: "index_commitments_threats_on_threat_id"
   end
 
-  create_table "countries", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "iso"
-  end
+# Could not dump table "countries" because of following StandardError
+#   Unknown type 'geography(Geometry,4326)' for column 'boundary'
 
   create_table "criteria", force: :cascade do |t|
     t.boolean "boundary", null: false
@@ -182,12 +179,35 @@ ActiveRecord::Schema.define(version: 2022_03_10_164315) do
     t.boolean "default_option", default: false
   end
 
+  create_table "post2020_targets", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "post2020_targets_commitment_activities", force: :cascade do |t|
+    t.bigint "post2020_target_id", null: false
+    t.string "commitment_activity_type", null: false
+    t.bigint "commitment_activity_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commitment_activity_type", "commitment_activity_id"], name: "targets_post2020_activities"
+    t.index ["post2020_target_id"], name: "post2020_activities_targets"
+  end
+
   create_table "progress_documents", force: :cascade do |t|
     t.bigint "commitment_id"
     t.text "progress_notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commitment_id"], name: "index_progress_documents_on_commitment_id"
+  end
+
+  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, default: nil, force: :cascade do |t|
+    t.string "auth_name", limit: 256
+    t.integer "auth_srid"
+    t.string "srtext", limit: 2048
+    t.string "proj4text", limit: 2048
   end
 
   create_table "stakeholders", force: :cascade do |t|
