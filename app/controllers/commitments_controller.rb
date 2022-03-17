@@ -41,7 +41,8 @@ class CommitmentsController < ApplicationController
 
   def new
     if params[:criterium_id] && criterium_id_valid?
-      @commitment = Commitment.new(criterium_id: params[:criterium_id])
+      manager_ids = Criterium.find(params[:criterium_id]).manager_ids
+      @commitment = Commitment.new(criterium_id: params[:criterium_id], manager_ids: manager_ids)
       @form_hash = Services::CommitmentProps.new(@commitment).call
     else
       redirect_to new_criterium_url
@@ -142,7 +143,6 @@ class CommitmentsController < ApplicationController
       :duration_years,
       :geospatial_file,
       :implementation_year,
-      :joint_governance_description,
       :latitude,
       :longitude,
       :name,
