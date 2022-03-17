@@ -100,3 +100,7 @@ en:
         button: Make a commitment
         subtitle: Capturing Area-Based Commitments
         title: Capturing Area-Based Commitments
+      map:
+        header: Explore Commitments
+        placeholder: Serach by country
+        button: View Commitments

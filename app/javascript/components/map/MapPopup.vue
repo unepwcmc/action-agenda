@@ -91,7 +91,7 @@ export default {
     },
 
     populateChartData() {
-      //reset the data array so it doesn't add to it on each click
+      //reset the data array so it doesn't push to it on each click
       this.randomKey += 1;
       this.data.labels = [];
       this.data.datasets[0].data = [];

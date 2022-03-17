@@ -5,7 +5,7 @@
         <input
           v-model="search"
           @input="onChange"
-          placeholder="placeholder"
+          :placeholder="placeholder"
           @keydown.down.prevent="onArrowDown"
           @keydown.up.prevent="onArrowUp"
           @keydown.enter.prevent="setResult(keyResult)"
@@ -43,6 +43,10 @@ export default {
     searchKey: {
       type: String,
     },
+    placeholder: {
+      type: String,
+      default: "Search"
+    }
   },
 
   data() {

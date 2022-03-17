@@ -1,6 +1,10 @@
 <template>
   <div>
-    <MapFilter :items="countries" searchKey="name" />
+    <MapFilter 
+      :items="countries" 
+      :placeholder="placeholder" 
+      searchKey="name" 
+    />
     <MglMap
       class="map"
       container="map-test"
@@ -55,13 +59,17 @@ export default {
   },
 
   props: {
+    countries: {
+      type: Array,
+    },
     spatialData: {
       type: Array,
       required: true,
     },
-    countries: {
-      type: Array,
-    },
+    placeholder: {
+      type: String,
+      required: false
+    }
   },
 
   data() {
