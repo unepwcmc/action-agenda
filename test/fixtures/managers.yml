@@ -15,3 +15,7 @@ local_communities:
 local_government:
   name: Sub-national or local government
   default_option: true
+
+none_of_the_above:
+  name: None of the above
+  default_option: true

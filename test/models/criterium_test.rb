@@ -8,7 +8,6 @@ class CriteriumTest < ActiveSupport::TestCase
   end
 
   test "should not save with both 'none of the above' other options" do
-    byebug
     criterium = criteria(:invalid_none_of_the_above_options)
     assert_not criterium.save
     assert criterium.errors.count == 2

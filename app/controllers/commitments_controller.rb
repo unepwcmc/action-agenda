@@ -106,6 +106,8 @@ class CommitmentsController < ApplicationController
   end
 
   def clean_progress_document_attachment_params
+    return unless commitment_params[:progress_documents_attributes].present?
+
     new_progress_document_attributes = []
     invalid_progress_document_attributes = []
 
