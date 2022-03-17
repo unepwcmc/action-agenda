@@ -1,1 +1,6 @@
-<%= notice %>
+<div class="flash-notice__container">
+  <div class="flash-notice__card">
+    <%= notice %>
+    <%= button_to I18n.t('views.buttons.log_in.button'), new_user_session_path, title: I18n.t('views.buttons.log_in.title'), class: 'flash-notice__button' %>
+  </div>
+</div>
