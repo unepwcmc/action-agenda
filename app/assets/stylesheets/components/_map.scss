@@ -7,30 +7,31 @@ display: none;
   min-height: 70vh;
 
   &__marker {
-    background-color: $green;
+    background-color: $green-dark;
     border-radius: 50%;
-    -webkit-box-shadow: 7px 7px 14px -2px $grey; 
-    box-shadow: 7px 7px 12px -2px $grey;  
+    -webkit-box-shadow: 4px 4px 12px -2px $grey-dark; 
+    box-shadow: 4px 4px 12px -2px $grey-dark;  
     color: white;
     font-weight: 700;
+    font-family: $header-font;
     text-align: center;
   
     &:active,
     &:hover {
-      background-color: $green-light;
+      background-color: $green;
     }
 
     &-1 {
-      padding: rem-calc(8);
+      padding: rem-calc(6);
     }
     &-2 {
-      padding: rem-calc(10);
+      padding: rem-calc(9);
     }
     &-3 {
-      padding: rem-calc(13);
+      padding: rem-calc(12);
     }
     &-4 {
-      padding: rem-calc(17);
+      padding: rem-calc(16);
     }
     &-5 {
       padding: rem-calc(20);

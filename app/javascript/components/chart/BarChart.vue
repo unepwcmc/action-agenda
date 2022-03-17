@@ -1,10 +1,10 @@
 <script>
-import { HorizontalBar } from "vue-chartjs";
+import { Bar } from "vue-chartjs";
 
 export default {
   name: "BarChart",
 
-  extends: HorizontalBar,
+  extends: Bar,
 
   props: {
     chartData: {

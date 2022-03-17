@@ -25,13 +25,7 @@ export default {
     return {
       id: this.content.id,
       chartData: Object,
-      data: {
-        labels: [],
-        datasets: [
-          {
-            label: this.content.name,
-            data: [],
-            backgroundColor: [
+      colors: [
               "rgb(255, 99, 132)",
               "rgb(255, 159, 64)",
               "rgb(255, 205, 86)",
@@ -48,23 +42,55 @@ export default {
               "rgb(75, 192, 192)",
               "rgb(54, 162, 235)",
             ],
-          },
+          // },
+      data: {
+        labels: [this.content.name],
+        datasets: [
+          // {
+            // label: [],
+            // data: [],
+            // backgroundColor: [
+            //   "rgb(255, 99, 132)",
+            //   "rgb(255, 159, 64)",
+            //   "rgb(255, 205, 86)",
+            //   "rgb(75, 192, 192)",
+            //   "rgb(54, 162, 235)",
+            //   "rgb(153, 102, 255)",
+            //   "rgb(201, 203, 207)",
+            //   "rgb(255, 99, 132)",
+            //   "rgb(255, 159, 64)",
+            //   "rgb(75, 192, 192)",
+            //   "rgb(54, 162, 235)",
+            //   "rgb(255, 99, 132)",
+            //   "rgb(255, 159, 64)",
+            //   "rgb(75, 192, 192)",
+            //   "rgb(54, 162, 235)",
+            // ],
+          // },
         ],
       },
       options: {
+        // responsive: false,
+        // maxWidth: 120,
+        maintainAspectRatio: false,
+        aspectRatio: 1.5,
         scales: {
           yAxes: [
             {
               ticks: {
-                display: false,
+                max: 2,
+                min: 0
+                // display: false,
               },
             },
           ],
         },
         //TODO pass the vars to the legend
         legend: {
-          display: false,
-          // position: 'right'
+          display: true,
+          position: 'bottom',
+          align: 'start',
+          maxWidth: 40,
         },
       },
       randomKey: Math.random(),
@@ -93,12 +119,18 @@ export default {
     populateChartData() {
       //reset the data array so it doesn't push to it on each click
       this.randomKey += 1;
-      this.data.labels = [];
-      this.data.datasets[0].data = [];
-      this.chartData.forEach((item) => {
-        this.data.labels.push(item.name),
-          this.data.datasets[0].data.push(item.count),
-          console.log(item.count);
+      // this.data.labels = [];
+      this.data.datasets = [];
+
+
+      this.chartData.forEach((item, key) => {
+        // this.data.labels.push(item.name),
+
+          this.data.datasets.push({ data: [item.count],
+          label: item.name,
+          backgroundColor: this.colors[key]}),
+          
+          console.log(item.count, this.data.datasets)
       });
     },
   },
