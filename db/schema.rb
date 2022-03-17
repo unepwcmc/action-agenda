@@ -181,22 +181,6 @@ ActiveRecord::Schema.define(version: 2022_03_17_152143) do
     t.boolean "default_option", default: false
   end
 
-  create_table "post2020_targets", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "post2020_targets_commitment_activities", force: :cascade do |t|
-    t.bigint "post2020_target_id", null: false
-    t.string "commitment_activity_type", null: false
-    t.bigint "commitment_activity_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["commitment_activity_type", "commitment_activity_id"], name: "targets_post2020_activities"
-    t.index ["post2020_target_id"], name: "post2020_activities_targets"
-  end
-
   create_table "progress_documents", force: :cascade do |t|
     t.bigint "commitment_id"
     t.text "progress_notes"
