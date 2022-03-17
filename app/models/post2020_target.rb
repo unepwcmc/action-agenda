@@ -9,4 +9,14 @@ class Post2020Target < ApplicationRecord
   def commitment_activities
     (objectives + threats).unique
   end
+
+  def commitment_statistics
+    # method to
+      # join self to managers via commitments
+      # calculate percentage of manager type by self
+  end
+
+  def icon_url
+    # Rails.application.routes.url_helpers.image_url(#{ image_location })
+  end
 end
