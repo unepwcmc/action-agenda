@@ -47,7 +47,7 @@ class Services::CommitmentProps
                 name: 'criterium_id',
                 defaultValue: @commitment.criterium_id,
                 # a bit of a hacky way to make it work
-                visibleIf: "{ criterium_id } contains '-1'"
+                visibleIf: "false"
               },
               {
                 type: 'text',
@@ -283,7 +283,7 @@ class Services::CommitmentProps
                     title: 'hidden field',
                     name: 'id',
                     # a bit of a hacky way to make it work
-                    visibleIf: "{ -1 } contains '-1'"
+                    visibleIf: "false"
                   },
                   {
                     type: 'text',
@@ -315,7 +315,7 @@ class Services::CommitmentProps
                     title: 'hidden field',
                     name: 'id',
                     # a bit of a hacky way to make it work
-                    visibleIf: "{ id } contains '-1'"
+                    visibleIf: "false"
                   },
                   {
                     type: 'file',
