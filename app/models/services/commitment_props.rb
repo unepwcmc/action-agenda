@@ -159,7 +159,7 @@ class Services::CommitmentProps
                     storeDataAsText: false,
                     allowImagesPreview: false,
                     maxSize: 26_214_400,
-                    acceptedTypes: '.zip,.kml,.kml+xml',
+                    acceptedTypes: '.zip,.kml,.kml+xml,.xx',
                     popupdescription: I18n.t('form.commitments.page2.q5.popupdescription_html'),
                     defaultValue: @commitment.geospatial_file.attached? ? [{name: @commitment.geospatial_file.filename, type: @commitment.geospatial_file.content_type }] : [],
                   }
@@ -184,6 +184,13 @@ class Services::CommitmentProps
                     defaultValue: @commitment.current_area_ha || ''
                   }
                 ]
+              },
+              {
+                type: 'comment',
+                name: 'area_manager',
+                title: I18n.t('form.commitments.page2.q8.title'),
+                isRequired: true,
+                defaultValue: @commitment.area_manager || ''
               }
             ]
           },
