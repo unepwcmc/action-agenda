@@ -68,6 +68,7 @@ group :development do
   gem 'capistrano-rvm',   '~> 0.1.2', require: false
   gem 'capistrano-passenger', '~> 0.2.0', require: false
   gem 'capistrano-yarn'
+  gem 'capistrano-rake', require: false
   
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
