@@ -46,7 +46,6 @@ class Services::CommitmentProps
                 title: 'hidden field',
                 name: 'criterium_id',
                 defaultValue: @commitment.criterium_id,
-                # a bit of a hacky way to make it work
                 visibleIf: "false"
               },
               {
@@ -55,6 +54,7 @@ class Services::CommitmentProps
                 title: I18n.t('form.commitments.page1.q1.title'),
                 description: I18n.t('form.commitments.page1.q1.description'),
                 isRequired: true,
+                popupdescription: I18n.t('form.commitments.page1.q1.popupdescription_html'),
                 defaultValue: @commitment.name || ''
               },
               {
@@ -116,6 +116,7 @@ class Services::CommitmentProps
           {
             name: I18n.t('form.commitments.page2.name'),
             title: 'Location',
+            description: I18n.t('form.commitments.page2.description'),
             elements: [
               # currently not working
               {
