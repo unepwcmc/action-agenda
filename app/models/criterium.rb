@@ -43,7 +43,7 @@ class Criterium < ApplicationRecord
   end
 
   def has_government_stakeholder?
-    stakeholder_names.include?('Sub-national or local government')
+    stakeholder_names.include?('Sub-national government')
   end
 
   def has_none_of_the_above_cbd_objectives?
