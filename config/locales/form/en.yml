@@ -83,8 +83,9 @@ en:
         q2:
           title: Please provide the latitude and longitude of the area
           popupdescription_html:
-            "The latitude and longitude that the measure geographically resides (or will reside) within.
-            If unknown, please use this website: <a href='https://www.latlong.net/'>https://www.latlong.net/</a>" 
+            'Please indicate the latitude and longitude of your commitment area. 
+            If unknown, please use this website: <a href="https://www.latlong.net/" target="_blank">https://www.latlong.net/</a>. 
+            If you are using the link to select the centre of your area, this does not need to be exact.'
         q3:
           title: Latitude
         q4:
@@ -93,13 +94,17 @@ en:
           title: If you have spatial data you would like to share, please upload it here.
           description: (Optional field)
           popupdescription_html: 
+            If you are uploading shapefiles, please upload them in a folder (as .zip or .xx files). 
             The spatial data should be the geographical boundary of the area once the commitment has been implemented. 
-            For example, if your commitment is to expand an existing area, please provide the boundary as it will be once the expansion is complete.
+            It is not necessary to expand the area. However, if your commitment is to expand an existing area, 
+            please provide the boundary as it will be once the expansion is complete.
         q6:
           title: How many hectares does/will the area cover?
           popupdescription_html: If the commitment is to expand an existing area, please provide the area in ha that will be covered once the commitment is implemented
         q7:
           title: Hectares
+        q8:
+          title: If this area of land or water is owned (legally or customarily) by a group other than the commitment-maker, please indicate the name of the group and their role in the commitment
       page3:
         name: '3. Duration'
         q1:
