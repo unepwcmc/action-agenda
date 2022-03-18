@@ -203,7 +203,7 @@ class Services::CommitmentProps
                 name: 'committed_year',
                 title: I18n.t('form.commitments.page3.q1.title'),
                 defaultValue: @commitment.committed_year || '',
-                choices: (2012..Date.today.year).to_a.reverse,
+                choices: committed_year_and_implementation_year_choices,
                 optionsCaption: I18n.t('form.commitments.page3.q1.caption'),
                 popupdescription: I18n.t('form.commitments.page3.q1.popupdescription_html')
               },
@@ -212,7 +212,7 @@ class Services::CommitmentProps
                 name: 'duration_years',
                 title: I18n.t('form.commitments.page3.q2.title'),
                 defaultValue: @commitment.duration_years || '',
-                choices: (5..15).to_a,
+                choices: duration_years_choices,
                 optionsCaption: I18n.t('form.commitments.page3.q2.caption'),
                 popupdescription: I18n.t('form.commitments.page3.q2.popupdescription_html')
               }
@@ -253,7 +253,7 @@ class Services::CommitmentProps
                 name: 'implementation_year',
                 title: I18n.t('form.commitments.page4.q3.title'),
                 defaultValue: @commitment.implementation_year || '',
-                choices: (2012..Date.today.year).to_a.reverse,
+                choices: committed_year_and_implementation_year_choices,
                 popupdescription: I18n.t('form.commitments.page4.q3.popupdescription_html')
               },
               {
@@ -343,5 +343,18 @@ class Services::CommitmentProps
         ]
       }
     }
+  end
+
+  def duration_years_choices
+    choices = (5..40).to_a
+    choices << "40+"
+    choices
+  end
+
+  def committed_year_and_implementation_year_choices
+    choices = (2010..2030).to_a
+    choices << 'after 2030'
+    choices.unshift('before 2010')
+    choices
   end
 end
