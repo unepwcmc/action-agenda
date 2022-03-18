@@ -106,14 +106,19 @@ display: none;
       font-size: medium;
       font-style: italic;
       padding: rem-calc(12) rem-calc(14);
+      padding-left: rem-calc(40);
+      width: 100%;
 
       position: relative;
     }
 
     &-icon {
       @include icon-search;
-      
+
       position:absolute;
+      top: rem-calc(12);
+      left: rem-calc(14);
+      z-index: 1;
     }
   
     &-dropdown {
@@ -155,5 +160,9 @@ display: none;
 
       display: inline-block;
     }
+  }
+  
+  &__info-box {
+    @include icon-tooltip;
   }
 }

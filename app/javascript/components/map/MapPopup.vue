@@ -8,6 +8,10 @@
       <BarChart :chartData="data" :options="options" :key="randomKey" />
       <MapLegend :data="data.datasets" />
     </div>
+    <div>
+    <span class="map__info-box"></span>
+      {{}}
+    </div>
     <button class="map__button">view commitments</button>
   </div>
 </template>
