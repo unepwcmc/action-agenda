@@ -5,7 +5,10 @@
       <strong>{{ content.commitment_count }}</strong> commitments
     </p>
     <BarChart :chartData="data" :options="options" :key="randomKey" />
-    <button class="map__button">view commitments</button>
+    <p>
+      {{ this.text }}
+    </p>
+    <button @click="onClick" class="map__button">view commitments</button>
   </div>
 </template>
 
@@ -13,6 +16,7 @@
 import axios from "axios";
 import BarChart from "../chart/BarChart";
 import { setAxiosHeaders } from "../../helpers/axios-helpers";
+import Turbolinks from "turbolinks";
 
 export default {
   name: "MapPopup",
@@ -29,6 +33,8 @@ export default {
     return {
       id: this.content.id,
       chartData: Object,
+      url: '',
+      text: '',
       colors: [
         "rgb(255, 99, 132)",
         "rgb(255, 159, 64)",
@@ -88,9 +94,15 @@ export default {
         .get(url)
         .then((response) => {
           this.chartData = response.data.managers;
+          this.url = response.data.country_commitments_path;
+          this.text = response.data.text;
           console.log(response.data);
         })
         .then(() => this.populateChartData());
+    },
+
+    onClick() {
+      Turbolinks.visit(this.url);
     },
 
     populateChartData() {
