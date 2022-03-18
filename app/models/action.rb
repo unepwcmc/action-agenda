@@ -1,7 +1,7 @@
 class Action < ApplicationRecord
   DEFAULT_OPTIONS = [
-    'Land/water protection', 'Land/water management', 'Species management', 'Education & awareness',
-    'Law & policy', 'Livelihood', 'Economic & other incentives' , 'Other'
+    'Protection of land/water', 'Management of land/water', 'Species management', 'Education or awareness-raising',
+    'Changes to law or policy', 'Economic or other incentives to influence behaviour' , 'Other'
   ]
 
   scope :commitment_form_options, -> { where(default_option: true) }

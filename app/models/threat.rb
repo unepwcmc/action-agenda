@@ -1,8 +1,9 @@
 class Threat < ApplicationRecord
   DEFAULT_OPTIONS = [
-    'Residential & commercial development', 'Agriculture & aquaculture', 'Energy production & mining', 'Transportation & service corridors',
-    'Biological resource use', 'Human intrusions & disturbance', 'Natural system modifications', 'Invasive & other problematic species',
-    'Genes & diseases', 'Pollution', 'Geological events', 'Climate change & severe weather', 'Other'
+    'Residential or commercial development', 'Agriculture or aquaculture', 'Energy production or mining', 
+    'Transportation or service corridors', 'Biological resource use', 'Human intrusions and disturbance', 
+    'Natural system modifications', 'Invasive species, genetic threats, disease threats',
+    'Pollution', 'Geological events', 'Climate change or severe weather', 'Other'
   ]
 
   scope :commitment_form_options, -> { where(default_option: true) }

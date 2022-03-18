@@ -65,8 +65,8 @@ class Services::CriteriumProps
                 description: I18n.t('form.criteria.q3.description'),
                 isRequired: true,
                 popupdescription: I18n.t('form.criteria.q3.popupdescription_html'),
-                choices: Manager.pluck(:id, :name).map do |id, name|
-                          if name != 'None of the above'
+                choices: Manager.commitment_form_options.pluck(:id, :name).map do |id, name|
+                          if name != 'Other'
                             {
                               value: id,
                               text: name
