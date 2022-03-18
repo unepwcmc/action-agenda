@@ -4,6 +4,18 @@ indigenous:
   name: Indigenous peoples
   default_option: true
 
-joint_governance:
-  name: Joint governance
+ngo:
+  name: Non-governmental organisation (NGO)
+  default_option: true
+
+local_communities:
+  name: Local communities
+  default_option: true
+
+local_government:
+  name: Sub-national or local government
+  default_option: true
+
+none_of_the_above:
+  name: None of the above
   default_option: true

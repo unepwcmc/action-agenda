@@ -7,7 +7,7 @@ class CriteriaController < ApplicationController
     @form_hash = Services::CriteriumProps.new(@criterium).call
     @none_values = {
       cbd_objective_ids: CbdObjective.find_by(name: 'None of the above').id,
-      stakeholder_ids: Stakeholder.find_by(name: 'None of the above').id
+      manager_ids: Manager.find_by(name: 'None of the above').id
     }
   end
 
@@ -40,7 +40,7 @@ class CriteriaController < ApplicationController
       :boundary,
       :five_year_commitment,
       :progress_report,
-      stakeholder_ids: [],
+      manager_ids: [],
       cbd_objective_ids: []
     )
   end
