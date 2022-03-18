@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_18_093430) do
+ActiveRecord::Schema.define(version: 2022_03_18_151017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,8 +70,8 @@ ActiveRecord::Schema.define(version: 2022_03_18_093430) do
     t.float "longitude"
     t.integer "current_area_ha"
     t.integer "proposed_area_ha"
-    t.integer "committed_year"
-    t.integer "implementation_year"
+    t.string "committed_year"
+    t.string "implementation_year"
     t.integer "update_year"
     t.text "name"
     t.text "governance_authority"
@@ -87,12 +87,15 @@ ActiveRecord::Schema.define(version: 2022_03_18_093430) do
     t.string "review_method"
     t.text "responsible_group"
     t.integer "state", default: 0
-    t.integer "duration_years"
+    t.string "duration_years"
     t.bigint "criterium_id"
     t.bigint "user_id"
     t.boolean "user_created", default: false, null: false
     t.text "area_manager"
+    t.index ["committed_year"], name: "index_commitments_on_committed_year"
     t.index ["country_id"], name: "index_commitments_on_country_id"
+    t.index ["duration_years"], name: "index_commitments_on_duration_years"
+    t.index ["implementation_year"], name: "index_commitments_on_implementation_year"
   end
 
   create_table "commitments_countries", id: false, force: :cascade do |t|
