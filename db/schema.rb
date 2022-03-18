@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_17_100209) do
+ActiveRecord::Schema.define(version: 2022_03_17_152143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "actions", force: :cascade do |t|
     t.text "name", null: false
@@ -134,6 +135,10 @@ ActiveRecord::Schema.define(version: 2022_03_17_100209) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "iso"
+    t.float "lat"
+    t.float "long"
+    t.geography "boundary", limit: {:srid=>4326, :type=>"geometry", :geographic=>true}
+    t.index ["boundary"], name: "index_countries_on_boundary", using: :gist
   end
 
   create_table "criteria", force: :cascade do |t|

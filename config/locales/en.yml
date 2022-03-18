@@ -99,4 +99,9 @@ en:
       hero:
         button: Make a commitment
         subtitle: Capturing Area-Based Commitments
-        title: Commitments for Nature
+        title: Capturing Area-Based Commitments
+      map:
+        header: Explore Commitments
+        placeholder: Search by country
+        button: View Commitments
+        information_text: The figure above presents the relative proportion of commitments being made by actor in this country
