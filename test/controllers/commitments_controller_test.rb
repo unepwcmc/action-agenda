@@ -94,7 +94,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
         name: "a name",
         description: "a description",
         duration_years: 5,
-        stage: "Implemented",
+        stage: "Implemented fully",
         responsible_group: "a name",
         state: "live",
         country_ids: [countries(:hungary).id],

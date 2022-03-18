@@ -46,7 +46,6 @@ class Services::CommitmentProps
                 title: 'hidden field',
                 name: 'criterium_id',
                 defaultValue: @commitment.criterium_id,
-                # a bit of a hacky way to make it work
                 visibleIf: "false"
               },
               {
@@ -55,6 +54,7 @@ class Services::CommitmentProps
                 title: I18n.t('form.commitments.page1.q1.title'),
                 description: I18n.t('form.commitments.page1.q1.description'),
                 isRequired: true,
+                popupdescription: I18n.t('form.commitments.page1.q1.popupdescription_html'),
                 defaultValue: @commitment.name || ''
               },
               {
@@ -97,14 +97,6 @@ class Services::CommitmentProps
                 otherText: I18n.t('form.none')
               },
               {
-                type: 'comment',
-                name: 'joint_governance_description',
-                visibleIf: "{ manager_ids } contains 'Joint governance'",
-                title: I18n.t('form.commitments.page1.q5.title'),
-                hideNumber: true,
-                defaultValue: @commitment.joint_governance_description || ''
-              },
-              {
                 type: 'text',
                 name: 'responsible_group',
                 title: I18n.t('form.commitments.page1.q6.title'),
@@ -116,6 +108,7 @@ class Services::CommitmentProps
           {
             name: I18n.t('form.commitments.page2.name'),
             title: 'Location',
+            description: I18n.t('form.commitments.page2.description'),
             elements: [
               # currently not working
               {
@@ -167,7 +160,7 @@ class Services::CommitmentProps
                     storeDataAsText: false,
                     allowImagesPreview: false,
                     maxSize: 26_214_400,
-                    acceptedTypes: '.zip,.kml,.kml+xml',
+                    acceptedTypes: '.zip,.kml,.kml+xml,.xx',
                     popupdescription: I18n.t('form.commitments.page2.q5.popupdescription_html'),
                     defaultValue: @commitment.geospatial_file.attached? ? [{name: @commitment.geospatial_file.filename, type: @commitment.geospatial_file.content_type }] : [],
                   }
@@ -192,6 +185,13 @@ class Services::CommitmentProps
                     defaultValue: @commitment.current_area_ha || ''
                   }
                 ]
+              },
+              {
+                type: 'comment',
+                name: 'area_manager',
+                title: I18n.t('form.commitments.page2.q8.title'),
+                isRequired: true,
+                defaultValue: @commitment.area_manager || ''
               }
             ]
           },
@@ -228,7 +228,7 @@ class Services::CommitmentProps
                 name: 'stage',
                 title: I18n.t('form.commitments.page4.q1.title'),
                 defaultValue: @commitment.stage || [],
-                choices: ['Committed', 'In progress', 'Implemented'],
+                choices: ['Committed only', 'In progress', 'Implemented fully'],
                 popupdescription: I18n.t('form.commitments.page4.q1.popupdescription_html')
               },
               {

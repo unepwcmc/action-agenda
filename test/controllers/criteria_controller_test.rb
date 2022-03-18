@@ -11,7 +11,7 @@ class CriteriaControllerTest < ActionDispatch::IntegrationTest
 
   test "should POST create criterium suitable for commitment" do
     sign_in users(:user_1)
-    stakeholder = stakeholders(:local_communities)
+    manager = managers(:local_communities)
     cbd_objective = cbd_objectives(:conservation_of_biological_diversity)
 
     valid_params = {
@@ -19,7 +19,7 @@ class CriteriaControllerTest < ActionDispatch::IntegrationTest
           boundary: true,
           five_year_commitment: true,
           progress_report: true,
-          stakeholder_ids: [stakeholder.id],
+          manager_ids: [manager.id],
           cbd_objective_ids: [cbd_objective]
       }
     }
@@ -32,7 +32,7 @@ class CriteriaControllerTest < ActionDispatch::IntegrationTest
 
   test "should POST create criterium unsuitable for commitment" do
     sign_in users(:user_1)
-    stakeholder = stakeholders(:local_communities)
+    manager = managers(:local_communities)
     cbd_objective = cbd_objectives(:conservation_of_biological_diversity)
 
     valid_params = {
@@ -40,7 +40,7 @@ class CriteriaControllerTest < ActionDispatch::IntegrationTest
           boundary: true,
           five_year_commitment: true,
           progress_report: false,
-          stakeholder_ids: [stakeholder.id],
+          manager_ids: [manager.id],
           cbd_objective_ids: [cbd_objective]
       }
     }
@@ -53,7 +53,7 @@ class CriteriaControllerTest < ActionDispatch::IntegrationTest
 
   test "return errors if parameters are invalid" do
     sign_in users(:user_1)
-    stakeholder = stakeholders(:local_communities)
+    manager = managers(:local_communities)
     cbd_objective = cbd_objectives(:conservation_of_biological_diversity)
 
     invalid_params = {
