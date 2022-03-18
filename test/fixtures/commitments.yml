@@ -13,7 +13,6 @@ valid_commitment_1:
   governance_authority: MyText
   planned_actions: MyText
   description: MyText
-  joint_governance_description: description of joint governance
   managers: indigenous, joint_governance
   state: live
   stage: Committed only
