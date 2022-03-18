@@ -4,7 +4,10 @@
       {{ content.name }},
       <strong>{{ content.commitment_count }}</strong> commitments
     </p>
-    <BarChart :chartData="data" :options="options" :key="randomKey" />
+    <div class="map__chart-container">
+      <BarChart :chartData="data" :options="options" :key="randomKey" />
+      <MapLegend :data="data.datasets" />
+    </div>
     <button class="map__button">view commitments</button>
   </div>
 </template>
@@ -13,11 +16,12 @@
 import axios from "axios";
 import BarChart from "../chart/BarChart";
 import { setAxiosHeaders } from "../../helpers/axios-helpers";
+import MapLegend from './MapLegend.vue';
 
 export default {
   name: "MapPopup",
 
-  components: { BarChart },
+  components: { BarChart, MapLegend },
 
   props: {
     content: {
@@ -30,21 +34,16 @@ export default {
       id: this.content.id,
       chartData: Object,
       colors: [
-        "rgb(255, 99, 132)",
-        "rgb(255, 159, 64)",
-        "rgb(255, 205, 86)",
-        "rgb(75, 192, 192)",
-        "rgb(54, 162, 235)",
-        "rgb(153, 102, 255)",
-        "rgb(201, 203, 207)",
-        "rgb(255, 99, 132)",
-        "rgb(255, 159, 64)",
-        "rgb(75, 192, 192)",
-        "rgb(54, 162, 235)",
-        "rgb(255, 99, 132)",
-        "rgb(255, 159, 64)",
-        "rgb(75, 192, 192)",
-        "rgb(54, 162, 235)",
+        "#97001F",
+        "#6054BA",
+        "#00483A",
+        "#E7C802",
+        "#4bc0c0",
+        "#43B2ED",
+        "#6380ff",
+        "#ff6384",
+        "#ffa040",
+        "#003e78",
       ],
       data: {
         labels: [this.content.name],
@@ -64,10 +63,7 @@ export default {
           ],
         },
         legend: {
-          display: true,
-          position: "top",
-          align: "start",
-          maxWidth: 40,
+          display: false,
         },
       },
       randomKey: Math.random(),
