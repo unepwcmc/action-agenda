@@ -40,10 +40,6 @@ class Commitment < ApplicationRecord
   validates_presence_of :description, :latitude, :longitude, :committed_year, :responsible_group, :implementation_year,
                         :duration_years, :objectives, :managers, :countries, :actions, :threats, if: :user_created_and_live?
   
-  validate :has_joint_governance_description, if: :user_created_and_live?
-
-  before_save :clear_joint_governance_description_if_not_joint_governance_managed
-
   TABLE_ATTRIBUTES = [
     {
       title: 'Name',
@@ -226,18 +222,6 @@ class Commitment < ApplicationRecord
   end
 
   private
-
-  def clear_joint_governance_description_if_not_joint_governance_managed
-    self.joint_governance_description = '' unless joint_governance?
-  end
-
-  def has_joint_governance_description
-    errors.add(:joint_governance_description, :description_blank) if joint_governance_description.blank? && joint_governance?
-  end
-
-  def joint_governance?
-    Manager.where(id: manager_ids).pluck(:name).include?('Joint governance')
-  end
 
   def user_created_and_live?
     live? && user_created?

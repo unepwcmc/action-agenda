@@ -114,18 +114,21 @@ export default {
 
   mounted() {
     setAxiosHeaders(axios);
-    this.survey.data = {
-      ...this.survey.data,
-      progress_documents_attributes:
-        this.formData.config.progress_document_json,
-      links_attributes:
-        this.formData.config.links_json,
-    };
+    
+    if (this.formData.config.progress_document_json) {
+      this.survey.data = {
+        ...this.survey.data,
+        progress_documents_attributes:
+          this.formData.config.progress_document_json,
+        links_attributes:
+          this.formData.config.links_json,
+      };
 
-    this.formData.config.progress_document_json.forEach((question) => {
-      this.progressFilesSignedIds[question.document[0].name] =
-        question.signed_id;
-    });
+      this.formData.config.progress_document_json.forEach((question) => {
+        this.progressFilesSignedIds[question.document[0].name] =
+          question.signed_id;
+      });
+    }
   },
 
   methods: {
@@ -301,7 +304,7 @@ export default {
       // multiselect
       const multiselectQs = [
         "cbd_objective_ids",
-        "stakeholder_ids",
+        "manager_ids",
         "objective_ids",
         "manager_ids",
         "country_ids",

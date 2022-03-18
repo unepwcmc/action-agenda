@@ -97,14 +97,6 @@ class Services::CommitmentProps
                 otherText: I18n.t('form.none')
               },
               {
-                type: 'comment',
-                name: 'joint_governance_description',
-                visibleIf: "{ manager_ids } contains 'Joint governance'",
-                title: I18n.t('form.commitments.page1.q5.title'),
-                hideNumber: true,
-                defaultValue: @commitment.joint_governance_description || ''
-              },
-              {
                 type: 'text',
                 name: 'responsible_group',
                 title: I18n.t('form.commitments.page1.q6.title'),
