@@ -159,7 +159,6 @@ ActiveRecord::Schema.define(version: 2022_03_17_100209) do
   end
 
   create_table "links", force: :cascade do |t|
-    t.text "name"
     t.text "url", null: false
     t.bigint "commitment_id"
     t.datetime "created_at", null: false
