@@ -138,7 +138,7 @@ en:
           caption: -Select-
           popupdescription_html:
             The year in which the commitment was pledged and not when it was registered in the platform. 
-            This could be in the past if the commitment is already in progress when it is submitted to the platform.
+            This could be in the past if the commitment activities are in progress or yet to start when it is submitted to the platform.
         q2:
           title: How many years do you expect the commitment to be in place for?
           caption: -Select-
@@ -162,7 +162,8 @@ en:
         q3:
           title: Please state the first year of commitment actions
           popupdescription_html:
-            This helps provide realistic expectations as to when planned actions are likely to start
+            This helps others understand when planned actions are likely to start, or if actions have already started. 
+            If commitment actions started in the past they must still be in progress now.
         q4:
           title: What are the main threats that your commitment is seeking to address?
           description: Multi select option
