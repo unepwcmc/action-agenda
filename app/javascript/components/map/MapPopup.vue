@@ -1,10 +1,18 @@
 <template>
-  <div>
+  <div class="popup__container">
     <p>
       {{ content.name }},
       <strong>{{ content.commitment_count }}</strong> commitments
     </p>
-    <BarChart :chartData="data" :options="options" :key="randomKey" />
+    <div class="map__chart-container">
+      <BarChart :chartData="data" :options="options" :key="randomKey" />
+      <MapLegend :data="data.datasets" />
+    </div>
+    <div class="map__info-box">
+      <span class="map__info-box-icon"></span>
+        {{ this.text }}
+    </div>
+    <button @click="onClick" class="map__button">view commitments</button>
   </div>
 </template>
 
@@ -12,11 +20,13 @@
 import axios from "axios";
 import BarChart from "../chart/BarChart";
 import { setAxiosHeaders } from "../../helpers/axios-helpers";
+import Turbolinks from "turbolinks";
+import MapLegend from './MapLegend.vue';
 
 export default {
   name: "MapPopup",
 
-  components: { BarChart },
+  components: { BarChart, MapLegend },
 
   props: {
     content: {
@@ -28,46 +38,39 @@ export default {
     return {
       id: this.content.id,
       chartData: Object,
+      url: '',
+      text: '',
+      colors: [
+        "#97001F",
+        "#6054BA",
+        "#00483A",
+        "#E7C802",
+        "#4bc0c0",
+        "#43B2ED",
+        "#6380ff",
+        "#ff6384",
+        "#ffa040",
+        "#003e78",
+      ],
       data: {
-        labels: [],
-        datasets: [
-          {
-            label: this.content.name,
-            data: [],
-            backgroundColor: [
-              "rgb(255, 99, 132)",
-              "rgb(255, 159, 64)",
-              "rgb(255, 205, 86)",
-              "rgb(75, 192, 192)",
-              "rgb(54, 162, 235)",
-              "rgb(153, 102, 255)",
-              "rgb(201, 203, 207)",
-              "rgb(255, 99, 132)",
-              "rgb(255, 159, 64)",
-              "rgb(75, 192, 192)",
-              "rgb(54, 162, 235)",
-              "rgb(255, 99, 132)",
-              "rgb(255, 159, 64)",
-              "rgb(75, 192, 192)",
-              "rgb(54, 162, 235)",
-            ],
-          },
-        ],
+        labels: [''],
+        datasets: [],
       },
       options: {
+        responsive: false,
+        maintainAspectRatio: false,
         scales: {
           yAxes: [
             {
               ticks: {
+                min: 0,
                 display: false,
               },
             },
           ],
         },
-        //TODO pass the vars to the legend
         legend: {
           display: false,
-          // position: 'right'
         },
       },
       randomKey: Math.random(),
@@ -75,7 +78,6 @@ export default {
   },
 
   created() {
-    //api call based on the content?
     setAxiosHeaders(axios);
     this.$root.$on(`popup:${this.id}`, this.getChartData);
   },
@@ -88,20 +90,27 @@ export default {
         .get(url)
         .then((response) => {
           this.chartData = response.data.managers;
-          console.log(response.data);
+          this.url = response.data.country_commitments_path;
+          this.text = response.data.text;
         })
         .then(() => this.populateChartData());
+    },
+
+    onClick() {
+      Turbolinks.visit(this.url);
     },
 
     populateChartData() {
       //reset the data array so it doesn't push to it on each click
       this.randomKey += 1;
-      this.data.labels = [];
-      this.data.datasets[0].data = [];
-      this.chartData.forEach((item) => {
-        this.data.labels.push(item.name),
-          this.data.datasets[0].data.push(item.count),
-          console.log(item.count);
+      this.data.datasets = [];
+
+      this.chartData.forEach((item, key) => {
+        this.data.datasets.push({
+          data: [item.count],
+          label: item.name,
+          backgroundColor: this.colors[key],
+        })
       });
     },
   },
