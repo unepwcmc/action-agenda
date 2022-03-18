@@ -46,7 +46,7 @@ en:
           attributes:
             base:
               none_of_the_above_option_for_cbd_commitments: 'CBD Objectives cannot include named objectives if "None of the above" option is selected'
-              none_of_the_above_option_for_stakeholders: '"Who is making the commitment" cannot include named stakeholders if "None of the above" option is selected'
+              none_of_the_above_option_for_managers: '"Who is making the commitment" cannot include named stakeholders if "None of the above" option is selected'
             boundary:
               nil_value: 'Boundary information missing' 
             five_year_commitment:
@@ -55,12 +55,10 @@ en:
               nil_value: 'Progress report information missing'
             cbd_objectives:
               blank: 'CBD Objective information missing'
-            stakeholders:
+            managers:
               blank: 'Stakeholder information missing'
         commitment:
           attributes:
-            joint_governance_description:
-              description_blank: "cannot be blank if joint governance manager type is selected"
             stage:
               inclusion: "is not one of the allowed stage options"
         progress_document:
@@ -75,7 +73,7 @@ en:
         five_year_commitment: The lifespan of your commitment is less than 5 years
         progress_report: You aren't able to submit progress reports
         no_cbd_objectives: Your commitment doesn't contribute to any of the CBD commitments
-        government_stakeholders: Your commitment is being made by a government
+        government_managers: Your commitment is being made by a government
 
   views:
     titles:
