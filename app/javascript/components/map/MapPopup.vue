@@ -53,7 +53,7 @@ export default {
         "#003e78",
       ],
       data: {
-        labels: [this.content.name],
+        labels: [''],
         datasets: [],
       },
       options: {
