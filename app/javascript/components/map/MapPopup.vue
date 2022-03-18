@@ -8,9 +8,9 @@
       <BarChart :chartData="data" :options="options" :key="randomKey" />
       <MapLegend :data="data.datasets" />
     </div>
-    <div>
-    <span class="map__info-box"></span>
-      {{ this.text }}
+    <div class="map__info-box">
+      <span class="map__info-box-icon"></span>
+        {{ this.text }}
     </div>
     <button @click="onClick" class="map__button">view commitments</button>
   </div>
@@ -78,7 +78,6 @@ export default {
   },
 
   created() {
-    //api call based on the content?
     setAxiosHeaders(axios);
     this.$root.$on(`popup:${this.id}`, this.getChartData);
   },
@@ -93,7 +92,6 @@ export default {
           this.chartData = response.data.managers;
           this.url = response.data.country_commitments_path;
           this.text = response.data.text;
-          console.log(response.data);
         })
         .then(() => this.populateChartData());
     },

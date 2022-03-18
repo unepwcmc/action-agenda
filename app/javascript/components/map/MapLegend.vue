@@ -1,11 +1,11 @@
 <template>
   <div v-if="data.length > 0">
-    <ul class="map__legend" v-for="item, key in data" :key="key">
+    <ul class="map__legend" v-for="(item, key) in data" :key="key">
       <li class="map__legend-item">
         <div class="map__legend-marker-container">
-          <span 
-            class="map__legend-marker" 
-            :style="{ 'background-color': item.backgroundColor }" 
+          <span
+            class="map__legend-marker"
+            :style="{ 'background-color': item.backgroundColor }"
           />
         </div>
         <span>
@@ -18,18 +18,14 @@
 </template>
 
 <script>
-  export default {
-    name: 'MapLegend',
+export default {
+  name: "MapLegend",
 
-    props: {
-      data: {
-        type: Array,
-        require: false
-      },
-    },
-    updated() {
-      console.log('DATA', this.data)
+  props: {
+    data: {
+      type: Array,
+      require: false,
     }
   }
-
+}
 </script>

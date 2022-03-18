@@ -1,7 +1,7 @@
  <template>
   <div class="map__filter">
     <form>
-      <div>
+      <div >
         <span class="map__filter-icon"/> 
         <input
           v-model="search"
@@ -67,10 +67,6 @@ export default {
     keyResult() {
       return this.results[this.arrowCounter]
     },
-  },
-
-  updated() {
-    console.log(this.search);
   },
 
   methods: {
