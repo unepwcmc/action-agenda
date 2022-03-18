@@ -10,7 +10,7 @@ class Criterium < ApplicationRecord
   validates :cbd_objectives, presence: true
   validates :managers, presence: true
   validate :none_of_the_above_for_cbd_commitments
-  validate :none_of_the_above_for_managers
+  validate :has_government_manager?
 
   def criteria_valid_for_commitment?
     !criteria_invalid_for_commitment?
@@ -43,15 +43,11 @@ class Criterium < ApplicationRecord
   end
 
   def has_government_manager?
-    manager_names.include?('Sub-national or local government')
+    manager_names.include?('Sub-national ministry or agency')
   end
 
   def has_none_of_the_above_cbd_objectives?
     cbd_objective_names.include?('None of the above')
-  end
-
-  def has_none_of_the_above_managers?
-    manager_names.include?('None of the above')
   end
 
   def none_of_the_above_for_cbd_commitments

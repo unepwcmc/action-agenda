@@ -50,7 +50,7 @@ commitments = [
 Commitment.create!(commitments)
 
 links = [
-  { url: 'something.com', name: 'a website', commitment: Commitment.first },
-  { url: 'something.org', name: 'another website', commitment: Commitment.first }
+  { url: 'something.com', commitment: Commitment.first },
+  { url: 'something.org', commitment: Commitment.first }
 ]
 Link.create!(links)

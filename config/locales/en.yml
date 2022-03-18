@@ -88,7 +88,7 @@ en:
     criterium:
       ineligible:
         title: This platform might not be the best place to record your commitment
-        description: Your answers in the current form suggest your commitment might be better suited to another platform, for example because it is not area-based or won't be in place for more than 5 years.
+        description: Your answers in the current form suggest this platform might not be the best place to record your commitment.
         results_did_not_pass: Your results that didn't pass the criteria form
         links:
           action_agenda:
@@ -97,4 +97,9 @@ en:
       hero:
         button: Make a commitment
         subtitle: Capturing Area-Based Commitments
-        title: Commitments for Nature
+        title: Capturing Area-Based Commitments
+      map:
+        header: Explore Commitments
+        placeholder: Search by country
+        button: View Commitments
+        information_text: The figure above presents the relative proportion of commitments being made by actor in this country
