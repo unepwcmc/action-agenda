@@ -7,26 +7,24 @@ User.create!(users)
 User.first.confirm
 
 # Criteria and assicated records
-stakeholder_names = [ 'Local communities', 'Indigenous peoples', 'Non-governmental organisation (NGO)', 'Private sector (business and industry)', 'Sub-national or local government', 'None of the above' ]
-Stakeholder.create!(stakeholder_names.map {|name| { name: name }})
+Manager.create!(Manager::DEFAULT_OPTIONS.map {|manager_name| { name: manager_name, default_option: true }})
 
 cbd_objective_names = [ 'Conservation of biological diversity', 'Sustainable use', 'Fair and equitable sharing of benefits from the utilization of genetic resources', 'None of the above' ]
 CbdObjective.create!(cbd_objective_names.map {|name| { name: name }})
 
 criteria = [
-  { boundary: true, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first], user: User.first },
-  { boundary: false, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first], user: User.first },
-  { boundary: true, five_year_commitment: false, progress_report: true, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first], user: User.first },
-  { boundary: true, five_year_commitment: true, progress_report: false, stakeholders: [Stakeholder.first], cbd_objectives: [CbdObjective.first], user: User.first },
-  { boundary: true, five_year_commitment: true, progress_report: true, stakeholders: [Stakeholder.last], cbd_objectives: [CbdObjective.last], user: User.first },
-  { boundary: false, five_year_commitment: false, progress_report: false, stakeholders: [Stakeholder.last], cbd_objectives: [CbdObjective.last], user: User.first }
+  { boundary: true, five_year_commitment: true, progress_report: true, managers: [Manager.first], cbd_objectives: [CbdObjective.first], user: User.first },
+  { boundary: false, five_year_commitment: true, progress_report: true, managers: [Manager.first], cbd_objectives: [CbdObjective.first], user: User.first },
+  { boundary: true, five_year_commitment: false, progress_report: true, managers: [Manager.first], cbd_objectives: [CbdObjective.first], user: User.first },
+  { boundary: true, five_year_commitment: true, progress_report: false, managers: [Manager.first], cbd_objectives: [CbdObjective.first], user: User.first },
+  { boundary: true, five_year_commitment: true, progress_report: true, managers: [Manager.last], cbd_objectives: [CbdObjective.last], user: User.first },
+  { boundary: false, five_year_commitment: false, progress_report: false, managers: [Manager.last], cbd_objectives: [CbdObjective.last], user: User.first }
 ]
 Criterium.create!(criteria)
 
 # Commitments and associated records
 Country.import
 
-Manager.create!(Manager::DEFAULT_OPTIONS.map {|manager_name| { name: manager_name, default_option: true }})
 Action.create!(Action::DEFAULT_OPTIONS.map {|action_name| { name: action_name, default_option: true }})
 Threat.create!(Threat::DEFAULT_OPTIONS.map {|threat_name| { name: threat_name, default_option: true }})
 Objective.create!(Objective::DEFAULT_OPTIONS.map {|objective_name| { name: objective_name, default_option: true }})
@@ -37,7 +35,7 @@ commitments = [
     committed_year: 2021, implementation_year: 2022, name: 'A commitment', 
     governance_authority: 'A governance authority name', description: 'A description',
     duration_years: 5, user: User.first, criterium: Criterium.first,
-    stage: 'Implemented fully', responsible_group: 'The responsible group', state: 'live', joint_governance_description: 'some managers',
+    stage: 'Implemented', responsible_group: 'The responsible group', state: 'live',
     threats: Threat.all, actions: Action.all, managers: Manager.all, countries: Country.where(id: 1..5), objectives: Objective.all
   },
   {
@@ -45,7 +43,7 @@ commitments = [
     committed_year: 2021, implementation_year: 2022, name: 'A commitment', 
     governance_authority: 'A governance authority name', description: 'A description',
     duration_years: 5, user: User.second, criterium: Criterium.first,
-    stage: 'Implemented fully', responsible_group: 'The responsible group', state: 'live', joint_governance_description: 'some managers',
+    stage: 'Implemented', responsible_group: 'The responsible group', state: 'live',
     threats: Threat.all, actions: Action.all, managers: Manager.all, countries: Country.where(id: 1..5), objectives: Objective.all
   }
 ]
