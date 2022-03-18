@@ -37,7 +37,7 @@ commitments = [
     committed_year: 2021, implementation_year: 2022, name: 'A commitment', 
     governance_authority: 'A governance authority name', description: 'A description',
     duration_years: 5, user: User.first, criterium: Criterium.first,
-    stage: 'Implemented', responsible_group: 'The responsible group', state: 'live', joint_governance_description: 'some managers',
+    stage: 'Implemented fully', responsible_group: 'The responsible group', state: 'live', joint_governance_description: 'some managers',
     threats: Threat.all, actions: Action.all, managers: Manager.all, countries: Country.where(id: 1..5), objectives: Objective.all
   },
   {
@@ -45,7 +45,7 @@ commitments = [
     committed_year: 2021, implementation_year: 2022, name: 'A commitment', 
     governance_authority: 'A governance authority name', description: 'A description',
     duration_years: 5, user: User.second, criterium: Criterium.first,
-    stage: 'Implemented', responsible_group: 'The responsible group', state: 'live', joint_governance_description: 'some managers',
+    stage: 'Committed only', responsible_group: 'The responsible group', state: 'live', joint_governance_description: 'some managers',
     threats: Threat.all, actions: Action.all, managers: Manager.all, countries: Country.where(id: 1..5), objectives: Objective.all
   }
 ]

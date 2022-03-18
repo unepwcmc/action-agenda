@@ -1,7 +1,7 @@
 require 'csv'
 require 'wcmc_components'
 class Commitment < ApplicationRecord
-  STAGE_OPTIONS = ['In progress', 'Committed', 'Implemented']
+  STAGE_OPTIONS = ['In progress', 'Committed only', 'Implemented fully']
   enum state: [:draft, :live] 
 
   include WcmcComponents::Loadable
@@ -134,6 +134,7 @@ class Commitment < ApplicationRecord
     # if params are empty then return the paginated results without filtering
     if filter_params.empty?
       return Commitment.includes(:countries)
+                       .where(state: 'live')
                        .order(id: :asc).paginate(page: page || 1, per_page: @items_per_page)
                        .to_a.map! do |commitment|
                commitment.to_hash
@@ -187,7 +188,7 @@ class Commitment < ApplicationRecord
 
   def self.run_query(page, where_params)
     Commitment.left_outer_joins(:managers, :countries, :objectives, :governance_types)
-      .distinct  
+      .distinct
       .where(where_params.values.join(' AND '))
       .paginate(page: page || 1, per_page: @items_per_page).order(id: :asc)
   end

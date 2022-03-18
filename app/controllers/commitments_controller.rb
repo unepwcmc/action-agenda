@@ -12,14 +12,12 @@ class CommitmentsController < ApplicationController
   before_action :clean_progress_document_attachment_params, only: [:update, :create]
 
   def index
-    # WARNING! Do not remove the live option, because this will show unpublished Commitments people might not want public
-    @paginatedCommitments = Commitment.live.paginate_commitments(DEFAULT_PARAMS).to_json
+    @paginatedCommitments = Commitment.paginate_commitments(DEFAULT_PARAMS).to_json
     @filters = Commitment.filters_to_json
     @table_attributes = Commitment::TABLE_ATTRIBUTES.to_json
   end
 
   def show
-    # only allow the Commitment owner to see the Commitment unless it has been published
     redirect_to commitments_path unless @commitment.live? || @commitment.user == current_user
     
     @primary_objectives = @commitment.objectives.pluck(:name).map do |name|
@@ -35,7 +33,7 @@ class CommitmentsController < ApplicationController
   
   def list
     # WARNING! Do not remove the live option, because this will show unpublished Commitments people might not want public
-    @commitments = Commitment.live.paginate_commitments(params.to_json)
+    @commitments = Commitment.paginate_commitments(params.to_json)
     render json: @commitments
   end
 

@@ -222,7 +222,7 @@ class Services::CommitmentProps
                 name: 'stage',
                 title: I18n.t('form.commitments.page4.q1.title'),
                 defaultValue: @commitment.stage || [],
-                choices: ['Committed', 'In progress', 'Implemented'],
+                choices: ['Committed only', 'In progress', 'Implemented fully'],
                 popupdescription: I18n.t('form.commitments.page4.q1.popupdescription_html')
               },
               {
