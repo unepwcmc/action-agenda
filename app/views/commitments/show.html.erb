@@ -7,10 +7,15 @@
 
       <h1><%= @commitment.name %></h1>
       <p><%= @commitment.description %></p>
-
+      <br>
       <h3>Planned actions:</h3>
-      <p><%= @commitment.planned_actions %></p>
-      
+      <% if @commitment.actions.present? %>
+        <% @commitment.actions.each do |action| %>
+          <p><%= action.name %></p>
+        <% end %>
+      <% else %>
+        <p><%= @commitment.planned_actions %></p>
+      <% end %>
     </div>
 
     <div class="list--commitment-info">
@@ -43,10 +48,6 @@
           <span class="list__text"><%= @commitment.duration_years ? "#{ @commitment.duration_years } years" : @commitment.duration %></span>
         </li>
         <li class="list__li">
-          <span class="list__subtitle">Review method:</span>
-          <span class="list__text"><%= @commitment.review_method %></span>
-        </li>
-        <li class="list__li">
           <span class="list__subtitle">Country Location:</span>
           <p class="list__country">
             <i class="list__icon icon--pin"></i>
@@ -68,44 +69,61 @@
   </section>
 
   <section class="grid-1-gap-1 spacer-large--bottom">
-    <div class="list--primary-objectives">
-      <h3 class="list__title">Primary Objectives</h3>
-      <ul class="list__ul">
-        <% @primary_objectives.each do |objective| %>
-          <li class="list__li">
-            <i class="list__icon icon--<%= objective[:icon] %>"></i>
-            <%= objective[:title] %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-
-    <div class="list--governance">
-      <h3 class="list__title">Governance Authority</h3>
-      <p><%= @commitment.governance_authority %></p>
-      <p class="bold">Governance type</p>
-      <span><%= @commitment.governance_types.pluck(:name).join(', ') %></span>
-    </div>
-
-    <div class="list--targets-biodiversity">
-      <h3 class="list__title">Related Biodiversity Targets</h3>
-      <ul class="list__ul">
-        <% @targets_biodiversity.each do |target| %>
-          <li class="list__li">
-            <% begin %>
-              <%= image_tag "icons/aichi-#{target}.svg", class: 'icon--aichi', alt: "Aichi target #{target} icon" %>
-            <% rescue Sprockets::Rails::Helper::AssetNotFound  %>
-              <% Rails.logger.info("Aichi icon not found") %>
+    <% if @primary_objectives.present? then %>
+      <div class="list--primary-objectives">
+        <h3 class="list__title">Primary Objectives</h3>
+        <div class="list__container">
+          <ul class="list__ul">
+            <% @primary_objectives.each do |objective| %>
+              <li class="list__li">
+                <i class="list__icon icon--<%= objective[:icon] %>"></i>
+                <%= objective[:title] %>
+              </li>
             <% end %>
-            <span class="list__subtitle">Aichi target <%= target %></span>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+          </ul>
+        </div>
+      </div>
+    <% end %>
 
-    <div class="list--targets-additional">
-      <h3 class="list__title">Additional Details</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur Qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate</p>
-    </div>
+    <% if @commitment.governance_authority.present? then %>
+      <div class="list--governance">
+        <h3 class="list__title">Governance Authority</h3>
+        <p><%= @commitment.governance_authority %></p>
+        <p class="bold">Governance type</p>
+        <span><%= @commitment.governance_types.pluck(:name).join(', ') %></span>
+      </div>
+    <% end %>
+
+    <% if false # section removed for now, will eventually be replaced by different targets %>
+      <div class="list--targets-biodiversity">
+        <h3 class="list__title">Related Biodiversity Targets</h3>
+        <ul class="list__ul">
+          <% @targets_biodiversity.each do |target| %>
+            <li class="list__li">
+              <% begin %>
+                <%= image_tag "icons/aichi-#{target}.svg", class: 'icon--aichi', alt: "Aichi target #{target} icon" %>
+              <% rescue Sprockets::Rails::Helper::AssetNotFound  %>
+                <% Rails.logger.info("Aichi icon not found") %>
+              <% end %>
+              <span class="list__subtitle">Aichi target <%= target %></span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% if @commitment.progress_documents.present? then %>
+      <div class="list--targets-additional">
+        <h3 class="list__title">Additional Details</h3>
+        <% @commitment.progress_documents.each do |progress_document| %>
+          <p>
+            <strong class="link__download">
+              <%= link_to progress_document.document.filename, rails_blob_path(progress_document.document, disposition: "attachment"), target: "_blank" %>
+            </strong>
+             <p><%= progress_document.progress_notes %> </p>
+          </p>
+        <% end %>
+      </div>
+    <% end %>
   </section>
 </div>

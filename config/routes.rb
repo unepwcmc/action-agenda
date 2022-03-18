@@ -7,16 +7,16 @@ Rails.application.routes.draw do
     root to: 'users#dashboard', as: :root
   end
 
+  get '/dashboard', to: 'users#dashboard', as: 'dashboard'
+  get '/about', to: 'about#show', as: 'about'
+
   resources :commitments
   post '/commitments/list', to: 'commitments#list'
 
   resources :criteria, only: [:new, :create]
+  get '/criteria/:id/ineligible', to: 'criteria#ineligible', as: 'ineligible_criteria'
+  
   resources :links, only: [:update, :destroy]
   resources :progress_documents, only: [:update, :destroy]
-
-  get '/criteria/:id/ineligible', to: 'criteria#ineligible', as: 'ineligible_criteria'
-
-  get '/dashboard', to: 'users#dashboard', as: 'dashboard'
-
   resources :country_commitments, only: [:show, :index]
 end

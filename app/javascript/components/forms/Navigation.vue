@@ -34,12 +34,14 @@
           v-if="!isFirstPage"
           class="form-navigation__item form-navigation__item--save-middle-page"
           v-text="navigationText.exit.right"
+          :disabled="disabled"
           @click.prevent="openModal"
         />
         <button
           v-if="dataModel === 'Commitment' && !isLastPage"
           class="form-navigation__item form-navigation__item--rightmost form-navigation__item--next-commitment"
           v-text="navigationText.next"
+          :disabled="disabled"
           @click.prevent="nextPage"
         />
         <button
@@ -76,6 +78,11 @@ export default {
     complete: {
       type: Function,
       required: true
+    },
+
+    disabled: {
+      type: Boolean,
+      default: false
     },
 
     exit: {
@@ -126,7 +133,16 @@ export default {
 
   data () {
     return {
-      showModal: false
+      randomKey: Math.random(),
+      showModal: false,
+    }
+  },
+
+  watch: {
+    disabled(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.disabled = newValue
+      }
     }
   },
 

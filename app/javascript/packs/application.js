@@ -28,6 +28,7 @@ import SurveyForm from '../components/forms/SurveyForm'
 import MockProgressBar from '../components/progress/MockProgressBar'
 import NavDropdown from '../components/nav/NavDropdown'
 import MapSection from '../components/map/MapSection'
+import NoticeOverlay from '../components/notice/NoticeOverlay'
 
 //mapbox
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -67,7 +68,9 @@ document.addEventListener('turbolinks:load', () => {
         MockProgressBar,
         MapSection,
         NavDropdown,
-        SurveyForm
+        SurveyForm,
+        NavDropdown,
+        NoticeOverlay
       }
     })
   }

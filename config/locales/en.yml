@@ -90,7 +90,7 @@ en:
     criterium:
       ineligible:
         title: This platform might not be the best place to record your commitment
-        description: Your answers in the current form suggest your commitment might be better suited to another platform, for example because it is not area-based or won't be in place for more than 5 years.
+        description: Your answers in the current form suggest this platform might not be the best place to record your commitment.
         results_did_not_pass: Your results that didn't pass the criteria form
         links:
           action_agenda:

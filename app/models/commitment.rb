@@ -29,7 +29,7 @@ class Commitment < ApplicationRecord
 
   accepts_nested_attributes_for :links, reject_if: ->(attributes){ attributes['url'].blank? }, allow_destroy: true
   accepts_nested_attributes_for :progress_documents, reject_if: ->(attributes){ attributes['document'].blank? }, allow_destroy: true
-  
+
   validates :geospatial_file, 
     content_type: %w(application/vnd.google-earth.kml+xml application/vnd.google-earth.kmz application/zip), 
     size: { less_than: 25.megabytes }

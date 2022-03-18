@@ -149,6 +149,12 @@
   @include list-box-height;
   font-size: rem-calc(20);
 
+  .list__container {
+    margin-top: rem-calc(10);
+    max-height: rem-calc(280);
+    overflow: auto;
+  }
+
   .list__ul {
     @include ul-unstyled;
   }
@@ -200,6 +206,10 @@
 .list--targets-additional {
   @include list-box;
   grid-column: 1/3;
+
+  .link__download {
+    color: $green-dark
+  }
 }
 
 //--------------------------------------------------
