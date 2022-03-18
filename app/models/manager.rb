@@ -1,7 +1,14 @@
 class Manager < ApplicationRecord
   DEFAULT_OPTIONS = [
-    'Indigenous peoples', 'Local communities', 'For-profit organisations', 'Non-profit organisations', 'Individual landowners',
-    'Collaborative governance', 'Joint governance', 'Sub-national ministry or agency', 'Other'
+    'Local communities', 
+    'Indigenous peoples', 
+    'Non-governmental organisation (NGO)', 
+    'For-profit organisation (business and industry)', 
+    'Sub-national government', 
+    'Joint governance (i.e. decisions are made by many)', 
+    'Individual landowners', 
+    'Collaborative governance (i.e. decisions are made by one group on behalf of many)', 
+    'Other'
   ]
 
   scope :commitment_form_options, -> { where(default_option: true) }
