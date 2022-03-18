@@ -65,7 +65,7 @@ en:
 
           ‘Commitment actions’ are the actions that are taken to achieve objectives.
 
-          ‘Area’ refers to the geographical area in which commitment activities take place. 
+          ‘Area’ refers to the geographical area in which commitment activities take place.
         q1:
           title: Enter commitment name
           description: (The name of the activity may describe the commitment actions and place. E.g. ‘Establishment of Cambridge community conserved area’)
@@ -101,6 +101,7 @@ en:
             is primarily responsible for the commitment and making management decisions about commitment actions. 
       page2:
         name: '2. Location'
+        description: This page asks for details about the area in which commitment actions (will) take place.
         q1:
           title: Select commitment location by country
           description: Multi select option
