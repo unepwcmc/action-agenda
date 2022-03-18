@@ -10,9 +10,9 @@
     </div>
     <div>
     <span class="map__info-box"></span>
-      {{}}
+      {{ this.text }}
     </div>
-    <button class="map__button">view commitments</button>
+    <button @click="onClick" class="map__button">view commitments</button>
   </div>
 </template>
 
@@ -20,6 +20,7 @@
 import axios from "axios";
 import BarChart from "../chart/BarChart";
 import { setAxiosHeaders } from "../../helpers/axios-helpers";
+import Turbolinks from "turbolinks";
 import MapLegend from './MapLegend.vue';
 
 export default {
@@ -37,6 +38,8 @@ export default {
     return {
       id: this.content.id,
       chartData: Object,
+      url: '',
+      text: '',
       colors: [
         "#97001F",
         "#6054BA",
@@ -88,9 +91,15 @@ export default {
         .get(url)
         .then((response) => {
           this.chartData = response.data.managers;
+          this.url = response.data.country_commitments_path;
+          this.text = response.data.text;
           console.log(response.data);
         })
         .then(() => this.populateChartData());
+    },
+
+    onClick() {
+      Turbolinks.visit(this.url);
     },
 
     populateChartData() {
