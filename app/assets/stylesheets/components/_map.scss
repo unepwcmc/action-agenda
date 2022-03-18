@@ -75,6 +75,7 @@ display: none;
     }
 
     .mapboxgl-popup-content {
+      padding: rem-calc(5) rem-calc(20) rem-calc(15);
       overflow: visible;
 
       position: absolute;
@@ -161,7 +162,7 @@ display: none;
       display: inline-block;
     }
   }
-  
+
   &__info-box {
     @include icon-tooltip;
   }
