@@ -10,26 +10,33 @@ en:
       description: Form 1 will help establish whether this platform is the right place for your commitment. ‘Commitment’ refers to what you intend to do, for example, commitments to enhance/improve an existing area where new actions are planned or to establish a new area. ‘Area’ refers to the geographical area this is (or will be) under management as a result of this commitment.
       q1: 
         title: Does/will the area have a clearly-defined boundary?
-        t: The area has, or will have, a clearly defined boundary
-        f: The area does not and will not have a clearly defined boundary
-        popupdescription_html:
-          Note that the boundary does not need to be a physical barrier/visible on the ground.</br></br>
-          Each commitment can be either represented as a polygon boundary, or if unavailable, a point location.
+        t: Yes - the area has, or will have, a clearly defined boundary
+        f: No - the area does not and will not have a clearly defined boundary
+        popupdescription_html: Note that the boundary does not need to be a physical barrier/visible on the ground.
       q2:
-        title: Please select the objectives of the Convention on Biological Diversity that your commitment contributes to
+        title: Please select which of the following objectives your commitment contributes to.
         description: Multi select option
-        popupdescription_html: <a href='https://www.cbd.int/' target="_blank">More details on CBD Objectives</a>
+        popupdescription_html: 
+          The objectives listed here follow the 
+          <a href='https://www.cbd.int/' target="_blank">three main goals of the Convention on Biological Diversity:</a> 
+          conservation of biodiversity; sustainable use of biodiversity; and fair and equitable sharing of benefits arising 
+          from the use of genetic resources (e.g. plants and animals). The last objective may include monetary or non-monetary benefits. 
+          The overall objective of this international treaty is to encourage actions which lead to a sustainable future.
       q3:
-        title: Who is making the commitment?
+        title: Who will be responsible for deciding how the area is managed?
         description: Multi select option
-        popupdescription_html: The individual or organization making the commitment
+        popupdescription_html:
+          This should be the group(s) that decide to make the commitment, decide on the objectives of the commitment, 
+          and decide on the actions taken to achieve those objectives.</br></br>
+          ‘Collaborative governance’ means one group makes the decisions, but these decisions are made after consultation with other groups.</br></br> 
+          ‘Joint governance’ means two or more groups make the decisions together. 
       q4:
         title: Is the duration of the commitment at least 5 years?
         t: 'Yes'
         f: 'No'
         popupdescription_html: Will the conservation actions you are committing to be carried out for a period of at least 5 years?
       q5:
-        title: Are you able to submit annual progress reports to this platform?
+        title: Would you be able to submit annual progress reports to this platform in the future?
         t: 'Yes'
         f: 'No'
         popupdescription_html: 
@@ -49,31 +56,49 @@ en:
       page1:
         name: '1. General Info'
         title: General Info
-        description: ‘Commitment’ refers to what you intend to do, for example establishing a new protected area, or working to improve the management of an existing area. ‘Area’ refers to the geographical area that is (or will be) under management as a result of this commitment.
+        description:
+          This page asks for details about commitment actions.
+          
+          A ‘commitment' is the pledge to conduct activities (which serve objectives related to the conservation and/or 
+          sustainable use of nature), now or in the future, within a specific area. This might include establishing a new 
+          protected area or improving the management/stewardship/governance of an existing area. 
+
+          ‘Commitment actions’ are the actions that are taken to achieve objectives.
+
+          ‘Area’ refers to the geographical area in which commitment activities take place. 
         q1:
           title: Enter commitment name
-          description: (To save or continue with this form, you’ll need to provide a name for your commitment)
+          description: (The name of the activity may describe the commitment actions and place. E.g. ‘Establishment of Cambridge community conserved area’)
+          popupdescription_html:
+            Please name your commitment in up to 10 words. This is the name that will appear on the platform. 
+            Examples include 'Establishment of Cambridge community conserved area', 'Expansion of Cambridge private reserve', 
+            or 'Improvement of management for sustainable use at Cambridge Farm'' 
         q2:
-          title: Please provide a description for your commitment
+          title: Please provide a description of your commitment
           popupdescription_html: 
-            Please provide information on the biodiversity in the area and, if possible, its status (is it declining, stable or improving?).
-            What are your specific objectives and how do you plan to achieve these? How will you measure whether you are achieving your objectives? Plus any other relevant information! 
+            'Please answer as many of the following questions as possible: 
+            What biodiversity and nature can be found in the area? 
+            What is the status of this biodiversity and nature (Is it declining, stable, or improving)? 
+            What are your specific objectives and how do you plan to achieve these? 
+            How will you measure whether you are achieving your objectives?'
         q3:
-          title: Please select the primary management objectives for the area
+          title: Please select the main objectives you aim to achieve through your commitment from the list below
           description: Multi select option
           popupdescription_html: Objectives can be defined as what the commitment is trying to accomplish.
         q4:
           title: Who will be responsible for deciding how the area is being managed?
           description: Multi select option
-          popupdescription_html: 
+          popupdescription_html:
             We would like to understand who is accountable for how the area is or will be managed. Management refers to the actions carried out.</br></br>
             <strong>Example of joint governance:</strong></br>
             NGO in collaboration with a private landowner
         q5:
           title: Specify the type of joint governance
         q6:
-          title: Name of the group responsible for decisions
-          popupdescription_html: For example, the name of a local community, NGO or local council
+          title: Name(s) of the group(s) ultimately responsible for management decisions on commitment actions
+          popupdescription_html:
+            For example, the name of a local community, NGO, or local council. This will be used to let others know who 
+            is primarily responsible for the commitment and making management decisions about commitment actions. 
       page2:
         name: '2. Location'
         q1:
@@ -147,11 +172,16 @@ en:
       page5:
         name: '5. Progress'
         q1:
-          title: Upload your progress documentation
+          title: Please upload your progress documentation and any other relevant documents of your choice
           description: (Optional field)
           add: Add another
           delete: Are you sure you want to delete this file?
-          popupdescription_html: The responsible enitity or organisation making or delivering the commitment.
+          popupdescription_html:
+            As a minimum requirement we ask you to provide a project plan if this is the first year of the commitment. Otherwise, please provide a brief update each year on the actions you have taken as part of the commitment. This can either be a word document or a PDF. Your progress notes will be timestamped so that commitment viewers can see when the updates were provided. 
+            <br><br>
+            In addition, you may also upload any other relevant documents that you would like others to be able to see. These must also be in PDF or Word format. 
+            <br><br>
+            By loading your updates, you agree that they will be visible to other users of the site. The information you provide will serve to inspire and enable others to learn from different approaches being applied across the world. Showcasing commitments may also inspire investors or donors to support specific initiatives.
       modal:
         question: Are you sure you want to exit this page?
         p1: If you still want to exit this page, selecting ‘Exit & Save’ will save any information you have entered so far*. Saved commitments will be accessible through your ‘My Dashboard’ page.
