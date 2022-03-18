@@ -66,11 +66,9 @@ class Services::CommitmentProps
                 defaultValue: @commitment.objective_ids || [],
                 popupdescription: I18n.t('form.commitments.page1.q3.popupdescription_html'),
                 choices: Objective.commitment_form_options.pluck(:id, :name).map do |id, name|
-                           next unless name != 'None of the above'
-
                            {
                              value: id,
-                             text: name
+                             text: form_option_text(name, 'objective')
                            }
                          end.compact
               },
@@ -237,7 +235,7 @@ class Services::CommitmentProps
 
                            {
                              value: id,
-                             text: name
+                             text: form_option_text(name, 'action')
                            }
                          end.compact,
                 otherText: 'Other'
@@ -262,7 +260,7 @@ class Services::CommitmentProps
 
                            {
                              value: id,
-                             text: name
+                             text: form_option_text(name, 'threat')
                            }
                          end.compact
               },
@@ -336,5 +334,14 @@ class Services::CommitmentProps
         ]
       }
     }
+  end
+
+  def form_option_text(name, klass)
+    underscore_name = name.downcase.gsub(' ', '_').to_sym
+    if I18n.t("models.#{ klass }.additional_form_text").keys.include?(underscore_name.to_sym)
+      I18n.t("models.#{ klass }.additional_form_text.#{ underscore_name }")
+    else
+      name
+    end
   end
 end

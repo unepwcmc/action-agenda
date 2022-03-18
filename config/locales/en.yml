@@ -76,6 +76,22 @@ en:
         progress_report: You aren't able to submit progress reports
         no_cbd_objectives: Your commitment doesn't contribute to any of the CBD commitments
         government_stakeholders: Your commitment is being made by a government
+    objective:
+      additional_form_text:
+        equitable_sharing_of_benefits_from_genetic_resources: Equitable sharing of benefits from genetic resources (i.e. Sharing monetary or non-monetary benefits from plants or animals fairly)
+    action:
+      additional_form_text:
+        protection_of_land/water: Protection of land/water (e.g. establish or expand a park or protected area)
+        management_of_land/water: Management of land/water (e.g. conserve or restore a habitat, control poachers or invasive species)
+        species_management: Species management (e,g, enhance or restore a species, manage trade or harvests)
+        economic_(or other)_incentives_to_influence_behaviour: Economic (or other) incentives to influence behaviour (e.g. provide alternative livelihoods or products)
+    threat:
+      additional_form_text:
+        biological_resource_use: Biological resource use (e.g. hunting, logging, fishing, gathering plants)
+        human_intrusions_and_disturbance: Human intrusions and disturbance (e.g. disturbance of habitat by recreational activities or war)
+        natural_system_modifications: Natural system modifications (e.g. dams, land reclamation, fire management)
+        geological_events: Geological events (e.g. volcanoes, earthquakes, landslides)
+        climate_change_or_severe_weather: Climate change or severe weather (e.g. flooding, droughts, habitat changes, temperature changes)
 
   views:
     titles:
