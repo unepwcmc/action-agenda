@@ -5,7 +5,7 @@
 #   gem 'sqlite3'
 #
 development:
-  adapter: postgresql
+  adapter: postgis
   encoding: utf-8
   database: aa_development
   pool: 5

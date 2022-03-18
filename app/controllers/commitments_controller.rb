@@ -4,7 +4,7 @@ class CommitmentsController < ApplicationController
     items_per_page: 10,
     requested_page: 1,
     filters: []
-  }.to_json
+  }
 
   skip_before_action :authenticate_user!, only: [:index, :list, :show]
   before_action :set_commitment, only: [:show, :edit, :update, :destroy]
@@ -12,8 +12,8 @@ class CommitmentsController < ApplicationController
   before_action :clean_progress_document_attachment_params, only: [:update, :create]
 
   def index
-    # WARNING! Do not remove the live option, because this will show unpublished Commitments people might not want public
-    @paginatedCommitments = Commitment.live.paginate_commitments(DEFAULT_PARAMS).to_json
+    DEFAULT_PARAMS[:filters] << params[:filters] if params[:filters].present?  
+    @paginatedCommitments = Commitment.paginate_commitments(DEFAULT_PARAMS.to_json).to_json
     @filters = Commitment.filters_to_json
     @table_attributes = Commitment::TABLE_ATTRIBUTES.to_json
   end
@@ -41,7 +41,8 @@ class CommitmentsController < ApplicationController
 
   def new
     if params[:criterium_id] && criterium_id_valid?
-      @commitment = Commitment.new(criterium_id: params[:criterium_id])
+      manager_ids = Criterium.find(params[:criterium_id]).manager_ids
+      @commitment = Commitment.new(criterium_id: params[:criterium_id], manager_ids: manager_ids)
       @form_hash = Services::CommitmentProps.new(@commitment).call
     else
       redirect_to new_criterium_url
@@ -105,6 +106,8 @@ class CommitmentsController < ApplicationController
   end
 
   def clean_progress_document_attachment_params
+    return unless commitment_params[:progress_documents_attributes].present?
+
     new_progress_document_attributes = []
     invalid_progress_document_attributes = []
 
@@ -142,7 +145,6 @@ class CommitmentsController < ApplicationController
       :duration_years,
       :geospatial_file,
       :implementation_year,
-      :joint_governance_description,
       :latitude,
       :longitude,
       :name,
@@ -154,7 +156,7 @@ class CommitmentsController < ApplicationController
       manager_ids: [],
       objective_ids: [],
       threat_ids: [],
-      links_attributes: [:id, :name, :url, :_destroy],
+      links_attributes: [:id, :url, :_destroy],
       progress_documents_attributes: [:id, :document, :progress_notes, :_destroy]
     )
   end

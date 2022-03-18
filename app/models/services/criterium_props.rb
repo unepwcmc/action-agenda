@@ -60,12 +60,12 @@ class Services::CriteriumProps
               },
               {
                 type: 'checkbox',
-                name: 'stakeholder_ids',
+                name: 'manager_ids',
                 title: I18n.t('form.criteria.q3.title'),
                 description: I18n.t('form.criteria.q3.description'),
                 isRequired: true,
                 popupdescription: I18n.t('form.criteria.q3.popupdescription_html'),
-                choices: Stakeholder.pluck(:id, :name).map do |id, name|
+                choices: Manager.pluck(:id, :name).map do |id, name|
                           if name != 'None of the above'
                             {
                               value: id,

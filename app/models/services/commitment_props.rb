@@ -19,6 +19,12 @@ class Services::CommitmentProps
             signed_id: progress_document.document.blob.signed_id,
             progress_notes: progress_document.progress_notes
           }
+        end,
+        links_json: @commitment.links.map do |link|
+          {
+            id: link.id,
+            url: link.url
+          }
         end
       },
       errors: @commitment.new_record? ? [] : @commitment.draft_errors,
@@ -41,7 +47,7 @@ class Services::CommitmentProps
                 name: 'criterium_id',
                 defaultValue: @commitment.criterium_id,
                 # a bit of a hacky way to make it work
-                visibleIf: "{ criterium_id } contains '-1'"
+                visibleIf: "false"
               },
               {
                 type: 'text',
@@ -87,14 +93,6 @@ class Services::CommitmentProps
                            }
                          end.compact,
                 otherText: I18n.t('form.none')
-              },
-              {
-                type: 'comment',
-                name: 'joint_governance_description',
-                visibleIf: "{ manager_ids } contains 'Joint governance'",
-                title: I18n.t('form.commitments.page1.q5.title'),
-                hideNumber: true,
-                defaultValue: @commitment.joint_governance_description || ''
               },
               {
                 type: 'text',
@@ -220,7 +218,7 @@ class Services::CommitmentProps
                 name: 'stage',
                 title: I18n.t('form.commitments.page4.q1.title'),
                 defaultValue: @commitment.stage || [],
-                choices: ['Committed', 'In progress', 'Implemented'],
+                choices: ['Committed only', 'In progress', 'Implemented fully'],
                 popupdescription: I18n.t('form.commitments.page4.q1.popupdescription_html')
               },
               {
@@ -272,9 +270,10 @@ class Services::CommitmentProps
                 templateElements: [
                   {
                     type: 'text',
-                    name: 'name',
-                    titleLocation: 'hidden',
-                    placeHolder: 'Website name'
+                    title: 'hidden field',
+                    name: 'id',
+                    # a bit of a hacky way to make it work
+                    visibleIf: "false"
                   },
                   {
                     type: 'text',
@@ -306,7 +305,7 @@ class Services::CommitmentProps
                     title: 'hidden field',
                     name: 'id',
                     # a bit of a hacky way to make it work
-                    visibleIf: "{ id } contains '-1'"
+                    visibleIf: "false"
                   },
                   {
                     type: 'file',

@@ -106,23 +106,29 @@ export default {
       progressFilesSignedIds: {},
       randomKey: Math.random(),
       geospatialFileSignedId: this.formData.config.geospatial_file,
-      destroyedIds: [],
+      destroyedDocumentIds: [],
+      destroyedLinkIds: [],
       showProgressBar: false,
     };
   },
 
   mounted() {
     setAxiosHeaders(axios);
-    this.survey.data = {
-      ...this.survey.data,
-      progress_documents_attributes:
-        this.formData.config.progress_document_json,
-    };
+    
+    if (this.formData.config.progress_document_json) {
+      this.survey.data = {
+        ...this.survey.data,
+        progress_documents_attributes:
+          this.formData.config.progress_document_json,
+        links_attributes:
+          this.formData.config.links_json,
+      };
 
-    this.formData.config.progress_document_json.forEach((question) => {
-      this.progressFilesSignedIds[question.document[0].name] =
-        question.signed_id;
-    });
+      this.formData.config.progress_document_json.forEach((question) => {
+        this.progressFilesSignedIds[question.document[0].name] =
+          question.signed_id;
+      });
+    }
   },
 
   methods: {
@@ -179,9 +185,18 @@ export default {
     },
 
     addDestroyKeys(data) {
-      if (this.destroyedIds.length > 0) {
-        this.destroyedIds.forEach((id) => {
+      if (this.destroyedDocumentIds.length > 0) {
+        this.destroyedDocumentIds.forEach((id) => {
           data["progress_documents_attributes"].push({
+            id: id,
+            _destroy: true,
+          });
+        });
+      }
+
+      if (this.destroyedLinkIds.length > 0) {
+        this.destroyedLinkIds.forEach((id) => {
+          data["links_attributes"].push({
             id: id,
             _destroy: true,
           });
@@ -222,15 +237,27 @@ export default {
       }
     },
 
-    appendDestroy() {
+    appendDocumentDestroy() {
       const documentJsonIds = this.formData.config.progress_document_json.map(
         (element) => element.id
       );
       const documentSurveyIds = this.survey.data[
         "progress_documents_attributes"
       ].map((element) => element.id);
-      this.destroyedIds = documentJsonIds.filter(
+      this.destroyedDocumentIds = documentJsonIds.filter(
         (item) => !documentSurveyIds.includes(item)
+      );
+    },
+
+    appendLinksDestroy() {
+      const linkJsonIds = this.formData.config.links_json.map(
+        (element) => element.id
+      );
+      const linkSurveyIds = this.survey.data[
+        "links_attributes"
+      ].map((element) => element.id);
+      this.destroyedLinkIds = linkJsonIds.filter(
+        (item) => !linkSurveyIds.includes(item)
       );
     },
 
@@ -261,7 +288,11 @@ export default {
     },
 
     onDynamicPanelRemoved(survey, options) {
-      this.appendDestroy();
+      if (options.question.name == 'links_attributes') {
+        this.appendLinksDestroy();
+      } else { 
+        this.appendDocumentDestroy();
+      }
     },
 
     onUpdateQuestionCssClasses(survey, options) {
@@ -273,7 +304,7 @@ export default {
       // multiselect
       const multiselectQs = [
         "cbd_objective_ids",
-        "stakeholder_ids",
+        "manager_ids",
         "objective_ids",
         "manager_ids",
         "country_ids",

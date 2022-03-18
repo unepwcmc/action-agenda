@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_10_164315) do
+ActiveRecord::Schema.define(version: 2022_03_17_163254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "actions", force: :cascade do |t|
     t.text "name", null: false
@@ -88,7 +89,6 @@ ActiveRecord::Schema.define(version: 2022_03_10_164315) do
     t.integer "state", default: 0
     t.integer "duration_years"
     t.bigint "criterium_id"
-    t.text "joint_governance_description"
     t.bigint "user_id"
     t.boolean "user_created", default: false, null: false
     t.index ["country_id"], name: "index_commitments_on_country_id"
@@ -134,6 +134,10 @@ ActiveRecord::Schema.define(version: 2022_03_10_164315) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "iso"
+    t.float "lat"
+    t.float "long"
+    t.geography "boundary", limit: {:srid=>4326, :type=>"geometry", :geographic=>true}
+    t.index ["boundary"], name: "index_countries_on_boundary", using: :gist
   end
 
   create_table "criteria", force: :cascade do |t|
@@ -145,11 +149,11 @@ ActiveRecord::Schema.define(version: 2022_03_10_164315) do
     t.bigint "user_id", null: false
   end
 
-  create_table "criteria_stakeholders", force: :cascade do |t|
+  create_table "criteria_managers", id: false, force: :cascade do |t|
     t.bigint "criterium_id"
-    t.bigint "stakeholder_id"
-    t.index ["criterium_id"], name: "index_criteria_stakeholders_on_criterium_id"
-    t.index ["stakeholder_id"], name: "index_criteria_stakeholders_on_stakeholder_id"
+    t.bigint "manager_id"
+    t.index ["criterium_id"], name: "index_criteria_managers_on_criterium_id"
+    t.index ["manager_id"], name: "index_criteria_managers_on_manager_id"
   end
 
   create_table "governance_types", force: :cascade do |t|
@@ -159,7 +163,6 @@ ActiveRecord::Schema.define(version: 2022_03_10_164315) do
   end
 
   create_table "links", force: :cascade do |t|
-    t.text "name"
     t.text "url", null: false
     t.bigint "commitment_id"
     t.datetime "created_at", null: false
@@ -182,18 +185,28 @@ ActiveRecord::Schema.define(version: 2022_03_10_164315) do
     t.boolean "default_option", default: false
   end
 
+  create_table "post2020_targets", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "post2020_targets_commitment_activities", force: :cascade do |t|
+    t.bigint "post2020_target_id", null: false
+    t.string "commitment_activity_type", null: false
+    t.bigint "commitment_activity_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commitment_activity_type", "commitment_activity_id"], name: "targets_post2020_activities"
+    t.index ["post2020_target_id"], name: "post2020_activities_targets"
+  end
+
   create_table "progress_documents", force: :cascade do |t|
     t.bigint "commitment_id"
     t.text "progress_notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commitment_id"], name: "index_progress_documents_on_commitment_id"
-  end
-
-  create_table "stakeholders", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "threats", force: :cascade do |t|

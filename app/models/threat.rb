@@ -9,6 +9,8 @@ class Threat < ApplicationRecord
   scope :commitment_form_options, -> { where(default_option: true) }
 
   has_and_belongs_to_many :commitments
+  has_many :post2020_targets_commitment_activities, as: :commitment_activity
+  has_many :post2020_targets, through: :post2020_targets_commitment_activities
   
   validates_presence_of :name
   validates_uniqueness_of :name

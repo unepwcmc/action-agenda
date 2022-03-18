@@ -11,10 +11,11 @@ class Manager < ApplicationRecord
     'Other'
   ]
 
-  scope :commitment_form_options, -> { where(default_option: true) }
+  scope :commitment_form_options, -> { where("default_option IS true AND name != 'None of the above'") }
   
   has_and_belongs_to_many :commitments
   
   validates_presence_of :name
   validates_uniqueness_of :name
+
 end

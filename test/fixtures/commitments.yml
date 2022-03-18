@@ -13,10 +13,9 @@ valid_commitment_1:
   governance_authority: MyText
   planned_actions: MyText
   description: MyText
-  joint_governance_description: description of joint governance
   managers: indigenous, joint_governance
   state: live
-  stage: Committed
+  stage: Committed only
   duration_years: 5
   countries: hungary, madagascar
   actions: species_management, livelihood
@@ -41,7 +40,7 @@ valid_commitment_2:
   description: MyText
   managers: indigenous
   state: draft
-  stage: Implemented
+  stage: Implemented fully
   duration_years: 5
   countries: hungary
   actions: species_management
@@ -67,7 +66,7 @@ no_joint_governance_description:
   description: MyText
   managers: indigenous, joint_governance
   state: live
-  stage: Committed
+  stage: Committed only
   duration_years: 5
   countries: hungary, madagascar
   actions: species_management, livelihood
