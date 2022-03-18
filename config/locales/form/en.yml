@@ -145,9 +145,8 @@ en:
         q1:
           title: Please select the stage of implementation of your commitment
           popupdescription_html:
-            Stage of the commitment. Is it a future commitment or has it already been implemented? 
-            Most commitments will be added to the platform at the 'committed' or 'in progress' stage, 
-            but data-providers will be encouraged to update the status of their commitment to 'implemented' when appropriate.
+            Is it a future commitment, currently in progress, or already implemented? 
+            If you feel that your commitment (e.g. to expand an existing area) has been completed, you can select ‘implemented fully’.
         q2:
           title: What actions do you intend/or have taken to implement the commitment?
           description: Multi select option

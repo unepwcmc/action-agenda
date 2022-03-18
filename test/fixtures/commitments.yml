@@ -15,7 +15,7 @@ valid_commitment_1:
   description: MyText
   managers: indigenous, joint_governance
   state: live
-  stage: Committed
+  stage: Committed only
   duration_years: 5
   countries: hungary, madagascar
   actions: species_management, livelihood
@@ -40,7 +40,7 @@ valid_commitment_2:
   description: MyText
   managers: indigenous
   state: draft
-  stage: Implemented
+  stage: Implemented fully
   duration_years: 5
   countries: hungary
   actions: species_management
@@ -50,4 +50,26 @@ valid_commitment_2:
 
 invalid_commitment:
   latitude: 1.5
-  
+
+no_joint_governance_description:
+  responsible_group: a group name 
+  geographic_boundary: false
+  latitude: 1.5
+  longitude: 1.5
+  current_area_ha: 1
+  proposed_area_ha: 1
+  committed_year: 1
+  implementation_year: 1
+  name: MyText
+  governance_authority: MyText
+  planned_actions: MyText
+  description: MyText
+  managers: indigenous, joint_governance
+  state: live
+  stage: Committed only
+  duration_years: 5
+  countries: hungary, madagascar
+  actions: species_management, livelihood
+  threats: pollution, other
+  objectives: sustainable_use, biodiversity_conservation
+  user_created: true
