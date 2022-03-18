@@ -96,6 +96,18 @@ export default {
   },
 
   methods: {
+    onPopup(id) {
+      this.$root.$emit(`popup:${id}`, id);
+    },
+
+    openPopup(id) {
+      if (this.$refs[`marker${id}`]) {
+        const marker = this.$refs[`marker${id}`]
+        marker[0].togglePopup()
+        this.onPopup(id)
+      }
+    },
+    
     setMaxValue() {
       this.spatialData.forEach((marker) =>
         this.markerValues.push(marker.commitment_count)
@@ -103,16 +115,6 @@ export default {
       this.maxValue = Math.max(...this.markerValues);
     },
 
-    onPopup(id) {
-      this.$root.$emit(`popup:${id}`, id);
-    },
-
-    openPopup(id) {
-      const marker = this.$refs[`marker${id}`]
-      marker[0].togglePopup()
-      this.onPopup(id)
-    },
-    
     zoomIn(selected) {
       // Create a 'LngLatBounds' with both corners at the first coordinate - https://docs.mapbox.com/mapbox-gl-js/example/zoomto-linestring/
       this.bounds = new Mapbox.LngLatBounds(
@@ -127,6 +129,7 @@ export default {
       this.$refs.MglMap.map.fitBounds(this.bounds, {
         padding: 50,
       });
+
       this.openPopup(selected.id)
     },
   },

@@ -2,6 +2,7 @@
   <div class="map__filter">
     <form>
       <div>
+        <span class="map__filter-icon"/> 
         <input
           v-model="search"
           @input="onChange"
@@ -11,7 +12,6 @@
           @keydown.enter.prevent="setResult(keyResult)"
           type="text"
         />
-        <span @click="toggleDropdown" />
       </div>
       <ul
         class="map__filter-dropdown"
@@ -107,13 +107,8 @@ export default {
         this.hasSelectedResult = true
         this.search = result[this.searchKey]
         this.isOpen = false
-        // this.submitItem(result)
         this.$root.$emit('selected', result)
       }
-    },
-
-    toggleDropdown() {
-      this.isOpen ? (this.isOpen = false) : (this.isOpen = true);
     },
   },
 };

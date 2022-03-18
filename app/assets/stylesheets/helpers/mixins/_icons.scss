@@ -160,6 +160,11 @@ $icon-search-width: rem-calc(21);
   @include icon-image('search-white.svg', $icon-search-width, rem-calc(23));
 }
 
+@mixin icon-tooltip() {
+  @include icon-basic;
+  @include icon-image('tooltip.svg', rem-calc(20), rem-calc(20));
+}
+
 @mixin icon-sort() {
   @include icon-button-reset;
 
