@@ -4,11 +4,11 @@ class NavigationPresenter
   def initialize
   end
 
-  def nav_header
+  def nav_header(signed_in)
     [
       {
-        title: 'Home',
-        url: '/'
+        title: signed_in ? 'Dashboard' : 'Home',
+        url:  signed_in ? dashboard_path : home_path
       },
       {
         title: 'Make a Commitment',
