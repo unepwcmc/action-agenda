@@ -22,11 +22,9 @@ class CommitmentPresenter
     when 'committed_year'
       Commitment.where.not(committed_year: nil).distinct.pluck(:committed_year)
     when 'actor'
-      Manager.pluck(:name).sort
+      Manager.filter_options.pluck(:name).sort
     when 'primary_objectives'
-      Objective.pluck(:name).sort
-    when 'governance_type'
-      GovernanceType.pluck(:name).sort
+      Objective.commitment_form_options.pluck(:name).sort
     else
       Commitment.pluck(filter.to_sym).uniq.compact.map(&:squish)
     end
