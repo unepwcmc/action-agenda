@@ -137,7 +137,7 @@ class CommitmentsController < ApplicationController
 
   def commitment_params
     params.require(:commitment).permit(
-      :area_manager,
+      :area_owner,
       :committed_year,
       :criterium_id,
       :current_area_ha,
