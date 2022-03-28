@@ -8,7 +8,7 @@ class NavigationPresenter
     [
       {
         title: signed_in ? 'Dashboard' : 'Home',
-        url:  signed_in ? dashboard_path : home_path
+        url: signed_in ? dashboard_path : home_path
       },
       {
         title: 'Make a Commitment',
