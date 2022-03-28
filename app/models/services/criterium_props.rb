@@ -1,6 +1,7 @@
 class Services::CriteriumProps
-  def initialize(criterium)
+  def initialize(criterium, form_option_text_service = Services::FormOptionText.new)
     @criterium = criterium
+    @form_option_text_service = form_option_text_service
   end
 
   def call
@@ -69,7 +70,7 @@ class Services::CriteriumProps
                           if name != 'Other'
                             {
                               value: id,
-                              text: name
+                              text: @form_option_text_service.call(name, 'manager')
                             }
                           else
                             nil
@@ -120,4 +121,13 @@ class Services::CriteriumProps
       }
     }
   end
+
+  # def form_option_text(name, klass)
+  #   underscore_name = name.downcase.gsub(' ', '_').to_sym
+  #   if I18n.t("models.#{ klass }.additional_form_text").keys.include?(underscore_name.to_sym)
+  #     I18n.t("models.#{ klass }.additional_form_text.#{ underscore_name }")
+  #   else
+  #     name
+  #   end
+  # end
 end

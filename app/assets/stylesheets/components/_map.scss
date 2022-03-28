@@ -50,15 +50,13 @@ display: none;
   }
 
   .popup__container {
-    max-width: rem-calc(320);
-
     p {
       font-size: medium;
     }
   }
 
   #bar-chart {
-    width: rem-calc(200);
+    width: rem-calc(250);
     height: rem-calc(230);
   }
 
@@ -142,7 +140,7 @@ display: none;
     line-height: 1;
     margin: 0;
     padding: 0 rem-calc(12);
-    min-width: rem-calc(140);
+    min-width: 10pc;
     margin-bottom: rem-calc(8);
 
     &-item {

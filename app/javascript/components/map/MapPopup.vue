@@ -8,10 +8,6 @@
       <BarChart :chartData="data" :options="options" :key="randomKey" />
       <MapLegend :data="data.datasets" />
     </div>
-    <div class="map__info-box">
-      <span class="map__info-box-icon"></span>
-        {{ this.text }}
-    </div>
     <button @click="onClick" class="map__button">view commitments</button>
   </div>
 </template>
@@ -66,6 +62,21 @@ export default {
                 min: 0,
                 display: false,
               },
+              scaleLabel: {
+                display: true,
+                fontSize: 25,
+                labelString: 'Number of Commitments',
+              }
+            },
+          ],
+          xAxes: [
+            {
+              scaleFontSize: 100,
+              scaleLabel: {
+                display: true,
+                fontSize: 25,
+                labelString: 'Actor',
+              }
             },
           ],
         },
