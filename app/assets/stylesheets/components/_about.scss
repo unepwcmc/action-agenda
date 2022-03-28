@@ -22,7 +22,9 @@
       font-family: $body-font;
       margin: rem-calc(20);
       line-height: 2;
-      
+      column-count: 2;
+      column-gap: rem-calc(75);
+
       flex-grow: 1;
     }
   }
