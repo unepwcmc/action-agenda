@@ -16,7 +16,7 @@ Action.create!(Action::DEFAULT_OPTIONS.map {|action_name| { name: action_name, d
 Threat.create!(Threat::DEFAULT_OPTIONS.map {|threat_name| { name: threat_name, default_option: true }})
 Objective.create!(Objective::DEFAULT_OPTIONS.map {|objective_name| { name: objective_name, default_option: true }})
 
-unless Rails.env.production?
+unless true #Rails.env.production?
   
   criteria = [
     { boundary: true, five_year_commitment: true, progress_report: true, managers: [Manager.first], cbd_objectives: [CbdObjective.first], user: User.first },

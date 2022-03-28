@@ -2,7 +2,7 @@ require 'csv'
 require 'wcmc_components'
 class Commitment < ApplicationRecord
   STAGE_OPTIONS = ['In progress', 'Committed only', 'Implemented fully']
-  enum state: [:draft, :live] 
+  enum state: [:draft, :live]
 
   include WcmcComponents::Loadable
   ignore_column 'criterium'
