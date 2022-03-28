@@ -66,7 +66,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :sendmail
-  
+
   mailer_credentials = Rails.application.credentials.production.dig(:mailer)
   config.action_mailer.default_url_options = { host: mailer_credentials.dig(:host) }
   config.action_mailer.default_options = { from: mailer_credentials.dig(:from), reply_to:  mailer_credentials.dig(:from) }

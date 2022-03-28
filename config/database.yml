@@ -21,3 +21,9 @@ test:
   encoding: utf-8
   database: aa_test
   pool: 5
+
+production:
+  adapter: postgis
+  encoding: utf-8
+  database: aa_production
+  pool: 5
