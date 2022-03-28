@@ -10,10 +10,9 @@ class CriteriumTest < ActiveSupport::TestCase
   test "should not save with both 'none of the above' other options" do
     criterium = criteria(:invalid_none_of_the_above_options)
     assert_not criterium.save
-    assert criterium.errors.count == 2
+    assert criterium.errors.count == 1
     assert_matched_arrays criterium.errors.full_messages, [
-      I18n.t(:"activerecord.errors.models.criterium.attributes.base.none_of_the_above_option_for_cbd_commitments"),
-      I18n.t(:"activerecord.errors.models.criterium.attributes.base.none_of_the_above_option_for_managers")
+      I18n.t(:"activerecord.errors.models.criterium.attributes.base.none_of_the_above_option_for_cbd_commitments")
     ]
   end
 

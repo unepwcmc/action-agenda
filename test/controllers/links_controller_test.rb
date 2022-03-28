@@ -5,14 +5,12 @@ class LinksControllerTest < ActionDispatch::IntegrationTest
   
   test "should update a link" do
     sign_in users(:user_1)
-    update_params = { link: { name: "a new name", url: "new.site.com" }}
+    update_params = { link: { url: "new.site.com" }}
     link = links(:link_1)
-    assert link.name != update_params.dig(:link, :name)
     assert link.url != update_params.dig(:link, :url) 
     put link_url(link, params: update_params), as: :json
     assert_response 204
     link.reload
-    assert link.name == update_params.dig(:link, :name)
     assert link.url == update_params.dig(:link, :url)
   end
 
