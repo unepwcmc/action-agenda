@@ -17,6 +17,7 @@ class CommitmentsController < ApplicationController
       params[:country_filters] = nil
     end
     @paginatedCommitments = Commitment.paginate_commitments(DEFAULT_PARAMS.to_json).to_json
+    puts @paginatedCommitments
     @filters = Commitment.filters_to_json
     @table_attributes = Commitment::TABLE_ATTRIBUTES.to_json
   end
