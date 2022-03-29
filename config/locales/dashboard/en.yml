@@ -8,7 +8,7 @@ en:
         existing: My Dashboard
         none: Upload your Area-Based Commitments
     navigation:
-      dashboard:
+      home:
         path: /home
         text: HOME
       commitments:
