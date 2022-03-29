@@ -1,8 +1,8 @@
 module ApplicationHelper
-  def header_nav
+  def nav_header(signed_in)
     navPresenter = NavigationPresenter.new
     
-    navPresenter.nav_header
+    navPresenter.nav_header(signed_in)
   end
 
   def footer_nav

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     root to: 'users#dashboard', as: :root
   end
 
+  get '/home', to: 'home#index', as: 'home'
+
   get '/dashboard', to: 'users#dashboard', as: 'dashboard'
   get '/about', to: 'about#show', as: 'about'
 

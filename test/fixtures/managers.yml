@@ -12,10 +12,10 @@ local_communities:
   name: Local communities
   default_option: true
 
-local_government:
-  name: Sub-national or local government
+government:
+  name: Sub-national government
   default_option: true
 
-none_of_the_above:
-  name: None of the above
+other:
+  name: Other
   default_option: true

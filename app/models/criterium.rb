@@ -11,7 +11,6 @@ class Criterium < ApplicationRecord
   validates :managers, presence: true
   validate :none_of_the_above_for_cbd_commitments
   validate :has_government_manager?
-  validate :has_other_as_manager?
 
   def criteria_valid_for_commitment?
     !criteria_invalid_for_commitment?

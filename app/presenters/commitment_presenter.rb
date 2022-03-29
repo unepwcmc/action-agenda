@@ -20,15 +20,15 @@ class CommitmentPresenter
     when 'country'
       Country.pluck(:name).sort
     when 'committed_year'
-      Commitment.where.not(committed_year: nil).distinct.pluck(:committed_year)
+      before_years = Commitment.where('committed_year ILIKE ?', "%before%").distinct.pluck(:committed_year).sort
+      other_years = Commitment.where('committed_year IS NOT NULL AND committed_year NOT ILIKE ?', "%before%").distinct.pluck(:committed_year).sort
+      before_years + other_years
     when 'actor'
-      Manager.pluck(:name).sort
+      Manager.filter_options.pluck(:name).sort
     when 'primary_objectives'
-      Objective.pluck(:name).sort
-    when 'governance_type'
-      GovernanceType.pluck(:name).sort
+      Objective.commitment_form_options.pluck(:name).sort
     else
-      Commitment.pluck(filter.to_sym).uniq.compact.map(&:squish)
+      Commitment.pluck(filter.to_sym).uniq.compact.map(&:squish).sort
     end
   end
 end
