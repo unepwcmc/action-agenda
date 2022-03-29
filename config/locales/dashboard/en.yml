@@ -8,9 +8,9 @@ en:
         existing: My Dashboard
         none: Upload your Area-Based Commitments
     navigation:
-      dashboard:
-        path: /dashboard
-        text: MY DASHBOARD
+      home:
+        path: /home
+        text: HOME
       commitments:
         path: /commitments
         text: EXPLORE COMMITMENTS

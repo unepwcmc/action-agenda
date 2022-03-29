@@ -1,7 +1,5 @@
 link_1:
   url: www.test.com
-  commitment: valid_commitment_1
 
 link_2:
   url: www.test2.com
-  commitment: valid_commitment_1
