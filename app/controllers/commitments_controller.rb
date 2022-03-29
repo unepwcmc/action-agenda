@@ -13,8 +13,8 @@ class CommitmentsController < ApplicationController
 
   def index
     if params[:country_filters].present?
+      DEFAULT_PARAMS[:filters] = [] # Previous search filters are persisted across calls unless we clear them
       DEFAULT_PARAMS[:filters] << params[:country_filters]
-      params[:country_filters] = nil
     end
     @paginatedCommitments = Commitment.paginate_commitments(DEFAULT_PARAMS.to_json).to_json
     @filters = Commitment.filters_to_json
