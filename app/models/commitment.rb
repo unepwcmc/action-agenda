@@ -5,7 +5,6 @@ class Commitment < ApplicationRecord
   enum state: [:draft, :live] 
 
   include WcmcComponents::Loadable
-  ignore_column 'criterium'
 
   has_and_belongs_to_many :countries
   import_by countries: :name
