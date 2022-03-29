@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2022_03_28_125350) do
     t.bigint "criterium_id"
     t.bigint "user_id"
     t.boolean "user_created", default: false, null: false
-    t.text "area_owner"
+    t.text "area_owner_and_role"
     t.index ["committed_year"], name: "index_commitments_on_committed_year"
     t.index ["country_id"], name: "index_commitments_on_country_id"
     t.index ["duration_years"], name: "index_commitments_on_duration_years"
