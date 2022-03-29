@@ -7,8 +7,8 @@ class CriteriumTest < ActiveSupport::TestCase
     assert criterium.errors.count == 6
   end
 
-  test "should not save with both 'none of the above' other options" do
-    criterium = criteria(:invalid_none_of_the_above_options)
+  test "should not save with 'none of the above' cbd commitments" do
+    criterium = criteria(:invalid_cbd_objectives_option)
     assert_not criterium.save
     assert criterium.errors.count == 1
     assert_matched_arrays criterium.errors.full_messages, [

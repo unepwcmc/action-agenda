@@ -46,7 +46,6 @@ en:
           attributes:
             base:
               none_of_the_above_option_for_cbd_commitments: 'CBD Objectives cannot include named objectives if "None of the above" option is selected'
-              none_of_the_above_option_for_managers: '"Who is making the commitment" cannot include named stakeholders if "None of the above" option is selected'
             boundary:
               nil_value: 'Boundary information missing' 
             five_year_commitment:
@@ -114,7 +113,7 @@ en:
       hero:
         button: Make a commitment
         subtitle: Capturing Area-Based Commitments
-        title: Capturing Area-Based Commitments
+        title: Commitments for Nature
       map:
         header: Explore Commitments
         placeholder: Search by country

@@ -46,12 +46,12 @@ no_cbd_objectives:
   managers: local_communities, indigenous_peoples
   user: user_1
 
-invalid_none_of_the_above_options:
+invalid_cbd_objectives_option:
   boundary: true
   five_year_commitment: true
   progress_report: true
   cbd_objectives: none_of_the_above, sustainable_use
-  managers: other, local_communities
+  managers: local_communities
   user: user_1
 
 valid_criterium_without_commitment:
