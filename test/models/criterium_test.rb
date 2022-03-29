@@ -12,7 +12,7 @@ class CriteriumTest < ActiveSupport::TestCase
     assert_not criterium.save
     assert criterium.errors.count == 1
     assert_matched_arrays criterium.errors.full_messages, [
-      I18n.t(:"activerecord.errors.models.criterium.attributes.base.none_of_the_above_option_for_cbd_commitments"),
+      I18n.t(:"activerecord.errors.models.criterium.attributes.base.none_of_the_above_option_for_cbd_commitments")
     ]
   end
 

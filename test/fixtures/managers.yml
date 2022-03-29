@@ -12,7 +12,7 @@ local_communities:
   name: Local communities
   default_option: true
 
-local_government:
+government:
   name: Sub-national government
   default_option: true
 

@@ -35,7 +35,7 @@ government_manager:
   five_year_commitment: true
   progress_report: true
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
-  managers: local_communities, indigenous_peoples, local_government
+  managers: local_communities, indigenous_peoples, government
   user: user_1
 
 no_cbd_objectives:

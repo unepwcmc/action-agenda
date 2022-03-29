@@ -186,10 +186,10 @@ class Services::CommitmentProps
               },
               {
                 type: 'comment',
-                name: 'area_manager',
+                name: 'area_owner_and_role',
                 title: I18n.t('form.commitments.page2.q8.title'),
                 isRequired: true,
-                defaultValue: @commitment.area_manager || ''
+                defaultValue: @commitment.area_owner_and_role || ''
               }
             ]
           },
