@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def header_nav(signed_in)
+  def nav_header(signed_in)
     navPresenter = NavigationPresenter.new
     
     navPresenter.nav_header(signed_in)
