@@ -216,7 +216,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'GET show should only show draft commitments to the owner' do
-    draft_commitment = commitments(:draft_commitment
+    draft_commitment = commitments(:draft_commitment)
     get commitment_url(draft_commitment)
     assert_response :found
     assert_redirected_to commitments_path
