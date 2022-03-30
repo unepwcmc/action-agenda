@@ -80,7 +80,7 @@ en:
     action:
       additional_form_text:
         protection_of_land/water: Protection of land/water (e.g. establish or expand a park or protected area)
-        management_of_land/water: Management of land/water (e.g. conserve or restore a habitat, control poachers or invasive species)
+        management_of_land/water: Management of land/water (e.g. conserve or restore a habitat, prevent poaching or control invasive species)
         species_management: Species management (e,g, enhance or restore a species, manage trade or harvests)
         economic_(or other)_incentives_to_influence_behaviour: Economic (or other) incentives to influence behaviour (e.g. provide alternative livelihoods or products)
     threat:
@@ -104,7 +104,7 @@ en:
     criterium:
       ineligible:
         title: This platform might not be the best place to record your commitment
-        description: Your answers in the current form suggest this platform might not be the best place to record your commitment.
+        description: Your answers in the criteria form suggest this platform might not be the best place to record your commitment.
         results_did_not_pass: Your results that didn't pass the criteria form
         links:
           action_agenda:

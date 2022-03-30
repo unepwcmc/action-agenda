@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
-
+  
   test "should GET index" do
     get commitments_url
     assert_response :success
@@ -41,9 +41,11 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   test "should not create a new commitment without a name attribute" do
     sign_in users(:user_1)
     commitment_count_at_start = Commitment.count
+    criterium = criteria(:valid_criterium_without_commitment)
     invalid_params = {
       commitment: {
-        description: "a commitment without a name"
+        description: "a commitment without a name",
+        criterium_id: criterium.id
       }
     }
     post commitments_url(params: invalid_params), as: :json
@@ -54,10 +56,12 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should POST create a new draft commitment with a name" do
     sign_in users(:user_1)
+    criterium = criteria(:valid_criterium_without_commitment)
     commitment_count_at_start = Commitment.count
     valid_params = {
       commitment: {
-        name: "a name"
+        name: "a name",
+        criterium_id: criterium.id
       }
     }
     post commitments_url(params: valid_params), as: :json
@@ -69,10 +73,12 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   test "should return errors if attempt to create a live commitment fails" do
     sign_in users(:user_1)
     commitment_count_at_start = Commitment.count
+    criterium = criteria(:valid_criterium_without_commitment)
     valid_params = {
       commitment: {
         name: "a name",
-        state: "live"
+        state: "live",
+        criterium_id: criterium.id
       }
     }
     post commitments_url(params: valid_params), as: :json
@@ -84,6 +90,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   test "should save a live commitment with valid params and return success" do
     sign_in users(:user_1)
     commitment_count_at_start = Commitment.count
+    criterium = criteria(:valid_criterium_without_commitment)
     valid_params = {
       commitment: {
         latitude: 21.23,
@@ -102,6 +109,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
         threat_ids: [threats(:pollution).id],
         manager_ids: [managers(:indigenous).id],
         objective_ids: [objectives(:sustainable_use).id],
+        criterium_id: criterium.id,
         links_attributes: [
           {
             url: "url",
@@ -196,10 +204,21 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not return draft commitments in the index' do
-    # write this test
+    draft_commitment = commitments(:draft_commitment)
+    valid_commitment_1 = commitments(:valid_commitment_1)
+    valid_commitment_2 = commitments(:valid_commitment_2)
+
+    get commitments_url
+    assert_response :success
+    returned_commitments = JSON.parse(@controller.view_assigns['paginatedCommitments'])['items']
+    assert returned_commitments.count == 2
+    assert returned_commitments.pluck('name').include?(draft_commitment.name) == false
   end
 
   test 'GET show should only show draft commitments to the owner' do
-    # write this test
+    draft_commitment = commitments(:draft_commitment
+    get commitment_url(draft_commitment)
+    assert_response :found
+    assert_redirected_to commitments_path
   end
 end

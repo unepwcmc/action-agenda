@@ -2,7 +2,7 @@ class Manager < ApplicationRecord
   DEFAULT_OPTIONS = [
     'Local communities', 
     'Indigenous peoples', 
-    'Non-governmental organisation (NGO)', 
+    'Non-profit organisation', 
     'For-profit organisation (business and industry)', 
     'Sub-national government', 
     'Joint governance (i.e. decisions are made by many)', 

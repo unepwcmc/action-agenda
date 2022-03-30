@@ -79,22 +79,6 @@ class Services::CommitmentProps
                          end.compact
               },
               {
-                type: 'checkbox',
-                name: 'manager_ids',
-                title: I18n.t('form.commitments.page1.q4.title'),
-                description: I18n.t('form.commitments.page1.q3.description'),
-                defaultValue: @commitment.manager_ids || [],
-                popupdescription: I18n.t('form.commitments.page1.q4.popupdescription_html'),
-                choices: Manager.commitment_form_options.pluck(:id, :name).map do |id, name|
-                           next unless name != 'None of the above'
-                           {
-                             value: id,
-                             text: name
-                           }
-                         end.compact,
-                otherText: I18n.t('form.none')
-              },
-              {
                 type: 'text',
                 name: 'responsible_group',
                 title: I18n.t('form.commitments.page1.q6.title'),
@@ -226,7 +210,7 @@ class Services::CommitmentProps
                 name: 'stage',
                 title: I18n.t('form.commitments.page4.q1.title'),
                 defaultValue: @commitment.stage || [],
-                choices: ['Committed only', 'In progress', 'Implemented fully'],
+                choices: ['Committed', 'In progress', 'Implemented fully'],
                 popupdescription: I18n.t('form.commitments.page4.q1.popupdescription_html')
               },
               {

@@ -7,7 +7,11 @@ en:
             active: Criteria
             dormant: Commitment form
       title: 'Form 1: criteria'
-      description: Form 1 will help establish whether this platform is the right place for your commitment. ‘Commitment’ refers to what you intend to do, for example, commitments to enhance/improve an existing area where new actions are planned or to establish a new area. ‘Area’ refers to the geographical area this is (or will be) under management as a result of this commitment.
+      description: 
+        Form 1 will help establish whether this platform is the right place for your commitment.
+        ‘Commitment’ refers to what you intend to do, for example, commitments to enhance/improve
+        an existing area where new actions are planned or to establish a new area. ‘Area’ refers to
+        the geographical area that is (or will be) under management as a result of this commitment.
       q1: 
         title: Does/will the area have a clearly-defined boundary?
         t: Yes - the area has, or will have, a clearly defined boundary
@@ -61,11 +65,11 @@ en:
           
           A ‘commitment' is the pledge to conduct activities (which serve objectives related to the conservation and/or 
           sustainable use of nature), now or in the future, within a specific area. This might include establishing a new 
-          protected area or improving the management/stewardship/governance of an existing area. 
+          protected area or improving the governance or management of an existing area. 
 
           ‘Commitment actions’ are the actions that are taken to achieve objectives.
 
-          ‘Area’ refers to the geographical area in which commitment activities take place.
+          ‘Area’ refers to the geographical area in which commitment actions take place.
         q1:
           title: Enter commitment name
           description: (The name of the activity may describe the commitment actions and place. E.g. ‘Establishment of Cambridge community conserved area’)
@@ -77,25 +81,16 @@ en:
           title: Please provide a description of your commitment
           popupdescription_html: 
             'Please answer as many of the following questions as possible: 
-            What biodiversity and nature can be found in the area? 
-            What is the status of this biodiversity and nature (Is it declining, stable, or improving)? 
+            What biodiversity (nature) can be found in the area? 
+            What is the status of this biodiversity (Is it declining, stable, or improving)? 
             What are your specific objectives and how do you plan to achieve these? 
             How will you measure whether you are achieving your objectives?'
         q3:
-          title: Please select the main objectives you aim to achieve through your commitment from the list below
+          title: Please select the main objectives you aim to achieve through your commitment
           description: Multi select option
           popupdescription_html: Objectives can be defined as what the commitment is trying to accomplish.
-        q4:
-          title: Who will be responsible for deciding how the area is managed?
-          description: Multi select option
-          popupdescription_html:
-            We would like to understand who is accountable for how the area is or will be managed. Management refers to the actions carried out.</br></br>
-            <strong>Example of joint governance:</strong></br>
-            NGO in collaboration with a private landowner
-        q5:
-          title: Specify the type of joint governance
         q6:
-          title: Name(s) of the group(s) ultimately responsible for management decisions on commitment actions
+          title: Name(s) of the group(s) responsible for management decisions on commitment actions
           popupdescription_html:
             For example, the name of a local community, NGO, or local council. This will be used to let others know who 
             is primarily responsible for the commitment and making management decisions about commitment actions. 
@@ -110,8 +105,7 @@ en:
           title: Please provide the latitude and longitude of the area
           popupdescription_html:
             'Please indicate the latitude and longitude of your commitment area. 
-            If unknown, please use this website: <a href="https://www.latlong.net/" target="_blank">https://www.latlong.net/</a>. 
-            If you are using the link to select the centre of your area, this does not need to be exact.'
+            If unknown, please use this website: <a href="https://www.latlong.net/" target="_blank">https://www.latlong.net/</a>.'
         q3:
           title: Latitude
         q4:
@@ -120,7 +114,7 @@ en:
           title: If you have spatial data you would like to share, please upload it here.
           description: (Optional field)
           popupdescription_html: 
-            If you are uploading shapefiles, please upload them in a folder (as .zip or .xx files). 
+            If you are uploading spatial data (e.g. shapefiles), please upload them in a folder (e.g. .zip). 
             The spatial data should be the geographical boundary of the area once the commitment has been implemented. 
             It is not necessary to expand the area. However, if your commitment is to expand an existing area, 
             please provide the boundary as it will be once the expansion is complete.
@@ -138,7 +132,6 @@ en:
           caption: -Select-
           popupdescription_html:
             The year in which the commitment was pledged and not when it was registered in the platform. 
-            This could be in the past if the commitment activities are in progress or yet to start when it is submitted to the platform.
         q2:
           title: How many years do you expect the commitment to be in place for?
           caption: -Select-
@@ -170,7 +163,7 @@ en:
           title: What are the main threats that your commitment is seeking to address?
           description: Multi select option
           popupdescription_html:
-            Direct threats are the human activities or processes that negatively impact the area. 
+            Direct threats are the human activities or environmental processes that negatively impact the area. 
             These threats may include past, present, or future threats. 
             The threats listed have been identified using the 
             <a href='https://nc.iucnredlist.org/redlist/content/attachment_files/dec_2012_guidance_threats_classification_scheme.pdf' target="_blank">IUCN-CMP classification of direct threats.</a>

@@ -1,7 +1,7 @@
 require 'csv'
 require 'wcmc_components'
 class Commitment < ApplicationRecord
-  STAGE_OPTIONS = ['In progress', 'Committed only', 'Implemented fully']
+  STAGE_OPTIONS = ['In progress', 'Committed', 'Implemented fully']
   enum state: [:draft, :live] 
 
   include WcmcComponents::Loadable
@@ -46,7 +46,7 @@ class Commitment < ApplicationRecord
       field: 'name'
     },
     {
-      title: 'Commited',
+      title: 'Committed',
       field: 'committed'
     },
     {

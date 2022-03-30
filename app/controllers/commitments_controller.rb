@@ -41,8 +41,7 @@ class CommitmentsController < ApplicationController
 
   def new
     if params[:criterium_id] && criterium_id_valid?
-      manager_ids = Criterium.find(params[:criterium_id]).manager_ids
-      @commitment = Commitment.new(criterium_id: params[:criterium_id], manager_ids: manager_ids)
+      @commitment = Commitment.new(criterium_id: params[:criterium_id])
       @form_hash = Services::CommitmentProps.new(@commitment).call
     else
       redirect_to new_criterium_url
@@ -51,6 +50,8 @@ class CommitmentsController < ApplicationController
 
   def create
     @commitment = Commitment.new(commitment_params.merge(user: current_user, user_created: true))
+    @commitment.manager_ids = Criterium.find(@commitment.criterium_id).manager_ids
+
     if @commitment.save
       respond_to do |format|
         format.json { json_response({ commitment: @commitment, redirect_path: dashboard_path }, :created) }
