@@ -304,9 +304,7 @@ export default {
       // multiselect
       const multiselectQs = [
         "cbd_objective_ids",
-        "manager_ids",
         "objective_ids",
-        "manager_ids",
         "country_ids",
         "action_ids",
         "threat_ids",

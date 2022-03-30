@@ -62,11 +62,9 @@ class Services::CriteriumProps
                 type: 'radiogroup',
                 name: 'manager_ids',
                 title: I18n.t('form.criteria.q3.title'),
-                description: I18n.t('form.criteria.q3.description'),
                 isRequired: true,
                 popupdescription: I18n.t('form.criteria.q3.popupdescription_html'),
-                choices: Manager.commitment_form_options.pluck(:id, :name).map do |id, name|
-                          if name != 'Other'
+                choices: Manager.form_options.pluck(:id, :name).map do |id, name|
                             {
                               # Hacky. Client has asked to now only have one manager type per commitment via the form
                               # This submits a single id as an array so the current has_and_belongs_to_many relationship still works.
@@ -77,12 +75,7 @@ class Services::CriteriumProps
                               value: [id],
                               text: name
                             }
-                          else
-                            nil
-                          end
-                         end.compact,
-                hasNone: true,
-                noneText: I18n.t('form.none')
+                         end
               },
               {
                 type: 'radiogroup',

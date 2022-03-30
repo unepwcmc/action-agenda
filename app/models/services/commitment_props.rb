@@ -81,9 +81,9 @@ class Services::CommitmentProps
               {
                 type: 'text',
                 name: 'responsible_group',
-                title: I18n.t('form.commitments.page1.q6.title'),
+                title: I18n.t('form.commitments.page1.q4.title'),
                 defaultValue: @commitment.responsible_group || '',
-                popupdescription: I18n.t('form.commitments.page1.q6.popupdescription_html')
+                popupdescription: I18n.t('form.commitments.page1.q4.popupdescription_html')
               }
             ]
           },

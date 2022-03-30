@@ -29,7 +29,6 @@ en:
           The overall objective of this international treaty is to encourage actions which lead to a sustainable future.
       q3:
         title: Who will be responsible for deciding how the area is managed?
-        description: Multi select option
         popupdescription_html:
           This should be the group(s) that decide to make the commitment, decide on the objectives of the commitment, 
           and decide on the actions taken to achieve those objectives.</br></br>
@@ -90,7 +89,7 @@ en:
           title: Please select the main objectives you aim to achieve through your commitment
           description: Multi select option
           popupdescription_html: Objectives can be defined as what the commitment is trying to accomplish.
-        q6:
+        q4:
           title: Name(s) of the group(s) responsible for management decisions on commitment actions
           popupdescription_html:
             For example, the name of a local community, NGO, or local council. This will be used to let others know who 

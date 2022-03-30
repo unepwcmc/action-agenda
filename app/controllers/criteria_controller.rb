@@ -6,8 +6,7 @@ class CriteriaController < ApplicationController
     @criterium = Criterium.new
     @form_hash = Services::CriteriumProps.new(@criterium).call
     @none_values = {
-      cbd_objective_ids: CbdObjective.find_by(name: 'None of the above').id,
-      manager_ids: Manager.find_by(name: 'Other').id
+      cbd_objective_ids: CbdObjective.find_by(name: 'None of the above').id
     }
   end
 
