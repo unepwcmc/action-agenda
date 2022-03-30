@@ -19,6 +19,7 @@ class CommitmentsController < ApplicationController
     @paginatedCommitments = Commitment.paginate_commitments(DEFAULT_PARAMS.to_json).to_json
     @filters = Commitment.filters_to_json
     @table_attributes = Commitment::TABLE_ATTRIBUTES.to_json
+    @preset_filters = DEFAULT_PARAMS[:filters]
   end
 
   def show
