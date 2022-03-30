@@ -59,7 +59,7 @@ class Services::CriteriumProps
                 noneText: I18n.t('form.none')
               },
               {
-                type: 'checkbox',
+                type: 'radiogroup',
                 name: 'manager_ids',
                 title: I18n.t('form.criteria.q3.title'),
                 description: I18n.t('form.criteria.q3.description'),
@@ -68,7 +68,13 @@ class Services::CriteriumProps
                 choices: Manager.commitment_form_options.pluck(:id, :name).map do |id, name|
                           if name != 'Other'
                             {
-                              value: id,
+                              # Hacky. Client has asked to now only have one manager type per commitment via the form
+                              # This submits a single id as an array so the current has_and_belongs_to_many relationship still works.
+                              # We have one commitment in the csv import that has two manager types
+                              # We don't know what the CBD import data looks like for managers
+                              # I would suggest leaving this until we know the CBD data structure for managers
+                              # TO DO: make commitment belong_to manager if this matched the CBD data
+                              value: [id],
                               text: name
                             }
                           else

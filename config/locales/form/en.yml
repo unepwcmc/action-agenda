@@ -9,9 +9,10 @@ en:
       title: 'Form 1: criteria'
       description: 
         Form 1 will help establish whether this platform is the right place for your commitment.
-        ‘Commitment’ refers to what you intend to do, for example, commitments to enhance/improve
-        an existing area where new actions are planned or to establish a new area. ‘Area’ refers to
-        the geographical area that is (or will be) under management as a result of this commitment.
+        A ‘commitment' is the pledge to conduct activities (which serve objectives related to the conservation
+        and/or sustainable use of nature), now or in the future, within a specific area. This might include
+        establishing a new protected area or improving the governance or management of an existing area.
+        ‘Area’ refers to the geographical area that is (or will be) under management as a result of this commitment.
       q1: 
         title: Does/will the area have a clearly-defined boundary?
         t: Yes - the area has, or will have, a clearly defined boundary
