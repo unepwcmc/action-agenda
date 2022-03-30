@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
-  
+
   test "should GET index" do
     get commitments_url
     assert_response :success
