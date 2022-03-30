@@ -35,7 +35,6 @@ export default {
       id: this.content.id,
       chartData: Object,
       url: '',
-      text: '',
       colors: [
         "#97001F",
         "#6054BA",
@@ -102,7 +101,6 @@ export default {
         .then((response) => {
           this.chartData = response.data.managers;
           this.url = response.data.country_commitments_path;
-          this.text = response.data.text;
         })
         .then(() => this.populateChartData());
     },
