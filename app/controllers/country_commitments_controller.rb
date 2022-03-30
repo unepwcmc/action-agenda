@@ -16,7 +16,7 @@ class CountryCommitmentsController < ApplicationController
     respond_to do |format|
       format.json {
         render json: @country.country_commitments_json.merge(
-          country_commitments_path: commitments_path({ filters: { name: 'country', options: [@country.name], type: 'multiple' }})
+          country_commitments_path: commitments_path({ country_filters: { name: 'country', options: [@country.name], type: 'multiple' }})
         )
       }
     end
