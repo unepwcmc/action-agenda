@@ -56,7 +56,11 @@
       },
       filters: { type: Array },
       paginatedRows: { type: Object },
-      presetFilters: { type: Array },
+      presetFilters: { 
+        required: true,
+        type: Array,
+        default: []
+      },
     },
 
     data () {
