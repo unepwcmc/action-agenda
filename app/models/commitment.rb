@@ -106,9 +106,14 @@ class Commitment < ApplicationRecord
       @filter_params = json_params['filters'].all? { |p| p['options'].blank? } ? [] : json_params['filters']
     end
 
-    commitments = generate_query(page, @filter_params)
+    unpaginated_commitments = generate_query(page, @filter_params)
+    paginated_commitments = unpaginated_commitments
+                              .paginate(page: page || 1, per_page: @items_per_page)
+                              .to_a.map! do |commitment|
+                                commitment.to_hash
+                              end
 
-    structure_data(page, commitments)
+    structure_data(page, paginated_commitments, unpaginated_commitments.count)
   end
   
   def to_hash
@@ -124,23 +129,18 @@ class Commitment < ApplicationRecord
     }
   end
 
-  def self.generate_query(page, filter_params, ignore_items_per_page = false)
+  def self.generate_query(page, filter_params)
     # if params are empty then return the paginated results without filtering
     if filter_params.empty?
       return Commitment.includes(:countries)
                        .where(state: 'live') # WARNING! Do not remove the 'live' query, because this will show unpublished Commitments people might not want public
-                       .order(id: :asc).paginate(page: page || 1, per_page: @items_per_page)
-                       .to_a.map! do |commitment|
-               commitment.to_hash
-             end
+                       .order(id: :asc)
     end
 
     # we have to do some hard work on the filtering...
     filters = filter_params.select { |hash| hash['options'].present? }
     where_params = parse_filters(filters)
-    run_query(page, where_params, ignore_items_per_page).to_a.map! do |commitment|
-      commitment.to_hash
-    end
+    run_query(page, where_params)
   end
 
   def self.parse_filters(filters)
@@ -175,17 +175,11 @@ class Commitment < ApplicationRecord
     params.compact
   end
 
-  def self.run_query(page, where_params, ignore_items_per_page = false)
-    commitments = Commitment.where(state: 'live') # WARNING! Do not remove the 'live' query, because this will show unpublished Commitments people might not want public
+  def self.run_query(page, where_params)
+    Commitment.where(state: 'live') # WARNING! Do not remove the 'live' query, because this will show unpublished Commitments people might not want public
       .left_outer_joins(:managers, :countries, :objectives, :governance_types)
       .distinct
       .where(where_params.values.join(' AND '))
-
-      if ignore_items_per_page
-      commitments
-    else
-      commitments.paginate(page: page || 1, per_page: @items_per_page).order(id: :asc)
-    end
   end
 
   def self.sanitise_filters
@@ -195,8 +189,7 @@ class Commitment < ApplicationRecord
     end
   end
 
-  def self.structure_data(page, items)
-    total_item_count = entries
+  def self.structure_data(page, items, total_item_count)
     {
       current_page: page,
       per_page: @items_per_page,
@@ -204,10 +197,6 @@ class Commitment < ApplicationRecord
       total_pages: pages(total_item_count),
       items: items
     }
-  end
-
-  def self.entries
-    @filter_params.empty? ? Commitment.count : generate_query(1, @filter_params, true).count
   end
 
   def self.pages(item_count)
