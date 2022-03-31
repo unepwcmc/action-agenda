@@ -54,8 +54,8 @@ en:
               nil_value: 'Progress report information missing'
             cbd_objectives:
               blank: 'CBD Objective information missing'
-            managers:
-              blank: 'Stakeholder information missing'
+            manager:
+              required: 'Stakeholder information missing'
         commitment:
           attributes:
             stage:
@@ -72,7 +72,7 @@ en:
         five_year_commitment: The lifespan of your commitment is less than 5 years
         progress_report: You aren't able to submit progress reports
         no_cbd_objectives: Your commitment doesn't contribute to any of the CBD commitments
-        government_managers: Your commitment is being made by a government
+        government_manager: Your commitment is being made by a government
         other_as_manager: Your commitment stakeholder is not suitable
     objective:
       additional_form_text:

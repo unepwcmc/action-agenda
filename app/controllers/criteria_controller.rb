@@ -39,7 +39,7 @@ class CriteriaController < ApplicationController
       :boundary,
       :five_year_commitment,
       :progress_report,
-      manager_ids: [],
+      :manager_id,
       cbd_objective_ids: []
     )
   end

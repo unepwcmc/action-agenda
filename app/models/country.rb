@@ -18,13 +18,13 @@ class Country < ApplicationRecord
   def country_commitments_json
     commitment_count_for_country = commitment_count
     managers = commitments
-                .joins(:managers)
+                .joins(:manager)
                 .group('managers.name')
                 .select("ROUND((COUNT(*)*100.0/#{ commitment_count_for_country }), 0) AS percentage")
                 .select('managers.name AS name')
                 .select("COUNT(*) AS count")
                 .as_json(only: [:name, :percentage, :count])
-    
+
     { country_name: name, commitment_count: commitment_count_for_country, managers: managers, text: I18n.t('views.home.map.information_text') }
   end
 

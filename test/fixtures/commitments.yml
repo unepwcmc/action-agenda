@@ -13,7 +13,7 @@ valid_commitment_1:
   governance_authority: MyText
   planned_actions: MyText
   description: MyText
-  managers: indigenous, joint_governance
+  manager: indigenous
   state: live
   stage: Committed
   duration_years: 5
@@ -38,7 +38,7 @@ valid_commitment_2:
   governance_authority: MyText
   planned_actions: MyText
   description: MyText
-  managers: indigenous
+  manager: indigenous
   state: draft
   stage: Implemented fully
   duration_years: 5
@@ -64,7 +64,7 @@ no_joint_governance_description:
   governance_authority: MyText
   planned_actions: MyText
   description: MyText
-  managers: indigenous, joint_governance
+  manager: joint_governance
   state: live
   stage: Committed
   duration_years: 5

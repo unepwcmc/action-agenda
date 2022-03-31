@@ -50,7 +50,7 @@ class CommitmentsController < ApplicationController
 
   def create
     @commitment = Commitment.new(commitment_params.merge(user: current_user, user_created: true))
-    @commitment.manager_ids = Criterium.find(@commitment.criterium_id).manager_ids
+    @commitment.manager_id = Criterium.find(@commitment.criterium_id).manager_id unless commitment_params[:manager_id].present?
 
     if @commitment.save
       respond_to do |format|
@@ -152,9 +152,9 @@ class CommitmentsController < ApplicationController
       :responsible_group,
       :stage,
       :state,
+      :manager_id,
       action_ids: [],
       country_ids: [],
-      manager_ids: [],
       objective_ids: [],
       threat_ids: [],
       links_attributes: [:id, :url, :_destroy],
