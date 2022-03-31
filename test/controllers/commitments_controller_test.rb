@@ -212,7 +212,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     returned_commitments = JSON.parse(@controller.view_assigns['paginatedCommitments'])['items']
     assert returned_commitments.count == 2
-    assert returned_commitments.pluck('name').include?(draft_commitment.name) == false
+    assert !returned_commitments.pluck('name').include?(draft_commitment.name)
   end
 
   test 'GET show should only show draft commitments to the owner' do
