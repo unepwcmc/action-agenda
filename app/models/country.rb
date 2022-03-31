@@ -25,7 +25,7 @@ class Country < ApplicationRecord
                 .select("COUNT(*) AS count")
                 .as_json(only: [:name, :percentage, :count])
     
-    { country_name: name, commitment_count: commitment_count_for_country, managers: managers, text: I18n.t('views.home.map.information_text') }
+    { country_name: name, commitment_count: commitment_count_for_country, managers: managers }
   end
 
   def commitment_count

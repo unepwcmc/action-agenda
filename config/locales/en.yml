@@ -90,6 +90,12 @@ en:
         natural_system_modifications: Natural system modifications (e.g. dams, land reclamation, fire management)
         geological_events: Geological events (e.g. volcanoes, earthquakes, landslides)
         climate_change_or_severe_weather: Climate change or severe weather (e.g. flooding, droughts, habitat changes, temperature changes)
+    manager:
+      additional_form_text:
+        for-profit_organisation: For-profit organisation (business and industry)
+        collaborative_governance: Collaborative governance (i.e. decisions are made by one group on behalf of many)
+        joint_governance: Joint governance (i.e. decisions are made by many)
+        non-governmental_organisation: Non-governmental organisation (NGO)
 
   views:
     titles:
@@ -118,4 +124,3 @@ en:
         header: Explore Commitments
         placeholder: Search by country
         button: View Commitments
-        information_text: The figure above presents the relative proportion of commitments being made by actor in this country

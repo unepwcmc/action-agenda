@@ -1,6 +1,7 @@
 class Services::CriteriumProps
-  def initialize(criterium)
+  def initialize(criterium, form_option_text_service = Services::FormOptionText.new)
     @criterium = criterium
+    @form_option_text_service = form_option_text_service
   end
 
   def call
@@ -69,7 +70,7 @@ class Services::CriteriumProps
                           if name != 'Other'
                             {
                               value: id,
-                              text: name
+                              text: @form_option_text_service.call(name, 'manager')
                             }
                           else
                             nil
