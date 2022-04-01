@@ -21,8 +21,8 @@
 
     props: {
       filters: {
-        required: true,
-        type: Array
+        type: Array,
+        default: () => []
       },
       presetFilters: {
         type: Array,
@@ -72,8 +72,8 @@
       },
 
       presetOptionsForFilter(filterName) {
-        const preselected = this.presetFilters.filter(presetFilter => presetFilter.name === filterName)
-        return preselected.length > 0 ? preselected[0]['options'] : []
+        const preselected = this.presetFilters.find(presetFilter => presetFilter.name === filterName)
+        return preselected ? preselected?.options : []
       }
     }
   }
