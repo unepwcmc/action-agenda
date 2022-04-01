@@ -1,4 +1,4 @@
-class ChangeManagersToBelongsToFor < ActiveRecord::Migration[5.2]
+class ChangeManagersToBelongsTo < ActiveRecord::Migration[5.2]
   def change
     add_column :commitments, :manager_id, :bigint
     add_column :criteria, :manager_id, :bigint
