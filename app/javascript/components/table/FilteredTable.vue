@@ -57,9 +57,8 @@
       filters: { type: Array },
       paginatedRows: { type: Object },
       presetFilters: { 
-        required: true,
         type: Array,
-        default: []
+        default: () => []
       },
     },
 

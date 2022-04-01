@@ -201,10 +201,7 @@ class Commitment < ApplicationRecord
 
   def self.pages(item_count)
     return 0 if item_count == 0
-
-    full_page_count = item_count / @items_per_page
-    full_page_count += 1 unless item_count % @items_per_page == 0
-    full_page_count
+    (item_count / @items_per_page.to_d).ceil
   end
 
   private

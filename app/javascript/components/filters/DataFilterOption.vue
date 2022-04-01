@@ -11,10 +11,11 @@
 
     props: {
       option: {
+        type: String,
         required: true
       },
       selected: {
-        required: true,
+        type: Boolean,
         default: false
       }
     },

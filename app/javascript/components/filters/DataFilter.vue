@@ -52,9 +52,8 @@
         type: String
       },
       presetFilterOptions: {
-        required: true,
         type: Array,
-        default: []
+        default: () => []
       }
     },
 
@@ -146,10 +145,7 @@
       },
 
       isSelected(option) {
-        const selected = this.presetFilterOptions.filter(obj => {
-            return obj === option
-          })
-        return selected.length > 0
+        return this.presetFilterOptions.includes(option)
       }
     }
   }

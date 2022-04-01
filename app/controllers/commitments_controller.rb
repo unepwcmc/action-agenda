@@ -12,14 +12,16 @@ class CommitmentsController < ApplicationController
   before_action :clean_progress_document_attachment_params, only: [:update, :create]
 
   def index
+    # make a copy of default params and modify those to prevent filters persisting over calls
+    filter_params = DEFAULT_PARAMS.dup
     if params[:country_filters].present?
-      DEFAULT_PARAMS[:filters] = [] # Previous search filters are persisted across calls unless we clear them
-      DEFAULT_PARAMS[:filters] << params[:country_filters]
+      filter_params[:filters] = []
+      filter_params[:filters] << params[:country_filters]
     end
-    @paginatedCommitments = Commitment.paginate_commitments(DEFAULT_PARAMS.to_json).to_json
+    @paginatedCommitments = Commitment.paginate_commitments(filter_params.to_json).to_json
     @filters = Commitment.filters_to_json
     @table_attributes = Commitment::TABLE_ATTRIBUTES.to_json
-    @preset_filters = DEFAULT_PARAMS[:filters]
+    @preset_filters = filter_params[:filters]
   end
 
   def show
