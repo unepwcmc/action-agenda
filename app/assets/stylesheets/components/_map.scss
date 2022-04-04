@@ -96,6 +96,7 @@ display: none;
     font-family: $body-font;
     font-size: medium;
     margin: rem-calc(20);
+    width: rem-calc(420);
 
     position: absolute;
     z-index: 10;
@@ -106,7 +107,7 @@ display: none;
       font-style: italic;
       padding: rem-calc(12) rem-calc(14);
       padding-left: rem-calc(40);
-      width: rem-calc(420);
+      width: 100%;
 
       position: relative;
     }
@@ -125,13 +126,18 @@ display: none;
       cursor: pointer;
       list-style: none;
       margin: 0;
-      padding: rem-calc(12) rem-calc(14);
+      padding: 0;
       overflow: auto;
+      width: 100%;
       max-height: 50vh;
-    }
-    
-    .is-active {
-      background-color: $grey-xlight;
+
+      &-item {
+        padding: 0.75rem 0.875rem 0.75rem 2.5rem;
+
+        &:hover, &--selected {
+          background-color: $grey-xlight;
+        }
+      }
     }
   }
 
