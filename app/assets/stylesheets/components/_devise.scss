@@ -137,8 +137,9 @@ $content-gutter: rem-calc(125);
     }
 
     #error_explanation {
+      color: $red-warning;
+
       h2 {
-        color: $red-warning;
         font-size: rem-calc(20);      
       }
     }
