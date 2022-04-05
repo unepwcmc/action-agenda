@@ -41,10 +41,12 @@
   }
 
   .hero__title {
+    font-family: $header-font;
     margin-bottom: rem-calc(15);
   }
 
   .hero__subtitle {
+    font-family: $header-font;
     font-size: rem-calc(21);
     font-weight: $bold;
     margin-top: 0;

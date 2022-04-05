@@ -28,7 +28,8 @@ h2 {
   &.h2--full-width {
     @include container;
     background-color: $primary;
-    coloR: $white;
+    color: $white;
+    font-family: $header-font;
     padding-top: rem-calc(10);
     padding-bottom: rem-calc(10);
     text-align: center;
