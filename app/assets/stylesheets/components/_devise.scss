@@ -135,6 +135,13 @@ $content-gutter: rem-calc(125);
         margin-bottom: rem-calc(30);
       }
     }
+
+    #error_explanation {
+      h2 {
+        color: $red-warning;
+        font-size: rem-calc(20);      
+      }
+    }
   }
 
   &__post-form-link {
