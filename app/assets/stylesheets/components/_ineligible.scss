@@ -11,17 +11,23 @@
 //--------------------------------------------------
 .ineligible {
   @include flex;
-
   background: $grey-xlight;
-  padding: rem-calc(165) rem-calc(400);
-  padding-bottom: rem-calc(80);
+  padding-top: rem-calc(120);
+  padding-bottom: rem-calc(70);
+
+  justify-content: center;
 
   &__icon {
     background-image: image_url('icons/group66.svg');
     background-repeat: no-repeat;
     background-size: contain;
+    margin-right: rem-calc(25);
     min-width: rem-calc(126); 
     min-height: rem-calc(126);
+  }
+
+  &__content {
+    max-width: rem-calc(630);
   }
 
   h1 {
