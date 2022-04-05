@@ -2,12 +2,16 @@
 // classes
 //----------------------------------------
 .dashboard-navigation {
+  margin-top: rem-calc(34);
+  margin-bottom: rem-calc(20);
+
   display: flex;
   align-items: flex-start;
   justify-content: center;
 }
 
 .dashboard-navigation__item {
+  font-family: $header-font;
   font-size: rem-calc(18);
   font-weight: $bold;
   list-style: none;
@@ -18,7 +22,6 @@
     border-bottom: 1px solid $green-dark;
     color: $green-dark;
     margin-right: rem-calc(28);
-    padding-bottom: rem-calc(8);
   }
 
   &:last-child {
@@ -27,5 +30,6 @@
 }
 
 .dashboard-navigation__item-link {
+  line-height: 1.4;
   text-decoration: none;
 }
