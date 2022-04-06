@@ -16,7 +16,8 @@ class Services::CommitmentProps
         progress_document_json: @commitment.progress_documents.map do |progress_document|
           {
             id: progress_document.id,
-            document: [{ name: progress_document.document.filename, content: rails_blob_path(progress_document.document, only_path: true) }],
+            document: [{ name: progress_document.document.filename,
+                         content: rails_blob_path(progress_document.document, only_path: true) }],
             signed_id: progress_document.document.blob.signed_id,
             progress_notes: progress_document.progress_notes
           }
@@ -47,7 +48,7 @@ class Services::CommitmentProps
                 title: 'hidden field',
                 name: 'criterium_id',
                 defaultValue: @commitment.criterium_id,
-                visibleIf: "false"
+                visibleIf: 'false'
               },
               {
                 type: 'text',
@@ -88,6 +89,7 @@ class Services::CommitmentProps
                 popupdescription: I18n.t('form.commitments.page1.q4.popupdescription_html'),
                 choices: Manager.commitment_form_options.pluck(:id, :name).map do |id, name|
                            next unless name != 'None of the above'
+
                            {
                              value: id,
                              text: @form_option_text_service.call(name, 'manager')
@@ -138,6 +140,7 @@ class Services::CommitmentProps
                     name: 'latitude',
                     title: I18n.t('form.commitments.page2.q3.title'),
                     titleLocation: 'left',
+                    placeHolder: '00.00000000',
                     hideNumber: true,
                     defaultValue: @commitment.latitude || ''
                   },
@@ -146,6 +149,7 @@ class Services::CommitmentProps
                     name: 'longitude',
                     title: I18n.t('form.commitments.page2.q4.title'),
                     titleLocation: 'left',
+                    placeHolder: '00.00000000',
                     hideNumber: true,
                     defaultValue: @commitment.longitude || ''
                   },
@@ -160,7 +164,12 @@ class Services::CommitmentProps
                     maxSize: 26_214_400,
                     acceptedTypes: '.zip,.kml,.kml+xml,.xx',
                     popupdescription: I18n.t('form.commitments.page2.q5.popupdescription_html'),
-                    defaultValue: @commitment.geospatial_file.attached? ? [{name: @commitment.geospatial_file.filename, type: @commitment.geospatial_file.content_type }] : [],
+                    defaultValue: if @commitment.geospatial_file.attached?
+                                    [{ name: @commitment.geospatial_file.filename,
+                                       type: @commitment.geospatial_file.content_type }]
+                                  else
+                                    []
+                                  end
                   }
                 ]
               },
@@ -281,7 +290,7 @@ class Services::CommitmentProps
                     title: 'hidden field',
                     name: 'id',
                     # a bit of a hacky way to make it work
-                    visibleIf: "false"
+                    visibleIf: 'false'
                   },
                   {
                     type: 'text',
@@ -313,7 +322,7 @@ class Services::CommitmentProps
                     title: 'hidden field',
                     name: 'id',
                     # a bit of a hacky way to make it work
-                    visibleIf: "false"
+                    visibleIf: 'false'
                   },
                   {
                     type: 'file',
@@ -345,7 +354,7 @@ class Services::CommitmentProps
 
   def duration_years_choices
     choices = (5..40).to_a
-    choices << "40+"
+    choices << '40+'
     choices
   end
 
