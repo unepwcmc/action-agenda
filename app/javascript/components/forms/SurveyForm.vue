@@ -84,6 +84,7 @@ export default {
 
   data() {
     const model = new SurveyVue.Model(this.formData.survey);
+
     // call methods on library-provided events here
     model.onAfterRenderQuestion.add(this.onAfterRenderQuestion);
     model.onComplete.add(this.onComplete);
@@ -109,6 +110,7 @@ export default {
       destroyedDocumentIds: [],
       destroyedLinkIds: [],
       showProgressBar: false,
+      numberedQuestionsOnPage: undefined
     };
   },
 
@@ -131,7 +133,74 @@ export default {
     }
   },
 
+  computed: {
+    numberedQuestionsByPage () {
+      const counts = {}
+
+      const pages = Array.from(this.survey.pages)
+
+      pages.forEach((page, pageIndex) => {
+        const visibleElements = page.elements.filter(element => element.visible)
+
+        counts[pageIndex] = visibleElements.length
+      })
+
+      return counts
+    }
+  },
+
   methods: {
+    addSideQuestionIndicator(options) {
+      // Get data for text
+      const questionNumber = options.question.no.slice(0, -1);
+      if (!questionNumber) { return }
+      
+      const currentPageNumber = this.survey.currentPageNo;
+      const questionsOnPage = this.numberedQuestionsByPage[currentPageNumber];
+
+      const questionNumberText = `${questionNumber} of ${questionsOnPage}`;
+
+      // Create element
+      const questionNumberTextElement = document.createElement('div');
+      questionNumberTextElement.className = 'question__side-number-indicator'
+      questionNumberTextElement.innerHTML = questionNumberText;
+
+      // Get question heading
+      const header = options.htmlElement.querySelector(".sv-question__header");
+
+      // Add element
+      header.appendChild(questionNumberTextElement);
+    },
+
+    addTooltip(options) {
+      // Return if there is no description to show in popup
+      if (!options.question.popupdescription) return;
+
+      // Create tooltip elements
+      const container = document.createElement("div");
+      container.className = "tooltip";
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "tooltip__trigger";
+
+      const popup = document.createElement("div");
+      popup.className = "tooltip__popup";
+      popup.innerHTML = options.question.popupdescription;
+
+      // Get question heading
+      const heading = options.htmlElement.querySelector("h5");
+
+      // Add elements
+      container.appendChild(button);
+      heading.appendChild(container);
+
+      container.onclick = () =>
+        container.lastChild === popup
+          ? container.removeChild(popup)
+          : container.appendChild(popup);
+    },
+
     assignNoneValues(data) {
       Object.keys(this.noneValues).forEach((question) => {
         if (data[question] && data[question][0] === "none") {
@@ -262,35 +331,11 @@ export default {
     },
 
     onAfterRenderQuestion(survey, options) {
-      // Return if there is no description to show in popup
-      if (!options.question.popupdescription) return;
-
-      // Create tooltip elements
-      const container = document.createElement("div");
-      container.className = "tooltip";
-
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "tooltip__trigger";
-
-      const popup = document.createElement("div");
-      popup.className = "tooltip__popup";
-      popup.innerHTML = options.question.popupdescription;
-
-      // Get question heading
-      const heading = options.htmlElement.querySelector("h5");
-
-      // Add elements
-      container.appendChild(button);
-      heading.appendChild(container);
-
-      container.onclick = () =>
-        container.lastChild === popup
-          ? container.removeChild(popup)
-          : container.appendChild(popup);
+      this.addTooltip(options);
+      this.addSideQuestionIndicator(options);
     },
 
-    onCurrentPageChanged() {
+    onCurrentPageChanged(survey, options) {
       this.isFirstPage = this.survey.isFirstPage;
       this.isLastPage = this.survey.isLastPage;
     },

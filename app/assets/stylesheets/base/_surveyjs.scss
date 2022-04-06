@@ -55,6 +55,15 @@ $radio-checkbox-width-height: rem-calc(39);
   width: rem-calc(670) !important;
 }
 
+.question__side-number-indicator {
+  color: $grey-xxdark;
+  font-size: rem-calc(20);
+
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 #v-app {
   .survey-container {
     margin-bottom: rem-calc(100);
@@ -153,6 +162,8 @@ $radio-checkbox-width-height: rem-calc(39);
 
     &__header {
       margin-bottom: rem-calc(25);
+
+      position: relative;
       
       &:not(.sv-question__header--location--left) {
         .sv-question__description {
