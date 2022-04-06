@@ -124,6 +124,7 @@ en:
         button: Make a commitment
         subtitle: Capturing Area-Based Commitments
         title: Commitments for Nature
+        commitments_count_description: Uploaded Commitments
       map:
         header: Explore Commitments
         placeholder: Search by country
