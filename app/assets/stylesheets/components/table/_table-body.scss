@@ -131,5 +131,6 @@
 
   &__button {
     @include button-accent;
+    font-family: $header-font;
   }
 }
