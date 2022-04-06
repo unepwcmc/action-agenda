@@ -95,8 +95,15 @@ $radio-checkbox-width-height: rem-calc(39);
     h5 {
       font-size: rem-calc(30);
       padding: 0;
-      padding-right: rem-calc(40);
-      max-width: rem-calc(780);
+      // padding-right: rem-calc(40);
+      max-width: rem-calc(815);
+
+      display: flex;
+      justify-content: space-between;
+
+      div:first-child {
+        margin-right: rem-calc(75);
+      }
     }
   }
 
@@ -117,7 +124,7 @@ $radio-checkbox-width-height: rem-calc(39);
 
   .sv-page > .sv-row {
     &:not(:last-child) {
-      margin-bottom: rem-calc(30);
+      margin-bottom: rem-calc(35);
       padding-bottom: 0;
     }
   }
@@ -142,7 +149,7 @@ $radio-checkbox-width-height: rem-calc(39);
 
   .sv-question {
     overflow: visible;
-    margin-bottom: rem-calc(30);
+    margin-bottom: rem-calc(35);
 
     &__header {
       margin-bottom: rem-calc(25);
@@ -292,7 +299,7 @@ $radio-checkbox-width-height: rem-calc(39);
 
   .sv-checkbox--checked, .sv-radio--checked {
     .sv-item__svg {
-      fill: $grey-md-dark;
+      fill: $green;
     }
   }
 

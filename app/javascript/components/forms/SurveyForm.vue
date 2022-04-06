@@ -262,24 +262,32 @@ export default {
     },
 
     onAfterRenderQuestion(survey, options) {
-      //Return if there is no description to show in popup
+      // Return if there is no description to show in popup
       if (!options.question.popupdescription) return;
 
-      //Add a button and description div;
-      const btn = document.createElement("button");
-      const description = document.createElement("div");
-      const header = options.htmlElement.querySelector("h5");
+      // Create tooltip elements
+      const container = document.createElement("div");
+      container.className = "tooltip";
 
-      btn.type = "button";
-      btn.className = "tooltip trigger";
-      description.className = "tooltip popup";
-      description.innerHTML = options.question.popupdescription;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "tooltip__trigger";
 
-      header.appendChild(btn);
-      btn.onclick = () =>
-        header.lastChild === description
-          ? header.removeChild(description)
-          : header.appendChild(description);
+      const popup = document.createElement("div");
+      popup.className = "tooltip__popup";
+      popup.innerHTML = options.question.popupdescription;
+
+      // Get question heading
+      const heading = options.htmlElement.querySelector("h5");
+
+      // Add elements
+      container.appendChild(button);
+      heading.appendChild(container);
+
+      container.onclick = () =>
+        container.lastChild === popup
+          ? container.removeChild(popup)
+          : container.appendChild(popup);
     },
 
     onCurrentPageChanged() {
