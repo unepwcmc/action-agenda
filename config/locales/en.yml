@@ -115,6 +115,10 @@ en:
         links:
           action_agenda:
             description: For other biodiversity related commitments
+    commitments:
+      call_to_action:
+        heading: Want to upload a commitment?
+        link: Get started
     home:
       hero:
         button: Make a commitment

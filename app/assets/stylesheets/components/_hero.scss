@@ -16,11 +16,49 @@
   @include flex;
   @include flex-v-center;
   @include hero-background('hero/amir-samoh-WgV0g05NQCM-unsplash.png');
-  text-align: center;
   height: rem-calc(340);
 
+  &::before {
+    all: unset;
+  }
+
   .hero__container {
-    @include container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+      font-family: $header-font;
+      margin-bottom: 0;
+      max-width: rem-calc(390);
+    }
+  }
+
+  .hero__call-to-action {
+    background-color: $grey-black-translucent;
+    border: rem-calc(1) solid $white;
+    border-radius: rem-calc(4);
+    font-family: $header-font;
+    padding: rem-calc(50) rem-calc(40);
+    text-align: center;
+    width: rem-calc(267);
+    height: rem-calc(275);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    h2 {
+      font-size: rem-calc(30);
+    }
+
+    a {
+      @include button-accent-condensed-taller;
+      width: 100%;
+
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 
