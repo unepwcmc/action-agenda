@@ -14,7 +14,7 @@ en:
         f: No - the area does not and will not have a clearly defined boundary
         popupdescription_html: Note that the boundary does not need to be a physical barrier/visible on the ground.
       q2:
-        title: Please select which of the following objectives your commitment contributes to.
+        title: Please select which of the following objectives your commitment contributes to
         description: Multi select option
         popupdescription_html: 
           The objectives listed here follow the 
