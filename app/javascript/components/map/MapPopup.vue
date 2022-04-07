@@ -8,10 +8,6 @@
       <BarChart :chartData="data" :options="options" :key="randomKey" />
       <MapLegend :data="data.datasets" />
     </div>
-    <div class="map__info-box">
-      <span class="map__info-box-icon"></span>
-        {{ this.text }}
-    </div>
     <button @click="onClick" class="map__button">view commitments</button>
   </div>
 </template>
@@ -39,7 +35,6 @@ export default {
       id: this.content.id,
       chartData: Object,
       url: '',
-      text: '',
       colors: [
         "#97001F",
         "#6054BA",
@@ -66,6 +61,21 @@ export default {
                 min: 0,
                 display: false,
               },
+              scaleLabel: {
+                display: true,
+                fontSize: 25,
+                labelString: 'Number of Commitments',
+              }
+            },
+          ],
+          xAxes: [
+            {
+              scaleFontSize: 100,
+              scaleLabel: {
+                display: true,
+                fontSize: 25,
+                labelString: 'Actor',
+              }
             },
           ],
         },
@@ -91,7 +101,6 @@ export default {
         .then((response) => {
           this.chartData = response.data.managers;
           this.url = response.data.country_commitments_path;
-          this.text = response.data.text;
         })
         .then(() => this.populateChartData());
     },

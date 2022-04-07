@@ -5,7 +5,9 @@
     <div>
       <h3>ID: <%= @commitment.id %></h3>
 
-      <h1><%= @commitment.name %></h1>
+      <h1 class="commitment__name">
+        <%= @commitment.name %>
+      </h1>
       <p><%= @commitment.description %></p>
       <br>
       <h3>Planned actions:</h3>
@@ -24,7 +26,7 @@
       <ul class="list__ul">
         <li class="list__li">
           <span class="list__subtitle">Actors:</span>
-          <span class="list__text"><%= @commitment.manager.name %></span>
+          <span class="list__text"><%= @commitment.manager&.name %></span>
           <%# <span class="list__text">COMPANY WEBSITE</span> %>
         </li>
         <li class="list__li">

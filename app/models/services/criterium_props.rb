@@ -1,6 +1,7 @@
 class Services::CriteriumProps
-  def initialize(criterium)
+  def initialize(criterium, form_option_text_service = Services::FormOptionText.new)
     @criterium = criterium
+    @form_option_text_service = form_option_text_service
   end
 
   def call
@@ -67,7 +68,7 @@ class Services::CriteriumProps
                 choices: Manager.form_options.pluck(:id, :name).map do |id, name|
                             {
                               value: id,
-                              text: name
+                              text: @form_option_text_service.call(name, 'manager')
                             }
                          end
               },

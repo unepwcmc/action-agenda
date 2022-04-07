@@ -4,6 +4,7 @@
       class="filters"
       :filters="filters"
       :total-items="totalItems"
+      :presetFilters="presetFilters"
     />
 
     <table class="table-head table-head--basic">
@@ -54,7 +55,11 @@
         type: String
       },
       filters: { type: Array },
-      paginatedRows: { type: Object }
+      paginatedRows: { type: Object },
+      presetFilters: { 
+        type: Array,
+        default: () => []
+      },
     },
 
     data () {

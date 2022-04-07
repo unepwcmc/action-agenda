@@ -24,7 +24,8 @@
           :key="key"
           :result="result[searchKey]"
           @click="setResult(result)"
-          :class="{ 'is-active': key === arrowCounter }"
+          class="map__filter-dropdown-item"
+          :class="{ 'map__filter-dropdown-item--selected': key === arrowCounter }"
           v-html="result[searchKey]"
         />
       </ul>
@@ -87,7 +88,7 @@ export default {
     },
     
     onArrowDown() {
-      this.arrowCounter < this.results.length
+      this.arrowCounter < this.results.length - 1
         ? (this.arrowCounter = this.arrowCounter + 1)
         : (this.arrowCounter = 0)
     },

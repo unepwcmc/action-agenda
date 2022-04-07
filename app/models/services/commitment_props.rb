@@ -1,8 +1,9 @@
 class Services::CommitmentProps
   include Rails.application.routes.url_helpers
 
-  def initialize(commitment)
+  def initialize(commitment, form_option_text_service = Services::FormOptionText.new)
     @commitment = commitment
+    @form_option_text_service = form_option_text_service
   end
 
   def call
@@ -15,7 +16,8 @@ class Services::CommitmentProps
         progress_document_json: @commitment.progress_documents.map do |progress_document|
           {
             id: progress_document.id,
-            document: [{ name: progress_document.document.filename, content: rails_blob_path(progress_document.document, only_path: true) }],
+            document: [{ name: progress_document.document.filename,
+                         content: rails_blob_path(progress_document.document, only_path: true) }],
             signed_id: progress_document.document.blob.signed_id,
             progress_notes: progress_document.progress_notes
           }
@@ -46,7 +48,7 @@ class Services::CommitmentProps
                 title: 'hidden field',
                 name: 'criterium_id',
                 defaultValue: @commitment.criterium_id,
-                visibleIf: "false"
+                visibleIf: 'false'
               },
               {
                 type: 'text',
@@ -74,7 +76,7 @@ class Services::CommitmentProps
                 choices: Objective.commitment_form_options.pluck(:id, :name).map do |id, name|
                            {
                              value: id,
-                             text: form_option_text(name, 'objective')
+                             text: @form_option_text_service.call(name, 'objective')
                            }
                          end.compact
               },
@@ -92,7 +94,6 @@ class Services::CommitmentProps
             title: 'Location',
             description: I18n.t('form.commitments.page2.description'),
             elements: [
-              # currently not working
               {
                 type: 'tagbox',
                 name: 'country_ids',
@@ -122,6 +123,7 @@ class Services::CommitmentProps
                     name: 'latitude',
                     title: I18n.t('form.commitments.page2.q3.title'),
                     titleLocation: 'left',
+                    placeHolder: '00.00000000',
                     hideNumber: true,
                     defaultValue: @commitment.latitude || ''
                   },
@@ -130,6 +132,7 @@ class Services::CommitmentProps
                     name: 'longitude',
                     title: I18n.t('form.commitments.page2.q4.title'),
                     titleLocation: 'left',
+                    placeHolder: '00.00000000',
                     hideNumber: true,
                     defaultValue: @commitment.longitude || ''
                   },
@@ -144,7 +147,12 @@ class Services::CommitmentProps
                     maxSize: 26_214_400,
                     acceptedTypes: '.zip,.kml,.kml+xml,.xx',
                     popupdescription: I18n.t('form.commitments.page2.q5.popupdescription_html'),
-                    defaultValue: @commitment.geospatial_file.attached? ? [{name: @commitment.geospatial_file.filename, type: @commitment.geospatial_file.content_type }] : [],
+                    defaultValue: if @commitment.geospatial_file.attached?
+                                    [{ name: @commitment.geospatial_file.filename,
+                                       type: @commitment.geospatial_file.content_type }]
+                                  else
+                                    []
+                                  end
                   }
                 ]
               },
@@ -172,7 +180,6 @@ class Services::CommitmentProps
                 type: 'comment',
                 name: 'area_owner_and_role',
                 title: I18n.t('form.commitments.page2.q8.title'),
-                isRequired: true,
                 defaultValue: @commitment.area_owner_and_role || ''
               }
             ]
@@ -225,7 +232,7 @@ class Services::CommitmentProps
 
                            {
                              value: id,
-                             text: form_option_text(name, 'action')
+                             text: @form_option_text_service.call(name, 'action')
                            }
                          end.compact,
                 otherText: 'Other'
@@ -250,7 +257,7 @@ class Services::CommitmentProps
 
                            {
                              value: id,
-                             text: form_option_text(name, 'threat')
+                             text: @form_option_text_service.call(name, 'threat')
                            }
                          end.compact
               },
@@ -265,7 +272,7 @@ class Services::CommitmentProps
                     title: 'hidden field',
                     name: 'id',
                     # a bit of a hacky way to make it work
-                    visibleIf: "false"
+                    visibleIf: 'false'
                   },
                   {
                     type: 'text',
@@ -297,7 +304,7 @@ class Services::CommitmentProps
                     title: 'hidden field',
                     name: 'id',
                     # a bit of a hacky way to make it work
-                    visibleIf: "false"
+                    visibleIf: 'false'
                   },
                   {
                     type: 'file',
@@ -327,18 +334,9 @@ class Services::CommitmentProps
     }
   end
 
-  def form_option_text(name, klass)
-    underscore_name = name.downcase.gsub(' ', '_').to_sym
-    if I18n.t("models.#{ klass }.additional_form_text").keys.include?(underscore_name.to_sym)
-      I18n.t("models.#{ klass }.additional_form_text.#{ underscore_name }")
-    else
-      name
-    end
-  end
-  
   def duration_years_choices
     choices = (5..40).to_a
-    choices << "40+"
+    choices << '40+'
     choices
   end
 

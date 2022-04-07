@@ -7,13 +7,15 @@
     />
     <MglMap
       class="map"
-      container="map-test"
+      container="map-container"
       ref="MglMap"
       :center.sync="center"
       :zoom.sync="zoom"
+      :scrollZoom="false"
       :accessToken="accessToken"
       :mapStyle="mapStyle"
     >
+      <MglNavigationControl position="bottom-left" :showCompass="false" />
       <template v-for="(marker, index) in spatialData">
         <MglMarker
           @click="onPopup(marker.id)"
@@ -44,7 +46,7 @@ import CustomMarker from "../marker/CustomMarker";
 import MapFilter from "./MapFilter";
 import MapPopup from "./MapPopup";
 import Mapbox from "mapbox-gl";
-import { MglMap, MglMarker, MglPopup } from "vue-mapbox";
+import { MglMap, MglMarker, MglNavigationControl, MglPopup } from "vue-mapbox";
 
 export default {
   name: "MapSection",
@@ -55,6 +57,7 @@ export default {
     MapPopup,
     MglMap,
     MglMarker,
+    MglNavigationControl,
     MglPopup,
   },
 

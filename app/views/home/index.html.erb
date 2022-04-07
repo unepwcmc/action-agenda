@@ -1,6 +1,6 @@
 <%= render partial: '/partials/topbar/topbar_secondary', locals: { links: nav_header(current_user) } %>
 
-<%= render partial: '/partials/hero/hero-home', locals: { logos: site_logos } %>
+<%= render partial: '/partials/hero/hero-home', locals: { commitments_count: @commitments_count, logos: site_logos } %>
 
 <%= render partial: '/partials/map/map' %>
 <%= render partial: '/partials/carousel/carousel-targets' %>

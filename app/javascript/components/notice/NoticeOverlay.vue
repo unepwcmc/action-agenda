@@ -1,14 +1,21 @@
 <template>
-  <div class="flash-notice__container" :class="{ closed: closed }" @click="close">
+  <div class="flash-notice__container" :class="{ closed: closed }">
     <div class="flash-notice__card">
-      <a 
-        class="flash-notice__close-btn"
-      >
-        X
-      </a>
-      <div v-html="notice">
+      <h2 v-text="heading" />
+      <p v-text="notice" />
+      <p>
+        <a
+          :href="resendPath"
+          :title="heading"
+          v-text="resendText"
+        />
+      </p>
+      <button
+        class="flash-notice__close-button"
+        v-text="closeText"
+        @click="close"
+      />
     </div>
-  </div>
   </div>
 </template>
 
@@ -17,22 +24,42 @@ export default {
   name: "NoticeOverlay",
 
   props: {
+    closeText: {
+      type: String,
+      required: true
+    },
+
+    heading: {
+      type: String,
+      required: true
+    },
+
     notice: {
       type: String,
-      default: ""
+      required: true
+    },
+
+    resendPath: {
+      type: String,
+      required: true
+    },
+
+    resendText: {
+      type: String,
+      required: true
     }
   },
 
-  data() {
+  data () {
     return {
       closed: false,
     };
   },
 
   methods: {
-    close() {
+    close () {
       this.closed = !this.closed;
     },
   },
-};
+}
 </script>

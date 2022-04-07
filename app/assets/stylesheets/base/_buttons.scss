@@ -95,7 +95,7 @@ $padding-medium: rem-calc(27);
 @mixin button-previous-next {
   @include button-basic;
   background-size: rem-calc(12), rem-calc(20);
-  border: solid 1px $black;
+  border: solid 1px $green-dark;
   width: rem-calc(42); height: rem-calc(42);
 }
 //--------------------------------------------------

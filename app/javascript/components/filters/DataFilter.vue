@@ -15,7 +15,7 @@
             v-if="option != null"
             :key="`${title}-${index}`"
             :option="option"
-            :selected="false">
+            :selected="isSelected(option)">
           </data-filter-option>
         </template>
       </ul>
@@ -50,6 +50,10 @@
       },
       type: {
         type: String
+      },
+      presetFilterOptions: {
+        type: Array,
+        default: () => []
       }
     },
 
@@ -72,7 +76,7 @@
 
         this.children.forEach(child => {
           if(child.isSelected){ 
-            selectedArray.push(child.option) 
+            selectedArray.push(child.option)
           }
         })
 
@@ -138,6 +142,10 @@
         this.$eventHub.$emit('getNewItems')
 
         this.$eventHub.$emit('filtersChanged')
+      },
+
+      isSelected(option) {
+        return this.presetFilterOptions.includes(option)
       }
     }
   }

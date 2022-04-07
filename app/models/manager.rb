@@ -1,13 +1,13 @@
 class Manager < ApplicationRecord
   DEFAULT_OPTIONS = [
-    'Local communities', 
-    'Indigenous peoples', 
-    'Non-profit organisation', 
-    'For-profit organisation (business and industry)', 
-    'Sub-national government', 
-    'Joint governance (i.e. decisions are made by many)', 
-    'Individual landowners', 
-    'Collaborative governance (i.e. decisions are made by one group on behalf of many)', 
+    'Local communities',
+    'Indigenous peoples',
+    'Non-profit organisation',
+    'For-profit organisation',
+    'Sub-national government',
+    'Joint governance',
+    'Individual landowners',
+    'Collaborative governance',
     'Other'
   ]
 

@@ -10,5 +10,6 @@
     endpoint="/commitments/list"
     :filters="<%= @filters %>" 
     :paginated-rows="<%= @paginatedCommitments %>"
+    :preset-filters="<%= @preset_filters.to_json %>"
   ></filtered-table>
 </div>
