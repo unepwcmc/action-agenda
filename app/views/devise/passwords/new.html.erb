@@ -11,6 +11,10 @@
   <div class="actions">
     <%= f.submit I18n.t('devise.passwords.send_instructions_request') %>
   </div>
+
+  <div class="device__post-form-links">
+    <%= link_to I18n.t('devise.passwords.back_to_log_in'), new_user_session_path, class: "devise__post-form-link" %>
+  </div>
 <% end %>
 
 <%= render "devise/shared/links" %>

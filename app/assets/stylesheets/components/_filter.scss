@@ -36,6 +36,7 @@ $total-width-desktop: rem-calc(24);
       @include button-dropdown-filter;
       color: $black;
       cursor: pointer;
+      font-family: $header-font;
       margin: 0;
 
       position: relative;

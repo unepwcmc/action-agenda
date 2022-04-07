@@ -1,3 +1,7 @@
 <notice-overlay
+  close-text="<%= I18n.t('devise.confirmations.modal_close') %>"
+  heading="<%= I18n.t('devise.confirmations.modal_heading') %>"
   notice="<%= notice %>"
+  resend-path="<%= new_user_confirmation_path %>"
+  resend-text="<%= I18n.t('devise.confirmations.didnt_receive') %>"
 ></notice-overlay>
