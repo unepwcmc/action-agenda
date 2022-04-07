@@ -7,7 +7,7 @@
     />
     <MglMap
       class="map"
-      container="map-test"
+      container="map-container"
       ref="MglMap"
       :center.sync="center"
       :zoom.sync="zoom"
