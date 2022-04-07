@@ -17,18 +17,44 @@
     // @include text-pagination;
   }
 
-    &__button--next { 
+  &__button {
+    color: $grey-xxdark;
+    font-size: rem-calc(16);
+    font-weight: 700;
+
+    &:not(:last-child) {
+      margin-right: rem-calc(11);
+    }
+
+    &--next { 
       @include button-next; 
     
       &.disabled { @include button-disabled; }
     }
-
-    &__button--previous {
+  
+    &--previous {
       @include button-prev;
-      margin: rem-calc(0 6 0 10);
       
       &.disabled { @include button-disabled; }
     }
+
+    &--current-page {
+      @include button-previous-next;
+      background-color: $green-dark;
+      color: $white;
+      cursor: not-allowed;
+    }
+  
+    &--non-current-page {
+      @include button-previous-next;
+    }
+  
+    &--ellipsis {
+      @include button-previous-next;
+      @include button-disabled;
+    }
+  }
+
 
   &__no-results {
     // @include text-pagination-no-results;
