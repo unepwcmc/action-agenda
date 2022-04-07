@@ -73,7 +73,7 @@
 
       presetOptionsForFilter(filterName) {
         const preselected = this.presetFilters.find(presetFilter => presetFilter.name === filterName)
-        return preselected ? preselected?.options : []
+        return preselected?.options || []
       }
     }
   }
