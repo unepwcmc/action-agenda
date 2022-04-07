@@ -11,13 +11,18 @@
 
     props: {
       option: {
+        type: String,
         required: true
+      },
+      selected: {
+        type: Boolean,
+        default: false
       }
     },
 
     data () {
       return {
-        isSelected: false
+        isSelected: this.selected
       }
     },
 
@@ -26,11 +31,5 @@
         return this.option.toString().replace(' |(|)|_', '-').toLowerCase()
       }
     },
-
-    methods: {
-      selectOption (option) {
-        this.isSelected = true
-      }
-    }
   }
 </script>

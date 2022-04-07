@@ -5,8 +5,9 @@
       :name="filter.name"
       :title="filter.title" 
       :options="filter.options"
-      :type="filter.type">
-    </data-filter>
+      :type="filter.type"
+      :presetFilterOptions="presetOptionsForFilter(filter.name)"
+    />
   </div>
 </template>
 
@@ -20,8 +21,12 @@
 
     props: {
       filters: {
-        required: true,
-        type: Array
+        type: Array,
+        default: () => []
+      },
+      presetFilters: {
+        type: Array,
+        default: () => []
       }
     },
 
@@ -49,11 +54,14 @@
 
         // create an empty array for each filter
         this.filters.forEach(filter => {
+
           if (filter.name !== undefined && filter.options.length > 0) {
+            const preselected = this.presetOptionsForFilter(filter.name)
+
             let obj = {}
 
             obj.name = filter.name
-            obj.options = []
+            obj.options = preselected
             obj.type = filter.type
 
             array.push(obj)
@@ -61,6 +69,11 @@
         })
 
         this.$store.dispatch('table/setFilterOptions', array)
+      },
+
+      presetOptionsForFilter(filterName) {
+        const preselected = this.presetFilters.find(presetFilter => presetFilter.name === filterName)
+        return preselected?.options || []
       }
     }
   }

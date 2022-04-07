@@ -106,10 +106,14 @@ class Commitment < ApplicationRecord
       @filter_params = json_params['filters'].all? { |p| p['options'].blank? } ? [] : json_params['filters']
     end
 
-    commitments = generate_query(page, @filter_params)
-    items = commitments
+    unpaginated_commitments = generate_query(page, @filter_params)
+    paginated_commitments = unpaginated_commitments
+                              .paginate(page: page || 1, per_page: @items_per_page)
+                              .to_a.map! do |commitment|
+                                commitment.to_hash
+                              end
 
-    structure_data(page, items)
+    structure_data(page, paginated_commitments, unpaginated_commitments.count)
   end
   
   def to_hash
@@ -130,18 +134,13 @@ class Commitment < ApplicationRecord
     if filter_params.empty?
       return Commitment.includes(:countries)
                        .where(state: 'live') # WARNING! Do not remove the 'live' query, because this will show unpublished Commitments people might not want public
-                       .order(id: :asc).paginate(page: page || 1, per_page: @items_per_page)
-                       .to_a.map! do |commitment|
-               commitment.to_hash
-             end
+                       .order(id: :asc)
     end
 
     # we have to do some hard work on the filtering...
     filters = filter_params.select { |hash| hash['options'].present? }
     where_params = parse_filters(filters)
-    run_query(page, where_params).to_a.map! do |commitment|
-      commitment.to_hash
-    end
+    run_query(page, where_params)
   end
 
   def self.parse_filters(filters)
@@ -181,7 +180,6 @@ class Commitment < ApplicationRecord
       .left_outer_joins(:managers, :countries, :objectives, :governance_types)
       .distinct
       .where(where_params.values.join(' AND '))
-      .paginate(page: page || 1, per_page: @items_per_page).order(id: :asc)
   end
 
   def self.sanitise_filters
@@ -191,30 +189,19 @@ class Commitment < ApplicationRecord
     end
   end
 
-  def self.structure_data(page, items)
+  def self.structure_data(page, items, total_item_count)
     {
       current_page: page,
       per_page: @items_per_page,
-      total_entries: entries(items),
-      total_pages: pages(items),
+      total_entries: total_item_count,
+      total_pages: pages(total_item_count),
       items: items
     }
   end
 
-  def self.entries(items)
-    @filter_params.empty? ? Commitment.count : items.count
-  end
-
-  def self.pages(items) 
-    return 0 if items.count == 0
-
-    total_pages = items.each_slice(@items_per_page).count
-
-    if @filter_params.empty?
-      total_pages = Commitment.all.each_slice(@items_per_page).count
-    end
-
-    total_pages
+  def self.pages(item_count)
+    return 0 if item_count == 0
+    (item_count / @items_per_page.to_d).ceil
   end
 
   private
