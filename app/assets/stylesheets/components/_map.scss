@@ -1,7 +1,3 @@
-.mapboxgl-ctrl-bottom-left, .mapboxgl-ctrl-bottom-right, .mapboxgl-ctrl-top-left, .mapboxgl-ctrl-top-right {
-display: none;
-}
-
 .map {
   min-height: 70vh;
   
@@ -175,6 +171,49 @@ display: none;
     &-icon {
       @include icon-tooltip;
       margin-right: rem-calc(4);
+    }
+  }
+}
+
+// nested in #v-app for higher specificity otherwise Mapbox styles overwrite these
+#v-app {
+  .mapboxgl-ctrl-bottom-left {
+    .mapboxgl-ctrl {
+      &.mapboxgl-ctrl-group {
+        border-radius: 0;
+        box-shadow: none;
+  
+        button {
+          border: rem-calc(1) solid $grey-black;
+          border-radius: 0;
+          width: rem-calc(38);
+          height: rem-calc(38);
+
+          &:hover {
+            background-color: $grey-xlight;
+          }
+  
+          &:last-child {
+            border-top: 0;
+          }
+        }
+  
+        .mapboxgl-ctrl-zoom-in {
+          .mapboxgl-ctrl-icon {
+            background-image: image_url('icons/plus.svg')
+          }
+        }
+  
+        .mapboxgl-ctrl-zoom-out {
+          .mapboxgl-ctrl-icon {
+            background-image: image_url('icons/minus.svg')
+          }
+        }
+      }
+
+      &:not(.mapboxgl-ctrl-group) {
+        display: none !important;
+      }
     }
   }
 }
