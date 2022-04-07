@@ -177,6 +177,10 @@
 
 // nested in #v-app for higher specificity otherwise Mapbox styles overwrite these
 #v-app {
+  .mapboxgl-ctrl-bottom-right {
+    display: none;
+  }
+
   .mapboxgl-ctrl-bottom-left {
     .mapboxgl-ctrl {
       &.mapboxgl-ctrl-group {
