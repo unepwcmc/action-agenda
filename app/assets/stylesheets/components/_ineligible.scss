@@ -1,7 +1,7 @@
 //--------------------------------------------------
 // variables
 //--------------------------------------------------
-
+$icon-size: rem-calc(126);
 //--------------------------------------------------
 // mixins
 //--------------------------------------------------
@@ -17,17 +17,26 @@
 
   justify-content: center;
 
-  &__icon {
-    background-image: image_url('icons/group66.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    margin-right: rem-calc(25);
-    min-width: rem-calc(126); 
-    min-height: rem-calc(126);
-  }
-
+  
   &__content {
     max-width: rem-calc(630);
+
+    position: relative;
+    
+    &::before {
+      background-image: image_url('icons/group66.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      content: '';
+      min-width: $icon-size; 
+      min-height: $icon-size;
+  
+      display: block;
+  
+      position: absolute;
+      top: 0;
+      left: -$icon-size - rem-calc(25);
+    }
   }
 
   h1 {
