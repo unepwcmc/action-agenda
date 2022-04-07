@@ -60,24 +60,17 @@ class Services::CriteriumProps
                 noneText: I18n.t('form.none')
               },
               {
-                type: 'checkbox',
-                name: 'manager_ids',
+                type: 'radiogroup',
+                name: 'manager_id',
                 title: I18n.t('form.criteria.q3.title'),
-                description: I18n.t('form.criteria.q3.description'),
                 isRequired: true,
                 popupdescription: I18n.t('form.criteria.q3.popupdescription_html'),
-                choices: Manager.commitment_form_options.pluck(:id, :name).map do |id, name|
-                          if name != 'Other'
+                choices: Manager.form_options.pluck(:id, :name).map do |id, name|
                             {
                               value: id,
                               text: @form_option_text_service.call(name, 'manager')
                             }
-                          else
-                            nil
-                          end
-                         end.compact,
-                hasNone: true,
-                noneText: I18n.t('form.none')
+                         end
               },
               {
                 type: 'radiogroup',

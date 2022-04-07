@@ -1,15 +1,13 @@
 require 'csv'
 require 'wcmc_components'
 class Commitment < ApplicationRecord
-  STAGE_OPTIONS = ['In progress', 'Committed only', 'Implemented fully']
+  STAGE_OPTIONS = ['In progress', 'Committed', 'Implemented fully']
   enum state: [:draft, :live] 
 
   include WcmcComponents::Loadable
 
   has_and_belongs_to_many :countries
   import_by countries: :name
-  has_and_belongs_to_many :managers
-  import_by managers: :name
   has_and_belongs_to_many :objectives
   import_by objectives: :name
   has_and_belongs_to_many :governance_types
@@ -22,6 +20,9 @@ class Commitment < ApplicationRecord
   import_by links: :url
   has_many :progress_documents, dependent: :destroy
   has_one_attached :geospatial_file
+
+  belongs_to :manager, class_name: 'Manager', optional: true
+  import_by manager: :name
 
   belongs_to :criterium, optional: true
   belongs_to :user, optional: true
@@ -37,7 +38,7 @@ class Commitment < ApplicationRecord
   validates :stage, inclusion: { in: STAGE_OPTIONS }, if: :user_created_and_live?
 
   validates_presence_of :description, :latitude, :longitude, :committed_year, :responsible_group, :implementation_year,
-                        :duration_years, :objectives, :managers, :countries, :actions, :threats, if: :user_created_and_live?
+                        :duration_years, :objectives, :manager, :countries, :actions, :threats, if: :user_created_and_live?
   
   TABLE_ATTRIBUTES = [
     {
@@ -45,7 +46,7 @@ class Commitment < ApplicationRecord
       field: 'name'
     },
     {
-      title: 'Commited',
+      title: 'Committed',
       field: 'committed'
     },
     {
@@ -67,7 +68,7 @@ class Commitment < ApplicationRecord
     valid?
     self.state = :draft
     errors.messages.map do |key, value|
-      if key.in?(%i(actions countries managers objectives threats))
+      if key.in?(%i(actions countries manager objectives threats))
         :"#{key.to_s.singularize}_ids"
       else
         key
@@ -177,7 +178,7 @@ class Commitment < ApplicationRecord
 
   def self.run_query(page, where_params)
     Commitment.where(state: 'live') # WARNING! Do not remove the 'live' query, because this will show unpublished Commitments people might not want public
-      .left_outer_joins(:managers, :countries, :objectives, :governance_types)
+      .left_outer_joins(:manager, :countries, :objectives, :governance_types)
       .distinct
       .where(where_params.values.join(' AND '))
   end

@@ -17,11 +17,11 @@ Threat.create!(Threat::DEFAULT_OPTIONS.map {|threat_name| { name: threat_name, d
 Objective.create!(Objective::DEFAULT_OPTIONS.map {|objective_name| { name: objective_name, default_option: true }})
 
 criteria = [
-  { boundary: true, five_year_commitment: true, progress_report: true, managers: [Manager.first], cbd_objectives: [CbdObjective.first], user: User.first },
-  { boundary: false, five_year_commitment: true, progress_report: true, managers: [Manager.first], cbd_objectives: [CbdObjective.first], user: User.first },
-  { boundary: true, five_year_commitment: false, progress_report: true, managers: [Manager.first], cbd_objectives: [CbdObjective.first], user: User.first },
-  { boundary: true, five_year_commitment: true, progress_report: false, managers: [Manager.first], cbd_objectives: [CbdObjective.first], user: User.first },
-  { boundary: true, five_year_commitment: true, progress_report: true, managers: [Manager.last], cbd_objectives: [CbdObjective.last], user: User.first },
-  { boundary: false, five_year_commitment: false, progress_report: false, managers: [Manager.last], cbd_objectives: [CbdObjective.last], user: User.first }
+  { boundary: true, five_year_commitment: true, progress_report: true, manager: Manager.first, cbd_objectives: [CbdObjective.first], user: User.first },
+  { boundary: false, five_year_commitment: true, progress_report: true, manager: Manager.first, cbd_objectives: [CbdObjective.first], user: User.first },
+  { boundary: true, five_year_commitment: false, progress_report: true, manager: Manager.first, cbd_objectives: [CbdObjective.first], user: User.first },
+  { boundary: true, five_year_commitment: true, progress_report: false, manager: Manager.first, cbd_objectives: [CbdObjective.first], user: User.first },
+  { boundary: true, five_year_commitment: true, progress_report: true, manager: Manager.last, cbd_objectives: [CbdObjective.last], user: User.first },
+  { boundary: false, five_year_commitment: false, progress_report: false, manager: Manager.last, cbd_objectives: [CbdObjective.last], user: User.first }
 ]
 Criterium.create!(criteria)

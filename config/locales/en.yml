@@ -54,8 +54,8 @@ en:
               nil_value: 'Progress report information missing'
             cbd_objectives:
               blank: 'CBD Objective information missing'
-            managers:
-              blank: 'Stakeholder information missing'
+            manager:
+              required: 'Stakeholder information missing'
         commitment:
           attributes:
             stage:
@@ -72,16 +72,16 @@ en:
         five_year_commitment: The lifespan of your commitment is less than 5 years
         progress_report: You aren't able to submit progress reports
         no_cbd_objectives: Your commitment doesn't contribute to any of the CBD commitments
-        government_managers: Your commitment is being made by a government
-        other_as_manager: Your commitment stakeholder is not on the permitted list
+        government_manager: Your commitment is being made by a government
+        other_as_manager: Your commitment stakeholder is not suitable
     objective:
       additional_form_text:
         equitable_sharing_of_benefits_from_genetic_resources: Equitable sharing of benefits from genetic resources (i.e. Sharing monetary or non-monetary benefits from plants or animals fairly)
     action:
       additional_form_text:
         protection_of_land/water: Protection of land/water (e.g. establish or expand a park or protected area)
-        management_of_land/water: Management of land/water (e.g. conserve or restore a habitat, control poachers or invasive species)
-        species_management: Species management (e,g, enhance or restore a species, manage trade or harvests)
+        management_of_land/water: Management of land/water (e.g. conserve or restore a habitat, prevent poaching or control invasive species)
+        species_management: Species management (excluding invasive species control. E.g. enhance or restore a species, manage trade or harvests)
         economic_(or other)_incentives_to_influence_behaviour: Economic (or other) incentives to influence behaviour (e.g. provide alternative livelihoods or products)
     threat:
       additional_form_text:
@@ -95,7 +95,7 @@ en:
         for-profit_organisation: For-profit organisation (business and industry)
         collaborative_governance: Collaborative governance (i.e. decisions are made by one group on behalf of many)
         joint_governance: Joint governance (i.e. decisions are made by many)
-        non-governmental_organisation: Non-governmental organisation (NGO)
+        non-profit_organisation: Non-governmental organisation (NGO)
 
   views:
     titles:
@@ -110,7 +110,7 @@ en:
     criterium:
       ineligible:
         title: This platform might not be the best place to record your commitment
-        description: Your answers in the current form suggest this platform might not be the best place to record your commitment.
+        description: Your answers in the criteria form suggest this platform might not be the best place to record your commitment.
         results_did_not_pass: Your results that didn't pass the criteria form
         links:
           action_agenda:

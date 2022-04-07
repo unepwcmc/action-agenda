@@ -19,7 +19,7 @@ class CriteriaControllerTest < ActionDispatch::IntegrationTest
           boundary: true,
           five_year_commitment: true,
           progress_report: true,
-          manager_ids: [manager.id],
+          manager_id: manager.id,
           cbd_objective_ids: [cbd_objective]
       }
     }
@@ -40,7 +40,7 @@ class CriteriaControllerTest < ActionDispatch::IntegrationTest
           boundary: true,
           five_year_commitment: true,
           progress_report: false,
-          manager_ids: [manager.id],
+          manager_id: manager.id,
           cbd_objective_ids: [cbd_objective]
       }
     }
