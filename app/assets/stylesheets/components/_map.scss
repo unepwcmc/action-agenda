@@ -182,6 +182,7 @@
       &.mapboxgl-ctrl-group {
         border-radius: 0;
         box-shadow: none;
+        margin: rem-calc(20);
   
         button {
           border: rem-calc(1) solid $grey-black;
