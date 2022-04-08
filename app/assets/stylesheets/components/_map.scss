@@ -1,3 +1,18 @@
+$popup-padding-top: rem-calc(5);
+$popup-padding-bottom: rem-calc(15);
+$popup-padding-x: rem-calc(20);
+
+// these are taken from inspection in the browser - it looks like there are
+// height and width styles that have been set here that aren't being applied,
+// probably because of not being nested in #v-app like the examples at the
+// bottom of this file. If the dimensions change, this calculation will need
+// updating to reflect this
+$popup-content-width: rem-calc(560);
+$popup-content-height: rem-calc(523.094);
+
+$popup-midpoint-x: ($popup-padding-x * 2 + $popup-content-width) / 2;
+$popup-midpoint-y: ($popup-padding-top + $popup-padding-x + $popup-content-height) / 2;
+
 .map {
   min-height: 70vh;
   
@@ -69,7 +84,7 @@
     }
 
     .mapboxgl-popup-content {
-      padding: rem-calc(5) rem-calc(20) rem-calc(15);
+      padding: $popup-padding-top $popup-padding-x $popup-padding-bottom;
       overflow: visible;
 
       position: absolute;
@@ -177,6 +192,22 @@
 
 // nested in #v-app for higher specificity otherwise Mapbox styles overwrite these
 #v-app {
+  .mapboxgl-popup {
+    transform: translate(calc(50vw - #{$popup-midpoint-x}), calc(50vh - #{$popup-midpoint-y})) !important;
+
+    .mapboxgl-popup-close-button {
+      background-image: image_url("icons/close.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      color: rgba(255, 255, 255, 0);
+      content: '';
+      margin-top: rem-calc(21);
+      margin-right: rem-calc(20);
+      width: rem-calc(30);
+      height: rem-calc(30);
+    }
+  }
+
   .mapboxgl-ctrl-bottom-right {
     display: none;
   }

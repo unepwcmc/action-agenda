@@ -50,14 +50,10 @@ $popup-width: rem-calc(390);
     }
     
     &:after {
-      // border-style: solid;
-      // border-top: none;
       border-right: ($arrow-width / 2) solid transparent;
       border-bottom: $arrow-height solid $grey-xxlight;
       border-left: ($arrow-width / 2) solid transparent;
       content: '';
-      // margin-top: -(rem-calc(2));
-      // margin-right: -(rem-calc(10));
       width: 0;
       height: 0;
 
