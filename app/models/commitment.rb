@@ -53,7 +53,7 @@ class Commitment < ApplicationRecord
     },
     {
       title: 'Duration',
-      field: 'duration'
+      field: 'duration_years'
     },
     {
       title: 'Stage',
@@ -125,7 +125,7 @@ class Commitment < ApplicationRecord
       title: name,
       description: description,
       committed: committed_year,
-      duration: duration_years || duration,
+      duration_years: duration_years,
       stage: stage,
       url: Rails.application.routes.url_helpers.commitment_path(id),
       links: links
