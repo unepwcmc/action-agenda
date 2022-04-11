@@ -34,19 +34,15 @@
           <span class="list__text"><%= @commitment.current_area_ha %> hectares</span>
         </li>
         <li class="list__li">
-          <span class="list__subtitle">Proposed area:</span>
-          <span class="list__text"><%= @commitment.proposed_area_ha %> hectares</span>
-        </li>
-        <li class="list__li">
           <span class="list__subtitle">Year when the commitment was made:</span>
           <span class="list__text"><%= @commitment.committed_year %></span>
         </li>
         <li class="list__li">
-          <span class="list__subtitle">Year when the commitment was fully implemented:</span>
+          <span class="list__subtitle">First year of commitment actions:</span>
           <span class="list__text"><%= @commitment.implementation_year %></span>
         </li>
         <li class="list__li">
-          <span class="list__subtitle">Expected duration once fully implemented:</span>
+          <span class="list__subtitle">Expected duration of commitment:</span>
           <span class="list__text"><%= @commitment.duration_years ? "#{ @commitment.duration_years } years" : @commitment.duration %></span>
         </li>
         <li class="list__li">
@@ -56,15 +52,11 @@
             <span class="list__text"><%= @commitment.countries.pluck(:name).join(', ') %></span>
           </p>
         </li>
-          <li class="list__li">
-            <span class="list__subtitle">Linked from platform:</span>
-            <% @commitment.links.each do |link| %>
-              <%= link_to link.url, link.url, target: '_blank', title: link.url %>
-            <% end %>
-          </li>
         <li class="list__li">
-          <span class="list__subtitle">Review method:</span>
-          <span class="list__text"><%= @commitment.review_method %></span>
+          <span class="list__subtitle">Linked from platform:</span>
+          <% @commitment.links.each do |link| %>
+            <%= link_to link.url, link.url, target: '_blank', title: link.url %>
+          <% end %>
         </li>
       </ul>
     </div>

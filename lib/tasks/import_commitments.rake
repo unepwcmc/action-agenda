@@ -16,10 +16,13 @@ namespace :import do
 
 
   def self.import_from_cbd
+    all_json = []
     (1..8).each do |page|
       response = HTTParty.get("https://www.cbd.int/api/v2019/actions?q=%7B%22actionDetails.actionCategories%22%3A%7B%22%24all%22%3A%5B%7B%22identifier%22%3A%22LAND-ECOSYSTEMS%22%7D%5D%7D%7D&sk=#{page}&s=%7B%22meta.modifiedOn%22%3A-1%7D&f=%7B%22actionDetails.actionCategories%22%3A1%2C%22actionDetails.aichiTargets%22%3A1%2C%22actionDetails.sdgs%22%3A1%2C%22actionDetails.thematicAreas%22%3A1%2C%22actionDetails.operationalAreas%22%3A1%2C%22contacts.country.identifier%22%3A1%2C%22meta%22%3A1%2C%22action.name%22%3A1%2C%22action.description%22%3A1%2C%22action.image%22%3A1%7D&l=10")
       
       raw_json = JSON.parse response.body
+      all_json << raw_json
+
       raw_json.each do |cbd_com|
         
         cbd_id = cbd_com["_id"]
@@ -42,5 +45,6 @@ namespace :import do
         our_com.save
       end
     end
+    byebug
   end
 end
