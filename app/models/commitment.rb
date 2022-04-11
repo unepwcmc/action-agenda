@@ -7,6 +7,7 @@ class Commitment < ApplicationRecord
   include WcmcComponents::Loadable
 
   ignore_column 'review_method'
+  ignore_column 'proposed_area_ha'
 
   has_and_belongs_to_many :countries
   import_by countries: :name

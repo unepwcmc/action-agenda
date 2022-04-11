@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(version: 2022_04_11_085523) do
     t.float "latitude"
     t.float "longitude"
     t.integer "current_area_ha"
-    t.integer "proposed_area_ha"
     t.string "committed_year"
     t.string "implementation_year"
     t.integer "update_year"

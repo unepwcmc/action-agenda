@@ -6,7 +6,6 @@ valid_commitment_1:
   latitude: 1.5
   longitude: 1.5
   current_area_ha: 1
-  proposed_area_ha: 1
   committed_year: 1
   implementation_year: 1
   name: Valid commitment 1
@@ -31,7 +30,6 @@ valid_commitment_2:
   latitude: 1.5
   longitude: 1.5
   current_area_ha: 1
-  proposed_area_ha: 1
   committed_year: 1
   implementation_year: 1
   name: Valid commitment 2
@@ -57,7 +55,6 @@ no_joint_governance_description:
   latitude: 1.5
   longitude: 1.5
   current_area_ha: 1
-  proposed_area_ha: 1
   committed_year: 1
   implementation_year: 1
   name: MyText
