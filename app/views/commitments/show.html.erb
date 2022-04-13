@@ -3,14 +3,14 @@
 <div class="container">
   <section class="grid-3-gap-2 spacer-small--top spacer-large--bottom">
     <div>
-      <h3>ID: <%= @commitment.id %></h3>
+      <h3><%= I18n.t('commitments.show.id') %>: <%= @commitment.id %></h3>
 
       <h1 class="commitment__name">
         <%= @commitment.name %>
       </h1>
       <p><%= @commitment.description %></p>
       <br>
-      <h3>Planned actions:</h3>
+      <h3><%= I18n.t('commitments.show.planned_actions') %></h3>
       <% if @commitment.actions.present? %>
         <% @commitment.actions.each do |action| %>
           <p><%= action.name %></p>
@@ -21,39 +21,39 @@
     </div>
 
     <div class="list--commitment-info">
-      <h2 class="list__title"><span class="green">Stage:</span> <%= @commitment.stage %></h2>
+      <h2 class="list__title"><span class="green"><%= I18n.t('commitments.show.stage') %>:</span> <%= @commitment.stage %></h2>
 
       <ul class="list__ul">
         <li class="list__li">
-          <span class="list__subtitle">Actors:</span>
-          <span class="list__text"><%= @commitment.manager&.name %></span>
+          <span class="list__subtitle"><%= I18n.t('commitments.show.actors') %></span>
+          <span class="list__text"><%= @commitment.manager&.name %>:</span>
           <%# <span class="list__text">COMPANY WEBSITE</span> %>
         </li>
         <li class="list__li">
-          <span class="list__subtitle">Current area:</span>
+          <span class="list__subtitle"><%= I18n.t('commitments.show.current_area') %>:</span>
           <span class="list__text"><%= @commitment.current_area_ha %> hectares</span>
         </li>
         <li class="list__li">
-          <span class="list__subtitle">Year when the commitment was made:</span>
+          <span class="list__subtitle"><%= I18n.t('commitments.show.year_when_commitment_was_made') %>:</span>
           <span class="list__text"><%= @commitment.committed_year %></span>
         </li>
         <li class="list__li">
-          <span class="list__subtitle">First year of commitment actions:</span>
+          <span class="list__subtitle"><%= I18n.t('commitments.show.first_year_of_commitment_actions') %>:</span>
           <span class="list__text"><%= @commitment.implementation_year %></span>
         </li>
         <li class="list__li">
-          <span class="list__subtitle">Expected duration of commitment:</span>
+          <span class="list__subtitle"><%= I18n.t('commitments.show.year_when_commitment_was_made') %>:</span>
           <span class="list__text"><%= @commitment.duration_years %></span>
         </li>
         <li class="list__li">
-          <span class="list__subtitle">Country Location:</span>
+          <span class="list__subtitle"><%= I18n.t('commitments.show.country_location') %>:</span>
           <p class="list__country">
             <i class="list__icon icon--pin"></i>
             <span class="list__text"><%= @commitment.countries.pluck(:name).join(', ') %></span>
           </p>
         </li>
         <li class="list__li">
-          <span class="list__subtitle">Linked from platform:</span>
+          <span class="list__subtitle"><%= I18n.t('commitments.show.linked_from_platform') %>:</span>
           <% @commitment.links.each do |link| %>
             <%= link_to link.url, link.url, target: '_blank', title: link.url %>
           <% end %>
@@ -65,7 +65,7 @@
   <section class="grid-1-gap-1 spacer-large--bottom">
     <% if @primary_objectives.present? then %>
       <div class="list--primary-objectives">
-        <h3 class="list__title">Primary Objectives</h3>
+        <h3 class="list__title"><%= I18n.t('commitments.show.primary_objectives') %></h3>
         <div class="list__container">
           <ul class="list__ul">
             <% @primary_objectives.each do |objective| %>
@@ -81,9 +81,9 @@
 
     <% if @commitment.governance_authority.present? then %>
       <div class="list--governance">
-        <h3 class="list__title">Governance Authority</h3>
+        <h3 class="list__title"><%= I18n.t('commitments.show.governance_authority') %></h3>
         <p><%= @commitment.governance_authority %></p>
-        <p class="bold">Governance type</p>
+        <p class="bold"><%= I18n.t('commitments.show.governance_type') %></p>
         <span><%= @commitment.governance_types.pluck(:name).join(', ') %></span>
       </div>
     <% end %>
@@ -108,7 +108,7 @@
 
     <% if @commitment.progress_documents.present? then %>
       <div class="list--targets-additional">
-        <h3 class="list__title">Additional Details</h3>
+        <h3 class="list__title"><%= I18n.t('commitments.show.additional_details') %></h3>
         <% @commitment.progress_documents.each do |progress_document| %>
           <p>
             <strong class="link__download">
