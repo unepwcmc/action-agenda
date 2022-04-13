@@ -236,7 +236,6 @@ export default {
         this.addDestroyKeys(data);
         this.send(data);
       }
-      Turbolinks.visit("/dashboard");
     },
 
     nextPage() {
@@ -437,7 +436,7 @@ export default {
         // set shareable to boolean based on presence/absence of checkbox value array
         data = {
           ...data,
-          shareable: data.shareable ? true : false
+          shareable: !!data.shareable
         };
       }
       this.options = {
