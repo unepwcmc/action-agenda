@@ -156,6 +156,7 @@ class CommitmentsController < ApplicationController
       :longitude,
       :name,
       :responsible_group,
+      :shareable,
       :stage,
       :state,
       :manager_id,

@@ -76,7 +76,8 @@ en:
           popupdescription_html:
             Please name your commitment in up to 10 words. This is the name that will appear on the platform. 
             Examples include 'Establishment of Cambridge community conserved area', 'Expansion of Cambridge private reserve', 
-            or 'Improvement of management for sustainable use at Cambridge Farm'' 
+            or 'Improvement of management for sustainable use at Cambridge Farm''
+          validation: Commitment name can be a maximum of 10 words
         q2:
           title: Please provide a description of your commitment
           popupdescription_html: 
@@ -108,8 +109,10 @@ en:
             If unknown, please use this website: <a href="https://www.latlong.net/" target="_blank">https://www.latlong.net/</a>.'
         q3:
           title: Latitude
+          validation: 'Latitude must be a number between -90 and 90, with up to 6 decimal places'
         q4:
           title: Longitude
+          validation: 'Longitude must be a number between -180 and 180, with up to 6 decimal places'
         q5:
           title: If you have spatial data you would like to share, please upload it here.
           description: (Optional field)
@@ -185,6 +188,11 @@ en:
             In addition, you may also upload any other relevant documents that you would like others to be able to see. These must also be in PDF or Word format. 
             <br><br>
             By loading your updates, you agree that they will be visible to other users of the site. The information you provide will serve to inspire and enable others to learn from different approaches being applied across the world. Showcasing commitments may also inspire investors or donors to support specific initiatives.
+        q2:
+          option_text: 
+            Permission is given to UNEP-WCMC to allow reposting or redistribution by third party platforms 
+            (e.g. the Convention on Biological Diversity's Sharm El Sheikh to Kunming Action Agenda Platform,
+            the IUNC Contributions Platform, the CitiesWithNature Action Platform)
       modal:
         question: Are you sure you want to exit this page?
         p1: If you still want to exit this page, selecting ‘Exit & Save’ will save any information you have entered so far*. Saved commitments will be accessible through your ‘My Dashboard’ page.
