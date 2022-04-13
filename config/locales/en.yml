@@ -61,7 +61,7 @@ en:
             stage:
               inclusion: "is not one of the allowed stage options"
             name:
-              too_long: Must be 10 words or less
+              too_long: Must be 10 words or fewer
         progress_document:
           attributes:
             document:

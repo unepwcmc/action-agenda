@@ -62,7 +62,7 @@ class Services::CommitmentProps
                   { 
                     type: 'regex',
                     text: I18n.t('form.commitments.page1.q1.validation'),  
-                    regex: '^\s*(\S+\s+|\S+$){1,10}$'
+                    regex: regex_10_word_maximum
                   }
                 ]
               },
@@ -137,7 +137,7 @@ class Services::CommitmentProps
                       { 
                         type: 'regex',
                         text: I18n.t('form.commitments.page2.q3.validation'),  
-                        regex: '^([+-])?(?:90(?:\\.0{1,6})?|((?:|[1-8])[0-9])(?:\\.[0-9]{1,6})?)$'
+                        regex: regex_latitude
                       }
                     ]
                   },
@@ -153,7 +153,7 @@ class Services::CommitmentProps
                       { 
                         type: 'regex',
                         text: I18n.t('form.commitments.page2.q4.validation'),  
-                        regex: '^([+-])?(?:180(?:\\.0{1,6})?|((?:|[1-9]|1[0-7])[0-9])(?:\\.[0-9]{1,6})?)$'
+                        regex: regex_longitude
                       }
                     ]
                   },
@@ -201,6 +201,7 @@ class Services::CommitmentProps
                 type: 'comment',
                 name: 'area_owner_and_role',
                 title: I18n.t('form.commitments.page2.q8.title'),
+                description: I18n.t('form.commitments.page2.q8.description'),
                 defaultValue: @commitment.area_owner_and_role || ''
               }
             ]
@@ -376,5 +377,20 @@ class Services::CommitmentProps
     choices << 'after 2030'
     choices.unshift('before 2010')
     choices
+  end
+
+  def regex_10_word_maximum
+    # https://stackoverflow.com/questions/1526881/use-a-regularexpressionvalidator-to-limit-a-word-count
+    '^\s*(\S+\s+|\S+$){1,10}$'
+  end
+
+  def regex_latitude
+    # https://stackoverflow.com/questions/3518504/regular-expression-for-matching-latitude-longitude-coordinates
+    '^([+-])?(?:90(?:\\.0{1,6})?|((?:|[1-8])[0-9])(?:\\.[0-9]{1,6})?)$'
+  end
+
+  def regex_longitude
+    # https://stackoverflow.com/questions/3518504/regular-expression-for-matching-latitude-longitude-coordinates
+    '^([+-])?(?:180(?:\\.0{1,6})?|((?:|[1-9]|1[0-7])[0-9])(?:\\.[0-9]{1,6})?)$'
   end
 end
