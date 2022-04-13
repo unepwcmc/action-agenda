@@ -42,6 +42,8 @@ class Commitment < ApplicationRecord
 
   validates_presence_of :description, :latitude, :longitude, :committed_year, :responsible_group, :implementation_year,
                         :duration_years, :objectives, :manager, :countries, :actions, :threats, if: :user_created_and_live?
+
+  validate :name_is_10_words_or_less, if: :user_created_and_live?
   
   TABLE_ATTRIBUTES = [
     {
@@ -212,5 +214,9 @@ class Commitment < ApplicationRecord
 
   def user_created_and_live?
     live? && user_created?
+  end
+
+  def name_is_10_words_or_less
+    errors.add(:name, :too_long) if name && name.split(' ').length > 10
   end
 end
