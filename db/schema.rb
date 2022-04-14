@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_31_154207) do
+ActiveRecord::Schema.define(version: 2022_04_13_084040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(version: 2022_03_31_154207) do
     t.float "latitude"
     t.float "longitude"
     t.integer "current_area_ha"
-    t.integer "proposed_area_ha"
     t.string "committed_year"
     t.string "implementation_year"
     t.integer "update_year"
@@ -81,10 +80,8 @@ ActiveRecord::Schema.define(version: 2022_03_31_154207) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "country_id"
-    t.string "duration"
     t.string "stage"
     t.string "related_biodiversity_targets"
-    t.string "review_method"
     t.text "responsible_group"
     t.integer "state", default: 0
     t.string "duration_years"
@@ -93,6 +90,8 @@ ActiveRecord::Schema.define(version: 2022_03_31_154207) do
     t.boolean "user_created", default: false, null: false
     t.text "area_owner_and_role"
     t.bigint "manager_id"
+    t.boolean "shareable", default: false
+    t.boolean "cbd_import", default: false, null: false
     t.index ["committed_year"], name: "index_commitments_on_committed_year"
     t.index ["country_id"], name: "index_commitments_on_country_id"
     t.index ["duration_years"], name: "index_commitments_on_duration_years"

@@ -24,7 +24,7 @@ class Country < ApplicationRecord
                 .select('managers.name AS name')
                 .select("COUNT(*) AS count")
                 .as_json(only: [:name, :percentage, :count])
-    
+
     { country_name: name, commitment_count: commitment_count_for_country, managers: managers }
   end
 

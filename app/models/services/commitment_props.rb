@@ -57,7 +57,14 @@ class Services::CommitmentProps
                 description: I18n.t('form.commitments.page1.q1.description'),
                 isRequired: true,
                 popupdescription: I18n.t('form.commitments.page1.q1.popupdescription_html'),
-                defaultValue: @commitment.name || ''
+                defaultValue: @commitment.name || '',
+                validators: [
+                  { 
+                    type: 'regex',
+                    text: I18n.t('form.commitments.page1.q1.validation'),  
+                    regex: regex_10_word_maximum
+                  }
+                ]
               },
               {
                 type: 'comment',
@@ -125,7 +132,14 @@ class Services::CommitmentProps
                     titleLocation: 'left',
                     placeHolder: '00.00000000',
                     hideNumber: true,
-                    defaultValue: @commitment.latitude || ''
+                    defaultValue: @commitment.latitude || '',
+                    validators: [
+                      { 
+                        type: 'regex',
+                        text: I18n.t('form.commitments.page2.q3.validation'),  
+                        regex: regex_latitude
+                      }
+                    ]
                   },
                   {
                     type: 'text',
@@ -134,7 +148,14 @@ class Services::CommitmentProps
                     titleLocation: 'left',
                     placeHolder: '00.00000000',
                     hideNumber: true,
-                    defaultValue: @commitment.longitude || ''
+                    defaultValue: @commitment.longitude || '',
+                    validators: [
+                      { 
+                        type: 'regex',
+                        text: I18n.t('form.commitments.page2.q4.validation'),  
+                        regex: regex_longitude
+                      }
+                    ]
                   },
                   {
                     type: 'file',
@@ -180,6 +201,7 @@ class Services::CommitmentProps
                 type: 'comment',
                 name: 'area_owner_and_role',
                 title: I18n.t('form.commitments.page2.q8.title'),
+                description: I18n.t('form.commitments.page2.q8.description'),
                 defaultValue: @commitment.area_owner_and_role || ''
               }
             ]
@@ -271,7 +293,6 @@ class Services::CommitmentProps
                     type: 'text',
                     title: 'hidden field',
                     name: 'id',
-                    # a bit of a hacky way to make it work
                     visibleIf: 'false'
                   },
                   {
@@ -303,7 +324,6 @@ class Services::CommitmentProps
                     type: 'text',
                     title: 'hidden field',
                     name: 'id',
-                    # a bit of a hacky way to make it work
                     visibleIf: 'false'
                   },
                   {
@@ -326,6 +346,18 @@ class Services::CommitmentProps
                 confirmDelete: true,
                 confirmDeleteText: I18n.t('form.commitments.page5.q1.delete'),
                 panelAddText: I18n.t('form.commitments.page5.q1.add')
+              },
+              {
+                type: 'checkbox',
+                name: 'shareable',
+                titleLocation: 'hidden',
+                defaultValue: !!@commitment.shareable,
+                choices: [
+                  {
+                    value: true,
+                    text: I18n.t('form.commitments.page5.q2.option_text')
+                  }
+                ]
               }
             ]
           }
@@ -345,5 +377,20 @@ class Services::CommitmentProps
     choices << 'after 2030'
     choices.unshift('before 2010')
     choices
+  end
+
+  def regex_10_word_maximum
+    # https://stackoverflow.com/questions/1526881/use-a-regularexpressionvalidator-to-limit-a-word-count
+    '^\s*(\S+\s+|\S+$){1,10}$'
+  end
+
+  def regex_latitude
+    # https://stackoverflow.com/questions/3518504/regular-expression-for-matching-latitude-longitude-coordinates
+    '^([+-])?(?:90(?:\\.0{1,6})?|((?:|[1-8])[0-9])(?:\\.[0-9]{1,6})?)$'
+  end
+
+  def regex_longitude
+    # https://stackoverflow.com/questions/3518504/regular-expression-for-matching-latitude-longitude-coordinates
+    '^([+-])?(?:180(?:\\.0{1,6})?|((?:|[1-9]|1[0-7])[0-9])(?:\\.[0-9]{1,6})?)$'
   end
 end
