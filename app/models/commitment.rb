@@ -2,7 +2,8 @@ require 'csv'
 require 'wcmc_components'
 class Commitment < ApplicationRecord
   STAGE_OPTIONS = ['In progress', 'Committed', 'Implemented fully']
-  enum state: [:draft, :live] 
+  enum state: [:draft, :live]
+  enum commitment_source: [:form, :csv, :cbd]
 
   include WcmcComponents::Loadable
 
@@ -213,7 +214,7 @@ class Commitment < ApplicationRecord
   private
 
   def user_created_and_live?
-    live? && user_created?
+    live? && commitment_source == 'form'
   end
 
   def name_is_10_words_or_less
