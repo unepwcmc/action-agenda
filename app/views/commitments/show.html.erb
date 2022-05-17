@@ -49,7 +49,11 @@
           <span class="list__subtitle"><%= I18n.t('commitments.show.country_location') %>:</span>
           <p class="list__country">
             <i class="list__icon icon--pin"></i>
-            <span class="list__text"><%= @commitment.countries.pluck(:name).join(', ') %></span>
+            <span class="list__text">
+              <%= @countries.map do |country|
+                link_to country[:name], country[:commitments_path], target: '_blank', title: "Commitments in #{country[:name]}"
+              end.join(', ').html_safe %>
+            </span>
           </p>
         </li>
         <li class="list__li">
