@@ -91,10 +91,10 @@ ActiveRecord::Schema.define(version: 2022_05_17_112027) do
     t.bigint "manager_id"
     t.boolean "shareable", default: false
     t.string "cbd_id"
-    t.boolean "cfm_approved"
+    t.boolean "cfn_approved"
     t.integer "commitment_source"
     t.index ["cbd_id"], name: "index_commitments_on_cbd_id", unique: true
-    t.index ["cfm_approved"], name: "index_commitments_on_cfm_approved"
+    t.index ["cfn_approved"], name: "index_commitments_on_cfn_approved"
     t.index ["committed_year"], name: "index_commitments_on_committed_year"
     t.index ["country_id"], name: "index_commitments_on_country_id"
     t.index ["duration_years"], name: "index_commitments_on_duration_years"

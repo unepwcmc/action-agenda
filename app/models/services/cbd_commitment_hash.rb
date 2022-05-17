@@ -16,7 +16,7 @@ class Services::CbdCommitmentHash
       country_ids: [country.id],
       committed_year: @cbd_hash["meta"]["createdOn"].to_date.year,
       commitment_source: 'cbd',
-      cfm_approved: @commitment.cfm_approved,
+      cfn_approved: @commitment.cfn_approved,
       state: 'live',
       shareable: false,
       links_attributes: [
