@@ -8,7 +8,7 @@
       <BarChart :chartData="data" :options="options" :key="randomKey" />
       <MapLegend :data="data.datasets" />
     </div>
-    <button @click="onClick" class="map__button">view commitments</button>
+    <a :href="url" target="_blank" class="map__button">view commitments</a>
   </div>
 </template>
 
@@ -103,10 +103,6 @@ export default {
           this.url = response.data.country_commitments_path;
         })
         .then(() => this.populateChartData());
-    },
-
-    onClick() {
-      Turbolinks.visit(this.url);
     },
 
     populateChartData() {
