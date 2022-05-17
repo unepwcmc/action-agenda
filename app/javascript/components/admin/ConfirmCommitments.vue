@@ -1,12 +1,21 @@
 <template>
   <div>
-    <div :class="{'commitment-approvals__tab--active': currentTab === 'unassigned'}" @click="select('unassigned')">
+    <div 
+      :class="{'commitment-approvals__tab--active': currentTab === 'unassigned'}"
+      @click="select('unassigned')"
+    >
       Unassigned
     </div>
-    <div :class="{'commitment-approvals__tab--active': currentTab === 'confirmed'}" @click="select('confirmed')">
+    <div 
+      :class="{'commitment-approvals__tab--active': currentTab === 'confirmed'}"
+      @click="select('confirmed')"
+    >
       Approved
     </div>
-    <div :class="{'commitment-approvals__tab--active': currentTab === 'rejected'}" @click="select('rejected')">
+    <div 
+      :class="{'commitment-approvals__tab--active': currentTab === 'rejected'}"
+      @click="select('rejected')"
+    >
       Rejected
     </div>
 

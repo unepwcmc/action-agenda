@@ -7,7 +7,7 @@ namespace :import do
     Rake::Task['add_country_boundaries'].invoke
     import_csv_file(args.csv_file)
     puts "local Commitments successfully imported"
-    import_from_cb
+    import_from_cbd
     puts "CBD Commitments successfully imported"
   end
 
