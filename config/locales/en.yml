@@ -125,7 +125,7 @@ en:
     commitments:
       call_to_action:
         commitments_count_description: Commitments Added
-        link: Want to add a commitment?
+        link: Add a commitment
     home:
       hero:
         button: Make a commitment
