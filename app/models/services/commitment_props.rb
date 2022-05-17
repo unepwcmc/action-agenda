@@ -376,7 +376,7 @@ class Services::CommitmentProps
     choices = (2010..2030).to_a
     choices << 'after 2030'
     choices.unshift('before 2010')
-    choicest
+    choices
   end
 
   def regex_10_word_maximum
