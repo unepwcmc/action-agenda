@@ -1,0 +1,20 @@
+//--------------------------------------------------
+// classes
+//--------------------------------------------------
+.commitment-approvals {
+  &__tab {
+    &--active {
+      border-style: solid;
+    }
+  }
+
+  &__button {
+    &--approve {
+      @include button-accept
+    }
+
+    &--reject {
+      @include button-reject
+    }
+  }
+}

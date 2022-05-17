@@ -12,6 +12,8 @@
         my-dashboard-path="<%= dashboard_url %>"
         my-dashboard-text="<%= I18n.t('views.buttons.my_dashboard') %>"
         user-icon-path="<%= image_url('icons/user.png') %>"
+        admin-text="<%= I18n.t('views.buttons.admin') if current_user.admin? %>"
+        admin-path="<%= admin_imported_commitments_path if current_user.admin? %>"
       ></nav-dropdown>
     </li>
   <% else %>

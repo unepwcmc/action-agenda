@@ -34,6 +34,13 @@
           class="nav-dropdown__link"
         />
       </li>
+      <li v-if="adminPath" class="nav-dropdown__list-item">
+        <a
+          :href="adminPath"
+          v-text="adminText"
+          class="nav-dropdown__link"
+        />
+      </li>
     </ul>
   </span>
 </template>
@@ -70,6 +77,16 @@ export default {
     userIconPath: {
       type: String,
       required: true,
+    },
+
+    adminPath: {
+      type: String,
+      required: false,
+    },
+
+    adminText: {
+      type: String,
+      required: false,
     },
   },
 
