@@ -18,6 +18,7 @@ class Services::CbdCommitmentHash
       commitment_source: 'cbd',
       cfm_approved: @commitment.cfm_approved,
       state: 'live',
+      shareable: false,
       links_attributes: [
         link_attributes: link_attributes
       ]
