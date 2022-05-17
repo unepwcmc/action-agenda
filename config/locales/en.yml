@@ -124,8 +124,8 @@ en:
             description: For other biodiversity related commitments
     commitments:
       call_to_action:
-        heading: Want to upload a commitment?
-        link: Get started
+        commitments_count_description: Commitments Added
+        link: Want to add a commitment?
     home:
       hero:
         button: Make a commitment

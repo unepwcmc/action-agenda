@@ -19,6 +19,7 @@ class CommitmentsController < ApplicationController
       filter_params[:filters] << params[:country_filters]
     end
     @paginatedCommitments = Commitment.paginate_commitments(filter_params.to_json).to_json
+    @commitments_count = Commitment.where(state: 'live').count
     @filters = Commitment.filters_to_json
     @table_attributes = Commitment::TABLE_ATTRIBUTES.to_json
     @preset_filters = filter_params[:filters]

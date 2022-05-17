@@ -51,6 +51,7 @@
 
   .hero__call-to-action {
     @include hero-box;
+    font-family: $header-font;
 
     h2 {
       font-size: rem-calc(30);
