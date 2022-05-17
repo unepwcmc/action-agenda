@@ -5,16 +5,14 @@ class Services::CbdCommitmentHash
   end
 
   def call
-    cbd_action = @cbd_hash["action"]
-    country = @cbd_hash["contacts"][0]["country"].present? ? Country.find_by(iso: @cbd_hash["contacts"][0]["country"]["identifier"].upcase)
-        : Country.find_by(iso: "--")
+    cbd_action = @cbd_hash['action']
 
     {
-      cbd_id: @cbd_hash["_id"],
-      name: cbd_action["name"]["en"],
-      description: cbd_action["description"]["en"],
-      country_ids: [country.id],
-      committed_year: @cbd_hash["meta"]["createdOn"].to_date.year,
+      cbd_id: @cbd_hash['_id'],
+      name: cbd_action.dig('name', 'en'),
+      description: cbd_action.dig('description', 'en'),
+      country_ids: [country_id],
+      committed_year: @cbd_hash.dig('meta', 'createdOn').to_date.year,
       commitment_source: 'cbd',
       cfn_approved: @commitment.cfn_approved,
       state: 'live',
@@ -25,10 +23,20 @@ class Services::CbdCommitmentHash
     }
   end
 
+  def country_id
+    # @TODO: Change this if CBD changes gives us different information.
+    country_object = @cbd_hash['contacts'][0]['country']
+
+    # If no country is found, assign to the 'Global' country record.
+    country_code = country_object.present? ? country_object['identifier'].upcase : '---'
+    Country.find_by(iso: country_code)
+    country.id
+  end
+
   def link_attributes
     {
       id: @commitment.links.first&.id,
-      url: "https://www.cbd.int/action-agenda/contributions/action?action-id=#{@cbd_hash["_id"]}"
+      url: "https://www.cbd.int/action-agenda/contributions/action?action-id=#{@cbd_hash['_id']}"
     }
   end
 end
