@@ -47,8 +47,9 @@ class CommitmentsController < ApplicationController
   end
 
   def list
-    # WARNING! Do not remove the live option, because this will show unpublished Commitments people might not want public
-    @commitments = Commitment.live.paginate_commitments(params.to_json)
+    # WARNING! Do not remove the 'published' scope, because this will show unpublished Commitments
+    # people might not want public and CBD commitments we've chosen not to display.
+    @commitments = Commitment.published.paginate_commitments(params.to_json)
     render json: @commitments
   end
 

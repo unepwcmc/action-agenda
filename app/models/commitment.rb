@@ -140,9 +140,11 @@ class Commitment < ApplicationRecord
 
   def self.generate_query(page, filter_params)
     # if params are empty then return the paginated results without filtering
+    # WARNING! Do not remove the 'published' scope, because this will show unpublished Commitments
+    # people might not want public and CBD commitments we've chosen not to display.
     if filter_params.empty?
-      return Commitment.includes(:countries)
-                       .where(state: 'live') # WARNING! Do not remove the 'live' query, because this will show unpublished Commitments people might not want public
+      return Commitment.published
+                       .includes(:countries)
                        .order(id: :asc)
     end
 
@@ -185,7 +187,9 @@ class Commitment < ApplicationRecord
   end
 
   def self.run_query(page, where_params)
-    Commitment.where(state: 'live', cfn_approved: true) # WARNING! Do not remove the 'live' query, because this will show unpublished Commitments people might not want public
+    # WARNING! Do not remove the 'published' scope, because this will show unpublished Commitments
+    # people might not want public and CBD commitments we've chosen not to display.
+    Commitment.published
       .left_outer_joins(:manager, :countries, :objectives, :governance_types)
       .distinct
       .where(where_params.values.join(' AND '))
