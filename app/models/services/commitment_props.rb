@@ -351,7 +351,7 @@ class Services::CommitmentProps
                 type: 'checkbox',
                 name: 'shareable',
                 titleLocation: 'hidden',
-                defaultValue: @commitment.shareable? ? [true] : [],
+                defaultValue: @commitment.shareable ? [true] : [],
                 choices: [
                   {
                     value: true,
