@@ -40,7 +40,7 @@ class Admin::ImportedCommitmentsController < ActionController::Base
   end
 
   def user_is_admin
-    redirect_to root_path unless current_user.admin?
+    redirect_to root_path unless current_user&.admin?
   end
 
   def set_commitment
