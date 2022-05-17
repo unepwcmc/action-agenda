@@ -26,7 +26,9 @@ en:
           <a href='https://www.cbd.int/' target="_blank">three main goals of the Convention on Biological Diversity:</a> 
           conservation of biodiversity; sustainable use of biodiversity; and fair and equitable sharing of benefits arising 
           from the use of genetic resources (e.g. plants and animals). The last objective may include monetary or non-monetary benefits. 
-          The overall objective of this international treaty is to encourage actions which lead to a sustainable future.
+          The overall objective of this international treaty is to encourage actions which lead to a sustainable future.<br><br>
+          <strong>Sustainable use of biological diversity (nature):</strong> meaning the use of biological diversity (nature) in way and rate that does not lead to long-term decline of biological diversity - adapted from Biodiversity A-Z<br><br>
+          <strong>Fair and equitable sharing of benefits from the use of biological diversity (nature):</strong> meaning that the benefits arising from the use of biodiversity and associated traditional knowledge are shared in a fair and equitable way among all organizations or communities that have contributed to resource management, research and development, and/or commercialization - adapted from <a href="https://www.cbd.int/abs/submissions/icnp-3/EU-UEBT-Sharing-Manual.pdf" target="_blank">https://www.cbd.int/abs/submissions/icnp-3/EU-UEBT-Sharing-Manual.pdf</a>
       q3:
         title: Who will be responsible for deciding how the area is managed?
         popupdescription_html:
@@ -43,7 +45,7 @@ en:
         title: Do you have the intention to report on progress?
         t: 'Yes'
         f: 'No'
-        popupdescription_html: 
+        popupdescription_html:
           We are interested in knowing how your commitment progresses once it has been added to the platform. 
           You will be sent periodic reminders asking you to submit progress reports. There is no specific format for these. 
           If you already produce progress reports for another purpose, you are welcome to share these. 
