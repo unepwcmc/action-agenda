@@ -29,7 +29,7 @@ class Services::CbdCommitmentHash
 
     # If no country is found, assign to the 'Global' country record.
     country_code = country_object.present? ? country_object['identifier'].upcase : '---'
-    Country.find_by(iso: country_code)
+    country = Country.find_by(iso: country_code)
     country.id
   end
 
