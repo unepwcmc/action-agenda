@@ -3,9 +3,9 @@ en:
     none: None of the above
     criteria:
       progress: 
-         title: 
-            active: Criteria
-            dormant: Commitment form
+        title: 
+          active: Criteria
+          dormant: Commitment form
       title: 'Form 1: criteria'
       description: 
         Form 1 will help establish whether this platform is the right place for your commitment.
@@ -40,7 +40,7 @@ en:
         f: 'No'
         popupdescription_html: Will the conservation actions you are committing to be carried out for a period of at least 5 years?
       q5:
-        title: Would you be able to submit annual progress reports to this platform in the future?
+        title: Do you have the intention to report on progress?
         t: 'Yes'
         f: 'No'
         popupdescription_html: 
