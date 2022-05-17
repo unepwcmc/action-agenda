@@ -29,7 +29,7 @@ class Country < ApplicationRecord
   end
 
   def commitment_count
-    commitments.live.count
+    commitments.published.count
   end
 
   def coordinates

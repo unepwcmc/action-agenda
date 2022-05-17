@@ -22,7 +22,6 @@ valid_commitment_1:
   objectives: sustainable_use, biodiversity_conservation
   criterium: valid_criterium
   user: user_1
-  user_created: true
 
 valid_commitment_2:
   responsible_group: another group name 
@@ -44,7 +43,6 @@ valid_commitment_2:
   actions: species_management
   threats: pollution
   objectives: biodiversity_conservation
-  user_created: true
 
 invalid_commitment:
   latitude: 1.5
@@ -69,7 +67,6 @@ no_joint_governance_description:
   actions: species_management, livelihood
   threats: pollution, other
   objectives: sustainable_use, biodiversity_conservation
-  user_created: true
 
 draft_commitment:
   name: Draft commitment

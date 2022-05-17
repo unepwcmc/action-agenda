@@ -45,6 +45,8 @@ class Commitment < ApplicationRecord
                         :duration_years, :objectives, :manager, :countries, :actions, :threats, if: :user_created_and_live?
 
   validate :name_is_10_words_or_less, if: :user_created_and_live?
+
+  scope :published, -> { where(state: 'live', cfn_approved: true) }
   
   TABLE_ATTRIBUTES = [
     {
@@ -183,7 +185,7 @@ class Commitment < ApplicationRecord
   end
 
   def self.run_query(page, where_params)
-    Commitment.where(state: 'live') # WARNING! Do not remove the 'live' query, because this will show unpublished Commitments people might not want public
+    Commitment.where(state: 'live', cfn_approved: true) # WARNING! Do not remove the 'live' query, because this will show unpublished Commitments people might not want public
       .left_outer_joins(:manager, :countries, :objectives, :governance_types)
       .distinct
       .where(where_params.values.join(' AND '))

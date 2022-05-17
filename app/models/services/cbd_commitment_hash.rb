@@ -28,7 +28,7 @@ class Services::CbdCommitmentHash
     country_object = @cbd_hash['contacts'][0]['country']
 
     # If no country is found, assign to the 'Global' country record.
-    country_code = country_object.present? ? country_object['identifier'].upcase : '---'
+    country_code = country_object.present? ? country_object['identifier'].upcase : '--'
     country = Country.find_by(iso: country_code)
     country.id
   end
