@@ -1,15 +1,15 @@
 class CommitmentsController < ApplicationController
   DEFAULT_PARAMS =
-  {
-    items_per_page: 10,
-    requested_page: 1,
-    filters: []
-  }
+    {
+      items_per_page: 10,
+      requested_page: 1,
+      filters: []
+    }
 
-  skip_before_action :authenticate_user!, only: [:index, :list, :show]
-  before_action :set_commitment, only: [:show, :edit, :update, :destroy]
-  before_action :purge_geospatial_file, only: [:update, :create]
-  before_action :clean_progress_document_attachment_params, only: [:update, :create]
+  skip_before_action :authenticate_user!, only: %i[index list show]
+  before_action :set_commitment, only: %i[show edit update destroy]
+  before_action :purge_geospatial_file, only: %i[update create]
+  before_action :clean_progress_document_attachment_params, only: %i[update create]
 
   def index
     # make a copy of default params and modify those to prevent filters persisting over calls
@@ -19,6 +19,7 @@ class CommitmentsController < ApplicationController
       filter_params[:filters] << params[:country_filters]
     end
     @paginatedCommitments = Commitment.paginate_commitments(filter_params.to_json).to_json
+    @commitments_count = Commitment.where(state: 'live').count
     @filters = Commitment.filters_to_json
     @table_attributes = Commitment::TABLE_ATTRIBUTES.to_json
     @preset_filters = filter_params[:filters]
@@ -27,18 +28,24 @@ class CommitmentsController < ApplicationController
   def show
     # only allow the Commitment owner to see the Commitment unless it has been published
     redirect_to commitments_path unless @commitment.live? || @commitment.user == current_user
-    
+
     @primary_objectives = @commitment.objectives.pluck(:name).map do |name|
       {
         icon: name.downcase.squish.gsub(' ', '-'),
         title: name
       }
     end
-    
+
     @targets_biodiversity = []
-    @targets_biodiversity = @commitment.related_biodiversity_targets.scan(/\d+/).map(&:to_i) unless @commitment.related_biodiversity_targets.nil?
+    unless @commitment.related_biodiversity_targets.nil?
+      @targets_biodiversity = @commitment.related_biodiversity_targets.scan(/\d+/).map(&:to_i)
+    end
+
+    @countries = @commitment.countries.map do |country|
+      { name: country.name, commitments_path: country.commitments_path }
+    end
   end
-  
+
   def list
     # WARNING! Do not remove the live option, because this will show unpublished Commitments people might not want public
     @commitments = Commitment.live.paginate_commitments(params.to_json)
@@ -56,7 +63,9 @@ class CommitmentsController < ApplicationController
 
   def create
     @commitment = Commitment.new(commitment_params.merge(user: current_user, user_created: true))
-    @commitment.manager_id = Criterium.find(@commitment.criterium_id).manager_id unless commitment_params[:manager_id].present?
+    unless commitment_params[:manager_id].present?
+      @commitment.manager_id = Criterium.find(@commitment.criterium_id).manager_id
+    end
 
     if @commitment.save
       respond_to do |format|
@@ -64,21 +73,23 @@ class CommitmentsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.json {
+        format.json do
           error_messages = @commitment.errors.messages.dup
-          json_response({ errors: error_messages }, :unprocessable_entity) 
-        }
+          json_response({ errors: error_messages }, :unprocessable_entity)
+        end
       end
     end
   end
 
   def edit
     raise ForbiddenError unless @commitment.user == current_user
+
     @form_hash = Services::CommitmentProps.new(@commitment).call
   end
 
   def update
     raise ForbiddenError unless @commitment.user == current_user
+
     if @commitment.update(commitment_params)
       respond_to do |format|
         format.json { json_response({ commitment: @commitment, redirect_path: dashboard_path }, 200) }
@@ -92,6 +103,7 @@ class CommitmentsController < ApplicationController
 
   def destroy
     raise ForbiddenError unless @commitment.user == current_user
+
     if @commitment.destroy
       respond_to do |format|
         format.json { json_response({}, 204) }
@@ -164,8 +176,8 @@ class CommitmentsController < ApplicationController
       country_ids: [],
       objective_ids: [],
       threat_ids: [],
-      links_attributes: [:id, :url, :_destroy],
-      progress_documents_attributes: [:id, :document, :progress_notes, :_destroy]
+      links_attributes: %i[id url _destroy],
+      progress_documents_attributes: %i[id document progress_notes _destroy]
     )
   end
 end

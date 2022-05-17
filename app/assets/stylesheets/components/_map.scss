@@ -1,6 +1,6 @@
 $popup-padding-top: rem-calc(5);
-$popup-padding-bottom: rem-calc(15);
 $popup-padding-x: rem-calc(20);
+$popup-padding-bottom: $popup-padding-x;
 
 // these are taken from inspection in the browser - it looks like there are
 // height and width styles that have been set here that aren't being applied,
@@ -93,14 +93,8 @@ $popup-midpoint-y: ($popup-padding-top + $popup-padding-x + $popup-content-heigh
   }
 
   &__button {
-    @include button-basic;
-    background-color: $green;
-    color: white;
-    font-family: $header-font;
-    font-weight: $bold;
+    @include button-accent-condensed-taller;
     margin-top: rem-calc(30);
-    padding: rem-calc(10) rem-calc(16);
-    text-transform: uppercase;
   }
 
   &__filter {

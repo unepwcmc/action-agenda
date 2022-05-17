@@ -59,9 +59,9 @@ class Services::CommitmentProps
                 popupdescription: I18n.t('form.commitments.page1.q1.popupdescription_html'),
                 defaultValue: @commitment.name || '',
                 validators: [
-                  { 
+                  {
                     type: 'regex',
-                    text: I18n.t('form.commitments.page1.q1.validation'),  
+                    text: I18n.t('form.commitments.page1.q1.validation'),
                     regex: regex_10_word_maximum
                   }
                 ]
@@ -134,9 +134,9 @@ class Services::CommitmentProps
                     hideNumber: true,
                     defaultValue: @commitment.latitude || '',
                     validators: [
-                      { 
+                      {
                         type: 'regex',
-                        text: I18n.t('form.commitments.page2.q3.validation'),  
+                        text: I18n.t('form.commitments.page2.q3.validation'),
                         regex: regex_latitude
                       }
                     ]
@@ -150,9 +150,9 @@ class Services::CommitmentProps
                     hideNumber: true,
                     defaultValue: @commitment.longitude || '',
                     validators: [
-                      { 
+                      {
                         type: 'regex',
-                        text: I18n.t('form.commitments.page2.q4.validation'),  
+                        text: I18n.t('form.commitments.page2.q4.validation'),
                         regex: regex_longitude
                       }
                     ]
@@ -351,7 +351,7 @@ class Services::CommitmentProps
                 type: 'checkbox',
                 name: 'shareable',
                 titleLocation: 'hidden',
-                defaultValue: !!@commitment.shareable,
+                defaultValue: @commitment.shareable ? [true] : [],
                 choices: [
                   {
                     value: true,

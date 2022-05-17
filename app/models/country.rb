@@ -1,9 +1,8 @@
-
 require 'wcmc_components'
 
 class Country < ApplicationRecord
   include WcmcComponents::Loadable
-  
+
   has_and_belongs_to_many :commitments
   validates_presence_of :name
   validates_uniqueness_of :name
@@ -18,18 +17,30 @@ class Country < ApplicationRecord
   def country_commitments_json
     commitment_count_for_country = commitment_count
     managers = commitments
-                .joins(:manager)
-                .group('managers.name')
-                .select("ROUND((COUNT(*)*100.0/#{ commitment_count_for_country }), 0) AS percentage")
-                .select('managers.name AS name')
-                .select("COUNT(*) AS count")
-                .as_json(only: [:name, :percentage, :count])
+               .joins(:manager)
+               .group('managers.name')
+               .select("ROUND((COUNT(*)*100.0/#{commitment_count_for_country}), 0) AS percentage")
+               .select('managers.name AS name')
+               .select('COUNT(*) AS count')
+               .as_json(only: %i[name percentage count])
 
     { country_name: name, commitment_count: commitment_count_for_country, managers: managers }
   end
 
   def commitment_count
     commitments.live.count
+  end
+
+  def commitments_path
+    Rails.application.routes.url_helpers.commitments_path(
+      {
+        country_filters: {
+          name: 'country',
+          options: [name],
+          type: 'multiple'
+        }
+      }
+    )
   end
 
   def coordinates

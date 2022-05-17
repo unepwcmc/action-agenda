@@ -12,6 +12,7 @@
         :href="item.url" 
         :title="item.title"
         class="table-body__button"
+        target="_blank"
       >View</a>
     </p>
     <!-- <p class="table-body__cell">{{ checkForMultiples('country') }}</p> -->
