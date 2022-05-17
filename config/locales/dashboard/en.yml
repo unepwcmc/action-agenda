@@ -15,13 +15,7 @@ en:
         path: /commitments
         text: EXPLORE COMMITMENTS
     carousel:
-      title:
-        Area-based commitments to achieve the aims of the<br>
-        <a href='https://www.cbd.int/action-agenda/contribute/' target='_blank'>
-          Sharm El-Sheikh to Kunming Action Agenda for Nature and People
-        </a><br>
-        in support of the post-2020 global biodiversity framework
-      subheading: Links to proposed goals and targets of the post-2020 global biodiversity framework
+      title: Commitments for Nature has been created to showcase and inspire action on commitments for area-based conservation
     content:
       existing:
         my_commitments:
