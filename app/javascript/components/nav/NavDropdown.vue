@@ -20,13 +20,6 @@
     >
       <li class="nav-dropdown__list-item">
         <a
-          :href="myDashboardPath"
-          v-text="myDashboardText"
-          class="nav-dropdown__link"
-        />
-      </li>
-      <li class="nav-dropdown__list-item">
-        <a
           :href="logOutPath"
           data-method="delete"
           rel="nofollow"
