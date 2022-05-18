@@ -2,19 +2,75 @@
 // classes
 //--------------------------------------------------
 .commitment-approvals {
+  &__tabs {
+    margin-bottom: rem-calc(30);
+
+    display: flex;
+  }
+
   &__tab {
+    @include button-dropdown-filter;
+    font-family: $header-font;
+
+    &:hover {
+      background-color: $primary;
+      border-color: $primary;
+      color: $white;
+    }
+
+    &:not(:last-child) {
+      margin-right: rem-calc(20);
+    }
+
     &--active {
-      border-style: solid;
+      border-color: $accent;
+      color: $accent;
     }
   }
 
+  &__table {
+    border-collapse: collapse;
+  }
+
+  &__table-column-headings {
+    background-color: $primary-dark;
+    color: $white;
+  }
+
+  &__table-column-heading {
+    padding: rem-calc(18 14);
+    text-align: left;
+  }  
+
+  &__commitment {
+    td {
+      padding-top: rem-calc(60);
+      padding-left: rem-calc(14);
+      vertical-align: top;
+
+      &:not(:last-child) {
+        padding-right: rem-calc(40);
+      }
+
+      &:last-child {
+        padding-right: rem-calc(14);
+      }
+    }
+  }
+
+  &__review {
+    display: flex;
+  }
+
   &__button {
-    &--approve {
-      @include button-accept
+    @include button-review;
+
+    &:not(:last-child) {
+      margin-right: rem-calc(20);
     }
 
     &--reject {
-      @include button-reject
+      background-color: $red-warning;
     }
   }
 }
