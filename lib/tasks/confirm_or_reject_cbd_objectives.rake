@@ -1,5 +1,9 @@
-desc 'Confirm or reject CBD objectives'
+desc 'Confirm or reject CBD objectives that have been assessed by CFN'
 task confirm_or_reject_cbd_commitments: :environment do
+  # Nina assessed which of the imports we are pulling up to 29/04/2022
+  # were appropriate for the platform, here we approve or reject them
+  # using their ids.
+
   puts 'Confirming suitable CBD commitments'
   Commitment.where(cbd_id: approve_ids).update_all(cfn_approved: true)
 
