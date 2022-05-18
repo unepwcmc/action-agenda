@@ -9,13 +9,13 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should GET not found on bad id" do
-    commitment = commitments(:valid_commitment_1)
+    commitment = commitments(:published_cfn_commitment_1)
     get commitment_url(1111)
     assert_response :not_found
   end
 
   test "should GET show" do
-    get commitment_url(commitments(:valid_commitment_1).id)
+    get commitment_url(commitments(:published_cfn_commitment_1).id)
     assert_response :success
   end
 
@@ -33,7 +33,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not GET new if the criterium_id is already associated with a commitment" do
     sign_in users(:user_1)
-    commitment_with_criterium = commitments(:valid_commitment_1)
+    commitment_with_criterium = commitments(:published_cfn_commitment_1)
     get new_commitment_url(criterium_id: commitment_with_criterium.criterium_id)
     assert_redirected_to new_criterium_path
   end
@@ -126,7 +126,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   
   test "should GET edit" do
     sign_in users(:user_1)
-    commitment = commitments(:valid_commitment_1) 
+    commitment = commitments(:published_cfn_commitment_1) 
     get edit_commitment_url(commitment)
     assert_response :success
   end
@@ -134,7 +134,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   test "should PUT update a commitment" do
     sign_in users(:user_1)
     new_description = "a new description"
-    commitment = commitments(:valid_commitment_1)
+    commitment = commitments(:published_cfn_commitment_1)
     assert commitment.description != new_description 
     put commitment_url(commitment, params: { commitment: { description: new_description }}), as: :json
     assert_response :success
@@ -144,14 +144,14 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   test "should destroy a commitment" do
     sign_in users(:user_1)
     commitment_count_at_start = Commitment.count
-    commitment = commitments(:valid_commitment_1)
+    commitment = commitments(:published_cfn_commitment_1)
     delete commitment_url(commitment), as: :json
     assert_response 204
     assert Commitment.count == commitment_count_at_start - 1
   end
 
   test "GET edit should redirect to sign in unless signed in" do
-    commitment = commitments(:valid_commitment_1) 
+    commitment = commitments(:published_cfn_commitment_1) 
     get edit_commitment_url(commitment)
     assert_redirected_to new_user_session_path
   end
@@ -162,7 +162,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "PUT update should redirect to sign in unless signed in" do
-    commitment = commitments(:valid_commitment_1)
+    commitment = commitments(:published_cfn_commitment_1)
     put commitment_url(commitment), as: :json
     assert_response :unauthorized
     assert JSON.parse(response.body).dig('error') == I18n.t('devise.failure.unauthenticated')
@@ -176,7 +176,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not allow GET edit if commitment does not belong to current_user" do
     sign_in users(:user_2)
-    commitment = commitments(:valid_commitment_1) 
+    commitment = commitments(:published_cfn_commitment_1) 
     get edit_commitment_url(commitment)
     assert_redirected_to root_path
     assert flash.notice == I18n.t('errors.messages.forbidden_resource')
@@ -185,7 +185,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   test "should not allow PUT update if commitment does not belong to current_user" do
     sign_in users(:user_2)
     new_description = "a new description"
-    commitment = commitments(:valid_commitment_1)
+    commitment = commitments(:published_cfn_commitment_1)
     assert commitment.description != new_description 
     put commitment_url(commitment, params: { commitment: { description: new_description }}), as: :json
     assert_response :forbidden
@@ -196,7 +196,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   test "should not allow DELETE destroy if commitment does not belong to current_user" do
     sign_in users(:user_2)
     commitment_count_at_start = Commitment.count
-    commitment = commitments(:valid_commitment_1)
+    commitment = commitments(:published_cfn_commitment_1)
     delete commitment_url(commitment), as: :json
     assert_response :forbidden
     assert Commitment.count == commitment_count_at_start
@@ -205,14 +205,15 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should not return draft commitments in the index' do
     draft_commitment = commitments(:draft_commitment)
-    valid_commitment_1 = commitments(:valid_commitment_1)
-    valid_commitment_2 = commitments(:valid_commitment_2)
+    rejected_cfn_commitment = commitments(:rejected_cbd_commitment)
 
     get commitments_url
     assert_response :success
+
     returned_commitments = JSON.parse(@controller.view_assigns['paginatedCommitments'])['items']
-    assert returned_commitments.count == 2
+    assert returned_commitments.count == 3
     assert !returned_commitments.pluck('name').include?(draft_commitment.name)
+    assert !returned_commitments.pluck('name').include?(rejected_cfn_commitment.name)
   end
 
   test 'GET show should only show draft commitments to the owner' do
