@@ -25,7 +25,7 @@ class NavigationPresenter
 
     if signed_in
       dashboard_link = {
-        title: 'Dashboard',
+        title: 'My dashboard',
         url: dashboard_path
       }
 
