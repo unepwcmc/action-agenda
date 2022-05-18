@@ -1,11 +1,17 @@
 <template>
   <div class="relative">
-    <filters 
-      class="filters"
-      :filters="filters"
-      :total-items="totalItems"
-      :presetFilters="presetFilters"
-    />
+    <div class="table__filters-and-counter">
+      <filters 
+        class="filters"
+        :filters="filters"
+        :total-items="totalItems"
+        :presetFilters="presetFilters"
+      />
+
+      <div>
+        Showing {{ totalItems }} results
+      </div>
+    </div>
 
     <table class="table-head table-head--basic">
       <table-head :filters="attributes" />

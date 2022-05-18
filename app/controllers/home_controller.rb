@@ -5,7 +5,7 @@ class HomeController < ApplicationController
     imagePresenter = ImagePresenter.new
     @partner_logos = imagePresenter.partner_logos
 
-    live_commitments = Commitment.where(state: 'live')
+    live_commitments = Commitment.published
     countries_with_commitments_ids = live_commitments.joins(:countries).pluck('countries.id').uniq
     commitment_countries = Country.displayable.where(id: countries_with_commitments_ids).eager_load(:commitments)
     @commitments_count = live_commitments.count

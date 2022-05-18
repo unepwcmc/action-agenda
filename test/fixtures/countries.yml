@@ -7,3 +7,7 @@ hungary:
 madagascar:
   name: Madagascar
   iso: MG
+
+global:
+  name: Global
+  iso: --

@@ -91,6 +91,7 @@
             v-if="live(commitment)"
             class="table-body__cell-action"
             :href="showPath(commitment)"
+            target="_blank"
           >
             <img
               class="table-body__cell-action-icon"

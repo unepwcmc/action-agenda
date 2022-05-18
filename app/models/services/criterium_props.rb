@@ -47,15 +47,13 @@ class Services::CriteriumProps
                 isRequired: true,
                 popupdescription: I18n.t('form.criteria.q2.popupdescription_html'),
                 choices: CbdObjective.pluck(:id, :name).map do |id, name|
-                          if name != 'None of the above'
-                            {
-                              value: id,
-                              text: name
-                            }
-                          else
-                            nil
-                          end
-                         end.compact,
+                  next if name == 'None of the above'
+
+                  {
+                    value: id,
+                    text: @form_option_text_service.call(name, 'cbd_objective')
+                  }
+                end.compact,
                 hasNone: true,
                 noneText: I18n.t('form.none')
               },
@@ -66,11 +64,11 @@ class Services::CriteriumProps
                 isRequired: true,
                 popupdescription: I18n.t('form.criteria.q3.popupdescription_html'),
                 choices: Manager.form_options.pluck(:id, :name).map do |id, name|
-                            {
-                              value: id,
-                              text: @form_option_text_service.call(name, 'manager')
-                            }
-                         end
+                  {
+                    value: id,
+                    text: @form_option_text_service.call(name, 'manager')
+                  }
+                end
               },
               {
                 type: 'radiogroup',
