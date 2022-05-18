@@ -34,6 +34,14 @@ class CbdCommitmentHashTest < ActiveSupport::TestCase
           {
             "identifier"=>"LAND-ECOSYSTEMS"
           }
+        ],
+        "operationalAreas"=>[
+          {
+            "identifier"=>"MG"
+          },
+          {
+            "identifier"=>"HU"
+          }
         ]
       },
       "contacts"=>[
@@ -57,7 +65,7 @@ class CbdCommitmentHashTest < ActiveSupport::TestCase
     assert commitment.name == cbd_commitment_json.dig('action', 'name', 'en')
     assert commitment.description == cbd_commitment_json.dig('action', 'description', 'en')
     assert commitment.cbd_id == cbd_commitment_json.dig('_id')
-    assert commitment.countries.first.iso == '--'
     assert commitment.links.first.url == "https://www.cbd.int/action-agenda/contributions/action?action-id=#{cbd_commitment_json.dig('_id')}"
+    assert commitment.countries.pluck(:iso).sort == %w[HU MG]
   end
 end
