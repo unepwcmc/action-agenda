@@ -191,6 +191,10 @@ $question-content-spacing-right: rem-calc(75);
       margin-left: 0;
     }
 
+    &[data-name="required_field_explainer"] {
+      margin-bottom: 0;
+    }
+
     &[data-name="latitude"], &[data-name="longitude"], &[data-name="current_area_ha"] {
       display: flex;
       align-items: center;
@@ -423,6 +427,13 @@ $question-content-spacing-right: rem-calc(75);
         justify-content: space-between;
       }
     }
+  }
+
+  .form__required-text-explainer {
+    color: $danger;
+    font-style: italic;
+    font-weight: 700;
+    margin: 0;
   }
 
   .form__page--not-first {

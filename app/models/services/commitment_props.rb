@@ -51,6 +51,11 @@ class Services::CommitmentProps
                 visibleIf: 'false'
               },
               {
+                type: 'html',
+                name: 'required_field_explainer',
+                html: I18n.t('form.commitments.page1.required_field_explainer'),
+              },
+              {
                 type: 'text',
                 name: 'name',
                 title: I18n.t('form.commitments.page1.q1.title'),
