@@ -41,8 +41,6 @@ export default {
           return true;
         case 'Rejected':
           return false;
-        default:
-          return 'Unassigned'; // null?
       }
     }
   },
