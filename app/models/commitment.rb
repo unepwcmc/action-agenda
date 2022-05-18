@@ -2,7 +2,8 @@ require 'csv'
 require 'wcmc_components'
 class Commitment < ApplicationRecord
   STAGE_OPTIONS = ['In progress', 'Committed', 'Implemented fully']
-  enum state: [:draft, :live] 
+  enum state: [:draft, :live]
+  enum commitment_source: [:form, :csv, :cbd]
 
   include WcmcComponents::Loadable
 
@@ -44,6 +45,8 @@ class Commitment < ApplicationRecord
                         :duration_years, :objectives, :manager, :countries, :actions, :threats, if: :user_created_and_live?
 
   validate :name_is_10_words_or_less, if: :user_created_and_live?
+
+  scope :published, -> { where(state: 'live', cfn_approved: true) }
   
   TABLE_ATTRIBUTES = [
     {
@@ -137,9 +140,11 @@ class Commitment < ApplicationRecord
 
   def self.generate_query(page, filter_params)
     # if params are empty then return the paginated results without filtering
+    # WARNING! Do not remove the 'published' scope, because this will show unpublished Commitments
+    # people might not want public and CBD commitments we've chosen not to display.
     if filter_params.empty?
-      return Commitment.includes(:countries)
-                       .where(state: 'live') # WARNING! Do not remove the 'live' query, because this will show unpublished Commitments people might not want public
+      return Commitment.published
+                       .includes(:countries)
                        .order(id: :asc)
     end
 
@@ -182,7 +187,9 @@ class Commitment < ApplicationRecord
   end
 
   def self.run_query(page, where_params)
-    Commitment.where(state: 'live') # WARNING! Do not remove the 'live' query, because this will show unpublished Commitments people might not want public
+    # WARNING! Do not remove the 'published' scope, because this will show unpublished Commitments
+    # people might not want public and CBD commitments we've chosen not to display.
+    Commitment.published
       .left_outer_joins(:manager, :countries, :objectives, :governance_types)
       .distinct
       .where(where_params.values.join(' AND '))
@@ -213,7 +220,7 @@ class Commitment < ApplicationRecord
   private
 
   def user_created_and_live?
-    live? && user_created?
+    live? && commitment_source == 'form'
   end
 
   def name_is_10_words_or_less

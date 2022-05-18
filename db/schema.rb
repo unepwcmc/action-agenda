@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_13_084040) do
+ActiveRecord::Schema.define(version: 2022_05_17_112027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,11 +87,14 @@ ActiveRecord::Schema.define(version: 2022_04_13_084040) do
     t.string "duration_years"
     t.bigint "criterium_id"
     t.bigint "user_id"
-    t.boolean "user_created", default: false, null: false
     t.text "area_owner_and_role"
     t.bigint "manager_id"
     t.boolean "shareable", default: false
-    t.boolean "cbd_import", default: false, null: false
+    t.string "cbd_id"
+    t.boolean "cfn_approved"
+    t.integer "commitment_source"
+    t.index ["cbd_id"], name: "index_commitments_on_cbd_id", unique: true
+    t.index ["cfn_approved"], name: "index_commitments_on_cfn_approved"
     t.index ["committed_year"], name: "index_commitments_on_committed_year"
     t.index ["country_id"], name: "index_commitments_on_country_id"
     t.index ["duration_years"], name: "index_commitments_on_duration_years"

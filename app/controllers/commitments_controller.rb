@@ -18,8 +18,9 @@ class CommitmentsController < ApplicationController
       filter_params[:filters] = []
       filter_params[:filters] << params[:country_filters]
     end
+
     @paginatedCommitments = Commitment.paginate_commitments(filter_params.to_json).to_json
-    @commitments_count = Commitment.where(state: 'live').count
+    @commitments_count = Commitment.published.count
     @filters = Commitment.filters_to_json
     @table_attributes = Commitment::TABLE_ATTRIBUTES.to_json
     @preset_filters = filter_params[:filters]
@@ -47,8 +48,9 @@ class CommitmentsController < ApplicationController
   end
 
   def list
-    # WARNING! Do not remove the live option, because this will show unpublished Commitments people might not want public
-    @commitments = Commitment.live.paginate_commitments(params.to_json)
+    # WARNING! Do not remove the 'published' scope, because this will show unpublished Commitments
+    # people might not want public and CBD commitments we've chosen not to display.
+    @commitments = Commitment.published.paginate_commitments(params.to_json)
     render json: @commitments
   end
 
@@ -62,7 +64,7 @@ class CommitmentsController < ApplicationController
   end
 
   def create
-    @commitment = Commitment.new(commitment_params.merge(user: current_user, user_created: true))
+    @commitment = Commitment.new(commitment_params.merge(user: current_user, commitment_source: 'form'))
     unless commitment_params[:manager_id].present?
       @commitment.manager_id = Criterium.find(@commitment.criterium_id).manager_id
     end
