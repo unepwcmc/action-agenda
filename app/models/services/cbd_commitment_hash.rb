@@ -32,8 +32,9 @@ class Services::CbdCommitmentHash
 
     # CDB returns some records with iso codes and some with a longer id, but the longer
     # codes refer to regions rather than countries so we'll exclude them.
-    iso_codes = country_codes.filter {|code| code.length == 2 }.map(&:upcase)
-    countries = Country.where(iso: iso_codes)
+    iso_codes = country_codes.filter {|code| code.length == 2 }
+    upcased_iso_codes = iso_codes.map(&:upcase)
+    countries = Country.where(iso: upcased_iso_codes)
     ids = countries.pluck(:id)
     ids.present? ? ids : [global_country_id]
   end
