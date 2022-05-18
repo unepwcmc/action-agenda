@@ -18,7 +18,7 @@ class Services::CbdCommitmentHash
       state: 'live',
       shareable: false,
       links_attributes: [
-        link_attributes: link_attributes
+        link_attributes
       ]
     }
   end
