@@ -1,7 +1,7 @@
 class Admin::ImportedCommitmentsController < ActionController::Base
   layout 'application'
 
-  before_action :user_is_admin
+  before_action :authenticate_admin
   before_action :set_commitment, only: [:update]
 
   def index
@@ -39,7 +39,7 @@ class Admin::ImportedCommitmentsController < ActionController::Base
     end
   end
 
-  def user_is_admin
+  def authenticate_admin
     redirect_to root_path unless current_user&.admin?
   end
 

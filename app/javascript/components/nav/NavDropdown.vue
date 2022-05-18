@@ -81,12 +81,12 @@ export default {
 
     adminPath: {
       type: String,
-      required: false,
+      default: '',
     },
 
     adminText: {
       type: String,
-      required: false,
+      default: '',
     },
   },
 

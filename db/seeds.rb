@@ -1,7 +1,8 @@
 # users
 users = [
-  { email: 'test@test.com', password: 'password', password_confirmation: 'password', admin: true, confirmed_at: Time.now },
-  { email: 'test2@test.com', password: 'password', password_confirmation: 'password', confirmed_at: Time.now }
+  { email: 'test@test.com', password: 'password', password_confirmation: 'password', confirmed_at: Time.now },
+  { email: 'test2@test.com', password: 'password', password_confirmation: 'password', confirmed_at: Time.now },
+  { email: 'admin@test.com', password: 'password', password_confirmation: 'password', admin: true, confirmed_at: Time.now }
 ]
 User.create!(users)
 User.first.confirm
