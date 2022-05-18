@@ -199,6 +199,10 @@ $popup-midpoint-y: ($popup-padding-top + $popup-padding-x + $popup-content-heigh
       margin-right: rem-calc(20);
       width: rem-calc(30);
       height: rem-calc(30);
+
+      &:hover {
+        background-color: transparent;
+      }
     }
   }
 
