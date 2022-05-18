@@ -118,6 +118,7 @@ $popup-midpoint-y: ($popup-padding-top + $popup-padding-x + $popup-content-heigh
 
     &-icon {
       @include icon-search;
+      cursor: auto;
 
       position:absolute;
       top: rem-calc(12);
@@ -127,6 +128,7 @@ $popup-midpoint-y: ($popup-padding-top + $popup-padding-x + $popup-content-heigh
 
     &-close {
       @include icon-close;
+      cursor: pointer;
       height: rem-calc(23);
       width: rem-calc(23);
 
