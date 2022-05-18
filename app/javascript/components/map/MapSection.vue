@@ -152,8 +152,6 @@ export default {
       this.$refs.MglMap.map.fitBounds(this.bounds, {
         padding: 50,
       });
-
-      this.openPopup(selected.id)
     },
   },
 };
