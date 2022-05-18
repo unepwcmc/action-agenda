@@ -25,17 +25,17 @@ class Services::CbdCommitmentHash
 
   def country_ids
     operational_areas = @cbd_hash.dig('actionDetails', 'operationalAreas')
+
+    return [global_country_id] if operational_areas.nil?
+
     country_codes = operational_areas.map { |operational_area| operational_area['identifier'] }
-    
+
     # CDB returns some records with iso codes and some with a longer id, but the longer
     # codes refer to regions rather than countries so we'll exclude them.
     iso_codes = country_codes.filter {|code| code.length == 2 }.map(&:upcase)
     countries = Country.where(iso: iso_codes)
     ids = countries.pluck(:id)
     ids.present? ? ids : [global_country_id]
-  rescue
-    # Will error if operationalAreas is nil.
-    [global_country_id]
   end
 
   def global_country_id
