@@ -19,6 +19,7 @@ import Mapbox from "mapbox-gl";
 import store from '../store/store.js'
 
 // components
+import Admin from '../components/admin/Admin'
 import DashboardContentExisting from '../components/dashboard/ContentExisting'
 import DashboardContentNone from '../components/dashboard/ContentNone'
 import DashboardHero from '../components/dashboard/Hero'
@@ -59,6 +60,7 @@ document.addEventListener('turbolinks:load', () => {
       el: '#v-app',
       store,
       components: {
+        Admin,
         DashboardContentExisting,
         DashboardContentNone,
         DashboardHero,

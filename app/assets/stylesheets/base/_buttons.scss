@@ -114,6 +114,13 @@ $padding-medium: rem-calc(27);
   min-height: rem-calc(67);
 }
 
+@mixin button-review {
+  @include button-accent;
+  font-family: $header-font;
+  line-height: $header-font-line-height;
+  min-height: rem-calc(50);
+}
+
 @mixin button-grey-light {
   @include button-block($grey-light, $black);
   font-family: $header-font;

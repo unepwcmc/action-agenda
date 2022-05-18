@@ -17,8 +17,12 @@ Rails.application.routes.draw do
 
   resources :criteria, only: [:new, :create]
   get '/criteria/:id/ineligible', to: 'criteria#ineligible', as: 'ineligible_criteria'
-  
+
   resources :links, only: [:update, :destroy]
   resources :progress_documents, only: [:update, :destroy]
   resources :country_commitments, only: [:show, :index]
+
+  namespace :admin do
+    resources :imported_commitments, only: [:index, :update]
+  end
 end

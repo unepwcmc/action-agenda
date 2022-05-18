@@ -109,6 +109,7 @@ en:
       action_agenda: Action Agenda
     buttons:
       access: 'Access'
+      admin: 'Admin'
       my_dashboard: My Dashboard
       log_in:
         button: Log In
