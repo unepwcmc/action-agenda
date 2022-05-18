@@ -240,6 +240,7 @@ export default {
 
     nextPage() {
       this.survey.nextPage();
+      window.scrollTo(0, 0)
     },
 
     onComplete(sender) {
@@ -427,6 +428,7 @@ export default {
 
     prevPage() {
       this.survey.prevPage();
+      window.scrollTo(0, 0)
     },
 
     send(data) {
