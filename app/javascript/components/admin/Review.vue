@@ -1,14 +1,14 @@
 <template>
   <td class="commitment-approvals__review">
     <button 
-      v-if="currentTab !== 'approved'"
+      v-if="currentTab !== 'Approved'"
       class="commitment-approvals__button commitment-approvals__button--approve"
       @click="reviewCommitment(true, commitmentId)"
     >
       Approve
     </button>
     <button
-      v-if="currentTab !== 'rejected'"
+      v-if="currentTab !== 'Rejected'"
       class="commitment-approvals__button commitment-approvals__button--reject"
       @click="reviewCommitment(false, commitmentId)"
     >
