@@ -12,6 +12,10 @@
           @keydown.enter.prevent="setResult(keyResult)"
           type="text"
         />
+        <span
+          class="map__filter-close"
+          @click="reset"
+        /> 
       </div>
       <ul
         class="map__filter-dropdown"
@@ -32,8 +36,8 @@
     </form>
   </div>
 </template>
- 
- <script>
+
+<script>
 export default {
   name: "MapFilter",
 
@@ -97,6 +101,15 @@ export default {
       this.filterResults();
       this.isOpen = true
       this.hasSelectedResult = false
+    },
+
+    reset() {
+      this.results = []
+      this.search = ""
+      this.isOpen = false
+      this.arrowCounter = -1
+      this.hasSelectedResult = false
+      this.$root.$emit('reset')
     },
 
     setResult(result) {

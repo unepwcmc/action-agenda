@@ -1,14 +1,13 @@
 class NavigationPresenter
   include Rails.application.routes.url_helpers
 
-  def initialize
-  end
+  def initialize; end
 
   def nav_header(signed_in)
-    [
+    links_array = [
       {
-        title: signed_in ? 'Dashboard' : 'Home',
-        url: signed_in ? dashboard_path : home_path
+        title: 'Home',
+        url: home_path
       },
       {
         title: 'Make a Commitment',
@@ -23,9 +22,20 @@ class NavigationPresenter
         url: about_path
       }
     ]
+
+    if signed_in
+      dashboard_link = {
+        title: 'My dashboard',
+        url: dashboard_path
+      }
+
+      links_array.insert(1, dashboard_link)
+    end
+
+    links_array
   end
 
-  def nav_footer 
+  def nav_footer
     [
       {
         title: 'Make a Commitment',

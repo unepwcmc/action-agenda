@@ -1,6 +1,4 @@
-<dashboard-navigation
-  :navigation="<%= I18n.t('dashboard.navigation').to_json %>"
-></dashboard-navigation>
+<%= render partial: '/partials/topbar/topbar_secondary', locals: { links: nav_header(current_user) } %>
 <dashboard-hero
   :button="<%= I18n.t('dashboard.button').to_json %>"
   :has-commitments="<%= @has_commitments %>"
