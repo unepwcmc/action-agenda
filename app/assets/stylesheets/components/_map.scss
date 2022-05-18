@@ -110,8 +110,7 @@ $popup-midpoint-y: ($popup-padding-top + $popup-padding-x + $popup-content-heigh
       font-family: $body-font;
       font-size: medium;
       font-style: italic;
-      padding: rem-calc(12) rem-calc(14);
-      padding-left: rem-calc(40);
+      padding: rem-calc(12) rem-calc(40);
       width: 100%;
 
       position: relative;
@@ -124,6 +123,16 @@ $popup-midpoint-y: ($popup-padding-top + $popup-padding-x + $popup-content-heigh
       top: rem-calc(12);
       left: rem-calc(14);
       z-index: 1;
+    }
+
+    &-close {
+      @include icon-close;
+      height: rem-calc(23);
+      width: rem-calc(23);
+
+      position: absolute;
+      top: rem-calc(12);
+      right: rem-calc(14);
     }
   
     &-dropdown {
