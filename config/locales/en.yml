@@ -76,6 +76,11 @@ en:
         no_cbd_objectives: Your commitment doesn't contribute to any of the CBD commitments
         government_manager: Your commitment is being made by a government
         other_as_manager: Your commitment stakeholder is not suitable
+    cbd_objective:
+      additional_form_text:
+        conservation_of_biological_diversity: Conservation of biological diversity (nature)
+        sustainable_use: Sustainable use of biological diversity (nature)
+        fair_and_equitable_sharing_of_benefits_from_the_utilization_of_genetic_resources: Fair and equitable sharing of benefits from the use of biological diversity (nature)
     objective:
       additional_form_text:
         equitable_sharing_of_benefits_from_genetic_resources: Equitable sharing of benefits from genetic resources (i.e. Sharing monetary or non-monetary benefits from plants or animals fairly)
@@ -120,8 +125,8 @@ en:
             description: For other biodiversity related commitments
     commitments:
       call_to_action:
-        heading: Want to upload a commitment?
-        link: Get started
+        commitments_count_description: Commitments Added
+        link: Add a commitment
     home:
       hero:
         button: Make a commitment

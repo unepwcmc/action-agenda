@@ -51,6 +51,11 @@ $table-horizontal-scroll-row-width-desktop: 80vw;
 }
 
 //--------------------------------------------------
+// table filters and counter
+//--------------------------------------------------
+@import './table/filters-and-counter';
+
+//--------------------------------------------------
 // table head
 //--------------------------------------------------
 @import './table/table-head';

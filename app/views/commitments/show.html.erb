@@ -42,14 +42,18 @@
           <span class="list__text"><%= @commitment.implementation_year %></span>
         </li>
         <li class="list__li">
-          <span class="list__subtitle"><%= I18n.t('commitments.show.year_when_commitment_was_made') %>:</span>
+          <span class="list__subtitle"><%= I18n.t('commitments.show.expected_duration_of_commitment') %>:</span>
           <span class="list__text"><%= @commitment.duration_years %></span>
         </li>
         <li class="list__li">
           <span class="list__subtitle"><%= I18n.t('commitments.show.country_location') %>:</span>
           <p class="list__country">
             <i class="list__icon icon--pin"></i>
-            <span class="list__text"><%= @commitment.countries.pluck(:name).join(', ') %></span>
+            <span class="list__text">
+              <%= @countries.map do |country|
+                link_to country[:name], country[:commitments_path], target: '_blank', title: "Commitments in #{country[:name]}"
+              end.join(', ').html_safe %>
+            </span>
           </p>
         </li>
         <li class="list__li">

@@ -433,12 +433,10 @@ export default {
       if (this.dataModel === "Criterium") {
         this.assignNoneValues(data);
       } else {
-        // set shareable to boolean based on presence/absence of checkbox value array
-        data = {
-          ...data,
-          shareable: !!data.shareable
-        };
+        // if shareable has been ticked, set it to true, else false
+        data.shareable = !!data.shareable
       }
+
       this.options = {
         method: this.formData.config.method,
         data: { [this.formData.config.root_key]: data },
