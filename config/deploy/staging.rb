@@ -1,7 +1,6 @@
 set :stage, :staging
 set :branch, "feat/automate-cbd-imports"
 
-
 server "web-supported-staging.linode.unep-wcmc.org", user: 'wcmc', roles: %w{app web db}
 
 set :application, "actionagenda"
