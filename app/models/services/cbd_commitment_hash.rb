@@ -28,12 +28,12 @@ class Services::CbdCommitmentHash
 
     return [global_country_id] if operational_areas.nil?
 
-    country_codes = operational_areas.map { |operational_area| operational_area['identifier'] }
-
     # CDB returns some records with iso codes and some with a longer id, but the longer
     # codes refer to regions rather than countries so we'll exclude them.
-    iso_codes = country_codes.filter {|code| code.length == 2 }
-    upcased_iso_codes = iso_codes.map(&:upcase)
+    upcased_iso_codes = operational_areas.map do |operational_area|
+      operational_area['identifier'].length == 2 ? operational_area['identifier'].upcase : nil
+    end.compact
+
     countries = Country.where(iso: upcased_iso_codes)
     ids = countries.pluck(:id)
     ids.present? ? ids : [global_country_id]
