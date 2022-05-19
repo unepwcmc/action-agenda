@@ -93,9 +93,7 @@ ActiveRecord::Schema.define(version: 2022_05_17_123115) do
     t.string "cbd_id"
     t.boolean "cfn_approved"
     t.integer "commitment_source"
-    t.boolean "cbd_import", default: false
     t.index ["cbd_id"], name: "index_commitments_on_cbd_id", unique: true
-    t.index ["cbd_import"], name: "index_commitments_on_cbd_import"
     t.index ["cfn_approved"], name: "index_commitments_on_cfn_approved"
     t.index ["committed_year"], name: "index_commitments_on_committed_year"
     t.index ["country_id"], name: "index_commitments_on_country_id"
