@@ -3,6 +3,8 @@
 module Api
   module V1
     class CommitmentsController < ApiController
+      before_action :validate_params
+
       def index
         commitments = Commitment
                       .api_records
@@ -39,7 +41,17 @@ module Api
           }
         )
 
-        render json: commitments_json
+        render json: commitments_json, status: :ok
+      rescue => e
+        render json: { message: e }, status: :unprocessable_entity
+      end
+
+      private
+
+      def validate_params
+        return unless params[:per_page].to_i > 50
+
+        render json: { message: 'max 50 items per page' }, status: :unprocessable_entity
       end
     end
   end
