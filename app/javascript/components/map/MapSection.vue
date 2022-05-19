@@ -7,13 +7,15 @@
     />
     <MglMap
       class="map"
-      container="map-test"
+      container="map-container"
       ref="MglMap"
       :center.sync="center"
       :zoom.sync="zoom"
+      :scrollZoom="false"
       :accessToken="accessToken"
       :mapStyle="mapStyle"
     >
+      <MglNavigationControl position="bottom-left" :showCompass="false" />
       <template v-for="(marker, index) in spatialData">
         <MglMarker
           @click="onPopup(marker.id)"
@@ -44,7 +46,7 @@ import CustomMarker from "../marker/CustomMarker";
 import MapFilter from "./MapFilter";
 import MapPopup from "./MapPopup";
 import Mapbox from "mapbox-gl";
-import { MglMap, MglMarker, MglPopup } from "vue-mapbox";
+import { MglMap, MglMarker, MglNavigationControl, MglPopup } from "vue-mapbox";
 
 export default {
   name: "MapSection",
@@ -55,6 +57,7 @@ export default {
     MapPopup,
     MglMap,
     MglMarker,
+    MglNavigationControl,
     MglPopup,
   },
 
@@ -83,6 +86,7 @@ export default {
       showed: false,
       markerValues: [],
       maxValue: 0,
+      defaultBounds: undefined
     };
   },
 
@@ -93,6 +97,7 @@ export default {
 
   mounted() {
     this.$root.$on("selected", this.zoomIn);
+    this.$root.$on("reset", this.reset);
   },
 
   methods: {
@@ -106,6 +111,24 @@ export default {
         marker[0].togglePopup()
         this.onPopup(id)
       }
+    },
+
+    reset() {
+      // small calculation to make the 'fly' speed relative to how far it has to go.
+      // Without something like this, big countries (which are lessed zoomed in)
+      // zoom out too quickly. Note this doesn't factor in distance from center,
+      // so countries of the same size further from the center would 'fly'
+      // a little slower, but the effect seems less prominent than the size effect
+      const currentZoom = this.$refs.MglMap.map.getZoom()
+      const targetZoom = 2
+      const speed = currentZoom / targetZoom / 2
+
+      this.$refs.MglMap.map.flyTo(
+        {
+          center: [2, 30],
+          zoom: 2,
+          speed
+        })
     },
     
     setMaxValue() {
@@ -129,8 +152,6 @@ export default {
       this.$refs.MglMap.map.fitBounds(this.bounds, {
         padding: 50,
       });
-
-      this.openPopup(selected.id)
     },
   },
 };

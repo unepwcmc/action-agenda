@@ -7,6 +7,9 @@
   color: $white;
   height: rem-calc(170);
 
+  display: flex;
+  align-items: center;
+
   &--reduced {
     height: 0;
   }
@@ -15,7 +18,5 @@
     @include container;
     @include flex;
     @include flex-h-between;
-    @include flex-v-center;
-    height: 100%;
   }
 }

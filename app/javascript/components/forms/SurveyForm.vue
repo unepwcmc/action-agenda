@@ -84,6 +84,7 @@ export default {
 
   data() {
     const model = new SurveyVue.Model(this.formData.survey);
+
     // call methods on library-provided events here
     model.onAfterRenderQuestion.add(this.onAfterRenderQuestion);
     model.onComplete.add(this.onComplete);
@@ -109,6 +110,7 @@ export default {
       destroyedDocumentIds: [],
       destroyedLinkIds: [],
       showProgressBar: false,
+      numberedQuestionsOnPage: undefined
     };
   },
 
@@ -131,7 +133,74 @@ export default {
     }
   },
 
+  computed: {
+    numberedQuestionsByPage () {
+      const counts = {}
+
+      const pages = Array.from(this.survey.pages)
+
+      pages.forEach((page, pageIndex) => {
+        const visibleElements = page.elements.filter(element => element.visible)
+
+        counts[pageIndex] = visibleElements.length
+      })
+
+      return counts
+    }
+  },
+
   methods: {
+    addSideQuestionIndicator(options) {
+      // Get data for text
+      const questionNumber = options.question.no.slice(0, -1);
+      if (!questionNumber) { return }
+      
+      const currentPageNumber = this.survey.currentPageNo;
+      const questionsOnPage = this.numberedQuestionsByPage[currentPageNumber];
+
+      const questionNumberText = `${questionNumber} of ${questionsOnPage}`;
+
+      // Create element
+      const questionNumberTextElement = document.createElement('div');
+      questionNumberTextElement.className = 'question__side-number-indicator'
+      questionNumberTextElement.innerHTML = questionNumberText;
+
+      // Get question heading
+      const header = options.htmlElement.querySelector(".sv-question__header");
+
+      // Add element
+      header.appendChild(questionNumberTextElement);
+    },
+
+    addTooltip(options) {
+      // Return if there is no description to show in popup
+      if (!options.question.popupdescription) return;
+
+      // Create tooltip elements
+      const container = document.createElement("div");
+      container.className = "tooltip";
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "tooltip__trigger";
+
+      const popup = document.createElement("div");
+      popup.className = "tooltip__popup";
+      popup.innerHTML = options.question.popupdescription;
+
+      // Get question heading
+      const heading = options.htmlElement.querySelector("h5");
+
+      // Add elements
+      container.appendChild(button);
+      heading.appendChild(container);
+
+      container.onclick = () =>
+        container.lastChild === popup
+          ? container.removeChild(popup)
+          : container.appendChild(popup);
+    },
+
     assignNoneValues(data) {
       Object.keys(this.noneValues).forEach((question) => {
         if (data[question] && data[question][0] === "none") {
@@ -167,11 +236,11 @@ export default {
         this.addDestroyKeys(data);
         this.send(data);
       }
-      Turbolinks.visit("/dashboard");
     },
 
     nextPage() {
       this.survey.nextPage();
+      window.scrollTo(0, 0)
     },
 
     onComplete(sender) {
@@ -262,27 +331,11 @@ export default {
     },
 
     onAfterRenderQuestion(survey, options) {
-      //Return if there is no description to show in popup
-      if (!options.question.popupdescription) return;
-
-      //Add a button and description div;
-      const btn = document.createElement("button");
-      const description = document.createElement("div");
-      const header = options.htmlElement.querySelector("h5");
-
-      btn.type = "button";
-      btn.className = "tooltip trigger";
-      description.className = "tooltip popup";
-      description.innerHTML = options.question.popupdescription;
-
-      header.appendChild(btn);
-      btn.onclick = () =>
-        header.lastChild === description
-          ? header.removeChild(description)
-          : header.appendChild(description);
+      this.addTooltip(options);
+      this.addSideQuestionIndicator(options);
     },
 
-    onCurrentPageChanged() {
+    onCurrentPageChanged(survey, options) {
       this.isFirstPage = this.survey.isFirstPage;
       this.isLastPage = this.survey.isLastPage;
     },
@@ -304,9 +357,7 @@ export default {
       // multiselect
       const multiselectQs = [
         "cbd_objective_ids",
-        "manager_ids",
         "objective_ids",
-        "manager_ids",
         "country_ids",
         "action_ids",
         "threat_ids",
@@ -377,12 +428,17 @@ export default {
 
     prevPage() {
       this.survey.prevPage();
+      window.scrollTo(0, 0)
     },
 
     send(data) {
       if (this.dataModel === "Criterium") {
         this.assignNoneValues(data);
+      } else {
+        // if shareable has been ticked, set it to true, else false
+        data.shareable = !!data.shareable
       }
+
       this.options = {
         method: this.formData.config.method,
         data: { [this.formData.config.root_key]: data },

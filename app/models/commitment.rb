@@ -1,16 +1,17 @@
 require 'csv'
 require 'wcmc_components'
 class Commitment < ApplicationRecord
-  STAGE_OPTIONS = ['In progress', 'Committed only', 'Implemented fully']
-  enum state: [:draft, :live] 
+  STAGE_OPTIONS = ['In progress', 'Committed', 'Implemented fully']
+  enum state: [:draft, :live]
+  enum commitment_source: [:form, :csv, :cbd]
 
   include WcmcComponents::Loadable
-  ignore_column 'criterium'
+
+  ignore_column 'review_method'
+  ignore_column 'proposed_area_ha'
 
   has_and_belongs_to_many :countries
   import_by countries: :name
-  has_and_belongs_to_many :managers
-  import_by managers: :name
   has_and_belongs_to_many :objectives
   import_by objectives: :name
   has_and_belongs_to_many :governance_types
@@ -24,13 +25,16 @@ class Commitment < ApplicationRecord
   has_many :progress_documents, dependent: :destroy
   has_one_attached :geospatial_file
 
+  belongs_to :manager, class_name: 'Manager', optional: true
+  import_by manager: :name
+
   belongs_to :criterium, optional: true
   belongs_to :user, optional: true
 
   accepts_nested_attributes_for :links, reject_if: ->(attributes){ attributes['url'].blank? }, allow_destroy: true
   accepts_nested_attributes_for :progress_documents, reject_if: ->(attributes){ attributes['document'].blank? }, allow_destroy: true
 
-  validates :geospatial_file, 
+  validates :geospatial_file,
     content_type: %w(application/vnd.google-earth.kml+xml application/vnd.google-earth.kmz application/zip), 
     size: { less_than: 25.megabytes }
 
@@ -38,7 +42,11 @@ class Commitment < ApplicationRecord
   validates :stage, inclusion: { in: STAGE_OPTIONS }, if: :user_created_and_live?
 
   validates_presence_of :description, :latitude, :longitude, :committed_year, :responsible_group, :implementation_year,
-                        :duration_years, :objectives, :managers, :countries, :actions, :threats, if: :user_created_and_live?
+                        :duration_years, :objectives, :manager, :countries, :actions, :threats, if: :user_created_and_live?
+
+  validate :name_is_10_words_or_less, if: :user_created_and_live?
+
+  scope :published, -> { where(state: 'live', cfn_approved: true) }
   
   TABLE_ATTRIBUTES = [
     {
@@ -46,12 +54,12 @@ class Commitment < ApplicationRecord
       field: 'name'
     },
     {
-      title: 'Commited',
+      title: 'Committed',
       field: 'committed'
     },
     {
       title: 'Duration',
-      field: 'duration'
+      field: 'duration_years'
     },
     {
       title: 'Stage',
@@ -68,7 +76,7 @@ class Commitment < ApplicationRecord
     valid?
     self.state = :draft
     errors.messages.map do |key, value|
-      if key.in?(%i(actions countries managers objectives threats))
+      if key.in?(%i(actions countries manager objectives threats))
         :"#{key.to_s.singularize}_ids"
       else
         key
@@ -76,7 +84,7 @@ class Commitment < ApplicationRecord
     end
   end
 
-  FILTERS = %w[actor country committed_year stage primary_objectives governance_type].freeze
+  FILTERS = %w[actor country committed_year stage primary_objectives].freeze
 
   # Filters moved to CommitmentPresenter to avoid repetition
   def self.filters_to_json
@@ -107,10 +115,14 @@ class Commitment < ApplicationRecord
       @filter_params = json_params['filters'].all? { |p| p['options'].blank? } ? [] : json_params['filters']
     end
 
-    commitments = generate_query(page, @filter_params)
-    items = commitments
+    unpaginated_commitments = generate_query(page, @filter_params)
+    paginated_commitments = unpaginated_commitments
+                              .paginate(page: page || 1, per_page: @items_per_page)
+                              .to_a.map! do |commitment|
+                                commitment.to_hash
+                              end
 
-    structure_data(page, items)
+    structure_data(page, paginated_commitments, unpaginated_commitments.count)
   end
   
   def to_hash
@@ -119,7 +131,7 @@ class Commitment < ApplicationRecord
       title: name,
       description: description,
       committed: committed_year,
-      duration: duration_years || duration,
+      duration_years: duration_years,
       stage: stage,
       url: Rails.application.routes.url_helpers.commitment_path(id),
       links: links
@@ -128,27 +140,23 @@ class Commitment < ApplicationRecord
 
   def self.generate_query(page, filter_params)
     # if params are empty then return the paginated results without filtering
+    # WARNING! Do not remove the 'published' scope, because this will show unpublished Commitments
+    # people might not want public and CBD commitments we've chosen not to display.
     if filter_params.empty?
-      return Commitment.includes(:countries)
-                       .where(state: 'live') # WARNING! Do not remove the 'live' query, because this will show unpublished Commitments people might not want public
-                       .order(id: :asc).paginate(page: page || 1, per_page: @items_per_page)
-                       .to_a.map! do |commitment|
-               commitment.to_hash
-             end
+      return Commitment.published
+                       .includes(:countries)
+                       .order(id: :asc)
     end
 
     # we have to do some hard work on the filtering...
     filters = filter_params.select { |hash| hash['options'].present? }
     where_params = parse_filters(filters)
-    run_query(page, where_params).to_a.map! do |commitment|
-      commitment.to_hash
-    end
+    run_query(page, where_params)
   end
 
   def self.parse_filters(filters)
     country_ids = []
     objective_ids = []
-    governance_type_ids = []
     manager_ids = []
     params = {}
     FILTERS.each { |filter| params[filter] = nil }
@@ -169,10 +177,6 @@ class Commitment < ApplicationRecord
         objectives = options
         objective_ids << Objective.where(name: objectives).pluck(:id)
         params['objective'] = objective_ids.flatten.empty? ? "" : "objectives.id IN (#{objective_ids.join(',')})"
-      when 'governance_type'
-        governance_types = options
-        governance_type_ids << GovernanceType.where(name: governance_types).pluck(:id)
-        params['governance_type'] = governance_type_ids.flatten.empty? ? "" : "governance_types.id IN (#{governance_type_ids.join(',')})"
       else
         # Single quoted strings needed for the SQL queries to work properly
         params[name] = options.empty? ? "" : "commitments.#{name} IN (#{options.map { |op| "'#{op}'" }.join(',')})"
@@ -183,11 +187,12 @@ class Commitment < ApplicationRecord
   end
 
   def self.run_query(page, where_params)
-    Commitment.where(state: 'live') # WARNING! Do not remove the 'live' query, because this will show unpublished Commitments people might not want public
-      .left_outer_joins(:managers, :countries, :objectives, :governance_types)
+    # WARNING! Do not remove the 'published' scope, because this will show unpublished Commitments
+    # people might not want public and CBD commitments we've chosen not to display.
+    Commitment.published
+      .left_outer_joins(:manager, :countries, :objectives, :governance_types)
       .distinct
       .where(where_params.values.join(' AND '))
-      .paginate(page: page || 1, per_page: @items_per_page).order(id: :asc)
   end
 
   def self.sanitise_filters
@@ -197,35 +202,28 @@ class Commitment < ApplicationRecord
     end
   end
 
-  def self.structure_data(page, items)
+  def self.structure_data(page, items, total_item_count)
     {
       current_page: page,
       per_page: @items_per_page,
-      total_entries: entries(items),
-      total_pages: pages(items),
+      total_entries: total_item_count,
+      total_pages: pages(total_item_count),
       items: items
     }
   end
 
-  def self.entries(items)
-    @filter_params.empty? ? Commitment.count : items.count
-  end
-
-  def self.pages(items) 
-    return 0 if items.count == 0
-
-    total_pages = items.each_slice(@items_per_page).count
-
-    if @filter_params.empty?
-      total_pages = Commitment.all.each_slice(@items_per_page).count
-    end
-
-    total_pages
+  def self.pages(item_count)
+    return 0 if item_count == 0
+    (item_count / @items_per_page.to_d).ceil
   end
 
   private
 
   def user_created_and_live?
-    live? && user_created?
+    live? && commitment_source == 'form'
+  end
+
+  def name_is_10_words_or_less
+    errors.add(:name, :too_long) if name && name.split(' ').length > 10
   end
 end

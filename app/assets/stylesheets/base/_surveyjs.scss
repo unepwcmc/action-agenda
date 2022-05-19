@@ -35,6 +35,8 @@
 // variables
 //--------------------------------------------------
 $radio-checkbox-width-height: rem-calc(39);
+$question-content-max-width: rem-calc(815);
+$question-content-spacing-right: rem-calc(75);
 
 //--------------------------------------------------
 // mixins
@@ -53,6 +55,15 @@ $radio-checkbox-width-height: rem-calc(39);
 .select2-dropdown {
   @include input-standard-font-size;
   width: rem-calc(670) !important;
+}
+
+.question__side-number-indicator {
+  color: $grey-xxdark;
+  font-size: rem-calc(20);
+
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 #v-app {
@@ -95,8 +106,14 @@ $radio-checkbox-width-height: rem-calc(39);
     h5 {
       font-size: rem-calc(30);
       padding: 0;
-      padding-right: rem-calc(40);
-      max-width: rem-calc(780);
+      max-width: $question-content-max-width;
+
+      display: flex;
+      justify-content: space-between;
+
+      div:first-child {
+        margin-right: $question-content-spacing-right;
+      }
     }
   }
 
@@ -117,7 +134,7 @@ $radio-checkbox-width-height: rem-calc(39);
 
   .sv-page > .sv-row {
     &:not(:last-child) {
-      margin-bottom: rem-calc(30);
+      margin-bottom: rem-calc(35);
       padding-bottom: 0;
     }
   }
@@ -142,10 +159,12 @@ $radio-checkbox-width-height: rem-calc(39);
 
   .sv-question {
     overflow: visible;
-    margin-bottom: rem-calc(30);
+    margin-bottom: rem-calc(35);
 
     &__header {
       margin-bottom: rem-calc(25);
+
+      position: relative;
       
       &:not(.sv-question__header--location--left) {
         .sv-question__description {
@@ -153,7 +172,8 @@ $radio-checkbox-width-height: rem-calc(39);
           font-style: italic;
           font-size: rem-calc(18);
           margin-top: rem-calc(20);
-          padding: 0;
+          padding: 0 $question-content-spacing-right 0 0;
+          max-width: $question-content-max-width;
         }
       }
     }
@@ -169,6 +189,10 @@ $radio-checkbox-width-height: rem-calc(39);
     &__content {
       color: $grey-xxdark;
       margin-left: 0;
+    }
+
+    &[data-name="required_field_explainer"] {
+      margin-bottom: 0;
     }
 
     &[data-name="latitude"], &[data-name="longitude"], &[data-name="current_area_ha"] {
@@ -195,6 +219,9 @@ $radio-checkbox-width-height: rem-calc(39);
   }
 
   .sv-item {
+    padding: 0 $question-content-spacing-right 0 0;
+    max-width: $question-content-max-width;
+
     &:not(:last-child) {
       margin-bottom: rem-calc(19);
     }
@@ -292,7 +319,7 @@ $radio-checkbox-width-height: rem-calc(39);
 
   .sv-checkbox--checked, .sv-radio--checked {
     .sv-item__svg {
-      fill: $grey-md-dark;
+      fill: $green;
     }
   }
 
@@ -376,7 +403,7 @@ $radio-checkbox-width-height: rem-calc(39);
 
     // delete button icon
     &__remove-svg {
-      fill: $danger-dark;
+      fill: $red-warning;
 
       display: flex;
       position: static;
@@ -400,6 +427,13 @@ $radio-checkbox-width-height: rem-calc(39);
         justify-content: space-between;
       }
     }
+  }
+
+  .form__required-text-explainer {
+    color: $danger;
+    font-style: italic;
+    font-weight: 700;
+    margin: 0;
   }
 
   .form__page--not-first {

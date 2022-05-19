@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_29_114606) do
+ActiveRecord::Schema.define(version: 2022_05_17_123115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(version: 2022_03_29_114606) do
     t.float "latitude"
     t.float "longitude"
     t.integer "current_area_ha"
-    t.integer "proposed_area_ha"
     t.string "committed_year"
     t.string "implementation_year"
     t.integer "update_year"
@@ -81,23 +80,28 @@ ActiveRecord::Schema.define(version: 2022_03_29_114606) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "country_id"
-    t.string "duration"
     t.string "stage"
     t.string "related_biodiversity_targets"
-    t.string "review_method"
     t.text "responsible_group"
     t.integer "state", default: 0
     t.string "duration_years"
     t.bigint "criterium_id"
     t.bigint "user_id"
-    t.boolean "user_created", default: false, null: false
-    t.text "area_manager"
+    t.text "area_owner_and_role"
+    t.bigint "manager_id"
+    t.boolean "shareable", default: false
+    t.string "cbd_id"
+    t.boolean "cfn_approved"
+    t.integer "commitment_source"
     t.boolean "cbd_import", default: false
+    t.index ["cbd_id"], name: "index_commitments_on_cbd_id", unique: true
     t.index ["cbd_import"], name: "index_commitments_on_cbd_import"
+    t.index ["cfn_approved"], name: "index_commitments_on_cfn_approved"
     t.index ["committed_year"], name: "index_commitments_on_committed_year"
     t.index ["country_id"], name: "index_commitments_on_country_id"
     t.index ["duration_years"], name: "index_commitments_on_duration_years"
     t.index ["implementation_year"], name: "index_commitments_on_implementation_year"
+    t.index ["manager_id"], name: "index_commitments_on_manager_id"
   end
 
   create_table "commitments_countries", id: false, force: :cascade do |t|
@@ -112,13 +116,6 @@ ActiveRecord::Schema.define(version: 2022_03_29_114606) do
     t.bigint "governance_type_id"
     t.index ["commitment_id"], name: "index_commitments_governance_types_on_commitment_id"
     t.index ["governance_type_id"], name: "index_commitments_governance_types_on_governance_type_id"
-  end
-
-  create_table "commitments_managers", id: false, force: :cascade do |t|
-    t.bigint "commitment_id"
-    t.bigint "manager_id"
-    t.index ["commitment_id"], name: "index_commitments_managers_on_commitment_id"
-    t.index ["manager_id"], name: "index_commitments_managers_on_manager_id"
   end
 
   create_table "commitments_objectives", id: false, force: :cascade do |t|
@@ -153,13 +150,8 @@ ActiveRecord::Schema.define(version: 2022_03_29_114606) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-  end
-
-  create_table "criteria_managers", id: false, force: :cascade do |t|
-    t.bigint "criterium_id"
     t.bigint "manager_id"
-    t.index ["criterium_id"], name: "index_criteria_managers_on_criterium_id"
-    t.index ["manager_id"], name: "index_criteria_managers_on_manager_id"
+    t.index ["manager_id"], name: "index_criteria_on_manager_id"
   end
 
   create_table "governance_types", force: :cascade do |t|
@@ -245,6 +237,7 @@ ActiveRecord::Schema.define(version: 2022_03_29_114606) do
     t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

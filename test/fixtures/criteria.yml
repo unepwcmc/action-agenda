@@ -3,7 +3,7 @@ valid_criterium:
   five_year_commitment: true
   progress_report: true
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
-  managers: local_communities, indigenous_peoples
+  manager: local_communities
   user: user_1
 
 no_boundary:
@@ -11,7 +11,7 @@ no_boundary:
   five_year_commitment: true
   progress_report: true
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
-  managers: local_communities, indigenous_peoples
+  manager: indigenous_peoples
   user: user_1
 
 no_five_year_commitment:
@@ -19,7 +19,7 @@ no_five_year_commitment:
   five_year_commitment: false
   progress_report: true
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
-  managers: local_communities, indigenous_peoples
+  manager: indigenous_peoples
   user: user_1
 
 no_progress_report:
@@ -27,7 +27,7 @@ no_progress_report:
   five_year_commitment: true
   progress_report: false
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
-  managers: local_communities, indigenous_peoples
+  manager: indigenous_peoples
   user: user_1
 
 government_manager:
@@ -35,7 +35,7 @@ government_manager:
   five_year_commitment: true
   progress_report: true
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
-  managers: local_communities, indigenous_peoples, local_government
+  manager: government
   user: user_1
 
 no_cbd_objectives:
@@ -43,15 +43,15 @@ no_cbd_objectives:
   five_year_commitment: true
   progress_report: true
   cbd_objectives: none_of_the_above
-  managers: local_communities, indigenous_peoples
+  manager: indigenous_peoples
   user: user_1
 
-invalid_none_of_the_above_options:
+invalid_cbd_objectives_option:
   boundary: true
   five_year_commitment: true
   progress_report: true
   cbd_objectives: none_of_the_above, sustainable_use
-  managers: none_of_the_above, local_communities
+  manager: local_communities
   user: user_1
 
 valid_criterium_without_commitment:
@@ -59,5 +59,5 @@ valid_criterium_without_commitment:
   five_year_commitment: true
   progress_report: true
   cbd_objectives: conservation_of_biological_diversity, sustainable_use
-  managers: local_communities, indigenous_peoples
+  manager: indigenous_peoples
   user: user_1

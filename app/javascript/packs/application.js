@@ -19,10 +19,10 @@ import Mapbox from "mapbox-gl";
 import store from '../store/store.js'
 
 // components
+import Admin from '../components/admin/Admin'
 import DashboardContentExisting from '../components/dashboard/ContentExisting'
 import DashboardContentNone from '../components/dashboard/ContentNone'
 import DashboardHero from '../components/dashboard/Hero'
-import DashboardNavigation from '../components/dashboard/Navigation'
 import FilteredTable from '../components/table/FilteredTable'
 import SurveyForm from '../components/forms/SurveyForm'
 import MockProgressBar from '../components/progress/MockProgressBar'
@@ -60,10 +60,10 @@ document.addEventListener('turbolinks:load', () => {
       el: '#v-app',
       store,
       components: {
+        Admin,
         DashboardContentExisting,
         DashboardContentNone,
         DashboardHero,
-        DashboardNavigation,
         FilteredTable,
         MockProgressBar,
         MapSection,

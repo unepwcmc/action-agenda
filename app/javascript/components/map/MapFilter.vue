@@ -12,6 +12,10 @@
           @keydown.enter.prevent="setResult(keyResult)"
           type="text"
         />
+        <span
+          class="map__filter-close"
+          @click="reset"
+        /> 
       </div>
       <ul
         class="map__filter-dropdown"
@@ -24,15 +28,16 @@
           :key="key"
           :result="result[searchKey]"
           @click="setResult(result)"
-          :class="{ 'is-active': key === arrowCounter }"
+          class="map__filter-dropdown-item"
+          :class="{ 'map__filter-dropdown-item--selected': key === arrowCounter }"
           v-html="result[searchKey]"
         />
       </ul>
     </form>
   </div>
 </template>
- 
- <script>
+
+<script>
 export default {
   name: "MapFilter",
 
@@ -87,7 +92,7 @@ export default {
     },
     
     onArrowDown() {
-      this.arrowCounter < this.results.length
+      this.arrowCounter < this.results.length - 1
         ? (this.arrowCounter = this.arrowCounter + 1)
         : (this.arrowCounter = 0)
     },
@@ -96,6 +101,15 @@ export default {
       this.filterResults();
       this.isOpen = true
       this.hasSelectedResult = false
+    },
+
+    reset() {
+      this.results = []
+      this.search = ""
+      this.isOpen = false
+      this.arrowCounter = -1
+      this.hasSelectedResult = false
+      this.$root.$emit('reset')
     },
 
     setResult(result) {

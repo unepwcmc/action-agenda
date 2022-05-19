@@ -180,6 +180,7 @@
   display: grid;
 
   .list__title {
+    font-family: $header-font;
     text-align: center;
   }
 
@@ -187,6 +188,7 @@
     @include flex;
     @include flex-v-center;
     @include ul-unstyled;
+    justify-content: center;
   }
 
   .list__li {

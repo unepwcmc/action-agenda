@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     root to: 'users#dashboard', as: :root
   end
 
+  get '/home', to: 'home#index', as: 'home'
+
   get '/dashboard', to: 'users#dashboard', as: 'dashboard'
   get '/about', to: 'about#show', as: 'about'
 
@@ -15,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :criteria, only: [:new, :create]
   get '/criteria/:id/ineligible', to: 'criteria#ineligible', as: 'ineligible_criteria'
-  
+
   resources :links, only: [:update, :destroy]
   resources :progress_documents, only: [:update, :destroy]
   resources :country_commitments, only: [:show, :index]
@@ -24,5 +26,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :commitments, only: [:index]
     end
+  end
+  
+  namespace :admin do
+    resources :imported_commitments, only: [:index, :update]
   end
 end

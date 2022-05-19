@@ -1,0 +1,17 @@
+en:
+  commitments:
+    show:
+      id: ID 
+      planned_actions: Planned actions
+      stage: Stage
+      actors: Actors
+      current_area: Current area
+      year_when_commitment_was_made: Year when the commitment was made
+      first_year_of_commitment_actions: First year of commitment actions
+      expected_duration_of_commitment: Expected duration of commitment
+      country_location: Country Location
+      linked_from_platform: Linked from platform
+      primary_objectives: Primary Objectives
+      governance_authority: Governance Authority
+      governance_type: Governance type
+      additional_details: Additional Details

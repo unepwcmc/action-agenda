@@ -20,17 +20,17 @@
     >
       <li class="nav-dropdown__list-item">
         <a
-          :href="myDashboardPath"
-          v-text="myDashboardText"
-          class="nav-dropdown__link"
-        />
-      </li>
-      <li class="nav-dropdown__list-item">
-        <a
           :href="logOutPath"
           data-method="delete"
           rel="nofollow"
           v-text="logOutText"
+          class="nav-dropdown__link"
+        />
+      </li>
+      <li v-if="adminPath" class="nav-dropdown__list-item">
+        <a
+          :href="adminPath"
+          v-text="adminText"
           class="nav-dropdown__link"
         />
       </li>
@@ -70,6 +70,16 @@ export default {
     userIconPath: {
       type: String,
       required: true,
+    },
+
+    adminPath: {
+      type: String,
+      default: '',
+    },
+
+    adminText: {
+      type: String,
+      default: '',
     },
   },
 

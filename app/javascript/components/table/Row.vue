@@ -5,13 +5,14 @@
       <span>{{ item.description | trimmed }}</span>
     </p>
     <p class="table-body__cell">{{ item.committed }}</p>
-    <p class="table-body__cell">{{ item.duration_years || item.duration }}</p>
+    <p class="table-body__cell">{{ item.duration_years }}</p>
     <p class="table-body__cell">{{ item.stage }}</p>
     <p class="table-body__cell">
       <a 
         :href="item.url" 
         :title="item.title"
         class="table-body__button"
+        target="_blank"
       >View</a>
     </p>
     <!-- <p class="table-body__cell">{{ checkForMultiples('country') }}</p> -->

@@ -1,6 +1,7 @@
 class Services::CriteriumProps
-  def initialize(criterium)
+  def initialize(criterium, form_option_text_service = Services::FormOptionText.new)
     @criterium = criterium
+    @form_option_text_service = form_option_text_service
   end
 
   def call
@@ -46,37 +47,28 @@ class Services::CriteriumProps
                 isRequired: true,
                 popupdescription: I18n.t('form.criteria.q2.popupdescription_html'),
                 choices: CbdObjective.pluck(:id, :name).map do |id, name|
-                          if name != 'None of the above'
-                            {
-                              value: id,
-                              text: name
-                            }
-                          else
-                            nil
-                          end
-                         end.compact,
+                  next if name == 'None of the above'
+
+                  {
+                    value: id,
+                    text: @form_option_text_service.call(name, 'cbd_objective')
+                  }
+                end.compact,
                 hasNone: true,
                 noneText: I18n.t('form.none')
               },
               {
-                type: 'checkbox',
-                name: 'manager_ids',
+                type: 'radiogroup',
+                name: 'manager_id',
                 title: I18n.t('form.criteria.q3.title'),
-                description: I18n.t('form.criteria.q3.description'),
                 isRequired: true,
                 popupdescription: I18n.t('form.criteria.q3.popupdescription_html'),
-                choices: Manager.commitment_form_options.pluck(:id, :name).map do |id, name|
-                          if name != 'Other'
-                            {
-                              value: id,
-                              text: name
-                            }
-                          else
-                            nil
-                          end
-                         end.compact,
-                hasNone: true,
-                noneText: I18n.t('form.none')
+                choices: Manager.form_options.pluck(:id, :name).map do |id, name|
+                  {
+                    value: id,
+                    text: @form_option_text_service.call(name, 'manager')
+                  }
+                end
               },
               {
                 type: 'radiogroup',

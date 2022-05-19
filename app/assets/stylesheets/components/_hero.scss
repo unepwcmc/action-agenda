@@ -9,6 +9,21 @@
   color: $white;
 }
 
+@mixin hero-box {
+  background-color: $grey-black-translucent;
+  border: rem-calc(1) solid $white;
+  border-radius: rem-calc(4);
+  font-family: $header-font;
+  padding: rem-calc(50) rem-calc(40);
+  text-align: center;
+  width: rem-calc(267);
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 //--------------------------------------------------
 // basic
 //--------------------------------------------------
@@ -16,11 +31,39 @@
   @include flex;
   @include flex-v-center;
   @include hero-background('hero/amir-samoh-WgV0g05NQCM-unsplash.png');
-  text-align: center;
   height: rem-calc(340);
 
+  &::before {
+    all: unset;
+  }
+
   .hero__container {
-    @include container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+      font-family: $header-font;
+      margin-bottom: 0;
+      max-width: rem-calc(390);
+    }
+  }
+
+  .hero__call-to-action {
+    @include hero-box;
+    font-family: $header-font;
+
+    h2 {
+      font-size: rem-calc(30);
+    }
+
+    a {
+      @include button-accent-condensed-taller;
+      width: 100%;
+
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 
@@ -29,32 +72,57 @@
 //--------------------------------------------------
 .hero--home {
   @include hero-background('hero/adrian-bar-lruGiwfIIOo-unsplash.png');
+  padding-top: rem-calc(100);
   min-height: rem-calc(524);
 
-  .hero__container {
-    @include container-medium;
-    padding-top: rem-calc(100);
-  }
-
   .hero__content {
-    width: 60%;
-  }
+    display: flex;
+    justify-content: space-between;
 
-  .hero__title {
-    margin-bottom: rem-calc(15);
-  }
+    .hero__content-left {
+      max-width: rem-calc(500);
 
-  .hero__subtitle {
-    font-size: rem-calc(21);
-    font-weight: $bold;
-    margin-top: 0;
-    margin-bottom: rem-calc(40);
-  }
+      .hero__title {
+        font-family: $header-font;
+        margin-bottom: rem-calc(15);
+      }
+    
+      .hero__subtitle {
+        font-family: $header-font;
+        font-size: rem-calc(21);
+        font-weight: $bold;
+        margin-top: 0;
+        margin-bottom: rem-calc(40);
+      }
+    
+      .hero__button {
+        @include button-accent-condensed-taller;
+        @include responsive(padding-right, rem-calc(43), rem-calc(43), rem-calc(43));
+        @include responsive(padding-left, rem-calc(43), rem-calc(43), rem-calc(43));
+      }
+    }
 
-  .hero__button {
-    @include button-accent-condensed-taller;
-    @include responsive(padding-right, rem-calc(43), rem-calc(43), rem-calc(43));
-    @include responsive(padding-left, rem-calc(43), rem-calc(43), rem-calc(43));
+    .hero__commitments-count {
+      @include hero-box;
+      font-family: $header-font;
+      font-weight: 700;
+
+      > *:not(:first-child) {
+        margin-top: rem-calc(10);
+      }
+
+      .hero__commitments-count-image {
+        height: rem-calc(41);
+      }
+
+      .hero__commitments-counter {
+        font-size: rem-calc(90);
+      }
+
+      .hero__commitments-counter-description {
+        font-size: rem-calc(30);
+      }
+    }
   }
 }
 

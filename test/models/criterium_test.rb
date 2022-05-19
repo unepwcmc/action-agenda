@@ -7,13 +7,12 @@ class CriteriumTest < ActiveSupport::TestCase
     assert criterium.errors.count == 6
   end
 
-  test "should not save with both 'none of the above' other options" do
-    criterium = criteria(:invalid_none_of_the_above_options)
+  test "should not save with 'none of the above' cbd commitments" do
+    criterium = criteria(:invalid_cbd_objectives_option)
     assert_not criterium.save
-    assert criterium.errors.count == 2
+    assert criterium.errors.count == 1
     assert_matched_arrays criterium.errors.full_messages, [
-      I18n.t(:"activerecord.errors.models.criterium.attributes.base.none_of_the_above_option_for_cbd_commitments"),
-      I18n.t(:"activerecord.errors.models.criterium.attributes.base.none_of_the_above_option_for_managers")
+      I18n.t(:"activerecord.errors.models.criterium.attributes.base.none_of_the_above_option_for_cbd_commitments")
     ]
   end
 
@@ -31,7 +30,7 @@ class CriteriumTest < ActiveSupport::TestCase
     assert_matched_arrays criteria(:no_boundary).failure_messages, [I18n.t(:"models.criterium.failure_messages.boundary")]
     assert_matched_arrays criteria(:no_five_year_commitment).failure_messages, [I18n.t(:"models.criterium.failure_messages.five_year_commitment")]
     assert_matched_arrays criteria(:no_progress_report).failure_messages, [I18n.t(:"models.criterium.failure_messages.progress_report")]
-    assert_matched_arrays criteria(:government_manager).failure_messages, [I18n.t(:"models.criterium.failure_messages.government_managers")]
+    assert_matched_arrays criteria(:government_manager).failure_messages, [I18n.t(:"models.criterium.failure_messages.government_manager")]
     assert_matched_arrays criteria(:no_cbd_objectives).failure_messages, [I18n.t(:"models.criterium.failure_messages.no_cbd_objectives")]
   end
 end
