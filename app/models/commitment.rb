@@ -47,6 +47,7 @@ class Commitment < ApplicationRecord
   validate :name_is_10_words_or_less, if: :user_created_and_live?
 
   scope :published, -> { where(state: 'live', cfn_approved: true) }
+  scope :api_records, -> { where(state: 'live', cfn_approved: true, shareable: true) }
   
   TABLE_ATTRIBUTES = [
     {

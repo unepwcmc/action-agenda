@@ -4,9 +4,8 @@ module Api
   module V1
     class CommitmentsController < ApiController
       def index
-        # @TODO: need a new scope that only includes published + shareable.
         commitments = Commitment
-                      .published
+                      .api_records
                       .paginate(
                         page: params[:page] || 1,
                         per_page: params[:per_page] || 10
