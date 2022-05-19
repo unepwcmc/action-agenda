@@ -68,7 +68,7 @@ Rails.application.configure do
   
   mailer_credentials = Rails.application.credentials.staging.dig(:mailer)
   config.action_mailer.default_url_options = { host: mailer_credentials.dig(:host) }
-  config.action_mailer.default_options = { from: mailer_credentials.dig(:from), reply_to:  mailer_credentials.dig(:from)}
+  config.action_mailer.default_options = { from: mailer_credentials.dig(:from), reply_to: mailer_credentials.dig(:from) }
   config.action_mailer.smtp_settings = {
     address:              mailer_credentials.dig(:address),
     port:                 587,
