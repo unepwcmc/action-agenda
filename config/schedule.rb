@@ -21,6 +21,6 @@
 
 set :chronic_options, hours24: true
 
-every 3.minutes, at: '1:00' do
+every 3.minutes do
   runner "CbdImportJob.perform_later"
 end
