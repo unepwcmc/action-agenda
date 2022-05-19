@@ -1,6 +1,4 @@
 class CbdImportJob < ApplicationJob
-  discard_on StandardError
-
   queue_as :imports
 
   def perform
