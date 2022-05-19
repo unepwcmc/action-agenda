@@ -25,11 +25,6 @@ class CbdCommitmentHashTest < ActiveSupport::TestCase
             "identifier"=>"CBD-SUBJECT-ILC"
           }
         ],
-        "operationalAreas"=>[
-          {
-            "identifier"=>"np"
-          }
-        ],
         "actionCategories"=>[
           {
             "identifier"=>"LAND-ECOSYSTEMS"
@@ -37,10 +32,10 @@ class CbdCommitmentHashTest < ActiveSupport::TestCase
         ],
         "operationalAreas"=>[
           {
-            "identifier"=>"MG"
+            "identifier"=>"mg"
           },
           {
-            "identifier"=>"HU"
+            "identifier"=>"hu"
           }
         ]
       },
