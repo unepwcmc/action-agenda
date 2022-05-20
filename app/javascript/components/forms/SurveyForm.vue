@@ -366,6 +366,27 @@ export default {
       if (multiselectQs.includes(options.question.name)) {
         options.cssClasses.mainRoot += " form__question--multiselect";
       }
+
+      // required
+      const requiredQs = [
+        "name",
+        "description",
+        "objective_ids",
+        "responsible_group",
+        "country_ids",
+        "latitude",
+        "longitude",
+        "committed_year",
+        "duration_years",
+        "stage",
+        "action_ids",
+        "implementation_year",
+        "threat_ids"
+      ]
+
+      if (requiredQs.includes(options.question.name)) {
+        options.cssClasses.mainRoot += " form__question--required";
+      }
     },
 
     onUpdatePageCssClasses(survey, options) {

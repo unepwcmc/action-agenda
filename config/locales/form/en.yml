@@ -72,7 +72,7 @@ en:
           ‘Commitment actions’ are the actions that are taken to achieve objectives.
 
           ‘Area’ refers to the geographical area in which commitment actions take place.
-        required_field_explainer: <p class="form__required-text-explainer">Required mandatory fields to publish commitment*</p>
+        required_field_explainer: <p class="form__required-text-explainer">* Required mandatory fields to publish commitment</p>
         q1:
           title: Enter commitment name
           description: (The name of the activity may describe the commitment actions and place. E.g. ‘Establishment of Cambridge community conserved area’)
@@ -82,7 +82,7 @@ en:
             or 'Improvement of management for sustainable use at Cambridge Farm'
           validation: Commitment name can be a maximum of 10 words
         q2:
-          title: Please provide a description of your commitment*
+          title: Please provide a description of your commitment
           popupdescription_html: 
             'Please answer as many of the following questions as possible: 
             What biodiversity (nature) can be found in the area? 
@@ -90,11 +90,11 @@ en:
             What are your specific objectives and how do you plan to achieve these? 
             How will you measure whether you are achieving your objectives?'
         q3:
-          title: Please select the main objectives you aim to achieve through your commitment*
+          title: Please select the main objectives you aim to achieve through your commitment
           description: Multi select option
           popupdescription_html: Objectives can be defined as what the commitment is trying to accomplish.
         q4:
-          title: Name(s) of the group(s) responsible for management decisions on commitment actions*
+          title: Name(s) of the group(s) responsible for management decisions on commitment actions
           popupdescription_html:
             For example, the name of a local community, NGO, or local council. This will be used to let others know who 
             is primarily responsible for the commitment and making management decisions about commitment actions. 
@@ -102,7 +102,7 @@ en:
         name: '2. Location'
         description: This page asks for details about the area in which commitment actions (will) take place.
         q1:
-          title: Select commitment location by country*
+          title: Select commitment location by country
           description: Multi select option
           caption: -Select a country-
         q2:
@@ -111,10 +111,10 @@ en:
             'Please indicate the latitude and longitude of your commitment area. 
             If unknown, please use this website: <a href="https://www.latlong.net/" target="_blank">https://www.latlong.net/</a>.'
         q3:
-          title: Latitude*
+          title: Latitude
           validation: Latitude must be a number between -90 and 90, with up to 6 decimal places
         q4:
-          title: Longitude*
+          title: Longitude
           validation: Longitude must be a number between -180 and 180, with up to 6 decimal places
         q5:
           title: If you have spatial data you would like to share, please upload it here.
@@ -135,12 +135,12 @@ en:
       page3:
         name: '3. Duration'
         q1:
-          title: Please state the year the commitment was made*
+          title: Please state the year the commitment was made
           caption: -Select-
           popupdescription_html:
             The year in which the commitment was pledged and not when it was registered in the platform. 
         q2:
-          title: How many years do you expect the commitment to be in place for?*
+          title: How many years do you expect the commitment to be in place for?
           caption: -Select-
           popupdescription_html:
             For how many years will you carry out the activities you are committing to? 
@@ -149,12 +149,12 @@ en:
       page4:
         name: '4. Stage'
         q1:
-          title: Please select the stage of implementation of your commitment*
+          title: Please select the stage of implementation of your commitment
           popupdescription_html:
             Is it a future commitment, currently in progress, or already implemented? 
             If you feel that your commitment (e.g. to expand an existing area) has been completed, you can select ‘implemented fully’.
         q2:
-          title: What actions do you intend/or have taken to implement the commitment?*
+          title: What actions do you intend/or have taken to implement the commitment?
           description: Multi select option
           popupdescription_html:
             our commitment actions are actions you take to achieve the commitment objectives. 
@@ -162,12 +162,12 @@ en:
             The responses have been identified using the 
             <a href='https://nc.iucnredlist.org/redlist/content/attachment_files/dec_2012_guidance_conservation_actions_needed_classification_scheme.pdf' target="_blank">IUCN CMP Classification of conservation actions.</a>
         q3:
-          title: Please state the first year of commitment actions*
+          title: Please state the first year of commitment actions
           popupdescription_html:
             This helps others understand when planned actions are likely to start, or if actions have already started. 
             If commitment actions started in the past they must still be in progress now.
         q4:
-          title: What are the main threats that your commitment is seeking to address?*
+          title: What are the main threats that your commitment is seeking to address?
           description: Multi select option
           popupdescription_html:
             Direct threats are the human activities or environmental processes that negatively impact the area. 

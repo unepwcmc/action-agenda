@@ -474,4 +474,10 @@ $question-content-spacing-right: rem-calc(75);
       }
     }
   }
+
+  .form__question--required {
+    .sv-question__num::before {
+      content: '* ';
+    }
+  }
 }
