@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'csv'
 require 'wcmc_components'
 class Commitment < ApplicationRecord
-  STAGE_OPTIONS = ['In progress', 'Committed', 'Implemented fully']
-  enum state: [:draft, :live]
-  enum commitment_source: [:form, :csv, :cbd]
+  STAGE_OPTIONS = ['In progress', 'Committed', 'Implemented fully'].freeze
+  enum state: %i[draft live]
+  enum commitment_source: %i[form csv cbd]
 
   include WcmcComponents::Loadable
 
@@ -34,12 +36,12 @@ class Commitment < ApplicationRecord
   belongs_to :criterium, optional: true
   belongs_to :user, optional: true
 
-  accepts_nested_attributes_for :links, reject_if: ->(attributes){ attributes['url'].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :progress_documents, reject_if: ->(attributes){ attributes['document'].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :links, reject_if: ->(attributes) { attributes['url'].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :progress_documents, reject_if: ->(attributes) { attributes['document'].blank? }, allow_destroy: true
 
   validates :geospatial_file,
-    content_type: %w(application/vnd.google-earth.kml+xml application/vnd.google-earth.kmz application/zip), 
-    size: { less_than: 25.megabytes }
+            content_type: %w[application/vnd.google-earth.kml+xml application/vnd.google-earth.kmz application/zip],
+            size: { less_than: 25.megabytes }
 
   validates :name, presence: true
   validates :stage, inclusion: { in: STAGE_OPTIONS }, if: :user_created_and_live?
@@ -50,7 +52,14 @@ class Commitment < ApplicationRecord
   validate :name_is_10_words_or_less, if: :user_created_and_live?
 
   scope :published, -> { where(state: 'live', cfn_approved: true) }
-  
+
+  scope :cbd_without_government_managers, lambda {
+    government_manager_ids = Manager.where(name: ['Other government', 'Sub-national government'])
+    where(commitment_source: 'cbd')
+      .joins(:managers)
+      .where('managers.id NOT IN (?)', Array.wrap(government_manager_ids))
+  }
+
   TABLE_ATTRIBUTES = [
     {
       title: 'Name',
@@ -78,8 +87,8 @@ class Commitment < ApplicationRecord
     self.state = :live
     valid?
     self.state = :draft
-    errors.messages.map do |key, value|
-      if key.in?(%i(actions countries managers objectives threats))
+    errors.messages.map do |key, _value|
+      if key.in?(%i[actions countries managers objectives threats])
         :"#{key.to_s.singularize}_ids"
       else
         key
@@ -120,14 +129,12 @@ class Commitment < ApplicationRecord
 
     unpaginated_commitments = generate_query(page, @filter_params)
     paginated_commitments = unpaginated_commitments
-                              .paginate(page: page || 1, per_page: @items_per_page)
-                              .to_a.map! do |commitment|
-                                commitment.to_hash
-                              end
+                            .paginate(page: page || 1, per_page: @items_per_page)
+                            .to_a.map!(&:to_hash)
 
     structure_data(page, paginated_commitments, unpaginated_commitments.count)
   end
-  
+
   def to_hash
     {
       id: id,
@@ -171,31 +178,31 @@ class Commitment < ApplicationRecord
       when 'country'
         countries = options
         country_ids << Country.where(name: countries).pluck(:id)
-        params['country'] = country_ids.flatten.empty? ? "" : "countries.id IN (#{country_ids.join(',')})"
+        params['country'] = country_ids.flatten.empty? ? '' : "countries.id IN (#{country_ids.join(',')})"
       when 'actor'
         managers = options
         manager_ids << Manager.where(name: managers).pluck(:id)
-        params['manager'] = manager_ids.flatten.empty? ? "" : "managers.id IN (#{manager_ids.join(',')})"
+        params['manager'] = manager_ids.flatten.empty? ? '' : "managers.id IN (#{manager_ids.join(',')})"
       when 'primary_objectives'
         objectives = options
         objective_ids << Objective.where(name: objectives).pluck(:id)
-        params['objective'] = objective_ids.flatten.empty? ? "" : "objectives.id IN (#{objective_ids.join(',')})"
+        params['objective'] = objective_ids.flatten.empty? ? '' : "objectives.id IN (#{objective_ids.join(',')})"
       else
         # Single quoted strings needed for the SQL queries to work properly
-        params[name] = options.empty? ? "" : "commitments.#{name} IN (#{options.map { |op| "'#{op}'" }.join(',')})"
+        params[name] = options.empty? ? '' : "commitments.#{name} IN (#{options.map { |op| "'#{op}'" }.join(',')})"
       end
     end
 
     params.compact
   end
 
-  def self.run_query(page, where_params)
+  def self.run_query(_page, where_params)
     # WARNING! Do not remove the 'published' scope, because this will show unpublished Commitments
     # people might not want public and CBD commitments we've chosen not to display.
     Commitment.published
-      .left_outer_joins(:managers, :countries, :objectives, :governance_types)
-      .distinct
-      .where(where_params.values.join(' AND '))
+              .left_outer_joins(:managers, :countries, :objectives, :governance_types)
+              .distinct
+              .where(where_params.values.join(' AND '))
   end
 
   def self.sanitise_filters
@@ -217,6 +224,7 @@ class Commitment < ApplicationRecord
 
   def self.pages(item_count)
     return 0 if item_count == 0
+
     (item_count / @items_per_page.to_d).ceil
   end
 

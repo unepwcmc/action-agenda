@@ -19,6 +19,7 @@ class Country < ApplicationRecord
   def country_commitments_json
     commitment_count_for_country = commitment_count
     managers = commitments
+               .published
                .joins(:managers)
                .group('managers.name')
                .select("ROUND((COUNT(*)*100.0/#{commitment_count_for_country}), 0) AS percentage")

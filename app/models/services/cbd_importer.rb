@@ -1,6 +1,7 @@
 class Services::CbdImporter
 
   def call
+    manager_hash = Hash[Manager.pluck(:name, :id).collect {|name, id| [name, id]}]
     first_item_position = 0
     loop do
       response = HTTParty.get(query(first_item_position))
@@ -15,7 +16,7 @@ class Services::CbdImporter
         next if cbd_com.nil?
 
         commitment = Commitment.find_or_initialize_by(cbd_id: cbd_com["_id"])
-        commitment_params = Services::CbdCommitmentHash.new(cbd_com, commitment).call
+        commitment_params = Services::CbdCommitmentHash.new(cbd_com, commitment, manager_hash).call
         commitment.assign_attributes(commitment_params)
         commitment.save!
       end
