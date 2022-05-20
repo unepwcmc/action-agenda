@@ -1,0 +1,214 @@
+en:
+  form:
+    none: None of the above
+    criteria:
+      progress: 
+        title: 
+          active: Criteria
+          dormant: Commitment form
+      title: 'Form 1: criteria'
+      description: 
+        Form 1 will help establish whether this platform is the right place for your commitment.
+        A ‘commitment' is the pledge to conduct activities (which serve objectives related to the conservation
+        and/or sustainable use of nature), now or in the future, within a specific area. This might include
+        establishing a new protected area or improving the governance or management of an existing area.
+        ‘Area’ refers to the geographical area that is (or will be) under management as a result of this commitment.
+      q1: 
+        title: Does/will the area have a clearly-defined boundary?
+        t: Yes - the area has, or will have, a clearly defined boundary
+        f: No - the area does not and will not have a clearly defined boundary
+        popupdescription_html: Note that the boundary does not need to be a physical barrier/visible on the ground.
+      q2:
+        title: Please select which of the following objectives your commitment contributes to
+        description: Multi select option
+        popupdescription_html: 
+          The objectives listed here follow the 
+          <a href='https://www.cbd.int/' target="_blank">three main goals of the Convention on Biological Diversity:</a> 
+          conservation of biodiversity; sustainable use of biodiversity; and fair and equitable sharing of benefits arising 
+          from the use of genetic resources (e.g. plants and animals). The last objective may include monetary or non-monetary benefits. 
+          The overall objective of this international treaty is to encourage actions which lead to a sustainable future.<br><br>
+          <strong>Sustainable use of biological diversity (nature):</strong> meaning the use of biological diversity (nature) in way and rate that does not lead to long-term decline of biological diversity - adapted from Biodiversity A-Z<br><br>
+          <strong>Fair and equitable sharing of benefits from the use of biological diversity (nature):</strong> meaning that the benefits arising from the use of biodiversity and associated traditional knowledge are shared in a fair and equitable way among all organizations or communities that have contributed to resource management, research and development, and/or commercialization - adapted from <a href="https://www.cbd.int/abs/submissions/icnp-3/EU-UEBT-Sharing-Manual.pdf" target="_blank">https://www.cbd.int/abs/submissions/icnp-3/EU-UEBT-Sharing-Manual.pdf</a>
+      q3:
+        title: Who will be responsible for deciding how the area is managed?
+        popupdescription_html:
+          This should be the group(s) that decide to make the commitment, decide on the objectives of the commitment, 
+          and decide on the actions taken to achieve those objectives.</br></br>
+          ‘Collaborative governance’ means one group makes the decisions, but these decisions are made after consultation with other groups.</br></br> 
+          ‘Joint governance’ means two or more groups make the decisions together. 
+      q4:
+        title: Is the duration of the commitment at least 5 years?
+        t: 'Yes'
+        f: 'No'
+        popupdescription_html: Will the conservation actions you are committing to be carried out for a period of at least 5 years?
+      q5:
+        title: Do you have the intention to report on progress?
+        t: 'Yes'
+        f: 'No'
+        popupdescription_html:
+          We are interested in knowing how your commitment progresses once it has been added to the platform. 
+          You will be sent periodic reminders asking you to submit progress reports. There is no specific format for these. 
+          If you already produce progress reports for another purpose, you are welcome to share these. 
+          If not, we will ask you to provide a few sentences detailing the steps taken to date.
+      modal:
+        question: Are you sure you want to exit this page?
+        p: You’ll lose any information you have entered so far.
+        continue: CONTINUE WITH CRITERIA FORM
+        exit: GO TO MY DASHBOARD
+      navigation:
+        exit: Exit
+        next: Next
+    commitments: 
+      page1:
+        name: '1. General Info'
+        title: General Info
+        description:
+          This page asks for details about commitment actions.
+          
+          A ‘commitment' is the pledge to conduct activities (which serve objectives related to the conservation and/or 
+          sustainable use of nature), now or in the future, within a specific area. This might include establishing a new 
+          protected area or improving the governance or management of an existing area. 
+
+          ‘Commitment actions’ are the actions that are taken to achieve objectives.
+
+          ‘Area’ refers to the geographical area in which commitment actions take place.
+        required_field_explainer: <p class="form__required-text-explainer">* Required mandatory fields to publish commitment</p>
+        q1:
+          title: Enter commitment name
+          description: (The name of the activity may describe the commitment actions and place. E.g. ‘Establishment of Cambridge community conserved area’)
+          popupdescription_html:
+            Please name your commitment in up to 10 words. This is the name that will appear on the platform. 
+            Examples include 'Establishment of Cambridge community conserved area', 'Expansion of Cambridge private reserve', 
+            or 'Improvement of management for sustainable use at Cambridge Farm'
+          validation: Commitment name can be a maximum of 10 words
+        q2:
+          title: Please provide a description of your commitment*
+          popupdescription_html: 
+            'Please answer as many of the following questions as possible: 
+            What biodiversity (nature) can be found in the area? 
+            What is the status of this biodiversity (Is it declining, stable, or improving)? 
+            What are your specific objectives and how do you plan to achieve these? 
+            How will you measure whether you are achieving your objectives?'
+        q3:
+          title: Please select the main objectives you aim to achieve through your commitment*
+          description: Multi select option
+          popupdescription_html: Objectives can be defined as what the commitment is trying to accomplish.
+        q4:
+          title: Name(s) of the group(s) responsible for management decisions on commitment actions*
+          popupdescription_html:
+            For example, the name of a local community, NGO, or local council. This will be used to let others know who 
+            is primarily responsible for the commitment and making management decisions about commitment actions. 
+      page2:
+        name: '2. Location'
+        description: This page asks for details about the area in which commitment actions (will) take place.
+        q1:
+          title: Select commitment location by country*
+          description: Multi select option
+          caption: -Select a country-
+        q2:
+          title: Please provide the latitude and longitude of the area
+          popupdescription_html:
+            'Please indicate the latitude and longitude of your commitment area. 
+            If unknown, please use this website: <a href="https://www.latlong.net/" target="_blank">https://www.latlong.net/</a>.'
+        q3:
+          title: Latitude*
+          validation: Latitude must be a number between -90 and 90, with up to 6 decimal places
+        q4:
+          title: Longitude*
+          validation: Longitude must be a number between -180 and 180, with up to 6 decimal places
+        q5:
+          title: If you have spatial data you would like to share, please upload it here.
+          description: (Optional field)
+          popupdescription_html: 
+            If you are uploading spatial data (e.g. shapefiles), please upload them in a folder (e.g. .zip). 
+            The spatial data should be the geographical boundary of the area once the commitment has been implemented. 
+            It is not necessary to expand the area. However, if your commitment is to expand an existing area, 
+            please provide the boundary as it will be once the expansion is complete.
+        q6:
+          title: How many hectares does/will the area cover?
+          popupdescription_html: If the commitment is to expand an existing area, please provide the area in ha that will be covered once the commitment is implemented
+        q7:
+          title: Hectares
+        q8:
+          title: If this area of land or water is owned (legally or customarily) by a group other than the commitment-maker, please indicate the name of the group and their role in the commitment
+          description: (Optional field)
+      page3:
+        name: '3. Duration'
+        q1:
+          title: Please state the year the commitment was made*
+          caption: -Select-
+          popupdescription_html:
+            The year in which the commitment was pledged and not when it was registered in the platform. 
+        q2:
+          title: How many years do you expect the commitment to be in place for?*
+          caption: -Select-
+          popupdescription_html:
+            For how many years will you carry out the activities you are committing to? 
+            If this is dependent on factors outside your control, 
+            enter the number of years you intend to carry out activities assuming these factors do not present a problem
+      page4:
+        name: '4. Stage'
+        q1:
+          title: Please select the stage of implementation of your commitment*
+          popupdescription_html:
+            Is it a future commitment, currently in progress, or already implemented? 
+            If you feel that your commitment (e.g. to expand an existing area) has been completed, you can select ‘implemented fully’.
+        q2:
+          title: What actions do you intend/or have taken to implement the commitment?*
+          description: Multi select option
+          popupdescription_html:
+            our commitment actions are actions you take to achieve the commitment objectives. 
+            Please select one or more responses from the list. 
+            The responses have been identified using the 
+            <a href='https://nc.iucnredlist.org/redlist/content/attachment_files/dec_2012_guidance_conservation_actions_needed_classification_scheme.pdf' target="_blank">IUCN CMP Classification of conservation actions.</a>
+        q3:
+          title: Please state the first year of commitment actions*
+          popupdescription_html:
+            This helps others understand when planned actions are likely to start, or if actions have already started. 
+            If commitment actions started in the past they must still be in progress now.
+        q4:
+          title: What are the main threats that your commitment is seeking to address?*
+          description: Multi select option
+          popupdescription_html:
+            Direct threats are the human activities or environmental processes that negatively impact the area. 
+            These threats may include past, present, or future threats. 
+            The threats listed have been identified using the 
+            <a href='https://nc.iucnredlist.org/redlist/content/attachment_files/dec_2012_guidance_threats_classification_scheme.pdf' target="_blank">IUCN-CMP classification of direct threats.</a>
+        q5:
+          title: Please provide the name and URL of any other websites containing information on your commitment.
+          description: (Optional field)
+          add: Add another
+          delete: Are you sure you want to delete this website?
+      page5:
+        name: '5. Progress'
+        q1:
+          title: Please upload your progress documentation and any other relevant documents of your choice
+          description: (Optional field)
+          add: Add another
+          delete: Are you sure you want to delete this file?
+          popupdescription_html:
+            As a minimum requirement we ask you to provide a project plan if this is the first year of the commitment. Otherwise, please provide a brief update each year on the actions you have taken as part of the commitment. This can either be a word document or a PDF. Your progress notes will be timestamped so that commitment viewers can see when the updates were provided. 
+            <br><br>
+            In addition, you may also upload any other relevant documents that you would like others to be able to see. These must also be in PDF or Word format. 
+            <br><br>
+            By loading your updates, you agree that they will be visible to other users of the site. The information you provide will serve to inspire and enable others to learn from different approaches being applied across the world. Showcasing commitments may also inspire investors or donors to support specific initiatives.
+        q2:
+          option_text: 
+            Permission is given to UNEP-WCMC to allow reposting or redistribution by third party platforms 
+            (e.g. the Convention on Biological Diversity's Sharm El Sheikh to Kunming Action Agenda Platform,
+            the IUCN Contributions Platform, and the CitiesWithNature Action Platform)
+      modal:
+        question: Are you sure you want to exit this page?
+        p1: If you still want to exit this page, selecting ‘Exit & Save’ will save any information you have entered so far*. Saved commitments will be accessible through your ‘My Dashboard’ page.
+        p2:
+          prefix: Note
+          content: Ensure you enter a commitment name in order to save
+        continue: CONTINUE WITH FORM
+        exit: SAVE & EXIT
+      navigation:
+        back: BACK
+        exit:
+          left: Exit & Save
+          right: Save & Exit
+        next: NEXT
+        save: PUBLISH

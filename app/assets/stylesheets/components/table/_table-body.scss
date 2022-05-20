@@ -1,0 +1,136 @@
+//----------------------------------------
+// classes
+//----------------------------------------
+.table-body {
+  margin-top: rem-calc(30);
+  margin-bottom: rem-calc(24);
+
+  display: block;
+
+  @include breakpoint($medium) { margin-top: 0; }
+
+  &__row {
+    @include table-grid-basic;
+    border: solid 1px $grey-light;
+    margin-top: rem-calc(16);
+    margin-bottom: rem-calc(16);
+    padding: rem-calc(6 0);
+
+    @include breakpoint($medium) { 
+      padding: rem-calc(0 11);
+    }
+
+    &:nth-child(even) { 
+      @include breakpoint($medium) { background-color: $white; }
+    }
+  }
+
+  &__cell {
+    margin: 0;
+    padding: rem-calc(18 14);
+    width: 100%;
+
+    @include breakpoint($medium) {
+      padding: rem-calc(21 18);
+      
+      display: inline-grid;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    &:first-child { border-left: none; }
+
+    &:before {
+      font-weight: $bold; 
+      margin-right: rem-calc(6);
+
+      @include breakpoint($medium){ display: none; }
+    }
+
+    &:nth-child(n+2) {
+      .table-body--basic & {
+        font-weight: $bold;
+      }
+    }
+    // Add copy for the table header
+    // These are shown on mobile and tablet
+    // Check pame_evalutation.rb for the copy
+    &:nth-child(1) { &:before { content: 'Name:'; } }
+    &:nth-child(2) { &:before { content: 'Committed :'; } }
+    &:nth-child(3) { &:before { content: 'Duration:'; } }
+    &:nth-child(4) { &:before { content: 'Stage:'; } }
+    &:nth-child(5) { &:before { content: ''; } }
+
+    &--actions {
+      padding-right: rem-calc(50);
+
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &--live-state {
+      color: $green;
+    }
+
+    &--draft-state {
+      max-width: rem-calc(280);
+    }
+  }
+
+  &__cell-title { 
+    font-weight: $bold;
+    
+    display: block;
+  }
+
+  &__cell-state {
+    font-weight: $bold;
+  }
+
+  &__cell-draft-info {
+    font-size: rem-calc(10);
+    line-height: rem-calc(10);
+
+    display: block;
+  }
+
+  &__cell-action {
+    cursor: pointer;
+  }
+
+  &__cell-action-icon {
+    height: rem-calc(27);
+
+    display: flex;
+  }
+
+  &__sorting {
+    opacity: .7;
+    vertical-align: middle;
+
+    display: inline-block;
+
+    &:hover { opacity: .9; }
+  }
+
+  &__sort {
+    cursor: pointer;
+    width: rem-calc(8); height: rem-calc(6);
+
+    display: block;
+
+    &--ascending {
+      background-image: image-url('icons/arrow-up-white.svg');
+      margin-bottom: rem-calc(1);
+    }
+
+    &--descending {
+      background-image: image-url('icons/arrow-down-white.svg');
+    }
+  }
+
+  &__button {
+    @include button-accent;
+    font-family: $header-font;
+  }
+}

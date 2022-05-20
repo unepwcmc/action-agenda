@@ -1,0 +1,159 @@
+//--------------------------------------------------
+// html elements
+//--------------------------------------------------
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  color: $body-font-colour;
+  font-family: $body-font;
+  margin: 0;
+}
+
+h1 { 
+  color: inherit;
+  margin-top: 0;
+
+  @include breakpoint($small) { font-size: $h1-size; }
+}
+
+h2 { 
+  color: inherit;
+  margin-top: 0;
+
+  @include breakpoint($small) { font-size: $h2-size; }
+
+  &.h2--full-width {
+    @include container;
+    background-color: $primary;
+    color: $white;
+    font-family: $header-font;
+    padding-top: rem-calc(10);
+    padding-bottom: rem-calc(10);
+    text-align: center;
+  }
+}
+
+h3 {
+  
+}
+
+h4 {
+  
+}
+  
+p,a { 
+  color: inherit; 
+  line-height: $p-font-line-height;
+}
+  
+a { 
+  text-decoration: underline; 
+
+  &:hover { text-decoration: none; }
+}
+
+label { cursor: pointer; }
+
+em { font-style: italic; }
+
+img { max-width: 100%; }
+
+sup {
+  font-size: .6em;
+}
+
+input {
+  &:focus { @include input-custom-focus; }
+}
+
+//--------------------------------------------------
+// site structure
+//--------------------------------------------------
+.site-width { @include site-width; }
+.site-width-medium { @include site-width-medium; }
+
+.gutter {
+  &-left { @include gutters('left'); }
+
+  &-right { @include gutters('right'); }
+}
+
+.container {
+  @include site-width;
+  @include container;
+}
+
+.container--medium { @include container-medium; }
+
+.container--desktop-up {
+  @include breakpoint($large) {
+    @include site-width;
+    @include container;
+  }
+}
+
+.container--component {
+  $container-component-padding: calc((100% - #{$site-width-medium-desktop})/2);
+  $cc-padding-small: rem-calc(20 $gutter-small 20);
+  $cc-padding-medium: rem-calc(30 $gutter-medium 30);
+  $cc-padding-large: rem-calc(40 $container-component-padding 40);
+
+  @include bg-grey-xlight;
+  @include border-radius;
+  @include responsive(margin-top, rem-calc(26), rem-calc(30), rem-calc(36));
+  @include responsive(margin-bottom, rem-calc(26), rem-calc(30), rem-calc(36));
+  @include responsive(padding, $cc-padding-small, $cc-padding-medium, $cc-padding-large);
+}
+
+//--------------------------------------------------
+// component spacers
+//--------------------------------------------------
+@mixin spacer-top($mobile, $tablet, $desktop) {
+  padding-top: $mobile;
+  @include breakpoint($small) { padding-top: $tablet; }
+  @include breakpoint($medium) { padding-top: $desktop; }
+}
+
+@mixin spacer-bottom($mobile, $tablet, $desktop) {
+  padding-bottom: $mobile;
+  @include breakpoint($small) { padding-bottom: $tablet; }
+  @include breakpoint($medium) { padding-bottom: $desktop; }
+}
+
+.spacer-small--top {
+  @include spacer-top($spacer-small-mobile, $spacer-small-tablet, $spacer-small-desktop);
+}
+
+.spacer-small--bottom {
+  @include spacer-bottom($spacer-small-mobile, $spacer-small-tablet, $spacer-small-desktop);
+}
+
+.spacer-medium--top {
+  @include spacer-top($spacer-medium-mobile, $spacer-medium-tablet, $spacer-medium-desktop);
+}
+
+.spacer-medium--bottom {
+  @include spacer-bottom($spacer-medium-mobile, $spacer-medium-tablet, $spacer-medium-desktop);
+}
+
+.spacer-large--top {
+  @include spacer-top($spacer-large-mobile, $spacer-large-tablet, $spacer-large-desktop);
+}
+
+.spacer-large--bottom {
+  @include spacer-bottom($spacer-large-mobile, $spacer-large-tablet, $spacer-large-desktop);
+}
+
+#v-app {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+
+  .content {
+    flex: 1 0 auto;
+  }
+}

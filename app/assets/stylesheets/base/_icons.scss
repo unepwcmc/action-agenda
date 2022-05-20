@@ -1,0 +1,27 @@
+//--------------------------------------------------
+// classes
+//--------------------------------------------------
+.icon {
+  &--aichi { @include icon-aichi; }
+  
+  &--certificate-of-products { @include icon-certificate; }
+  &--close { @include icon-close; }
+  &--climate-change-mitigation { @include icon-climate; }
+
+  &--loading-spinner { 
+    @include icon-loading-spinner; 
+
+    visibility: hidden;
+  }
+  
+  &--pin { @include icon-pin; }
+
+  &--search { @include icon-search; }
+  &--sort { @include icon-sort; }
+  &--sustainable-use { @include icon-earth; }
+
+//--------------------------------------------------
+// helpers
+//--------------------------------------------------
+  &-visible { visibility: visible; }
+}

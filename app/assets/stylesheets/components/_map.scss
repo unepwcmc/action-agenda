@@ -1,0 +1,264 @@
+$popup-padding-top: rem-calc(5);
+$popup-padding-x: rem-calc(20);
+$popup-padding-bottom: $popup-padding-x;
+
+// these are taken from inspection in the browser - it looks like there are
+// height and width styles that have been set here that aren't being applied,
+// probably because of not being nested in #v-app like the examples at the
+// bottom of this file. If the dimensions change, this calculation will need
+// updating to reflect this
+$popup-content-width: rem-calc(560);
+$popup-content-height: rem-calc(523.094);
+
+$popup-midpoint-x: ($popup-padding-x * 2 + $popup-content-width) / 2;
+$popup-midpoint-y: ($popup-padding-top + $popup-padding-x + $popup-content-height) / 2;
+
+.map {
+  min-height: 70vh;
+  
+  display: flex;
+
+  position: relative;
+
+  &__marker {
+    background-color: $green-dark;
+    border-radius: 50%;
+    -webkit-box-shadow: 4px 4px 12px -2px $grey-dark; 
+    box-shadow: 4px 4px 12px -2px $grey-dark;  
+    color: white;
+    font-weight: 700;
+    font-family: $header-font;
+    text-align: center;
+  
+    &:active,
+    &:hover {
+      background-color: $green;
+    }
+
+    &-1 {
+      padding: rem-calc(6);
+    }
+    &-2 {
+      padding: rem-calc(9);
+    }
+    &-3 {
+      padding: rem-calc(12);
+    }
+    &-4 {
+      padding: rem-calc(16);
+    }
+    &-5 {
+      padding: rem-calc(20);
+    }
+    &-6 {
+      padding: rem-calc(25);
+    }
+  }
+
+  &__marker span {
+    display: block;
+    height: 20px; width: 20px;
+  }
+
+  .popup__container {
+    p {
+      font-size: medium;
+    }
+  }
+
+  #bar-chart {
+    width: rem-calc(250);
+    height: rem-calc(230);
+  }
+
+  &__chart-container {
+    display: flex;
+  }
+
+  .mapboxgl-map {
+    .mapboxgl-popup {
+      max-width: rem-calc(320)!important;
+      position: fixed;
+
+      z-index: 100!important;
+    }
+
+    .mapboxgl-popup-content {
+      padding: $popup-padding-top $popup-padding-x $popup-padding-bottom;
+      overflow: visible;
+
+      position: absolute;
+      top: 0;
+    }
+  }
+
+  &__button {
+    @include button-accent-condensed-taller;
+    margin-top: rem-calc(30);
+  }
+
+  &__filter {
+    font-family: $body-font;
+    font-size: medium;
+    margin: rem-calc(20);
+    width: rem-calc(420);
+
+    position: absolute;
+    z-index: 10;
+
+    input {
+      font-family: $body-font;
+      font-size: medium;
+      font-style: italic;
+      padding: rem-calc(12) rem-calc(40);
+      width: 100%;
+
+      position: relative;
+    }
+
+    &-icon {
+      @include icon-search;
+      cursor: auto;
+
+      position:absolute;
+      top: rem-calc(12);
+      left: rem-calc(14);
+      z-index: 1;
+    }
+
+    &-close {
+      @include icon-close;
+      cursor: pointer;
+      height: rem-calc(23);
+      width: rem-calc(23);
+
+      position: absolute;
+      top: rem-calc(12);
+      right: rem-calc(14);
+    }
+  
+    &-dropdown {
+      background-color: white;
+      cursor: pointer;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+      width: 100%;
+      max-height: 50vh;
+
+      &-item {
+        padding: 0.75rem 0.875rem 0.75rem 2.5rem;
+
+        &:hover, &--selected {
+          background-color: $grey-xlight;
+        }
+      }
+    }
+  }
+
+  &__legend {
+    list-style: none;
+    line-height: 1;
+    margin: 0;
+    padding: 0 rem-calc(12);
+    min-width: 10rem;
+    margin-bottom: rem-calc(8);
+
+    &-item {
+      display: flex;
+    }
+
+    &-marker-container {
+      display: flex;
+    }
+
+    &-marker {
+      border-radius: 50%;
+      margin-right: rem-calc(10);
+      min-height: rem-calc(12); min-width: rem-calc(12);
+      align-self: center;
+
+      display: inline-block;
+    }
+  }
+
+  &__info-box {
+    font-style: italic;
+
+    display: flex;
+
+    &-icon {
+      @include icon-tooltip;
+      margin-right: rem-calc(4);
+    }
+  }
+}
+
+// nested in #v-app for higher specificity otherwise Mapbox styles overwrite these
+#v-app {
+  .mapboxgl-popup {
+    transform: translate(calc(50vw - #{$popup-midpoint-x}), calc(50vh - #{$popup-midpoint-y})) !important;
+
+    .mapboxgl-popup-close-button {
+      background-image: image_url("icons/close.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      color: rgba(255, 255, 255, 0);
+      content: '';
+      margin-top: rem-calc(21);
+      margin-right: rem-calc(20);
+      width: rem-calc(30);
+      height: rem-calc(30);
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .mapboxgl-ctrl-bottom-right {
+    display: none;
+  }
+
+  .mapboxgl-ctrl-bottom-left {
+    .mapboxgl-ctrl {
+      &.mapboxgl-ctrl-group {
+        border-radius: 0;
+        box-shadow: none;
+        margin: rem-calc(20);
+  
+        button {
+          border: rem-calc(1) solid $grey-black;
+          border-radius: 0;
+          width: rem-calc(38);
+          height: rem-calc(38);
+
+          &:hover {
+            background-color: $grey-xlight;
+          }
+  
+          &:last-child {
+            border-top: 0;
+          }
+        }
+  
+        .mapboxgl-ctrl-zoom-in {
+          .mapboxgl-ctrl-icon {
+            background-image: image_url('icons/plus.svg')
+          }
+        }
+  
+        .mapboxgl-ctrl-zoom-out {
+          .mapboxgl-ctrl-icon {
+            background-image: image_url('icons/minus.svg')
+          }
+        }
+      }
+
+      &:not(.mapboxgl-ctrl-group) {
+        display: none !important;
+      }
+    }
+  }
+}

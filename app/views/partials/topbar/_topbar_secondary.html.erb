@@ -1,0 +1,11 @@
+<div class="topbar--secondary">
+  <nav class="nav--secondary">
+    <ul class="nav__ul">
+      <% links.each do |link| %>
+        <li class="nav__li">
+          <%= link_to link[:title], link[:url], class: 'nav__a' %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+</div>

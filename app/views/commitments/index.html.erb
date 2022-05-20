@@ -1,0 +1,18 @@
+<%= render partial: '/partials/topbar/topbar_secondary', locals: { links: nav_header(current_user) } %>
+
+<%= render partial: '/partials/hero/hero-basic', 
+  locals: {
+    title: 'Explore Area-Based Commitments',
+    commitments_count: @commitments_count
+  }
+%>
+
+<div class="container spacer-medium--top spacer-large--bottom">
+  <filtered-table 
+    :attributes="<%= @table_attributes %>"
+    endpoint="/commitments/list"
+    :filters="<%= @filters %>" 
+    :paginated-rows="<%= @paginatedCommitments %>"
+    :preset-filters="<%= @preset_filters.to_json %>"
+  ></filtered-table>
+</div>

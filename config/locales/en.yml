@@ -31,3 +31,109 @@
 
 en:
   hello: "Hello world"
+
+  errors:
+    format: "%{message}"
+    messages:
+      content_type_invalid: "has an invalid content type: %{content_type}"
+      file_size_out_of_range: "file size %{file_size} is too large"
+      forbidden_resource: "You are not permitted to modify this resource"
+
+  activerecord:
+    errors:
+      models:
+        criterium:
+          attributes:
+            base:
+              none_of_the_above_option_for_cbd_commitments: 'CBD Objectives cannot include named objectives if "None of the above" option is selected'
+            boundary:
+              nil_value: 'Boundary information missing' 
+            five_year_commitment:
+              nil_value: 'Five year commitment information missing'
+            progress_report:
+              nil_value: 'Progress report information missing'
+            cbd_objectives:
+              blank: 'CBD Objective information missing'
+            manager:
+              required: 'Stakeholder information missing'
+        commitment:
+          attributes:
+            stage:
+              inclusion: "is not one of the allowed stage options"
+            name:
+              too_long: Must be 10 words or fewer
+        progress_document:
+          attributes:
+            document:
+              document_missing: Progress notes must have a document attachment
+
+  models:
+    criterium:
+      failure_messages:
+        boundary: Your commitment has no current/planned boundary
+        five_year_commitment: The lifespan of your commitment is less than 5 years
+        progress_report: You aren't able to submit progress reports
+        no_cbd_objectives: Your commitment doesn't contribute to any of the CBD commitments
+        government_manager: Your commitment is being made by a government
+        other_as_manager: Your commitment stakeholder is not suitable
+    cbd_objective:
+      additional_form_text:
+        conservation_of_biological_diversity: Conservation of biological diversity (nature)
+        sustainable_use: Sustainable use of biological diversity (nature)
+        fair_and_equitable_sharing_of_benefits_from_the_utilization_of_genetic_resources: Fair and equitable sharing of benefits from the use of biological diversity (nature)
+    objective:
+      additional_form_text:
+        equitable_sharing_of_benefits_from_genetic_resources: Equitable sharing of benefits from genetic resources (i.e. Sharing monetary or non-monetary benefits from plants or animals fairly)
+    action:
+      additional_form_text:
+        protection_of_land/water: Protection of land/water (e.g. establish or expand a park or protected area)
+        management_of_land/water: Management of land/water (e.g. conserve or restore a habitat, prevent poaching or control invasive species)
+        species_management: Species management (excluding invasive species control. E.g. enhance or restore a species, manage trade or harvests)
+        economic_(or other)_incentives_to_influence_behaviour: Economic (or other) incentives to influence behaviour (e.g. provide alternative livelihoods or products)
+    threat:
+      additional_form_text:
+        biological_resource_use: Biological resource use (e.g. hunting, logging, fishing, gathering plants)
+        human_intrusions_and_disturbance: Human intrusions and disturbance (e.g. disturbance of habitat by recreational activities or war)
+        natural_system_modifications: Natural system modifications (e.g. dams, land reclamation, fire management)
+        geological_events: Geological events (e.g. volcanoes, earthquakes, landslides)
+        climate_change_or_severe_weather: Climate change or severe weather (e.g. flooding, droughts, habitat changes, temperature changes)
+    manager:
+      additional_form_text:
+        for-profit_organisation: For-profit organisation (business and industry)
+        collaborative_governance: Collaborative governance (i.e. decisions are made by one group on behalf of many)
+        joint_governance: Joint governance (i.e. decisions are made by many)
+        non-profit_organisation: Non-governmental organisation (NGO)
+
+  views:
+    titles:
+      action_agenda: Action Agenda
+    buttons:
+      access: 'Access'
+      admin: 'Admin'
+      my_dashboard: My Dashboard
+      log_in:
+        button: Log In
+        title: Sign in to your Action Agenda account
+      log_out: Log Out 
+    criterium:
+      ineligible:
+        title: This platform might not be the best place to record your commitment
+        description: Your answers in the criteria form suggest this platform might not be the best place to record your commitment.
+        results_did_not_pass: Your results that didn't pass the criteria form
+        links:
+          action_agenda:
+            description: For other biodiversity related commitments
+    commitments:
+      call_to_action:
+        commitments_count_description: Commitments Added
+        link: Add a commitment
+    home:
+      hero:
+        button: Make a commitment
+        subtitle: Capturing Area-Based Commitments
+        title: Commitments for Nature
+        commitments_count_description: Uploaded Commitments
+      map:
+        header: Explore Commitments
+        placeholder: Search by country
+        button: View Commitments

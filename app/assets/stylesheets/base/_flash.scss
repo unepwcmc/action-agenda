@@ -1,0 +1,40 @@
+.flash-notice {
+  &__container {
+    background-color: rgba(44, 44, 44, 0.6);
+    height: 100vh; width: 100vw;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    z-index: 4;
+
+    &.closed {
+      display: none;
+      all: none;
+    }
+  }
+  
+  &__card {
+    background-color: $white;
+    font-size: rem-calc(20);
+    padding: rem-calc(70) rem-calc(95);
+    max-width: rem-calc(572);
+    
+    display: flex;
+    flex-direction: column;
+    
+    position: absolute;
+  }
+
+  &__close-button {
+    @include button-grey-light;
+    font-size: rem-calc(18);
+    margin-top: rem-calc(20);
+    width: 100%;
+    min-height: rem-calc(67);
+  
+    justify-content: center;
+  }
+}

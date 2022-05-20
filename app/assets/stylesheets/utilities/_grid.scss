@@ -1,0 +1,13 @@
+.grid-1-gap-1 {
+  column-gap: 46px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 46px;
+}
+
+.grid-3-gap-2 {
+  column-gap: 46px;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  row-gap: 46px;
+}

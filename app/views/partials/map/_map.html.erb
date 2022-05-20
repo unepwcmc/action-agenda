@@ -1,0 +1,11 @@
+<section>
+  <h2 class="h2--full-width"><%= I18n.t('views.home.map.header')%></h2>
+  
+  <map-section 
+    class="map"
+    placeholder="<%= I18n.t('views.home.map.placeholder')%>"
+    :spatial-data="<%= @commitments_spatial_data.to_json %>"
+    :countries="<%= @countries.to_json %>"
+  >
+  </map-section>
+</section>

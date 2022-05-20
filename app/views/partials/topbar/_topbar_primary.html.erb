@@ -1,0 +1,24 @@
+<div class="topbar--primary">
+  <ul class="nav nav--primary">
+    <li class="nav__item">
+      <%= link_to 'Main Action Agenda', 'https://www.cbd.int/action-agenda', title: 'Visit the Action Agenda website', target: '_blank', class: 'nav__link' %>
+    </li>
+  <% if current_user %>
+    <li class="nav__item">
+      <nav-dropdown
+        chevron-icon-path="<%= image_url('icons/chevron-down.svg') %>"
+        log-out-path="<%= destroy_user_session_path %>"
+        log-out-text="<%= I18n.t('views.buttons.log_out') %>"
+        my-dashboard-path="<%= dashboard_url %>"
+        my-dashboard-text="<%= I18n.t('views.buttons.my_dashboard') %>"
+        user-icon-path="<%= image_url('icons/user.png') %>"
+        admin-text="<%= I18n.t('views.buttons.admin') if current_user.admin? %>"
+        admin-path="<%= admin_imported_commitments_path if current_user.admin? %>"
+      ></nav-dropdown>
+    </li>
+  <% else %>
+    <li class="nav__item">
+      <%= link_to I18n.t('views.buttons.log_in.button'), new_user_session_url, title: I18n.t('views.buttons.log_in.title'), class: 'nav__link' %>
+    </li>
+  <% end %>
+</div>

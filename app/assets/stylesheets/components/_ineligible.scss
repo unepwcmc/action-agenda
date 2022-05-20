@@ -1,0 +1,107 @@
+//--------------------------------------------------
+// variables
+//--------------------------------------------------
+$icon-size: rem-calc(126);
+//--------------------------------------------------
+// mixins
+//--------------------------------------------------
+
+//--------------------------------------------------
+// classes
+//--------------------------------------------------
+.ineligible {
+  @include flex;
+  background: $grey-xlight;
+  padding-top: rem-calc(120);
+  padding-bottom: rem-calc(70);
+
+  justify-content: center;
+
+  
+  &__content {
+    max-width: rem-calc(630);
+
+    position: relative;
+    
+    &::before {
+      background-image: image_url('icons/group66.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      content: '';
+      min-width: $icon-size; 
+      min-height: $icon-size;
+  
+      display: block;
+  
+      position: absolute;
+      top: 0;
+      left: -$icon-size - rem-calc(25);
+    }
+  }
+
+  h1 {
+    font-family: $header-font;
+    font-stretch: condensed;
+  }
+
+  p,
+  li {
+    font-size: rem-calc(20);
+    line-height: $p-font-line-height;
+  }
+
+  li {
+    color: $grey-dark;
+  }
+
+  ul {
+    margin-bottom: rem-calc(60);
+    padding-left: rem-calc(20);
+  }
+ 
+  .container {
+    a {
+      margin-top: rem-calc(60);
+      font-family: $header-font;
+      font-stretch: condensed;
+    }
+
+    .blurb {
+      margin-bottom: rem-calc(40);
+    }    
+  }
+
+  &__links {
+    @include flex;
+
+    margin-bottom: rem-calc(40);
+
+    justify-content: space-between;
+
+    p {
+      margin: 0;
+
+      align-self: flex-end;
+
+      a {
+        color: $green-dark;
+        font-family: $header-font;
+        font-stretch: condensed;
+        font-weight: bold;
+        text-decoration: none;
+
+        span {
+          background-image: image_url('icons/link.svg');
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: right;
+          font-family: $header-font;
+          font-size: rem-calc(18);
+          font-stretch: condensed;
+          padding-right: rem-calc(35);
+          width: rem-calc(20); height: rem-calc(20);
+        }
+      }
+    }
+  }
+}

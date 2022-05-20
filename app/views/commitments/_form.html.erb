@@ -1,0 +1,13 @@
+<% @grey_bg = true %>
+<% @reduced_footer = true %>
+
+<div class="container spacer-medium--top spacer-large--bottom">
+  <survey-form
+    data-model="Commitment"
+    :form-data="<%= @form_hash.to_json %>"
+    modal-question-body="<%="<p>#{I18n.t('form.commitments.modal.p1')}</p><p><b>#{I18n.t('form.commitments.modal.p2.prefix')}*</b> #{I18n.t('form.commitments.modal.p2.content')}</p>"%>"
+    :modal-text="<%=I18n.t('form.commitments.modal').to_json%>"
+    :navigation-text="<%=I18n.t('form.commitments.navigation').to_json%>"
+    :none-values="<%= @none_values.to_json %>"   
+  ></survey-form>
+</div>

@@ -1,0 +1,38 @@
+en:
+  dashboard:
+    button:
+      text: ADD A COMMITMENT
+      path: /criteria/new
+    hero:
+      heading:
+        existing: My Dashboard
+        none: Upload your Area-Based Commitments
+    navigation:
+      home:
+        path: /home
+        text: HOME
+      commitments:
+        path: /commitments
+        text: EXPLORE COMMITMENTS
+    carousel:
+      title: Commitments for Nature has been created to showcase and inspire action on commitments for area-based conservation
+      subheading: Coming Soon - links to the post-2020 global biodiversity goals and targets
+    content:
+      existing:
+        my_commitments:
+          heading: My Commitments
+        upload_status:
+          heading: Upload Status
+          published: Published
+          draft: Information still required
+          draft_info: All mandatory fields are required before a commitment can be published to the website. Select the edit icon to fill out missing fields.
+        icon_alts:
+          destroy: Delete icon
+          edit: Edit icon
+          show: View icon
+          show-inactive: View icon (inactive)
+          warning: Warning icon
+      none:
+        icon_alt: Pencil icon
+        heading: You have no commitments added
+        sub: Start uploading your commitments today

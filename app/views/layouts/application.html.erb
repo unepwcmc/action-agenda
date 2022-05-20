@@ -4,12 +4,33 @@
     <title>ActionAgenda</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render partial: '/partials/head/cdn' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <div id="v-app">
+      <% flash.each do |key, value| %>
+        <% if value == I18n.t('devise.registrations.signed_up_but_unconfirmed') %>
+          <%= render partial: '/devise/notice', locals: { notice: value } %>
+        <% end %>
+      <% end %>
+
+      <%= render partial: '/partials/topbar/topbar_primary' %>
+
+      <div class="content<%= " bg--grey-xlight" if @grey_bg %>">
+        <%= yield %>
+      </div>
+
+      <% if @reduced_footer %>
+        <%= render partial:'partials/global/reduced_footer' %>
+      <% else %>
+        <%= render partial:'partials/global/footer', locals: {
+          links: footer_nav, 
+          logos: site_logos
+        } %>
+      <% end %>
+    </div>
   </body>
 </html>

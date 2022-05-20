@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+indigenous:
+  name: Indigenous peoples
+  default_option: true
+
+non_profit:
+  name: Non-profit organisation
+  default_option: true
+
+local_communities:
+  name: Local communities
+  default_option: true
+
+government:
+  name: Sub-national government
+  default_option: true
+
+other:
+  name: Other
+  default_option: true

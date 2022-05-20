@@ -1,0 +1,24 @@
+<% content_for :header_link_text, I18n.t('devise.sessions.no_account') %>
+<% content_for :header_link_path, "/users/sign_up" %>
+<% content_for :title, I18n.t('devise.sessions.log_in') %>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field">
+    <%= f.label :email, I18n.t('devise.labels.email') %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <div class="field__label-with-extra-text">
+      <%= f.label :password, I18n.t('devise.labels.password'), class: "field__label-with-extra-text-item" %>
+      <%= link_to I18n.t('devise.passwords.forgot'), new_password_path(resource_name), class: "field__label-with-extra-text-item field__label-with-extra-text-item--link" %>
+    </div>
+      <%= f.password_field :password, autocomplete: "current-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit I18n.t('devise.sessions.log_in') %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

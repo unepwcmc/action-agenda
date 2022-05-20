@@ -1,0 +1,21 @@
+<% confirmation = devise_mapping.confirmable? && ['confirmations', 'registrations', 'sessions'].include?(controller_name) %>
+<% unlock = devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name == 'unlocks' %>
+<% omniauth = devise_mapping.omniauthable? %>
+
+<% if confirmation || unlock || omniauth %>
+  <div class="device__post-form-links">
+    <%- if confirmation %>
+      <%= link_to I18n.t('devise.confirmations.didnt_receive'), new_confirmation_path(resource_name), class: "devise__post-form-link" %><br />
+    <% end %>
+
+    <%- if unlock %>
+      <%= link_to I18n.t('devise.unlocks.didnt_receive'), new_unlock_path(resource_name), class: "devise__post-form-link" %><br />
+    <% end %>
+
+    <%- if omniauth %>
+      <%- resource_class.omniauth_providers.each do |provider| %>
+        <%= link_to "#{I18n.t('devise.omniauth.sign_in_with')} #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), method: :post, class: "devise__post-form-link" %><br />
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

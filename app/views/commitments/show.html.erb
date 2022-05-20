@@ -1,0 +1,127 @@
+<%= render partial: '/partials/topbar/topbar_secondary', locals: { links: nav_header(current_user) } %>
+
+<div class="container">
+  <section class="grid-3-gap-2 spacer-small--top spacer-large--bottom">
+    <div>
+      <h3><%= I18n.t('commitments.show.id') %>: <%= @commitment.id %></h3>
+
+      <h1 class="commitment__name">
+        <%= @commitment.name %>
+      </h1>
+      <p><%= @commitment.description %></p>
+      <br>
+      <h3><%= I18n.t('commitments.show.planned_actions') %></h3>
+      <% if @commitment.actions.present? %>
+        <% @commitment.actions.each do |action| %>
+          <p><%= action.name %></p>
+        <% end %>
+      <% else %>
+        <p><%= @commitment.planned_actions %></p>
+      <% end %>
+    </div>
+
+    <div class="list--commitment-info">
+      <h2 class="list__title"><span class="green"><%= I18n.t('commitments.show.stage') %>:</span> <%= @commitment.stage %></h2>
+
+      <ul class="list__ul">
+        <li class="list__li">
+          <span class="list__subtitle"><%= I18n.t('commitments.show.actors') %>:</span>
+          <span class="list__text"><%= @commitment.managers.pluck(:name).join(', ') %></span>
+          <%# <span class="list__text">COMPANY WEBSITE</span> %>
+        </li>
+        <li class="list__li">
+          <span class="list__subtitle"><%= I18n.t('commitments.show.current_area') %>:</span>
+          <span class="list__text"><%= @commitment.current_area_ha %> hectares</span>
+        </li>
+        <li class="list__li">
+          <span class="list__subtitle"><%= I18n.t('commitments.show.year_when_commitment_was_made') %>:</span>
+          <span class="list__text"><%= @commitment.committed_year %></span>
+        </li>
+        <li class="list__li">
+          <span class="list__subtitle"><%= I18n.t('commitments.show.first_year_of_commitment_actions') %>:</span>
+          <span class="list__text"><%= @commitment.implementation_year %></span>
+        </li>
+        <li class="list__li">
+          <span class="list__subtitle"><%= I18n.t('commitments.show.expected_duration_of_commitment') %>:</span>
+          <span class="list__text"><%= @commitment.duration_years %></span>
+        </li>
+        <li class="list__li">
+          <span class="list__subtitle"><%= I18n.t('commitments.show.country_location') %>:</span>
+          <p class="list__country">
+            <i class="list__icon icon--pin"></i>
+            <span class="list__text">
+              <%= @countries.map do |country|
+                link_to country[:name], country[:commitments_path], target: '_blank', title: "Commitments in #{country[:name]}"
+              end.join(', ').html_safe %>
+            </span>
+          </p>
+        </li>
+        <li class="list__li">
+          <span class="list__subtitle"><%= I18n.t('commitments.show.linked_from_platform') %>:</span>
+          <% @commitment.links.each do |link| %>
+            <%= link_to link.url, link.url, target: '_blank', title: link.url %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="grid-1-gap-1 spacer-large--bottom">
+    <% if @primary_objectives.present? then %>
+      <div class="list--primary-objectives">
+        <h3 class="list__title"><%= I18n.t('commitments.show.primary_objectives') %></h3>
+        <div class="list__container">
+          <ul class="list__ul">
+            <% @primary_objectives.each do |objective| %>
+              <li class="list__li">
+                <i class="list__icon icon--<%= objective[:icon] %>"></i>
+                <%= objective[:title] %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @commitment.governance_authority.present? then %>
+      <div class="list--governance">
+        <h3 class="list__title"><%= I18n.t('commitments.show.governance_authority') %></h3>
+        <p><%= @commitment.governance_authority %></p>
+        <p class="bold"><%= I18n.t('commitments.show.governance_type') %></p>
+        <span><%= @commitment.governance_types.pluck(:name).join(', ') %></span>
+      </div>
+    <% end %>
+
+    <% if false # section removed for now, will eventually be replaced by different targets %>
+      <div class="list--targets-biodiversity">
+        <h3 class="list__title">Related Biodiversity Targets</h3>
+        <ul class="list__ul">
+          <% @targets_biodiversity.each do |target| %>
+            <li class="list__li">
+              <% begin %>
+                <%= image_tag "icons/aichi-#{target}.svg", class: 'icon--aichi', alt: "Aichi target #{target} icon" %>
+              <% rescue Sprockets::Rails::Helper::AssetNotFound  %>
+                <% Rails.logger.info("Aichi icon not found") %>
+              <% end %>
+              <span class="list__subtitle">Aichi target <%= target %></span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% if @commitment.progress_documents.present? then %>
+      <div class="list--targets-additional">
+        <h3 class="list__title"><%= I18n.t('commitments.show.additional_details') %></h3>
+        <% @commitment.progress_documents.each do |progress_document| %>
+          <p>
+            <strong class="link__download">
+              <%= link_to progress_document.document.filename, rails_blob_path(progress_document.document, disposition: "attachment"), target: "_blank" %>
+            </strong>
+             <p><%= progress_document.progress_notes %> </p>
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
+</div>

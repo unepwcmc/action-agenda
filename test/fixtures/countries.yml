@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+hungary:
+  name: Hungary
+  iso: HU
+
+madagascar:
+  name: Madagascar
+  iso: MG
+
+global:
+  name: Global
+  iso: --

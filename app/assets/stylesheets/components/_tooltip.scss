@@ -1,0 +1,65 @@
+//--------------------------------------------------
+// variables
+//--------------------------------------------------
+$arrow-height: rem-calc(10);
+$arrow-width: rem-calc(40);
+$button-size: rem-calc(35);
+$popup-padding-x: rem-calc(35);
+$popup-width: rem-calc(390);
+//--------------------------------------------------
+// mixins
+//--------------------------------------------------
+
+//--------------------------------------------------
+// classes
+//--------------------------------------------------
+.tooltip {
+  position: relative;
+
+  &__trigger {
+    background-color: transparent;
+    background-image: image-url('icons/tooltip.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: $button-size; height: $button-size;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+  } 
+  
+  &__popup {
+    background-color: $white;
+    font-family: $body-font;
+    font-size: rem-calc(16);
+    font-weight: 500;
+    line-height: 1.2;
+    padding: rem-calc(40) $popup-padding-x;
+    width: rem-calc(390);
+
+    position: absolute;
+    top: $button-size + $arrow-height + rem-calc(5);
+    left: -($popup-width / 2 + $button-size / 2);
+    z-index: 3;
+
+    * {
+      line-height: 1.2;
+    }
+    
+    &:after {
+      border-right: ($arrow-width / 2) solid transparent;
+      border-bottom: $arrow-height solid $grey-xxlight;
+      border-left: ($arrow-width / 2) solid transparent;
+      content: '';
+      width: 0;
+      height: 0;
+
+      position: absolute;
+      top: -$arrow-height;
+      right: $popup-width / 2 - $arrow-width / 2;
+    }
+  }
+}

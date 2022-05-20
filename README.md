@@ -1,24 +1,16 @@
-# README
+# Commitments for Nature
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## Ruby version
+2.6.3
+## Node version 
 
-* Ruby version
+## Quickstart
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. `bundle install`
+2. `yarn install`
+3. `bundle exec rails db:create db:migrate rails db:seed`
+4. `bundle exec rails s` 
+5. Obtain a copy of the 'commitments' CSV if not already present in `lib/data/seeds`
+6. Run `rake import:commitments`
+7. On the Commitments page, you should see a list of commitments.

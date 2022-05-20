@@ -1,0 +1,14 @@
+<header class="hero--basic">
+  <div class="hero__container container">
+    <h1><%= title %></h1>
+    <div class="hero__call-to-action">
+      <h2>
+        <%= commitments_count %>
+        <%= I18n.t('views.commitments.call_to_action.commitments_count_description') %>
+      </h2>
+      <a href="/criteria/new" title="Add a commitment">
+        <%= I18n.t('views.commitments.call_to_action.link') %>
+      </a>
+    </div>
+  </div>
+</header>

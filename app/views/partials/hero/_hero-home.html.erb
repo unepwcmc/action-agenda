@@ -1,0 +1,41 @@
+<header class="hero--home">
+  <div class="container">
+    <div class="hero__content">
+      <div class="hero__content-left">
+        <h1 class="hero__title">
+          <%= I18n.t('views.home.hero.title') %>
+        </h1>
+        <p class="hero__subtitle">
+          <%= I18n.t('views.home.hero.subtitle') %>
+        </p>
+
+        <a
+          class="hero__button"
+          href="/criteria/new"
+          title="<%= I18n.t('views.home.hero.button') %>"
+        >
+          <%= I18n.t('views.home.hero.button').upcase %>
+        </a>
+        
+        <div class="list--hero-logos">
+          <ul class="list__ul">
+            <% logos.each do |logo| %>
+              <li class="list__li">
+                <%= image_tag logo[:src], alt: logo[:alt], class: 'list__img' %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="hero__commitments-count">
+        <%= image_tag image_url('icons/document.svg'), alt: 'Document', class: 'hero__commitments-count-image' %>
+        <div class="hero__commitments-counter">
+          <%= commitments_count %>
+        </div>
+        <div class="hero__commitments-counter-description">
+          <%= I18n.t('views.home.hero.commitments_count_description') %>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

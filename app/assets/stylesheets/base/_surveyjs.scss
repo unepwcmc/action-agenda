@@ -1,0 +1,477 @@
+//--------------------------------------------------
+// mixins
+//--------------------------------------------------
+@mixin input-standard {
+  @include input-standard-background-border;
+  @include input-standard-font-size;
+  @include input-standard-padding;
+  @include input-standard-width;
+  @include input-standard-height;
+}
+
+@mixin input-standard-background-border {
+  background-color: $white;
+  border: rem-calc(1) solid $grey-md-dark;
+  border-radius: 0;
+}
+
+@mixin input-standard-font-size {
+  font-size: rem-calc(20);
+}
+
+@mixin input-standard-padding {
+  padding: 0.87rem;
+}
+
+@mixin input-standard-width {
+  width: rem-calc(670);
+}
+
+@mixin input-standard-height {
+  height: rem-calc(64);
+}
+
+//--------------------------------------------------
+// variables
+//--------------------------------------------------
+$radio-checkbox-width-height: rem-calc(39);
+$question-content-max-width: rem-calc(815);
+$question-content-spacing-right: rem-calc(75);
+
+//--------------------------------------------------
+// mixins
+//--------------------------------------------------
+@mixin survey-body-text {
+  color: $grey-xxdark;
+  font-family: $body-font;
+  font-size: rem-calc(20);
+  font-weight: initial;
+  line-height: 2;
+}
+
+//--------------------------------------------------
+// classes
+//--------------------------------------------------
+.select2-dropdown {
+  @include input-standard-font-size;
+  width: rem-calc(670) !important;
+}
+
+.question__side-number-indicator {
+  color: $grey-xxdark;
+  font-size: rem-calc(20);
+
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#v-app {
+  .survey-container {
+    margin-bottom: rem-calc(100);
+  }
+
+  .sv-header {
+    &__text {
+      color: $grey-xxdark;
+      max-width: 85%;
+
+      h3 {
+        font-size: rem-calc(48);
+      }
+
+      h5 {
+        @include survey-body-text;
+        
+        padding-top: rem-calc(20);
+      }
+    }
+  }
+
+  .sv-page__description {
+    @include survey-body-text;
+    margin: rem-calc(40) 0 rem-calc(20);
+    padding: 0;
+    max-width: 85%;
+  }
+
+  .sv-body {
+    font-family: $body-font;
+    font-size: rem-calc(20);
+
+    h4 {
+      display: none;
+    }
+
+    h5 {
+      font-size: rem-calc(30);
+      padding: 0;
+      max-width: $question-content-max-width;
+
+      display: flex;
+      justify-content: space-between;
+
+      div:first-child {
+        margin-right: $question-content-spacing-right;
+      }
+    }
+  }
+
+  .sv-title {
+    font-family: $header-font;
+  }
+  
+  .sv-container-modern__title, .sv-body__page {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .sv-container-modern__title {
+    margin-top: rem-calc(50);
+    margin-bottom: rem-calc(20);
+    padding: 0;
+  }
+
+  .sv-page > .sv-row {
+    &:not(:last-child) {
+      margin-bottom: rem-calc(35);
+      padding-bottom: 0;
+    }
+  }
+
+  .sv-panel {
+    .sv-row {
+      &:not(:last-child) {
+        padding-bottom: 0;
+      }
+
+      &:not(:first-child) {
+        .sv-question__title {
+          font-size: rem-calc(20);
+        }
+
+        :not(.sv-question__header--location--left) > .sv-question__title {
+          font-weight: normal;
+        }
+      }
+    }
+  }
+
+  .sv-question {
+    overflow: visible;
+    margin-bottom: rem-calc(35);
+
+    &__header {
+      margin-bottom: rem-calc(25);
+
+      position: relative;
+      
+      &:not(.sv-question__header--location--left) {
+        .sv-question__description {
+          color: $grey-xxdark;
+          font-style: italic;
+          font-size: rem-calc(18);
+          margin-top: rem-calc(20);
+          padding: 0 $question-content-spacing-right 0 0;
+          max-width: $question-content-max-width;
+        }
+      }
+    }
+
+    &__title {
+      font-size: rem-calc(30);
+
+      &--answer {
+        background: none;
+      }
+    }
+  
+    &__content {
+      color: $grey-xxdark;
+      margin-left: 0;
+    }
+
+    &[data-name="required_field_explainer"] {
+      margin-bottom: 0;
+    }
+
+    &[data-name="latitude"], &[data-name="longitude"], &[data-name="current_area_ha"] {
+      display: flex;
+      align-items: center;
+
+      .sv-question__header {
+        float: none;
+        margin: 0 0 0 rem-calc(17);
+        padding: 0;
+        width: auto;
+        
+        order: 2;
+      }
+
+      .sv-question__content {
+        order: 1;
+
+        .sv-text {
+          width: rem-calc(281);
+        }
+      }
+    }
+  }
+
+  .sv-item {
+    padding: 0 $question-content-spacing-right 0 0;
+    max-width: $question-content-max-width;
+
+    &:not(:last-child) {
+      margin-bottom: rem-calc(19);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &__decorator {
+      border: none;
+      width: rem-calc($radio-checkbox-width-height);
+      height: rem-calc($radio-checkbox-width-height);
+  
+      left: rem-calc(-($radio-checkbox-width-height + rem-calc(23)));
+    }
+
+    &__svg {
+      background-color: $white;
+      border: rem-calc(1) solid $grey-md-dark;
+      width: rem-calc($radio-checkbox-width-height);
+      height: rem-calc($radio-checkbox-width-height);
+    }
+
+    &__control-label {
+      @include input-standard-font-size;
+      line-height: $radio-checkbox-width-height;
+
+      top: 0;
+    }
+  }
+
+  .sv-text {
+    @include input-standard;
+    &::placeholder {
+      color: $grey;
+    }
+  }
+
+  .sv-comment {
+    @include input-standard-background-border;
+    @include input-standard-font-size;
+    @include input-standard-padding;
+    @include input-standard-width;
+    height: rem-calc(160);
+  }
+
+  .select2 {    
+    &-selection {
+      @include input-standard;
+      display: flex;
+      align-items: center;
+  
+      &__rendered {
+        padding: 0;
+      }
+  
+      &__choice {
+        margin-top: rem-calc(0);
+      }
+    }
+
+    &-search__field {
+      margin-top: rem-calc(0);
+    }
+  }
+  
+  .sv-dropdown {
+    @include input-standard-background-border;
+    @include input-standard-font-size;
+    @include input-standard-padding;
+    @include input-standard-height;
+    width: rem-calc(180);
+  }
+
+  .sv-selectbase {
+    margin-bottom: 0;
+      
+    &__label {
+      margin-left: rem-calc($radio-checkbox-width-height + rem-calc(23));
+      min-height: rem-calc($radio-checkbox-width-height);
+    }
+
+    &__column {
+      min-width: 0;
+
+      &:not(:last-child) {
+        padding-right: rem-calc(65);
+      }
+    }
+  }
+
+  .sv-checkbox__svg {
+    border-radius: 0;
+  }
+
+  .sv-checkbox--checked, .sv-radio--checked {
+    .sv-item__svg {
+      fill: $green;
+    }
+  }
+
+  .sv-file {
+    @include input-standard-width;
+    background-color: $white;
+    border: rem-calc(1) solid $grey-md-dark;
+    padding: rem-calc(7) rem-calc(7) rem-calc(7) rem-calc(22);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;   
+    
+    // file upload button and placeholder text outer div
+    &__decorator {
+      padding: 0;
+
+      display: flex;
+      order: 2;
+    }
+
+    // file upload button and placeholder text inner div
+    &__wrapper {
+      background-color: $white;
+      margin: 0;
+
+      display: flex;
+      align-items: center;
+
+      transform: none;
+    }
+
+    // file upload button
+    &__choose-btn {
+      @include button-accent-condensed-taller;
+      border-radius: 0;
+      width: rem-calc(235);
+  
+      justify-content: center;
+      order: 2;
+    }
+
+    // placeholder text
+    &__no-file-chosen {
+      font-size: rem-calc(20);
+      margin-right: rem-calc(20);
+      margin-left: 0;
+      color: $grey;
+
+      order: 1;
+    }
+
+    // uploaded file name with delete button outer div
+    &> div:not(.sv-file__decorator) {
+      margin-right: rem-calc(30);
+
+      order: 1;
+    }
+
+    // uploaded file name with delete button inner span
+    &__preview {
+      margin-top: 0;
+      padding-right: 0;
+
+      display: flex;
+      align-items: center;
+
+      // uploaded file name
+      .sv-file__sign {
+        font-size: rem-calc(20);
+        margin-right: rem-calc(10);
+
+        order: 1;
+      }
+
+      // delete button outer div
+      &> :not(.sv-file__sign) {
+        order: 2;
+      }
+    }
+
+    // delete button icon
+    &__remove-svg {
+      fill: $red-warning;
+
+      display: flex;
+      position: static;
+    }
+
+    // unnecessary "clean" button that also deletes uploaded file
+    &__clean-btn {
+      display: none;
+    }
+  }
+
+  // makes flex work when no file is chosen
+  // specificity here is to make it work for file uploads within panels
+  .sv-question:not(.sv-question--answered) > * > * > .sv-file {
+    &__decorator {
+      width: 100%;
+    
+      .sv-file__wrapper {
+        width: 100%;
+  
+        justify-content: space-between;
+      }
+    }
+  }
+
+  .form__required-text-explainer {
+    color: $danger;
+    font-style: italic;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .form__page--not-first {
+    margin-top: rem-calc(90);
+  }
+
+  .form__question--errors {
+    .sv-question__title {
+      &:not(.sv-question__title--answer) {
+        color: $danger;
+      }
+    }
+  }
+  
+  .form__question--multiselect {
+    .sv-question__header--location--top {
+      .sv-question__description {
+        color: $grey-md-dark;
+        font-style: normal;
+        font-weight: $bold;
+  
+        position: relative;
+  
+        .sv-string-viewer {
+          display: flex;
+          align-items: center;
+  
+          &:before {
+            background-image: image_url("icons/multiselect.svg");
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: '';
+            margin-right: rem-calc(10);
+            width: rem-calc(24);
+            height: rem-calc(24);
+          }  
+        }
+      }
+    }
+  }
+}
