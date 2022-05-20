@@ -14,6 +14,14 @@ class CbdCommitmentHashTest < ActiveSupport::TestCase
           "zh"=>"喜马拉雅民间传说、土著知识和人民网络、基兰特土著协会联合会、湿地生物多样性保护协会尼泊尔希望通过加紧并带来对生物文化多样性指示、智慧、土著人的价值观表达是与大自然母亲和地球和谐相处。 \n\n我们土著人民和当地社区，包括妇女和青年，将游说和倡导生物文化多样性、价值观和指标对 2020 年后全球生物多样性框架的重要性，该框架将在 UNCBD COP15 和 2050 年愿景中通过与自然和谐相处。我们将促进对《公约》及其条款的路线图和精神的传播、教育和公众意识，与其他 IPLC 及其组织等盟友建立联系，以更好地了解《生物多样性公约》及其议定书。"
         }
       },
+      "actor"=>{
+        "types"=>[
+          {
+            "name"=>"Non-governmental organization (NGO)",
+            "identifier"=>"8A265B81-3973-42ED-BB06-40ACC755E496"
+          }
+        ]
+      },
       "actionDetails"=>{
         "sdgs"=>[
           {
@@ -52,7 +60,9 @@ class CbdCommitmentHashTest < ActiveSupport::TestCase
       }
     }
     commitment = Commitment.new
-    commitment_params = Services::CbdCommitmentHash.new(cbd_commitment_json, commitment).call
+    manager = managers(:non_profit)
+    manager_hash = { manager.name=> manager.id } 
+    commitment_params = Services::CbdCommitmentHash.new(cbd_commitment_json, commitment, manager_hash).call
     commitment.assign_attributes(commitment_params)
     commitment.save!
     commitment.reload
@@ -62,5 +72,6 @@ class CbdCommitmentHashTest < ActiveSupport::TestCase
     assert commitment.cbd_id == cbd_commitment_json.dig('_id')
     assert commitment.links.first.url == "https://www.cbd.int/action-agenda/contributions/action?action-id=#{cbd_commitment_json.dig('_id')}"
     assert commitment.countries.pluck(:iso).sort == %w[HU MG]
+    assert commitment.managers.pluck(:name) == [manager.name]
   end
 end

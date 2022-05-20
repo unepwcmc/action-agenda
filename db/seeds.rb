@@ -9,6 +9,7 @@ User.first.confirm
 
 # Criteria and assicated records
 Manager.create!(Manager::DEFAULT_OPTIONS.map {|manager_name| { name: manager_name, default_option: true }})
+Manager.create!(name: 'Other government', default_option: false)
 
 cbd_objective_names = [ 'Conservation of biological diversity', 'Sustainable use', 'Fair and equitable sharing of benefits from the utilization of genetic resources', 'None of the above' ]
 CbdObjective.create!(cbd_objective_names.map {|name| { name: name }})

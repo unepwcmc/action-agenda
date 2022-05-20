@@ -14,7 +14,7 @@ class Manager < ApplicationRecord
   scope :form_options, -> { where("default_option IS true") }
   scope :filter_options, -> { where("default_option IS true AND name != 'Sub-national government'") }
   
-  has_many :commitments
+  has_and_belongs_to_many :commitments
   
   validates_presence_of :name
   validates_uniqueness_of :name

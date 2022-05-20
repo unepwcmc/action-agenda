@@ -7,7 +7,7 @@ class Admin::ImportedCommitmentsController < ActionController::Base
   def index
     respond_to do |format|
       format.json { 
-        @commitments = Commitment.where(commitment_source: 'cbd', cfn_approved: cfn_approved_param) 
+        @commitments = Commitment.cbd_without_government_managers.where(cfn_approved: cfn_approved_param) 
         render json: @commitments.as_json(only: [:id, :name, :description])
       }
       format.html {}
