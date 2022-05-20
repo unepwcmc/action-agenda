@@ -65,9 +65,8 @@ class CommitmentsController < ApplicationController
 
   def create
     @commitment = Commitment.new(commitment_params.merge(user: current_user, commitment_source: 'form', cfn_approved: true))
-    unless commitment_params[:manager_id].present?
-      @commitment.manager_id = Criterium.find(@commitment.criterium_id).manager_id
-    end
+    criterium = Criterium.find(@commitment.criterium_id)
+    @commitment.manager_ids = [criterium.manager_id]
 
     if @commitment.save
       respond_to do |format|
