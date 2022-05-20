@@ -5,7 +5,7 @@ indigenous:
   default_option: true
 
 ngo:
-  name: Non-governmental organisation (NGO)
+  name: Non-profit organisation
   default_option: true
 
 local_communities:

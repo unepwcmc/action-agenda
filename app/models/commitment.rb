@@ -30,9 +30,6 @@ class Commitment < ApplicationRecord
   has_many :progress_documents, dependent: :destroy
   has_one_attached :geospatial_file
 
-  # belongs_to :manager, class_name: 'Manager', optional: true
-  # import_by manager: :name
-
   belongs_to :criterium, optional: true
   belongs_to :user, optional: true
 
