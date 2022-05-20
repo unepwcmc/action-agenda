@@ -17,6 +17,7 @@
 
 ### Adding new commitments via csv
 We are dependant on several fields on Commitment to filter the results we want to return over the API.
+
 ```scope :api_records, -> { where(state: 'live', cfn_approved: true, shareable: true) }```
 
 We need to add these to any csv file for importing:
