@@ -10,23 +10,26 @@ class Commitment < ApplicationRecord
   ignore_column 'review_method'
   ignore_column 'proposed_area_ha'
 
-  has_and_belongs_to_many :countries
-  import_by countries: :name
-  has_and_belongs_to_many :objectives
-  import_by objectives: :name
-  has_and_belongs_to_many :governance_types
-  import_by governance_types: :name
   has_and_belongs_to_many :actions
   import_by actions: :name
-  has_and_belongs_to_many :threats
-  import_by threats: :name
+  has_and_belongs_to_many :countries
+  import_by countries: :name
+  has_and_belongs_to_many :governance_types
+  import_by governance_types: :name
   has_many :links, dependent: :destroy
   import_by links: :url
+  has_and_belongs_to_many :managers
+  import_by managers: :name
+  has_and_belongs_to_many :objectives
+  import_by objectives: :name
+  has_and_belongs_to_many :threats
+  import_by threats: :name
+
   has_many :progress_documents, dependent: :destroy
   has_one_attached :geospatial_file
 
-  belongs_to :manager, class_name: 'Manager', optional: true
-  import_by manager: :name
+  # belongs_to :manager, class_name: 'Manager', optional: true
+  # import_by manager: :name
 
   belongs_to :criterium, optional: true
   belongs_to :user, optional: true
@@ -42,7 +45,7 @@ class Commitment < ApplicationRecord
   validates :stage, inclusion: { in: STAGE_OPTIONS }, if: :user_created_and_live?
 
   validates_presence_of :description, :latitude, :longitude, :committed_year, :responsible_group, :implementation_year,
-                        :duration_years, :objectives, :manager, :countries, :actions, :threats, if: :user_created_and_live?
+                        :duration_years, :objectives, :managers, :countries, :actions, :threats, if: :user_created_and_live?
 
   validate :name_is_10_words_or_less, if: :user_created_and_live?
 
@@ -76,7 +79,7 @@ class Commitment < ApplicationRecord
     valid?
     self.state = :draft
     errors.messages.map do |key, value|
-      if key.in?(%i(actions countries manager objectives threats))
+      if key.in?(%i(actions countries managers objectives threats))
         :"#{key.to_s.singularize}_ids"
       else
         key
@@ -190,7 +193,7 @@ class Commitment < ApplicationRecord
     # WARNING! Do not remove the 'published' scope, because this will show unpublished Commitments
     # people might not want public and CBD commitments we've chosen not to display.
     Commitment.published
-      .left_outer_joins(:manager, :countries, :objectives, :governance_types)
+      .left_outer_joins(:managers, :countries, :objectives, :governance_types)
       .distinct
       .where(where_params.values.join(' AND '))
   end

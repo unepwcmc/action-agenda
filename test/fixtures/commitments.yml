@@ -12,7 +12,7 @@ published_cfn_commitment_1:
   governance_authority: MyText
   planned_actions: MyText
   description: MyText
-  manager: indigenous
+  # commitments_manager_id: published_cfn_commitment_1_indigenous
   state: live
   stage: Committed
   duration_years: 5
@@ -37,7 +37,7 @@ published_cfn_commitment_2:
   governance_authority: MyText
   planned_actions: MyText
   description: MyText
-  manager: indigenous
+  # managers: indigenous
   state: live
   stage: Implemented fully
   duration_years: 5
@@ -60,7 +60,7 @@ published_cbd_commitment:
   governance_authority: MyText
   planned_actions: MyText
   description: MyText
-  manager: indigenous
+  # managers: indigenous
   state: live
   stage: Implemented fully
   duration_years: 5
@@ -87,7 +87,7 @@ no_joint_governance_description:
   governance_authority: MyText
   planned_actions: MyText
   description: MyText
-  manager: joint_governance
+  # managers: joint_governance
   state: live
   stage: Committed
   duration_years: 5
@@ -113,7 +113,7 @@ rejected_cbd_commitment:
   governance_authority: MyText
   planned_actions: MyText
   description: MyText
-  manager: indigenous
+  # managers: indigenous
   state: live
   stage: Implemented fully
   duration_years: 5
