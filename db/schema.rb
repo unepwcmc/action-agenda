@@ -88,7 +88,6 @@ ActiveRecord::Schema.define(version: 2022_05_20_093533) do
     t.bigint "criterium_id"
     t.bigint "user_id"
     t.text "area_owner_and_role"
-    t.bigint "manager_id"
     t.boolean "shareable", default: false
     t.string "cbd_id"
     t.boolean "cfn_approved"
@@ -99,7 +98,6 @@ ActiveRecord::Schema.define(version: 2022_05_20_093533) do
     t.index ["country_id"], name: "index_commitments_on_country_id"
     t.index ["duration_years"], name: "index_commitments_on_duration_years"
     t.index ["implementation_year"], name: "index_commitments_on_implementation_year"
-    t.index ["manager_id"], name: "index_commitments_on_manager_id"
   end
 
   create_table "commitments_countries", id: false, force: :cascade do |t|

@@ -4,5 +4,7 @@ class AndJoinTableForManagersOnCommitments < ActiveRecord::Migration[5.2]
       t.belongs_to :commitment
       t.belongs_to :manager
     end
+
+    remove_column :commitments, :manager_id
   end
 end
