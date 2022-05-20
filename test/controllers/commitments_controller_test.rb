@@ -115,7 +115,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
         stage: 'Implemented fully',
         responsible_group: 'a name',
         state: 'live',
-        manager_id: managers(:indigenous).id,
+        manager_ids: [managers(:indigenous).id],
         country_ids: [countries(:hungary).id],
         action_ids: [actions(:species_management).id],
         threat_ids: [threats(:pollution).id],

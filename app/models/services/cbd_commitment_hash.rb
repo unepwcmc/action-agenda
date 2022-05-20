@@ -74,7 +74,7 @@ class Services::CbdCommitmentHash
       actor_data = @cbd_hash.dig('actor', 'types')
       return [] unless actor_data
       # Generate a list of ids from out database from the cbd ids
-      actor_data.map { |x| cbd_identifier_to_cfn_id(x['identifier']) }
+      actor_data.map { |actor| cbd_identifier_to_cfn_id(actor['identifier']) }
     end
   end
 

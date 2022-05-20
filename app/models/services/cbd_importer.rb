@@ -1,7 +1,7 @@
 class Services::CbdImporter
 
   def call
-    manager_hash = Hash[Manager.pluck(:name, :id).collect {|name, id| [name, id]}]
+    manager_hash = Hash[Manager.pluck(:name, :id)]
     first_item_position = 0
     loop do
       response = HTTParty.get(query(first_item_position))

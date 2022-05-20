@@ -4,7 +4,7 @@ indigenous:
   name: Indigenous peoples
   default_option: true
 
-ngo:
+non_profit:
   name: Non-profit organisation
   default_option: true
 

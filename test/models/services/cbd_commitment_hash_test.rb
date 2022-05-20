@@ -60,7 +60,7 @@ class CbdCommitmentHashTest < ActiveSupport::TestCase
       }
     }
     commitment = Commitment.new
-    manager = managers(:ngo)
+    manager = managers(:non_profit)
     manager_hash = { manager.name=> manager.id } 
     commitment_params = Services::CbdCommitmentHash.new(cbd_commitment_json, commitment, manager_hash).call
     commitment.assign_attributes(commitment_params)
