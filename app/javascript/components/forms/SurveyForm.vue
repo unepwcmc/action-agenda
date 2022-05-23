@@ -253,6 +253,8 @@ export default {
         this.appendFileSignedIds(data);
         this.addDestroyKeys(data);
         this.send(data);
+      } else {
+        window.location.replace('/dashboard')
       }
     },
 
