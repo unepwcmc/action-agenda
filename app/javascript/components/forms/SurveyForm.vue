@@ -147,8 +147,8 @@ export default {
           const notAQuestion = element.getType() === 'html'
 
           const unnumberedCases = [
-            hiddenTitle,
             hiddenNumber,
+            hiddenTitle,
             invisible,
             notAQuestion
           ]
