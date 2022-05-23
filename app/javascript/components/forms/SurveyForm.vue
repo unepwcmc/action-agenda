@@ -140,7 +140,25 @@ export default {
       const pages = Array.from(this.survey.pages)
 
       pages.forEach((page, pageIndex) => {
-        const visibleElements = page.elements.filter(element => element.visible)
+        const visibleElements = page.elements.filter(element => {
+          const hiddenNumber = element.hideNumber
+          const hiddenTitle = element.titleLocation === 'hidden'
+          const invisible = !element.visible
+          const notAQuestion = element.getType() === 'html'
+
+          const unnumberedCases = [
+            hiddenTitle,
+            hiddenNumber,
+            invisible,
+            notAQuestion
+          ]
+
+          if (unnumberedCases.some(kase => kase)) {
+            return false
+          }
+
+          return true
+        })
 
         counts[pageIndex] = visibleElements.length
       })
