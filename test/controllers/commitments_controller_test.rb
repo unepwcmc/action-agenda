@@ -94,9 +94,6 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert Commitment.count == commitment_count_at_start + 1
     assert Commitment.last.state == 'draft'
-    # assert_response :unprocessable_entity
-    # assert Commitment.count == commitment_count_at_start
-    # assert JSON.parse(response.body).dig('errors').count > 1
   end
 
   test 'should save a live commitment with valid params and return success' do
