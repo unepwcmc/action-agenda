@@ -78,9 +78,9 @@ en:
         other_as_manager: Your commitment stakeholder is not suitable
     cbd_objective:
       additional_form_text:
-        conservation_of_biological_diversity: Conservation of biological diversity (nature)
-        sustainable_use: Sustainable use of biological diversity (nature)
-        fair_and_equitable_sharing_of_benefits_from_the_utilization_of_genetic_resources: Fair and equitable sharing of benefits from the use of biological diversity (nature)
+        conservation_of_biological_diversity: Conservation of biological diversity
+        sustainable_use: Sustainable use of biological diversity
+        fair_and_equitable_sharing_of_benefits_from_the_utilization_of_genetic_resources: Fair and equitable sharing of benefits from the use of biological diversity
     objective:
       additional_form_text:
         equitable_sharing_of_benefits_from_genetic_resources: Equitable sharing of benefits from genetic resources (i.e. Sharing monetary or non-monetary benefits from plants or animals fairly)
