@@ -102,6 +102,7 @@ export default {
     model.onUpdatePageCssClasses.add(this.onUpdatePageCssClasses);
     model.onUploadFiles.add(this.onUploadFiles);
     model.onDynamicPanelRemoved.add(this.onDynamicPanelRemoved);
+    model.onValueChanged.add(this.onValueChanged);
 
     return {
       axiosDone: false,
@@ -467,9 +468,32 @@ export default {
       });
     },
 
+    onValueChanged(survey, options) {
+      this.retainNullValues(options)
+    },
+
     prevPage() {
       this.survey.prevPage();
       window.scrollTo(0, 0)
+    },
+
+    retainNullValues(options) {
+      const questionName = options.name
+      const newValue = options.value
+
+      // TODO?: conditions for progress documents and geospatial file uploads
+
+      // number - return since all numbers are likely valid
+      if (typeof newValue === 'number') return
+
+      // arrays and strings
+      if (!newValue?.length) {
+        if (Array.isArray(newValue)) {
+          this.survey.mergeData({[questionName]: []})
+        } else {
+          this.survey.mergeData({[questionName]: ""})
+        }
+      }
     },
 
     send(data) {
