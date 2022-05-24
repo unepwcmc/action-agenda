@@ -107,7 +107,7 @@ export default {
       axiosDone: false,
       counter: 0,
       disabled: false,
-      errors: {},
+      errors: [],
       isFirstPage: true,
       isLastPage: false,
       options: {},
@@ -144,7 +144,7 @@ export default {
 
   computed: {
     hasErrors () {
-      return this.formData.errors?.length > 0
+      return this.formData.errors?.length > 0 || this.errors.length > 0
     },
 
     numberedQuestionsByPage () {
@@ -306,6 +306,13 @@ export default {
       }
     },
 
+    addErrorClassToSubmittedQuestion(options) {
+      // add error class if question present in this.errors (after submitting to backend)
+      if (this.errors.includes(options.question.name)) {
+        options.htmlElement.classList += " form__question--errors"
+      }
+    },
+
     appendFileSignedIds(data) {
       this.appendFileSignedId(
         data,
@@ -364,6 +371,7 @@ export default {
     },
 
     onAfterRenderQuestion(survey, options) {
+      this.addErrorClassToSubmittedQuestion(options)  
       this.addTooltip(options);
       this.addSideQuestionIndicator(options);
     },
