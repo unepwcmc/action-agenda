@@ -44,6 +44,8 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:user_1)
     commitment_count_at_start = Commitment.count
     criterium = criteria(:valid_criterium_without_commitment)
+    criterium.manager = managers(:indigenous)
+    criterium.save
     invalid_params = {
       commitment: {
         description: 'a commitment without a name',
@@ -59,6 +61,8 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
   test 'should POST create a new draft commitment with a name' do
     sign_in users(:user_1)
     criterium = criteria(:valid_criterium_without_commitment)
+    criterium.manager = managers(:indigenous)
+    criterium.save
     commitment_count_at_start = Commitment.count
     valid_params = {
       commitment: {
@@ -76,6 +80,9 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:user_1)
     commitment_count_at_start = Commitment.count
     criterium = criteria(:valid_criterium_without_commitment)
+    manager = managers(:indigenous)
+    criterium.manager = manager
+    criterium.save
     valid_params = {
       commitment: {
         name: 'a name',
@@ -93,6 +100,8 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:user_1)
     commitment_count_at_start = Commitment.count
     criterium = criteria(:valid_criterium_without_commitment)
+    criterium.manager = managers(:indigenous)
+    criterium.save
     valid_params = {
       commitment: {
         latitude: 21.23,
@@ -106,7 +115,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
         stage: 'Implemented fully',
         responsible_group: 'a name',
         state: 'live',
-        manager_id: managers(:indigenous).id,
+        manager_ids: [managers(:indigenous).id],
         country_ids: [countries(:hungary).id],
         action_ids: [actions(:species_management).id],
         threat_ids: [threats(:pollution).id],
@@ -137,6 +146,8 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:user_1)
     new_description = 'a new description'
     commitment = commitments(:published_cfn_commitment_1)
+    commitment.manager_ids = [managers(:indigenous).id]
+    commitment.save
     assert commitment.description != new_description
     put commitment_url(commitment, params: { commitment: { description: new_description } }), as: :json
     assert_response :success
