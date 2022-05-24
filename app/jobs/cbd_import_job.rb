@@ -1,5 +1,5 @@
 class CbdImportJob < ApplicationJob
-  queue_as :imports
+  queue_as :import
 
   def perform
     Services::CbdImporter.new.call
