@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_17_123115) do
+ActiveRecord::Schema.define(version: 2022_05_20_093533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,7 +88,6 @@ ActiveRecord::Schema.define(version: 2022_05_17_123115) do
     t.bigint "criterium_id"
     t.bigint "user_id"
     t.text "area_owner_and_role"
-    t.bigint "manager_id"
     t.boolean "shareable", default: false
     t.string "cbd_id"
     t.boolean "cfn_approved"
@@ -99,7 +98,6 @@ ActiveRecord::Schema.define(version: 2022_05_17_123115) do
     t.index ["country_id"], name: "index_commitments_on_country_id"
     t.index ["duration_years"], name: "index_commitments_on_duration_years"
     t.index ["implementation_year"], name: "index_commitments_on_implementation_year"
-    t.index ["manager_id"], name: "index_commitments_on_manager_id"
   end
 
   create_table "commitments_countries", id: false, force: :cascade do |t|
@@ -114,6 +112,13 @@ ActiveRecord::Schema.define(version: 2022_05_17_123115) do
     t.bigint "governance_type_id"
     t.index ["commitment_id"], name: "index_commitments_governance_types_on_commitment_id"
     t.index ["governance_type_id"], name: "index_commitments_governance_types_on_governance_type_id"
+  end
+
+  create_table "commitments_managers", force: :cascade do |t|
+    t.bigint "commitment_id"
+    t.bigint "manager_id"
+    t.index ["commitment_id"], name: "index_commitments_managers_on_commitment_id"
+    t.index ["manager_id"], name: "index_commitments_managers_on_manager_id"
   end
 
   create_table "commitments_objectives", id: false, force: :cascade do |t|

@@ -30,7 +30,7 @@ module Api
       end
 
       def commitments_to_json(commitments)
-        commitments.eager_load(:manager,
+        commitments.eager_load(:managers,
                                :actions,
                                :countries,
                                :objectives,
@@ -54,7 +54,7 @@ module Api
                                    updated_at
                                  ],
                                  include: {
-                                   manager: { only: %i[id name] },
+                                   managers: { only: %i[id name] },
                                    actions: { only: %i[id name] },
                                    countries: { only: %i[id name iso] },
                                    objectives: { only: %i[id name] },
