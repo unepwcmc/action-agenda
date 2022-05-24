@@ -18,7 +18,11 @@
       }"
       :key="randomKey"
     />
-    <error-banner :errors="errors" :key="errorKey" />
+    <error-banner
+      v-if="hasErrors"
+      v-bind="{ errorText }"
+      :key="errorKey"
+    />
   </div>
 </template>
 
@@ -51,6 +55,11 @@ export default {
   },
 
   props: {
+    errorText: {
+      type: String,
+      default: ''
+    },
+
     formData: {
       type: Object,
       required: true,
@@ -134,6 +143,10 @@ export default {
   },
 
   computed: {
+    hasErrors () {
+      return this.formData.errors?.length > 0
+    },
+
     numberedQuestionsByPage () {
       const counts = {}
 
