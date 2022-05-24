@@ -64,22 +64,15 @@ class CommitmentsController < ApplicationController
   end
 
   def create
-    @commitment = Commitment.new(commitment_params.merge(user: current_user, commitment_source: 'form', cfn_approved: true))
+    @commitment = Commitment.new(commitment_params.merge(
+                                   user: current_user,
+                                   commitment_source: 'form',
+                                   cfn_approved: true
+                                 ))
     criterium = Criterium.find(@commitment.criterium_id)
     @commitment.manager_ids = [criterium.manager_id]
 
-    if @commitment.save
-      respond_to do |format|
-        format.json { json_response({ commitment: @commitment, redirect_path: dashboard_path }, :created) }
-      end
-    else
-      respond_to do |format|
-        format.json do
-          error_messages = @commitment.errors.messages.dup
-          json_response({ errors: error_messages }, :unprocessable_entity)
-        end
-      end
-    end
+    publish_or_save
   end
 
   def edit
@@ -91,15 +84,7 @@ class CommitmentsController < ApplicationController
   def update
     raise ForbiddenError unless @commitment.user == current_user
 
-    if @commitment.update(commitment_params)
-      respond_to do |format|
-        format.json { json_response({ commitment: @commitment, redirect_path: dashboard_path }, 200) }
-      end
-    else
-      respond_to do |format|
-        format.json { json_response({ errors: @commitment.errors }, :unprocessable_entity) }
-      end
-    end
+    publish_or_save
   end
 
   def destroy
@@ -117,6 +102,50 @@ class CommitmentsController < ApplicationController
   end
 
   private
+
+  def publish_or_save
+    is_new_record = @commitment.new_record?
+    saved_or_updated = false
+
+    # try saving commitment as is
+    if is_new_record ? @commitment.save : @commitment.update(commitment_params)
+      saved_or_updated = true
+
+      respond_after_publish_or_save(is_new_record, dashboard_path)
+    # else try saving new record as draft if state is currently live
+    elsif [@commitment.state, commitment_params[:state]].include?('live')
+      if is_new_record
+        @commitment.state = 'draft'
+      else
+        set_commitment # this seems necessary, otherwise it doesn't update properly
+        commitment_params_as_draft = commitment_params.merge({ 'state': 'draft' })
+      end
+
+      if is_new_record ? @commitment.save : @commitment.update(commitment_params_as_draft)
+        saved_or_updated = true
+
+        respond_after_publish_or_save(is_new_record, edit_commitment_path(@commitment))
+      end
+    end
+
+    # if neither save worked, respond with errors
+    unless saved_or_updated
+      respond_to do |format|
+        format.json do
+          error_messages = @commitment.errors.messages.dup
+          json_response({ errors: error_messages }, :unprocessable_entity)
+        end
+      end
+    end
+  end
+
+  def respond_after_publish_or_save(is_new_record, redirect_path)
+    successful_http_code = is_new_record ? :created : 200
+
+    respond_to do |format|
+      format.json { json_response({ commitment: @commitment, redirect_path: redirect_path }, successful_http_code) }
+    end
+  end
 
   def purge_geospatial_file
     if commitment_params[:geospatial_file].blank?
