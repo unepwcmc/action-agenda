@@ -85,7 +85,7 @@ class CommitmentsController < ApplicationController
     else
       respond_to do |format|
         format.json do
-          error_messages = @commitment.errors.messages.dup
+          error_messages = @commitment.errors_to_form_fields
           json_response({ errors: error_messages }, :unprocessable_entity)
         end
       end
@@ -114,7 +114,7 @@ class CommitmentsController < ApplicationController
     else
       respond_to do |format|
         format.json do
-          error_messages = @commitment.errors.messages.dup
+          error_messages = @commitment.errors_to_form_fields
           json_response({ errors: error_messages }, :unprocessable_entity)
         end
       end
