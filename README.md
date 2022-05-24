@@ -1,4 +1,4 @@
-# Commitments for Nature
+# Nature Commitments
 
 
 ## Ruby version

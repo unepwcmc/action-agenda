@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/admin/sidekiq'
+  end
+  
   devise_for :users
   unauthenticated :user do
     root to: 'home#index', as: :unauthenticated_root

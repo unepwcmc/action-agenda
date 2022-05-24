@@ -67,9 +67,12 @@ set :keep_releases, 5
 
 set :passenger_restart_with_touch, false
 
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
-
-
+namespace :deploy do
+  after :publishing, 'service:aa_default:restart'
+  after :publishing, 'service:aa_import:restart'
+end
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
