@@ -34,7 +34,9 @@ class Commitment < ApplicationRecord
   belongs_to :user, optional: true
 
   accepts_nested_attributes_for :links, reject_if: ->(attributes) { attributes['url'].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :progress_documents, reject_if: ->(attributes) { attributes['document'].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :progress_documents, reject_if: lambda { |attributes|
+                                                                  attributes['document'].blank?
+                                                                }, allow_destroy: true
 
   validates :geospatial_file,
             content_type: %w[application/vnd.google-earth.kml+xml application/vnd.google-earth.kmz application/zip],
@@ -84,6 +86,10 @@ class Commitment < ApplicationRecord
     self.state = :live
     valid?
     self.state = :draft
+    errors_to_form_fields
+  end
+
+  def errors_to_form_fields
     errors.messages.map do |key, _value|
       if key.in?(%i[actions countries managers objectives threats])
         :"#{key.to_s.singularize}_ids"
