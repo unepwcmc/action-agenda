@@ -103,6 +103,8 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    capistrano-service (0.0.2)
+      capistrano (>= 3.0.0.pre)
     capistrano-sidekiq (2.3.0)
       capistrano (>= 3.9.0)
       capistrano-bundler
@@ -321,6 +323,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.6.1)
   capistrano-rake
   capistrano-rvm (~> 0.1.2)
+  capistrano-service
   capistrano-sidekiq (~> 2.3.0)
   capistrano-yarn
   capybara (>= 2.15, < 4.0)

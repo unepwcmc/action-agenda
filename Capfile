@@ -39,6 +39,9 @@ require 'capistrano/yarn'
 require 'capistrano/rake'
 require 'whenever/capistrano'
 
+set :services, [:aa_default, :aa_import ]
+require 'capistrano/service'
+
 require 'capistrano/sidekiq'
 install_plugin Capistrano::Sidekiq # Default sidekiq tasks
 # Then select your service manager

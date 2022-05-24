@@ -64,6 +64,8 @@ gem 'whenever', '~> 0.9.4', require: false
 
 gem 'redis-namespace'
 
+gem 'capistrano-service'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
