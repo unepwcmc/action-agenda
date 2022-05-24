@@ -104,32 +104,13 @@ class CommitmentsController < ApplicationController
   private
 
   def publish_or_save
-    is_new_record = @commitment.new_record?
-    saved_or_updated = false
+    @is_new_record = @commitment.new_record?
 
-    # try saving commitment as is
-    if is_new_record ? @commitment.save : @commitment.update(commitment_params)
-      saved_or_updated = true
-
-      respond_after_publish_or_save(is_new_record, dashboard_path)
-    # else try saving new record as draft if state is currently live
-    elsif [@commitment.state, commitment_params[:state]].include?('live')
-      if is_new_record
-        @commitment.state = 'draft'
-      else
-        set_commitment # this seems necessary, otherwise it doesn't update properly
-        commitment_params_as_draft = commitment_params.merge({ 'state': 'draft' })
-      end
-
-      if is_new_record ? @commitment.save : @commitment.update(commitment_params_as_draft)
-        saved_or_updated = true
-
-        respond_after_publish_or_save(is_new_record, edit_commitment_path(@commitment))
-      end
-    end
-
-    # if neither save worked, respond with errors
-    unless saved_or_updated
+    if save_or_update_unchanged
+      respond_after_save_or_update(dashboard_path)
+    elsif attempting_to_publish? && save_or_update_as_draft
+      respond_after_save_or_update(edit_commitment_path(@commitment))
+    else
       respond_to do |format|
         format.json do
           error_messages = @commitment.errors.messages.dup
@@ -139,8 +120,30 @@ class CommitmentsController < ApplicationController
     end
   end
 
-  def respond_after_publish_or_save(is_new_record, redirect_path)
-    successful_http_code = is_new_record ? :created : 200
+  def save_or_update_unchanged
+    if @is_new_record
+      @commitment.save
+    else
+      @commitment.update(commitment_params)
+    end
+  end
+
+  def save_or_update_as_draft
+    if @is_new_record
+      @commitment.state = 'draft'
+      @commitment.save
+    else
+      set_commitment
+      @commitment.update(commitment_params_as_draft)
+    end
+  end
+
+  def attempting_to_publish?
+    [@commitment.state, commitment_params[:state]].include?('live')
+  end
+
+  def respond_after_save_or_update(redirect_path)
+    successful_http_code = @is_new_record ? :created : 200
 
     respond_to do |format|
       format.json { json_response({ commitment: @commitment, redirect_path: redirect_path }, successful_http_code) }
@@ -209,5 +212,9 @@ class CommitmentsController < ApplicationController
       links_attributes: %i[id url _destroy],
       progress_documents_attributes: %i[id document progress_notes _destroy]
     )
+  end
+
+  def commitment_params_as_draft
+    commitment_params.merge({ 'state': 'draft' })
   end
 end
