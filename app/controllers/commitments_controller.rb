@@ -72,7 +72,24 @@ class CommitmentsController < ApplicationController
     criterium = Criterium.find(@commitment.criterium_id)
     @commitment.manager_ids = [criterium.manager_id]
 
-    publish_or_save
+    if @commitment.save
+      respond_to do |format|
+        format.json { json_response({ commitment: @commitment, redirect_path: dashboard_path }, :created) }
+      end
+    elsif attempting_to_publish? && save_draft
+      respond_to do |format|
+        format.json do
+          json_response({ commitment: @commitment, redirect_path: edit_commitment_path(@commitment) }, :created)
+        end
+      end
+    else
+      respond_to do |format|
+        format.json do
+          error_messages = @commitment.errors.messages.dup
+          json_response({ errors: error_messages }, :unprocessable_entity)
+        end
+      end
+    end
   end
 
   def edit
@@ -84,7 +101,24 @@ class CommitmentsController < ApplicationController
   def update
     raise ForbiddenError unless @commitment.user == current_user
 
-    publish_or_save
+    if @commitment.update(commitment_params)
+      respond_to do |format|
+        format.json { json_response({ commitment: @commitment, redirect_path: dashboard_path }, :ok) }
+      end
+    elsif attempting_to_publish? && update_draft
+      respond_to do |format|
+        format.json do
+          json_response({ commitment: @commitment, redirect_path: edit_commitment_path(@commitment) }, :ok)
+        end
+      end
+    else
+      respond_to do |format|
+        format.json do
+          error_messages = @commitment.errors.messages.dup
+          json_response({ errors: error_messages }, :unprocessable_entity)
+        end
+      end
+    end
   end
 
   def destroy
@@ -103,51 +137,18 @@ class CommitmentsController < ApplicationController
 
   private
 
-  def publish_or_save
-    @is_new_record = @commitment.new_record?
-
-    if save_or_update_unchanged
-      respond_after_save_or_update(dashboard_path)
-    elsif attempting_to_publish? && save_or_update_as_draft
-      respond_after_save_or_update(edit_commitment_path(@commitment))
-    else
-      respond_to do |format|
-        format.json do
-          error_messages = @commitment.errors.messages.dup
-          json_response({ errors: error_messages }, :unprocessable_entity)
-        end
-      end
-    end
+  def save_draft
+    @commitment.state = 'draft'
+    @commitment.save
   end
 
-  def save_or_update_unchanged
-    if @is_new_record
-      @commitment.save
-    else
-      @commitment.update(commitment_params)
-    end
-  end
-
-  def save_or_update_as_draft
-    if @is_new_record
-      @commitment.state = 'draft'
-      @commitment.save
-    else
-      set_commitment
-      @commitment.update(commitment_params_as_draft)
-    end
+  def update_draft
+    set_commitment
+    @commitment.update(commitment_params_as_draft)
   end
 
   def attempting_to_publish?
     [@commitment.state, commitment_params[:state]].include?('live')
-  end
-
-  def respond_after_save_or_update(redirect_path)
-    successful_http_code = @is_new_record ? :created : 200
-
-    respond_to do |format|
-      format.json { json_response({ commitment: @commitment, redirect_path: redirect_path }, successful_http_code) }
-    end
   end
 
   def purge_geospatial_file
