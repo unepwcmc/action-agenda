@@ -148,7 +148,7 @@ class CommitmentsController < ApplicationController
   end
 
   def attempting_to_publish?
-    [@commitment.state, commitment_params[:state]].include?('live')
+    !@published && [@commitment.state, commitment_params[:state]].include?('live')
   end
 
   def purge_geospatial_file
@@ -186,6 +186,7 @@ class CommitmentsController < ApplicationController
 
   def set_commitment
     @commitment = Commitment.find(params[:id])
+    @published = @commitment.state == 'live'
   end
 
   def commitment_params
