@@ -21,7 +21,7 @@ class ImagePresenter
     [
       {
         alt: 'Government of the Netherlands',
-        src: 'logos/RO_Logo_2_RGB_pos op wit_x_en.png'
+        src: 'logos/government_of_the_netherlands.png'
       }
     ]
   end
