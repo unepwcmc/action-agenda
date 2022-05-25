@@ -481,7 +481,7 @@ export default {
       const questionName = options.name
       const newValue = options.value
 
-      // TODO?: conditions for progress documents and geospatial file uploads
+      // TODO?: conditions for progress documents
 
       // number - return since all numbers are likely valid
       if (typeof newValue === 'number') return
@@ -492,6 +492,13 @@ export default {
           this.survey.mergeData({[questionName]: []})
         } else {
           this.survey.mergeData({[questionName]: ""})
+        }
+      }
+
+      // geospatial file
+      if (questionName === 'geospatial_file') {
+        if (!options.value.length) {
+          this.geospatialFileSignedId = ''
         }
       }
     },
