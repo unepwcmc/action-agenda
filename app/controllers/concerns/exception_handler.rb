@@ -26,10 +26,18 @@ module ExceptionHandler
       end
     end
 
-    rescue_from MissingProgressDocumentAttachmentError do |e|
-      respond_to do |format|
-        format.json { json_response({ errors: { message: [I18n.t('activerecord.errors.models.progress_document.attributes.document.document_missing')] }}, :unprocessable_entity) }
-      end
-    end
+    # rescue_from MissingProgressDocumentAttachmentError do |e|
+    #   respond_to do |format|
+    #     format.json do
+    #       @commitment.assign_attributes(commitment_params.except(:progress_documents_attributes))
+          
+    #       @commitment.description = nil
+    #       @commitment.valid?
+    #       error_messages = @commitment.errors_to_form_fields
+    #       error_messages << :progress_documents_attributes
+    #       json_response({ errors: error_messages }, :unprocessable_entity)
+    #     end
+    #   end
+    # end
   end
 end

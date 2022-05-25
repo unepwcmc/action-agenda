@@ -103,6 +103,7 @@ export default {
     model.onUploadFiles.add(this.onUploadFiles);
     model.onDynamicPanelRemoved.add(this.onDynamicPanelRemoved);
     model.onValueChanged.add(this.onValueChanged);
+    model.onVisibleChanged.add(this.onVisibleChanged)
 
     return {
       axiosDone: false,
@@ -183,25 +184,27 @@ export default {
 
   methods: {
     addSideQuestionIndicator(options) {
+      const questionNumberText = options.question.no
+      if (!questionNumberText) { return }
       // Get data for text
-      const questionNumber = options.question.no.slice(0, -1);
+      const questionNumber = questionNumberText.slice(0, -1);
       if (!questionNumber) { return }
       
       const currentPageNumber = this.survey.currentPageNo;
       const questionsOnPage = this.numberedQuestionsByPage[currentPageNumber];
 
-      const questionNumberText = `${questionNumber} of ${questionsOnPage}`;
+      const indicatorText = `${questionNumber} of ${questionsOnPage}`;
 
       // Create element
-      const questionNumberTextElement = document.createElement('div');
-      questionNumberTextElement.className = 'question__side-number-indicator'
-      questionNumberTextElement.innerHTML = questionNumberText;
+      const indicatorTextElement = document.createElement('div');
+      indicatorTextElement.className = 'question__side-number-indicator'
+      indicatorTextElement.innerHTML = indicatorText;
 
       // Get question heading
       const header = options.htmlElement.querySelector(".sv-question__header");
 
       // Add element
-      header.appendChild(questionNumberTextElement);
+      header.appendChild(indicatorTextElement);
     },
 
     addTooltip(options) {
@@ -242,6 +245,7 @@ export default {
     },
 
     axiosCall() {
+      debugger;
       axios(this.formData.config.action, this.options)
         .then((response) => {
           if (response.data.redirect_path) {
@@ -264,6 +268,7 @@ export default {
     exit() {
       if (this.dataModel === "Commitment") {
         const data = this.survey.data;
+        console.log('exit', data)
         this.appendFileSignedIds(data);
         this.addDestroyKeys(data);
         this.send(data);
@@ -279,12 +284,32 @@ export default {
 
     onComplete(sender) {
       const data = sender.data;
+      console.log('onComplete', sender.data)
       if (this.dataModel === "Commitment") {
         data["state"] = "live";
         this.appendFileSignedIds(data);
         this.addDestroyKeys(data);
       }
       this.send(data);
+    },
+
+    onVisibleChanged(sender, options) {
+      if(options.question.name === 'progress_notes') {
+        let progressDocuments = this.survey.data.progress_documents_attributes.filter(progress_document_attributes => {
+          return progress_document_attributes.id || progress_document_attributes.document
+        })
+        progressDocuments = progressDocuments.map(progressDocument => {
+          if(progressDocument.id && !progressDocument.document) {
+            return { ...progressDocument, _destroy: 1 }
+          } else {
+            return progressDocument
+          }
+        })
+        // this.survey.mergeData({ progress_documents_attributes: progressDocuments})
+                this.survey.data = { ...this.survey.data, progress_documents_attributes: progressDocuments}
+
+        console.log('when setting destroy', this.survey.data)
+      }
     },
 
     addDestroyKeys(data) {
@@ -322,16 +347,16 @@ export default {
       );
 
       data["progress_documents_attributes"].forEach(
-        (progress_documents_attributes) => {
+        (progress_document_attributes) => {
           let signedId = "";
-          if (progress_documents_attributes.document) {
+          if (progress_document_attributes.document) {
             signedId =
               this.progressFilesSignedIds[
-                progress_documents_attributes.document[0].name
+                progress_document_attributes.document[0].name
               ];
           }
           this.appendFileSignedId(
-            progress_documents_attributes,
+            progress_document_attributes,
             "document",
             signedId
           );
@@ -378,6 +403,7 @@ export default {
     },
 
     onCurrentPageChanged(survey, options) {
+      console.log('pageChange', this.survey.data)
       this.isFirstPage = this.survey.isFirstPage;
       this.isLastPage = this.survey.isLastPage;
     },
@@ -481,8 +507,6 @@ export default {
       const questionName = options.name
       const newValue = options.value
 
-      // TODO?: conditions for progress documents
-
       // number - return since all numbers are likely valid
       if (typeof newValue === 'number') return
 
@@ -500,6 +524,18 @@ export default {
         if (!options.value.length) {
           this.geospatialFileSignedId = ''
         }
+      }
+
+      // progress_documents
+      if (questionName === 'progress_documents_attributes') {
+        const newValues = options.value.map(progressDocumentAttr => {
+          if(!progressDocumentAttr.progress_notes) {
+            return { ...progressDocumentAttr, progress_notes: '' }
+          } else {
+           return progressDocumentAttr
+          }
+        })
+        this.survey.mergeData({ progress_documents_attributes: newValues })
       }
     },
 

@@ -19,7 +19,8 @@ class Services::CommitmentProps
             document: [{ name: progress_document.document.filename,
                          content: rails_blob_path(progress_document.document, only_path: true) }],
             signed_id: progress_document.document.blob.signed_id,
-            progress_notes: progress_document.progress_notes
+            progress_notes: progress_document.progress_notes,
+            _destroy: 0
           }
         end,
         links_json: @commitment.links.map do |link|
@@ -330,6 +331,13 @@ class Services::CommitmentProps
                 templateElements: [
                   {
                     type: 'text',
+                    inputType: 'number',
+                    title: 'hidden field',
+                    name: '_destroy',
+                    visibleIf: 'false'
+                  },
+                  {
+                    type: 'text',
                     title: 'hidden field',
                     name: 'id',
                     visibleIf: 'false'
@@ -347,10 +355,12 @@ class Services::CommitmentProps
                     type: 'comment',
                     name: 'progress_notes',
                     title: 'Option to include progress notes',
-                    description: '(Optional field)'
+                    description: '(Optional field)',
+                    visibleIf: '{panel.document} notempty'
                   }
                 ],
-                minPanelCount: 1,
+                minPanelCount: 0,
+                panelCount: 1,
                 confirmDelete: true,
                 confirmDeleteText: I18n.t('form.commitments.page5.q1.delete'),
                 panelAddText: I18n.t('form.commitments.page5.q1.add')
