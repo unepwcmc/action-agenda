@@ -20,8 +20,8 @@ class ImagePresenter
   def partner_logos
     [
       {
-        alt: 'Ministry of Infrastructure and Water Management logo',
-        src: 'logos/ministry-of-infrastructure-and-water-management.png'
+        alt: 'Government of the Netherlands',
+        src: 'logos/RO_Logo_2_RGB_pos op wit_x_en.png'
       }
     ]
   end
