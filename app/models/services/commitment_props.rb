@@ -53,7 +53,7 @@ class Services::CommitmentProps
               {
                 type: 'html',
                 name: 'required_field_explainer',
-                html: I18n.t('form.commitments.page1.required_field_explainer'),
+                html: I18n.t('form.commitments.page1.required_field_explainer')
               },
               {
                 type: 'text',
@@ -174,8 +174,11 @@ class Services::CommitmentProps
                     acceptedTypes: '.zip,.kml,.kml+xml,.xx',
                     popupdescription: I18n.t('form.commitments.page2.q5.popupdescription_html'),
                     defaultValue: if @commitment.geospatial_file.attached?
-                                    [{ name: @commitment.geospatial_file.filename,
-                                       type: @commitment.geospatial_file.content_type }]
+                                    {
+                                      name: @commitment.geospatial_file.filename,
+                                      type: @commitment.geospatial_file.content_type,
+                                      content: rails_blob_path(@commitment.geospatial_file, only_path: true)
+                                    }
                                   else
                                     []
                                   end
