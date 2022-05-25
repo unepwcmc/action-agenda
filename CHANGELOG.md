@@ -1,3 +1,7 @@
+# 0.1.3
+
+- updated Netherlands logo
+
 # 0.1.2
 
 - removed '(nature)' where it appears in text
