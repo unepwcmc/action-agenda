@@ -103,7 +103,6 @@ export default {
     model.onUploadFiles.add(this.onUploadFiles);
     model.onDynamicPanelRemoved.add(this.onDynamicPanelRemoved);
     model.onValueChanged.add(this.onValueChanged);
-    model.onVisibleChanged.add(this.onVisibleChanged)
 
     return {
       axiosDone: false,
@@ -183,6 +182,33 @@ export default {
   },
 
   methods: {
+    addDestroyKeys(data) {
+      if (this.destroyedDocumentIds.length > 0) {
+        this.destroyedDocumentIds.forEach((id) => {
+          data["progress_documents_attributes"].push({
+            id: id,
+            _destroy: true,
+          });
+        });
+      }
+
+      if (this.destroyedLinkIds.length > 0) {
+        this.destroyedLinkIds.forEach((id) => {
+          data["links_attributes"].push({
+            id: id,
+            _destroy: true,
+          });
+        });
+      }
+    },
+
+    addErrorClassToSubmittedQuestion(options) {
+      // add error class if question present in this.errors (after submitting to backend)
+      if (this.errors.includes(options.question.name)) {
+        options.htmlElement.classList += " form__question--errors"
+      }
+    },
+
     addSideQuestionIndicator(options) {
       const questionNumberText = options.question.no
       if (!questionNumberText) { return }
@@ -236,107 +262,16 @@ export default {
           : container.appendChild(popup);
     },
 
-    assignNoneValues(data) {
-      Object.keys(this.noneValues).forEach((question) => {
-        if (data[question] && data[question][0] === "none") {
-          data[question][0] = this.noneValues[question];
-        }
-      });
-    },
+    appendDocumentDestroy() {
+      const initialDocumentIds = this.formData.config.progress_document_json
+        .map(element => element.id);
 
-    axiosCall() {
-      debugger;
-      axios(this.formData.config.action, this.options)
-        .then((response) => {
-          if (response.data.redirect_path) {
-            // preferred to turbolink so JQery reloads on the commitment form
-            window.location.replace(response.data.redirect_path);
-          }
-        })
-        .catch((error) => {
-          if (error.response) {
-            this.errorKey++;
-            this.errors = error.response.data.errors;
-          }
-        });
-    },
+      const currentDocumentIds = this.survey.data.progress_documents_attributes
+        .filter(element => element.document)
+        .map((element) => element.id);
 
-    complete() {
-      this.onComplete(this.survey);
-    },
-
-    exit() {
-      if (this.dataModel === "Commitment") {
-        const data = this.survey.data;
-        console.log('exit', data)
-        this.appendFileSignedIds(data);
-        this.addDestroyKeys(data);
-        this.send(data);
-      } else {
-        window.location.replace('/dashboard')
-      }
-    },
-
-    nextPage() {
-      this.survey.nextPage();
-      window.scrollTo(0, 0)
-    },
-
-    onComplete(sender) {
-      const data = sender.data;
-      console.log('onComplete', sender.data)
-      if (this.dataModel === "Commitment") {
-        data["state"] = "live";
-        this.appendFileSignedIds(data);
-        this.addDestroyKeys(data);
-      }
-      this.send(data);
-    },
-
-    onVisibleChanged(sender, options) {
-      if(options.question.name === 'progress_notes') {
-        let progressDocuments = this.survey.data.progress_documents_attributes.filter(progress_document_attributes => {
-          return progress_document_attributes.id || progress_document_attributes.document
-        })
-        progressDocuments = progressDocuments.map(progressDocument => {
-          if(progressDocument.id && !progressDocument.document) {
-            return { ...progressDocument, _destroy: 1 }
-          } else {
-            return progressDocument
-          }
-        })
-        // this.survey.mergeData({ progress_documents_attributes: progressDocuments})
-                this.survey.data = { ...this.survey.data, progress_documents_attributes: progressDocuments}
-
-        console.log('when setting destroy', this.survey.data)
-      }
-    },
-
-    addDestroyKeys(data) {
-      if (this.destroyedDocumentIds.length > 0) {
-        this.destroyedDocumentIds.forEach((id) => {
-          data["progress_documents_attributes"].push({
-            id: id,
-            _destroy: true,
-          });
-        });
-      }
-
-      if (this.destroyedLinkIds.length > 0) {
-        this.destroyedLinkIds.forEach((id) => {
-          data["links_attributes"].push({
-            id: id,
-            _destroy: true,
-          });
-        });
-      }
-    },
-
-    addErrorClassToSubmittedQuestion(options) {
-      // add error class if question present in this.errors (after submitting to backend)
-      if (this.errors.includes(options.question.name)) {
-        options.htmlElement.classList += " form__question--errors"
-      }
+      this.destroyedDocumentIds = initialDocumentIds
+        .filter(id => !currentDocumentIds.includes(id));
     },
 
     appendFileSignedIds(data) {
@@ -372,28 +307,58 @@ export default {
       }
     },
 
-    appendDocumentDestroy() {
-      const documentJsonIds = this.formData.config.progress_document_json.map(
-        (element) => element.id
-      );
-      const documentSurveyIds = this.survey.data[
-        "progress_documents_attributes"
-      ].map((element) => element.id);
-      this.destroyedDocumentIds = documentJsonIds.filter(
-        (item) => !documentSurveyIds.includes(item)
-      );
+    appendLinksDestroy() {
+      const initialLinkIds = this.formData.config.links_json
+        .map(element => element.id);
+      
+      const currentLinkIds = this.survey.data.links_attributes
+        .map(element => element.id);
+      
+      this.destroyedLinkIds = initialLinkIds
+        .filter(id => !currentLinkIds.includes(id));
     },
 
-    appendLinksDestroy() {
-      const linkJsonIds = this.formData.config.links_json.map(
-        (element) => element.id
-      );
-      const linkSurveyIds = this.survey.data[
-        "links_attributes"
-      ].map((element) => element.id);
-      this.destroyedLinkIds = linkJsonIds.filter(
-        (item) => !linkSurveyIds.includes(item)
-      );
+    assignNoneValues(data) {
+      Object.keys(this.noneValues).forEach((question) => {
+        if (data[question] && data[question][0] === "none") {
+          data[question][0] = this.noneValues[question];
+        }
+      });
+    },
+
+    axiosCall() {
+      axios(this.formData.config.action, this.options)
+        .then((response) => {
+          if (response.data.redirect_path) {
+            // preferred to turbolink so JQery reloads on the commitment form
+            window.location.replace(response.data.redirect_path);
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            this.errorKey++;
+            this.errors = error.response.data.errors;
+          }
+        });
+    },
+
+    complete() {
+      this.onComplete(this.survey);
+    },
+
+    exit() {
+      if (this.dataModel === "Commitment") {
+        const data = this.survey.data;
+        this.processCommitmentBeforeSubmission(data)
+        this.send(data);
+      } else {
+        window.location.replace('/dashboard')
+      }
+    },
+
+    nextPage() {
+      this.survey.nextPage();
+      window.scrollTo(0, 0)
     },
 
     onAfterRenderQuestion(survey, options) {
@@ -402,17 +367,44 @@ export default {
       this.addSideQuestionIndicator(options);
     },
 
+    onComplete(sender) {
+      const data = sender.data;
+      if (this.dataModel === "Commitment") {
+        data["state"] = "live";
+        this.processCommitmentBeforeSubmission(data)
+      }
+      this.send(data);
+    },
+
     onCurrentPageChanged(survey, options) {
-      console.log('pageChange', this.survey.data)
       this.isFirstPage = this.survey.isFirstPage;
       this.isLastPage = this.survey.isLastPage;
     },
 
     onDynamicPanelRemoved(survey, options) {
-      if (options.question.name == 'links_attributes') {
+      if (options.question.name === 'links_attributes') {
         this.appendLinksDestroy();
-      } else { 
-        this.appendDocumentDestroy();
+      }
+    },
+
+    onFileUploaded() {
+      setTimeout(() => {
+        this.randomKey++;
+        this.disabled = false;
+        this.showProgressBar = false;
+      }, 100);
+      clearTimeout();
+    },
+
+    onFileUploading() {
+      this.randomKey++;
+      this.disabled = true;
+      this.showProgressBar = true;
+    },
+
+    onUpdatePageCssClasses(survey, options) {
+      if (options.page.num > 1) {
+        options.cssClasses.page.root += " form__page--not-first";
       }
     },
 
@@ -436,29 +428,8 @@ export default {
       }
     },
 
-    onUpdatePageCssClasses(survey, options) {
-      if (options.page.num > 1) {
-        options.cssClasses.page.root += " form__page--not-first";
-      }
-    },
-
-    onfileUploading() {
-      this.randomKey++;
-      this.disabled = true;
-      this.showProgressBar = true;
-    },
-
-    onfileUploaded() {
-      setTimeout(() => {
-        this.randomKey++;
-        this.disabled = false;
-        this.showProgressBar = false;
-      }, 100);
-      clearTimeout();
-    },
-
     async onUploadFiles(survey, options) {
-      this.onfileUploading();
+      this.onFileUploading();
       //TODO set cors settings on the bucket for this to work with S3
       const file = options.files[0];
       const upload = new DirectUpload(
@@ -488,7 +459,7 @@ export default {
                 content: file.content,
               };
             }),
-            this.onfileUploaded()
+            this.onFileUploaded()
           )
         }
       });
@@ -501,6 +472,12 @@ export default {
     prevPage() {
       this.survey.prevPage();
       window.scrollTo(0, 0)
+    },
+
+    processCommitmentBeforeSubmission(data) {
+      this.appendDocumentDestroy()
+      this.appendFileSignedIds(data);
+      this.addDestroyKeys(data);
     },
 
     retainNullValues(options) {
@@ -528,13 +505,20 @@ export default {
 
       // progress_documents
       if (questionName === 'progress_documents_attributes') {
-        const newValues = options.value.map(progressDocumentAttr => {
-          if(!progressDocumentAttr.progress_notes) {
-            return { ...progressDocumentAttr, progress_notes: '' }
-          } else {
-           return progressDocumentAttr
-          }
-        })
+        const newValues = options.value
+          // remove item if there's no document
+          // `addDestroyKeys` will handle _destroy keys on submission
+          .filter(progressDocumentAttributes => progressDocumentAttributes.document)
+          .map(progressDocumentAttributes => {
+            if(!progressDocumentAttributes.progress_notes) {
+              // include empty string for progress_notes if not present
+              return { ...progressDocumentAttributes, progress_notes: '' }
+            } else {
+              // if document and progress notes are present, return as is
+              return progressDocumentAttributes
+            }
+          })
+
         this.survey.mergeData({ progress_documents_attributes: newValues })
       }
     },
