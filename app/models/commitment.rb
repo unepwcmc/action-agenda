@@ -48,6 +48,11 @@ class Commitment < ApplicationRecord
   validates_presence_of :description, :latitude, :longitude, :committed_year, :responsible_group, :implementation_year,
                         :duration_years, :objectives, :managers, :countries, :actions, :threats, if: :user_created_and_live?
 
+  validates :latitude, numericality: { greater_than_or_equal_to: -90, less_than_or_equal_to: 90 },
+                       if: :user_created_and_live?
+  validates :longitude, numericality: { greater_than_or_equal_to: -180, less_than_or_equal_to: 180 },
+                        if: :user_created_and_live?
+
   validate :name_is_10_words_or_less, if: :user_created_and_live?
 
   scope :published, -> { where(state: 'live', cfn_approved: true) }
