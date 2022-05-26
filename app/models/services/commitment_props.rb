@@ -132,6 +132,7 @@ class Services::CommitmentProps
                   },
                   {
                     type: 'text',
+                    inputType: 'number',
                     name: 'latitude',
                     title: I18n.t('form.commitments.page2.q3.title'),
                     titleLocation: 'left',
@@ -148,6 +149,7 @@ class Services::CommitmentProps
                   },
                   {
                     type: 'text',
+                    inputType: 'number',
                     name: 'longitude',
                     title: I18n.t('form.commitments.page2.q4.title'),
                     titleLocation: 'left',
