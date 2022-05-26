@@ -7,12 +7,16 @@ module Api
       before_action :validate_params
 
       def index
-        commitments = Commitment
-                      .api_records
-                      .paginate(
-                        page: params[:page] || 1,
-                        per_page: params[:per_page] || 10
-                      )
+        commitments = Commitment.api_records
+
+        if params[:updated_after].present?
+          commitments = commitments.where('commitments.updated_at > ?', params[:updated_after].to_datetime)
+        end
+
+        commitments = commitments.paginate(
+          page: params[:page] || 1,
+          per_page: params[:per_page] || 10
+        )
 
         render json: commitments_to_json(commitments), status: :ok
       rescue StandardError => e
