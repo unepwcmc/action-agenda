@@ -9,7 +9,6 @@ class CommitmentsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index list show]
   before_action :set_commitment, only: %i[show edit update destroy]
   before_action :purge_geospatial_file, only: %i[update create]
-  before_action :clean_progress_document_attachment_params, only: %i[update create]
 
   def index
     # make a copy of default params and modify those to prevent filters persisting over calls
@@ -155,27 +154,6 @@ class CommitmentsController < ApplicationController
     if commitment_params[:geospatial_file].blank?
       params[:commitment] = params[:commitment].except(:geospatial_file)
       @commitment.geospatial_file.purge if @commitment && @commitment.geospatial_file.attached?
-    end
-  end
-
-  def clean_progress_document_attachment_params
-    return unless commitment_params[:progress_documents_attributes].present?
-
-    new_progress_document_attributes = []
-    invalid_progress_document_attributes = []
-
-    commitment_params[:progress_documents_attributes].each do |progress_document_attributes|
-      if progress_document_attributes[:document].present?
-        new_progress_document_attributes << progress_document_attributes
-      elsif progress_document_attributes[:progress_notes].present?
-        invalid_progress_document_attributes << progress_document_attributes
-      end
-    end
-
-    if invalid_progress_document_attributes.present?
-      raise MissingProgressDocumentAttachmentError
-    else
-      commitment_params[:progress_documents_attributes] = new_progress_document_attributes
     end
   end
 

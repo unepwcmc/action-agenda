@@ -330,7 +330,6 @@ class Services::CommitmentProps
                 templateElements: [
                   {
                     type: 'text',
-                    title: 'hidden field',
                     name: 'id',
                     visibleIf: 'false'
                   },
@@ -347,10 +346,13 @@ class Services::CommitmentProps
                     type: 'comment',
                     name: 'progress_notes',
                     title: 'Option to include progress notes',
-                    description: '(Optional field)'
+                    description: '(Optional field)',
+                    visibleIf: '{panel.document} notempty',
+                    clearIfInvisible: 'onHidden'
                   }
                 ],
-                minPanelCount: 1,
+                minPanelCount: 0,
+                panelCount: 1,
                 confirmDelete: true,
                 confirmDeleteText: I18n.t('form.commitments.page5.q1.delete'),
                 panelAddText: I18n.t('form.commitments.page5.q1.add')
