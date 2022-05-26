@@ -25,19 +25,5 @@ module ExceptionHandler
         format.html { redirect_back fallback_location: root_path, notice: I18n.t('errors.messages.forbidden_resource') }
       end
     end
-
-    # rescue_from MissingProgressDocumentAttachmentError do |e|
-    #   respond_to do |format|
-    #     format.json do
-    #       @commitment.assign_attributes(commitment_params.except(:progress_documents_attributes))
-          
-    #       @commitment.description = nil
-    #       @commitment.valid?
-    #       error_messages = @commitment.errors_to_form_fields
-    #       error_messages << :progress_documents_attributes
-    #       json_response({ errors: error_messages }, :unprocessable_entity)
-    #     end
-    #   end
-    # end
   end
 end
