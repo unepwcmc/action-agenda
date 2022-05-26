@@ -205,7 +205,7 @@ export default {
     addErrorClassToSubmittedQuestion(options) {
       // add error class if question present in this.errors (after submitting to backend)
       if (this.errors.includes(options.question.name)) {
-        options.htmlElement.classList += " form__question--errors"
+        options.htmlElement.classList.add("form__question--errors")
       }
     },
 
@@ -475,6 +475,7 @@ export default {
 
     onValueChanged(survey, options) {
       this.retainNullValues(options)
+      this.removeErrorClass(options)
     },
 
     prevPage() {
@@ -486,6 +487,16 @@ export default {
       this.appendDocumentDestroy()
       this.appendFileSignedIds(data);
       this.addDestroyKeys(data);
+    },
+
+    removeErrorClass(options) {
+      const questionId = options.question.id
+      const element = document.getElementById(questionId)
+      const hasErrorClass = element.classList.contains("form__question--errors")
+
+      if (hasErrorClass) {
+        element.classList.remove("form__question--errors")
+      }
     },
 
     retainNullValues(options) {
