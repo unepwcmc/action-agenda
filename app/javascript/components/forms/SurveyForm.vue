@@ -338,6 +338,14 @@ export default {
           if (error.response) {
             this.errorKey++;
             this.errors = error.response.data.errors;
+
+            if (this.isFirstPage) {
+              this.nextPage()
+              this.prevPage()
+            } else {
+              this.prevPage()
+              this.nextPage()
+            }
           }
         });
     },
