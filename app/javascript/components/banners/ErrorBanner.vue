@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <div
-      class="error animated-banner bg-danger"
-    >
-      <span class="error__message" v-text="errorText" />
-    </div>
+  <div
+    class="error animated-banner bg-danger"
+  >
+    <span class="error__message" v-text="errorText" />
   </div>
 </template>
 
