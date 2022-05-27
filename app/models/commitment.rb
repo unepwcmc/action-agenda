@@ -33,8 +33,8 @@ class Commitment < ApplicationRecord
   belongs_to :criterium, optional: true
   belongs_to :user, optional: true
 
-  accepts_nested_attributes_for :links, reject_if: ->(attributes) { attributes['url'].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :progress_documents, reject_if: ->(attributes) { attributes['document'].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :links, allow_destroy: true
+  accepts_nested_attributes_for :progress_documents, allow_destroy: true
 
   validates :geospatial_file,
             content_type: %w[application/vnd.google-earth.kml+xml application/vnd.google-earth.kmz application/zip],
@@ -45,6 +45,11 @@ class Commitment < ApplicationRecord
 
   validates_presence_of :description, :latitude, :longitude, :committed_year, :responsible_group, :implementation_year,
                         :duration_years, :objectives, :managers, :countries, :actions, :threats, if: :user_created_and_live?
+
+  validates :latitude, numericality: { greater_than_or_equal_to: -90, less_than_or_equal_to: 90 },
+                       if: :user_created_and_live?
+  validates :longitude, numericality: { greater_than_or_equal_to: -180, less_than_or_equal_to: 180 },
+                        if: :user_created_and_live?
 
   validate :name_is_10_words_or_less, if: :user_created_and_live?
 
@@ -84,9 +89,15 @@ class Commitment < ApplicationRecord
     self.state = :live
     valid?
     self.state = :draft
+    errors_to_form_fields
+  end
+
+  def errors_to_form_fields
     errors.messages.map do |key, _value|
       if key.in?(%i[actions countries managers objectives threats])
         :"#{key.to_s.singularize}_ids"
+      elsif key.to_s == 'progress_documents.document'
+        :progress_documents_attributes
       else
         key
       end

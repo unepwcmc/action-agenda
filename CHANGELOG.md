@@ -1,3 +1,9 @@
+# 0.1.4
+
+- Form error styling
+- Fixed form error handling and attachment submission
+
+
 # 0.1.3
 
 - updated Netherlands logo

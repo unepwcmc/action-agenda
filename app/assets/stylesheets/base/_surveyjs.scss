@@ -442,7 +442,7 @@ $question-content-spacing-right: rem-calc(75);
 
   .form__question--errors {
     .sv-question__title {
-      &:not(.sv-question__title--answer) {
+      > div:not(.tooltip) {
         color: $danger;
       }
     }

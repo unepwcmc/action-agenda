@@ -18,7 +18,11 @@
       }"
       :key="randomKey"
     />
-    <error-banner :errors="errors" :key="errorKey" />
+    <error-banner
+      v-if="hasErrors"
+      v-bind="{ errorText }"
+      :key="errorKey"
+    />
   </div>
 </template>
 
@@ -51,6 +55,11 @@ export default {
   },
 
   props: {
+    errorText: {
+      type: String,
+      default: ''
+    },
+
     formData: {
       type: Object,
       required: true,
@@ -93,12 +102,13 @@ export default {
     model.onUpdatePageCssClasses.add(this.onUpdatePageCssClasses);
     model.onUploadFiles.add(this.onUploadFiles);
     model.onDynamicPanelRemoved.add(this.onDynamicPanelRemoved);
+    model.onValueChanged.add(this.onValueChanged);
 
     return {
       axiosDone: false,
       counter: 0,
       disabled: false,
-      errors: {},
+      errors: [],
       isFirstPage: true,
       isLastPage: false,
       options: {},
@@ -134,6 +144,10 @@ export default {
   },
 
   computed: {
+    hasErrors () {
+      return this.formData.errors?.length > 0 || this.errors.length > 0
+    },
+
     numberedQuestionsByPage () {
       const counts = {}
 
@@ -168,26 +182,55 @@ export default {
   },
 
   methods: {
+    addDestroyKeys(data) {
+      if (this.destroyedDocumentIds.length > 0) {
+        this.destroyedDocumentIds.forEach((id) => {
+          data["progress_documents_attributes"].push({
+            id: id,
+            _destroy: true,
+          });
+        });
+      }
+
+      if (this.destroyedLinkIds.length > 0) {
+        this.destroyedLinkIds.forEach((id) => {
+          data["links_attributes"].push({
+            id: id,
+            _destroy: true,
+          });
+        });
+      }
+    },
+
+    addErrorClassToSubmittedQuestion(options) {
+      // add error class if question present in this.errors (after submitting to backend)
+      if (this.errors.includes(options.question.name)) {
+        options.htmlElement.classList.add("form__question--errors")
+      }
+    },
+
     addSideQuestionIndicator(options) {
+      const questionNumberText = options.question.no
+      if (!questionNumberText) { return }
       // Get data for text
-      const questionNumber = options.question.no.slice(0, -1);
+      const questionNumber = questionNumberText.slice(0, -1);
       if (!questionNumber) { return }
       
       const currentPageNumber = this.survey.currentPageNo;
       const questionsOnPage = this.numberedQuestionsByPage[currentPageNumber];
 
-      const questionNumberText = `${questionNumber} of ${questionsOnPage}`;
+      const indicatorText = `${questionNumber} of ${questionsOnPage}`;
 
       // Create element
-      const questionNumberTextElement = document.createElement('div');
-      questionNumberTextElement.className = 'question__side-number-indicator'
-      questionNumberTextElement.innerHTML = questionNumberText;
+      const indicatorTextElement = document.createElement('div');
+      indicatorTextElement.className = 'question__side-number-indicator'
+      indicatorTextElement.innerHTML = indicatorText;
 
       // Get question heading
       const header = options.htmlElement.querySelector(".sv-question__header");
 
       // Add element
-      header.appendChild(questionNumberTextElement);
+      header.appendChild(indicatorTextElement);
     },
 
     addTooltip(options) {
@@ -219,6 +262,64 @@ export default {
           : container.appendChild(popup);
     },
 
+    appendDocumentDestroy() {
+      const initialDocumentIds = this.formData.config.progress_document_json
+        .map(element => element.id);
+
+      const currentDocumentIds = this.survey.data.progress_documents_attributes
+        .filter(element => element.document)
+        .map((element) => element.id);
+
+      this.destroyedDocumentIds = initialDocumentIds
+        .filter(id => !currentDocumentIds.includes(id));
+    },
+
+    appendFileSignedIds(data) {
+      this.appendFileSignedId(
+        data,
+        "geospatial_file",
+        this.geospatialFileSignedId
+      );
+
+      data["progress_documents_attributes"].forEach(
+        (progress_document_attributes) => {
+          const document = progress_document_attributes.document
+
+          if (document && typeof document === 'object') {
+            const signedId =
+              this.progressFilesSignedIds[
+                progress_document_attributes.document[0].name
+              ];
+            
+            this.appendFileSignedId(
+              progress_document_attributes,
+              "document",
+              signedId
+            );
+          }
+        }
+      );
+    },
+
+    appendFileSignedId(data, field, signedId) {
+      if (data[field]) {
+        data[field] = signedId;
+      } else {
+        data[field] = "";
+      }
+    },
+
+    appendLinksDestroy() {
+      const initialLinkIds = this.formData.config.links_json
+        .map(element => element.id);
+      
+      const currentLinkIds = this.survey.data.links_attributes
+        .map(element => element.id);
+      
+      this.destroyedLinkIds = initialLinkIds
+        .filter(id => !currentLinkIds.includes(id));
+    },
+
     assignNoneValues(data) {
       Object.keys(this.noneValues).forEach((question) => {
         if (data[question] && data[question][0] === "none") {
@@ -239,6 +340,14 @@ export default {
           if (error.response) {
             this.errorKey++;
             this.errors = error.response.data.errors;
+
+            if (this.isFirstPage) {
+              this.nextPage()
+              this.prevPage()
+            } else {
+              this.prevPage()
+              this.nextPage()
+            }
           }
         });
     },
@@ -250,8 +359,7 @@ export default {
     exit() {
       if (this.dataModel === "Commitment") {
         const data = this.survey.data;
-        this.appendFileSignedIds(data);
-        this.addDestroyKeys(data);
+        this.processCommitmentBeforeSubmission(data)
         this.send(data);
       } else {
         window.location.replace('/dashboard')
@@ -263,96 +371,19 @@ export default {
       window.scrollTo(0, 0)
     },
 
+    onAfterRenderQuestion(survey, options) {
+      this.addErrorClassToSubmittedQuestion(options)  
+      this.addTooltip(options);
+      this.addSideQuestionIndicator(options);
+    },
+
     onComplete(sender) {
       const data = sender.data;
       if (this.dataModel === "Commitment") {
         data["state"] = "live";
-        this.appendFileSignedIds(data);
-        this.addDestroyKeys(data);
+        this.processCommitmentBeforeSubmission(data)
       }
       this.send(data);
-    },
-
-    addDestroyKeys(data) {
-      if (this.destroyedDocumentIds.length > 0) {
-        this.destroyedDocumentIds.forEach((id) => {
-          data["progress_documents_attributes"].push({
-            id: id,
-            _destroy: true,
-          });
-        });
-      }
-
-      if (this.destroyedLinkIds.length > 0) {
-        this.destroyedLinkIds.forEach((id) => {
-          data["links_attributes"].push({
-            id: id,
-            _destroy: true,
-          });
-        });
-      }
-    },
-
-    appendFileSignedIds(data) {
-      this.appendFileSignedId(
-        data,
-        "geospatial_file",
-        this.geospatialFileSignedId
-      );
-
-      data["progress_documents_attributes"].forEach(
-        (progress_documents_attributes) => {
-          let signedId = "";
-          if (progress_documents_attributes.document) {
-            signedId =
-              this.progressFilesSignedIds[
-                progress_documents_attributes.document[0].name
-              ];
-          }
-          this.appendFileSignedId(
-            progress_documents_attributes,
-            "document",
-            signedId
-          );
-        }
-      );
-    },
-
-    appendFileSignedId(data, field, signedId) {
-      if (data[field]) {
-        data[field] = signedId;
-      } else {
-        data[field] = "";
-      }
-    },
-
-    appendDocumentDestroy() {
-      const documentJsonIds = this.formData.config.progress_document_json.map(
-        (element) => element.id
-      );
-      const documentSurveyIds = this.survey.data[
-        "progress_documents_attributes"
-      ].map((element) => element.id);
-      this.destroyedDocumentIds = documentJsonIds.filter(
-        (item) => !documentSurveyIds.includes(item)
-      );
-    },
-
-    appendLinksDestroy() {
-      const linkJsonIds = this.formData.config.links_json.map(
-        (element) => element.id
-      );
-      const linkSurveyIds = this.survey.data[
-        "links_attributes"
-      ].map((element) => element.id);
-      this.destroyedLinkIds = linkJsonIds.filter(
-        (item) => !linkSurveyIds.includes(item)
-      );
-    },
-
-    onAfterRenderQuestion(survey, options) {
-      this.addTooltip(options);
-      this.addSideQuestionIndicator(options);
     },
 
     onCurrentPageChanged(survey, options) {
@@ -361,10 +392,29 @@ export default {
     },
 
     onDynamicPanelRemoved(survey, options) {
-      if (options.question.name == 'links_attributes') {
+      if (options.question.name === 'links_attributes') {
         this.appendLinksDestroy();
-      } else { 
-        this.appendDocumentDestroy();
+      }
+    },
+
+    onFileUploaded() {
+      setTimeout(() => {
+        this.randomKey++;
+        this.disabled = false;
+        this.showProgressBar = false;
+      }, 100);
+      clearTimeout();
+    },
+
+    onFileUploading() {
+      this.randomKey++;
+      this.disabled = true;
+      this.showProgressBar = true;
+    },
+
+    onUpdatePageCssClasses(survey, options) {
+      if (options.page.num > 1) {
+        options.cssClasses.page.root += " form__page--not-first";
       }
     },
 
@@ -388,29 +438,8 @@ export default {
       }
     },
 
-    onUpdatePageCssClasses(survey, options) {
-      if (options.page.num > 1) {
-        options.cssClasses.page.root += " form__page--not-first";
-      }
-    },
-
-    onfileUploading() {
-      this.randomKey++;
-      this.disabled = true;
-      this.showProgressBar = true;
-    },
-
-    onfileUploaded() {
-      setTimeout(() => {
-        this.randomKey++;
-        this.disabled = false;
-        this.showProgressBar = false;
-      }, 100);
-      clearTimeout();
-    },
-
     async onUploadFiles(survey, options) {
-      this.onfileUploading();
+      this.onFileUploading();
       //TODO set cors settings on the bucket for this to work with S3
       const file = options.files[0];
       const upload = new DirectUpload(
@@ -440,15 +469,79 @@ export default {
                 content: file.content,
               };
             }),
-            this.onfileUploaded()
+            this.onFileUploaded()
           )
         }
       });
     },
 
+    onValueChanged(survey, options) {
+      this.retainNullValues(options)
+      this.removeErrorClass(options)
+    },
+
     prevPage() {
       this.survey.prevPage();
       window.scrollTo(0, 0)
+    },
+
+    processCommitmentBeforeSubmission(data) {
+      this.appendDocumentDestroy()
+      this.appendFileSignedIds(data);
+      this.addDestroyKeys(data);
+    },
+
+    removeErrorClass(options) {
+      const questionId = options.question.id
+      const element = document.getElementById(questionId)
+      const hasErrorClass = element.classList.contains("form__question--errors")
+
+      if (hasErrorClass) {
+        element.classList.remove("form__question--errors")
+      }
+    },
+
+    retainNullValues(options) {
+      const questionName = options.name
+      const newValue = options.value
+
+      // number - return since all numbers are likely valid
+      if (typeof newValue === 'number') return
+
+      // arrays and strings
+      if (!newValue?.length) {
+        if (Array.isArray(newValue)) {
+          this.survey.mergeData({[questionName]: []})
+        } else {
+          this.survey.mergeData({[questionName]: ""})
+        }
+      }
+
+      // geospatial file
+      if (questionName === 'geospatial_file') {
+        if (!options.value.length) {
+          this.geospatialFileSignedId = ''
+        }
+      }
+
+      // progress_documents
+      if (questionName === 'progress_documents_attributes') {
+        const newValues = options.value
+          // remove item if there's no document
+          // `addDestroyKeys` will handle _destroy keys on submission
+          .filter(progressDocumentAttributes => progressDocumentAttributes.document)
+          .map(progressDocumentAttributes => {
+            if(!progressDocumentAttributes.progress_notes) {
+              // include empty string for progress_notes if not present
+              return { ...progressDocumentAttributes, progress_notes: '' }
+            } else {
+              // if document and progress notes are present, return as is
+              return progressDocumentAttributes
+            }
+          })
+
+        this.survey.mergeData({ progress_documents_attributes: newValues })
+      }
     },
 
     send(data) {
