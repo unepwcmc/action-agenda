@@ -33,10 +33,8 @@ class Commitment < ApplicationRecord
   belongs_to :criterium, optional: true
   belongs_to :user, optional: true
 
-  accepts_nested_attributes_for :links, reject_if: ->(attributes) { attributes['url'].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :progress_documents, reject_if: ->(attributes) {
-    attributes['document'].blank? && attributes['_destroy'].blank?
-  }, allow_destroy: true
+  accepts_nested_attributes_for :links, allow_destroy: true
+  accepts_nested_attributes_for :progress_documents, allow_destroy: true
 
   validates :geospatial_file,
             content_type: %w[application/vnd.google-earth.kml+xml application/vnd.google-earth.kmz application/zip],
@@ -236,19 +234,6 @@ class Commitment < ApplicationRecord
     return 0 if item_count == 0
 
     (item_count / @items_per_page.to_d).ceil
-  end
-
-  def progress_documents_attributes=(attrs)
-    attrs.each do |attr|
-      next unless attr[:document].blank?
-
-      # If there's no document we want to destroy the record, and we
-      # need to remove the document value because it raises an error
-      # if it isn't a valid signed_id
-      attr.except!(:document)
-      attr[:_destroy] = true
-    end
-    super
   end
 
   private
