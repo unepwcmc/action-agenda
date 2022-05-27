@@ -54,7 +54,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     }
     post commitments_url(params: invalid_params), as: :json
     assert_response :unprocessable_entity
-    assert JSON.parse(response.body)['errors'].keys.include?('name')
+    assert JSON.parse(response.body)['errors'].include?('name')
     assert commitment_count_at_start == Commitment.count
   end
 
