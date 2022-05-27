@@ -283,18 +283,20 @@ export default {
 
       data["progress_documents_attributes"].forEach(
         (progress_document_attributes) => {
-          let signedId = "";
-          if (progress_document_attributes.document) {
-            signedId =
+          const document = progress_document_attributes.document
+
+          if (document && typeof document === 'object') {
+            const signedId =
               this.progressFilesSignedIds[
                 progress_document_attributes.document[0].name
               ];
+            
+            this.appendFileSignedId(
+              progress_document_attributes,
+              "document",
+              signedId
+            );
           }
-          this.appendFileSignedId(
-            progress_document_attributes,
-            "document",
-            signedId
-          );
         }
       );
     },
