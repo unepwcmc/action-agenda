@@ -1,4 +1,3 @@
-.vue
 <template>
   <div>
     <div
@@ -9,7 +8,7 @@
   </div>
 </template>
 
-<script>      
+<script>
 export default {
   name: "ErrorBanner",
   props: {
