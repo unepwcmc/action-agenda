@@ -212,3 +212,4 @@ en:
           right: Save & Exit
         next: NEXT
         save: PUBLISH
+      errors: You must complete all required fields in order to publish the commitment

@@ -53,7 +53,7 @@ class Services::CommitmentProps
               {
                 type: 'html',
                 name: 'required_field_explainer',
-                html: I18n.t('form.commitments.page1.required_field_explainer'),
+                html: I18n.t('form.commitments.page1.required_field_explainer')
               },
               {
                 type: 'text',
@@ -132,6 +132,7 @@ class Services::CommitmentProps
                   },
                   {
                     type: 'text',
+                    inputType: 'number',
                     name: 'latitude',
                     title: I18n.t('form.commitments.page2.q3.title'),
                     titleLocation: 'left',
@@ -148,6 +149,7 @@ class Services::CommitmentProps
                   },
                   {
                     type: 'text',
+                    inputType: 'number',
                     name: 'longitude',
                     title: I18n.t('form.commitments.page2.q4.title'),
                     titleLocation: 'left',
@@ -174,8 +176,11 @@ class Services::CommitmentProps
                     acceptedTypes: '.zip,.kml,.kml+xml,.xx',
                     popupdescription: I18n.t('form.commitments.page2.q5.popupdescription_html'),
                     defaultValue: if @commitment.geospatial_file.attached?
-                                    [{ name: @commitment.geospatial_file.filename,
-                                       type: @commitment.geospatial_file.content_type }]
+                                    {
+                                      name: @commitment.geospatial_file.filename,
+                                      type: @commitment.geospatial_file.content_type,
+                                      content: rails_blob_path(@commitment.geospatial_file, only_path: true)
+                                    }
                                   else
                                     []
                                   end
@@ -327,7 +332,6 @@ class Services::CommitmentProps
                 templateElements: [
                   {
                     type: 'text',
-                    title: 'hidden field',
                     name: 'id',
                     visibleIf: 'false'
                   },
@@ -344,10 +348,13 @@ class Services::CommitmentProps
                     type: 'comment',
                     name: 'progress_notes',
                     title: 'Option to include progress notes',
-                    description: '(Optional field)'
+                    description: '(Optional field)',
+                    visibleIf: '{panel.document} notempty',
+                    clearIfInvisible: 'onHidden'
                   }
                 ],
-                minPanelCount: 1,
+                minPanelCount: 0,
+                panelCount: 1,
                 confirmDelete: true,
                 confirmDeleteText: I18n.t('form.commitments.page5.q1.delete'),
                 panelAddText: I18n.t('form.commitments.page5.q1.add')

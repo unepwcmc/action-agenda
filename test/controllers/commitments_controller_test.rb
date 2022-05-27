@@ -54,7 +54,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     }
     post commitments_url(params: invalid_params), as: :json
     assert_response :unprocessable_entity
-    assert JSON.parse(response.body)['errors'].keys.include?('name')
+    assert JSON.parse(response.body)['errors'].include?('name')
     assert commitment_count_at_start == Commitment.count
   end
 
@@ -76,7 +76,7 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
     assert Commitment.last.state == 'draft'
   end
 
-  test 'should return errors if attempt to create a live commitment fails' do
+  test 'should save commitment as draft if attempt to create a live commitment fails' do
     sign_in users(:user_1)
     commitment_count_at_start = Commitment.count
     criterium = criteria(:valid_criterium_without_commitment)
@@ -91,9 +91,9 @@ class CommitmentsControllerTest < ActionDispatch::IntegrationTest
       }
     }
     post commitments_url(params: valid_params), as: :json
-    assert_response :unprocessable_entity
-    assert Commitment.count == commitment_count_at_start
-    assert JSON.parse(response.body).dig('errors').count > 1
+    assert_response :success
+    assert Commitment.count == commitment_count_at_start + 1
+    assert Commitment.last.state == 'draft'
   end
 
   test 'should save a live commitment with valid params and return success' do

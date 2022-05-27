@@ -30,13 +30,14 @@
 .error {
   &.animated-banner {
     @include fade-in-out(10s);
+    z-index: 100;
+    width: 100vw;
     
     display: flex;
 
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
   }
 
   &.bg-danger {
