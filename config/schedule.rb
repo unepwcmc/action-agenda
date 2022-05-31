@@ -26,5 +26,5 @@ every 1.day, at: '1:00' do
 end
 
 every 1.day, at: '2:00 am' do
-  rake 'active_storage_clean_up'
+  rake 'active_storage:purge_unattached'
 end
