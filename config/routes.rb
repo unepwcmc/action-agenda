@@ -27,6 +27,12 @@ Rails.application.routes.draw do
   resources :progress_documents, only: [:update, :destroy]
   resources :country_commitments, only: [:show, :index]
 
+  namespace :api do
+    namespace :v1 do
+      resources :commitments, only: [:index]
+    end
+  end
+  
   namespace :admin do
     resources :imported_commitments, only: [:index, :update]
   end

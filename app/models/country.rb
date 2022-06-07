@@ -22,10 +22,12 @@ class Country < ApplicationRecord
                .published
                .joins(:managers)
                .group('managers.name')
+               .group('managers.id')
                .select("ROUND((COUNT(*)*100.0/#{commitment_count_for_country}), 0) AS percentage")
                .select('managers.name AS name')
                .select('COUNT(*) AS count')
-               .as_json(only: %i[name percentage count])
+               .select('managers.id AS id')
+               .as_json(only: %i[id name percentage count])
 
     {
       country_name: name,

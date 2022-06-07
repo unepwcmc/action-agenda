@@ -1,3 +1,7 @@
+# 0.1.5
+
+- Assign bar chart colours cosistently based on Actor id
+
 # 0.1.4
 
 - Form error styling

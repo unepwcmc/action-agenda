@@ -137,3 +137,9 @@ en:
         header: Explore Commitments
         placeholder: Search by country
         button: View Commitments
+  controllers:
+    api:
+      v1:
+        commitments:
+          per_page:
+            exceeds_maximum: Maximum of 50 items per page

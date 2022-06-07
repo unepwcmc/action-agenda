@@ -15,8 +15,8 @@
 <script>
 import axios from "axios";
 import BarChart from "../chart/BarChart";
+import CHART_COLORS from "../../constants"
 import { setAxiosHeaders } from "../../helpers/axios-helpers";
-import Turbolinks from "turbolinks";
 import MapLegend from './MapLegend.vue';
 
 export default {
@@ -35,18 +35,6 @@ export default {
       id: this.content.id,
       chartData: Object,
       url: '',
-      colors: [
-        "#97001F",
-        "#6054BA",
-        "#00483A",
-        "#E7C802",
-        "#4bc0c0",
-        "#43B2ED",
-        "#6380ff",
-        "#ff6384",
-        "#ffa040",
-        "#003e78",
-      ],
       data: {
         labels: [''],
         datasets: [],
@@ -110,11 +98,13 @@ export default {
       this.randomKey += 1;
       this.data.datasets = [];
 
-      this.chartData.forEach((item, key) => {
+      this.chartData.forEach((item) => {
+        const backgroundColor = CHART_COLORS[item.id] || "#E3E3E3"
+
         this.data.datasets.push({
           data: [item.count],
           label: item.name,
-          backgroundColor: this.colors[key],
+          backgroundColor
         })
       });
     },
