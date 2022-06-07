@@ -98,11 +98,8 @@ export default {
       this.randomKey += 1;
       this.data.datasets = [];
 
-      this.chartData.forEach((item, key) => {
-        const ids = []
+      this.chartData.forEach((item) => {
         const backgroundColor = CHART_COLORS[item.id] || "#E3E3E3"
-
-        ids.push(item.id)
 
         this.data.datasets.push({
           data: [item.count],
