@@ -1,17 +1,15 @@
 const CHART_COLORS  = {
-  1: "#97001F",
-  2: "#6054BA",
-  3: "#00483A",
-  4: "#E7C802",
-  5: "#4BC0C0",
-  6: "#43B2ED",
-  7: "#6380FF",
-  8: "#FF6384",
-  9: "#FFA040",
-  10: "#003E78",
-  11: "#137856",
-  12: "#A9BD39",
-  13: "#D16BC0"
+  "Local communities": "#97001F",
+  "Indigenous peoples": "#6054BA",
+  "Non-governmental organisation (NGO)": "#00483A",
+  "For-profit organisation (business and industry)": "#E7C802",
+  "Sub-national government": "#4BC0C0",
+  "Joint governance (i.e. decisions are made by many)": "#43B2ED",
+  "Individual landowners": "#6380FF",
+  "Collaborative governance (i.e. decisions are made by one group on behalf of many)": "#FF6384",
+  "Non-profit organisation": "#00483A",
+  "For-profit organisation": "#E7C802",
+  "Joint governance": "#43B2ED",
 }
 
 export default CHART_COLORS
