@@ -9,6 +9,9 @@ const CHART_COLORS  = {
   8: "#FF6384",
   9: "#FFA040",
   10: "#003E78",
+  11: "#137856",
+  12: "#A9BD39",
+  13: "#D16BC0"
 }
 
 export default CHART_COLORS
