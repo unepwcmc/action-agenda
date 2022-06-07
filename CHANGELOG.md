@@ -1,3 +1,7 @@
+# 0.1.6
+
+- Change bar chart colour matching with actors from id to name
+
 # 0.1.5
 
 - Assign bar chart colours cosistently based on Actor id
