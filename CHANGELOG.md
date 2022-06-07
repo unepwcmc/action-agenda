@@ -1,6 +1,7 @@
 # 0.1.5
 
 - Assign bar chart colours cosistently based on Actor id
+- external API
 
 # 0.1.4
 
