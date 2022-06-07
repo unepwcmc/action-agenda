@@ -15,6 +15,7 @@
 <script>
 import axios from "axios";
 import BarChart from "../chart/BarChart";
+import CHART_COLOURS from "../../constants"
 import { setAxiosHeaders } from "../../helpers/axios-helpers";
 import Turbolinks from "turbolinks";
 import MapLegend from './MapLegend.vue';
@@ -35,18 +36,7 @@ export default {
       id: this.content.id,
       chartData: Object,
       url: '',
-      colors: [
-        "#97001F",
-        "#6054BA",
-        "#00483A",
-        "#E7C802",
-        "#4bc0c0",
-        "#43B2ED",
-        "#6380ff",
-        "#ff6384",
-        "#ffa040",
-        "#003e78",
-      ],
+      colors: [],
       data: {
         labels: [''],
         datasets: [],
@@ -109,6 +99,16 @@ export default {
       //reset the data array so it doesn't push to it on each click
       this.randomKey += 1;
       this.data.datasets = [];
+
+      const ids =[]
+      this.chartData.forEach(item => ids.push(item.id))
+
+      for (const [key, value] of Object.entries(CHART_COLOURS)) {
+        // if using ids key has to be changed to Number type --> Number(key) https://stackoverflow.com/a/49550265/10897687
+        if (ids.includes(Number(key))) {
+          this.colors.push(value)
+        }
+      }
 
       this.chartData.forEach((item, key) => {
         this.data.datasets.push({
