@@ -99,7 +99,7 @@ export default {
       this.data.datasets = [];
 
       this.chartData.forEach((item) => {
-        const backgroundColor = CHART_COLORS[item.id] || "#E3E3E3"
+        const backgroundColor = CHART_COLORS[item.name] || "#E3E3E3"
 
         this.data.datasets.push({
           data: [item.count],
