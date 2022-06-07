@@ -54,7 +54,9 @@ class Commitment < ApplicationRecord
   validate :name_is_10_words_or_less, if: :user_created_and_live?
 
   scope :published, -> { where(state: 'live', cfn_approved: true) }
-
+  scope :api_records, lambda {
+    where(state: 'live', cfn_approved: true, shareable: true, commitment_source: %w[csv form])
+  }
   scope :cbd_without_government_managers, lambda {
     government_manager_ids = Manager.where(name: ['Other government', 'Sub-national government'])
     where(commitment_source: 'cbd')
@@ -135,7 +137,7 @@ class Commitment < ApplicationRecord
       @filter_params = json_params['filters'].all? { |p| p['options'].blank? } ? [] : json_params['filters']
     end
 
-    unpaginated_commitments = generate_query(page, @filter_params)
+    unpaginated_commitments = generate_query(@filter_params)
     paginated_commitments = unpaginated_commitments
                             .paginate(page: page || 1, per_page: @items_per_page)
                             .to_a.map!(&:to_hash)
@@ -156,10 +158,11 @@ class Commitment < ApplicationRecord
     }
   end
 
-  def self.generate_query(page, filter_params)
+  def self.generate_query(filter_params)
     # if params are empty then return the paginated results without filtering
-    # WARNING! Do not remove the 'published' scope, because this will show unpublished Commitments
-    # people might not want public and CBD commitments we've chosen not to display.
+    # WARNING! Do not remove the 'published' scope, because this will show
+    # unpublished Commitments people might not want public and CBD commitments
+    # we've chosen not to display.
     if filter_params.empty?
       return Commitment.published
                        .includes(:countries)
@@ -169,7 +172,7 @@ class Commitment < ApplicationRecord
     # we have to do some hard work on the filtering...
     filters = filter_params.select { |hash| hash['options'].present? }
     where_params = parse_filters(filters)
-    run_query(page, where_params)
+    run_query(where_params)
   end
 
   def self.parse_filters(filters)
