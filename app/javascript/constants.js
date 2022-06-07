@@ -7,8 +7,6 @@ const CHART_COLORS  = {
   "Joint governance (i.e. decisions are made by many)": "#43B2ED",
   "Individual landowners": "#6380FF",
   "Collaborative governance (i.e. decisions are made by one group on behalf of many)": "#FF6384",
-  "Other": "#FFA040",
-  "Other government": "#003E78",
   "Non-profit organisation": "#00483A",
   "For-profit organisation": "#E7C802",
   "Joint governance": "#43B2ED",
