@@ -15,7 +15,7 @@
 <script>
 import axios from "axios";
 import BarChart from "../chart/BarChart";
-import CHART_COLOURS from "../../constants"
+import CHART_COLORS from "../../constants"
 import { setAxiosHeaders } from "../../helpers/axios-helpers";
 import Turbolinks from "turbolinks";
 import MapLegend from './MapLegend.vue';
@@ -103,7 +103,7 @@ export default {
       const ids =[]
       this.chartData.forEach(item => ids.push(item.id))
 
-      for (const [key, value] of Object.entries(CHART_COLOURS)) {
+      for (const [key, value] of Object.entries(CHART_COLORS)) {
         // if using ids key has to be changed to Number type --> Number(key) https://stackoverflow.com/a/49550265/10897687
         if (ids.includes(Number(key))) {
           this.colors.push(value)

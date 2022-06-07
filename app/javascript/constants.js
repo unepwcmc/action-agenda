@@ -1,4 +1,4 @@
-const CHART_COLOURS  = {
+const CHART_COLORS  = {
   "1":"#97001F",
   "2":"#6054BA",
   "3":"#00483A",
@@ -11,4 +11,4 @@ const CHART_COLOURS  = {
   "10":"#003e78",
 }
 
-export default CHART_COLOURS
+export default CHART_COLORS
