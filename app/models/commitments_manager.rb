@@ -1,0 +1,2 @@
+class CommitmentsManager < ApplicationRecord
+end

@@ -1,3 +1,7 @@
+# 0.1.7
+
+- Rake task to fix duplicated Manager records with slightly different name
+
 # 0.1.6
 
 - Change bar chart colour matching with actors from id to name
