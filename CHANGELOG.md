@@ -1,3 +1,7 @@
+# 0.1.8
+
+- removed class for join table
+
 # 0.1.7
 
 - Rake task to fix duplicated Manager records with slightly different name

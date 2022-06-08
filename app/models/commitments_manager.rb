@@ -1,2 +1,0 @@
-class CommitmentsManager < ApplicationRecord
-end
