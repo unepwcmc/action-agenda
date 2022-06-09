@@ -5,8 +5,8 @@ task update_country_names_to_un_standard: :environment do
     { iso: 'CI', name:	'Côte d’Ivoire' },
     { iso: 'CD', name:	'Democratic Republic of the Congo' },
     { iso: 'GF', name:	'French Guiana' },
-    { iso: 'HK', name:	'Hong Kong SAR' },
-    { iso: 'MO', name:	'Macau SAR' },
+    { iso: 'HK', name:	'Hong Kong, SAR China' },
+    { iso: 'MO', name:	'Macau, SAR China' },
     { iso: 'SJ', name:	'Svalbard and Jan Mayen Islands' }
   ]
 
