@@ -14,7 +14,7 @@ module Api
         end
 
         commitments = commitments.paginate(
-          page: params[:page] || 1,
+          page: params[:page] || 0,
           per_page: params[:per_page] || 10
         )
 
