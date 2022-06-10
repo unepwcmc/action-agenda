@@ -79,6 +79,7 @@
 ## Associated records
 
 The data below are provided for reference and are included in the API where associated with a particular commitment - the API does not provide an index of these associations
+
 ### Managers
 
 ```json
