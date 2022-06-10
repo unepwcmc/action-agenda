@@ -4,11 +4,11 @@
 
 ```page=5       # default 1```
 
-```updated_after=Thu, 26 May 2022 14:35:09 +0100       # default nil```
+```updated_after=2022-06-03       # default nil, accepts valid datetime formats https://ruby-doc.org/stdlib-2.6.1/libdoc/date/rdoc/DateTime.html```
 
 ## Endpoint
 
-```https://www.naturecommitments.org/api/v1/commitments?per_page=10&page=5&updated_after=Thu, 26 May 2022 14:35:09 +0100```
+```https://www.naturecommitments.org/api/v1/commitments?per_page=10&page=5&updated_after=2022-06-03```
 
 
 ## JSON structure
@@ -78,6 +78,7 @@
 
 ## Associated records
 
+The data below are provided for reference and are included in the API where associated with a particular commitment - the API does not provide an index of these associations
 ### Managers
 
 ```json
@@ -364,7 +365,7 @@
   },
   {
     "id": 44,
-    "name": "Côte D'Ivoire",
+    "name": "Côte d’Ivoire",
     "iso": "CI"
   },
   {
@@ -464,7 +465,7 @@
   },
   {
     "id": 95,
-    "name": "Hong Kong",
+    "name": "Hong Kong, SAR China",
     "iso": "HK"
   },
   {
@@ -889,7 +890,7 @@
   },
   {
     "id": 40,
-    "name": "Democratic Republic of Congo",
+    "name": "Democratic Republic of the Congo",
     "iso": "CD"
   },
   {
@@ -1009,7 +1010,7 @@
   },
   {
     "id": 80,
-    "name": "French Guyana",
+    "name": "French Guiana",
     "iso": "GF"
   },
   {
@@ -1214,7 +1215,7 @@
   },
   {
     "id": 148,
-    "name": "Macau",
+    "name": "Macau, SAR China",
     "iso": "MO"
   },
   {
@@ -1379,7 +1380,7 @@
   },
   {
     "id": 201,
-    "name": "Svalbard and Jan Mayen",
+    "name": "Svalbard and Jan Mayen Islands",
     "iso": "SJ"
   },
   {
