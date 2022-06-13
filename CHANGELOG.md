@@ -1,4 +1,4 @@
-# 0.2.0
+# 0.1.9
 
 - Added external API with a filterable commitments index
 - rake task to update countries to UN compliant names
