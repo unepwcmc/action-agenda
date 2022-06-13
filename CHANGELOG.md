@@ -1,3 +1,8 @@
+# 0.2.0
+
+- Added external API with a filterable commitments index
+- rake task to update countries to UN compliant names
+
 # 0.1.8
 
 - removed class for join table
