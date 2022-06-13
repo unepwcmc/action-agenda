@@ -1,3 +1,12 @@
+# 0.2.0
+
+- Added external API with a filterable commitments index
+- rake task to update countries to UN compliant names
+
+# 0.1.8
+
+- removed class for join table
+
 # 0.1.7
 
 - Rake task to fix duplicated Manager records with slightly different name
