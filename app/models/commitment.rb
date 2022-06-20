@@ -207,7 +207,7 @@ class Commitment < ApplicationRecord
     params.compact
   end
 
-  def self.run_query(_page, where_params)
+  def self.run_query(where_params)
     # WARNING! Do not remove the 'published' scope, because this will show unpublished Commitments
     # people might not want public and CBD commitments we've chosen not to display.
     Commitment.published
