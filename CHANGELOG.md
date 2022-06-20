@@ -1,3 +1,7 @@
+# 0.2.0
+
+- Bugfix map popup - button link functionality
+
 # 0.1.9
 
 - Rake task to update countries to UN compliant names
