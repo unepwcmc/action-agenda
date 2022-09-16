@@ -28,5 +28,6 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "webpack-dev-server": "^3.11.0"
-  }
+  },
+  "version": null
 }
