@@ -9,7 +9,7 @@ en:
           to conserve areas of land and water. Examples of commitments include actions to protect, 
           sustainably manage and restore nature in a given area of land or sea rather than building on it 
           or deciding to improve the way an area is managed to maximise benefits for both human well-being 
-          and the species that live there." 
+          and the species that live there."
     
     footer:
       left: In 2018, the governments of Egypt and China, with support from the CBD Secretariat, launched the
@@ -32,3 +32,11 @@ en:
             (underpinned by the World Database on Protected Areas and other databases) to track the area-based measures
             that have been implemented. The site is designed such that when relevant area-based commitments are eventually
             implemented, the information can seamlessly be transferred to the Protected Planet Initiative.
+
+      quote-iclei:
+            author: Kobie Brand, ICLEI Deputy Secretary-General
+            quote: '"The Nature Commitments platform is a valuable new space for NGOs, businesses, indigenous peoples and local communities to share their commitments to protect and restore areas of land and water. ICLEI – Local Governments for Sustainability supports this initiative by UNEP-WCMC in the spirit of collaboration, and we are pleased that it complements our CitiesWithNature Action Platform, which is the recognized place for city governments to share their actions and commitments to nature."'
+
+      quote-iucn:
+            author: IUCN
+            quote: '"@IUCN and @unepwcmc have worked in partnership for decades – we’re delighted to extend this synergy and complementarity through mutual documentation of conservation through the IUCN Contributions for Nature Platform and the new UNEP-WCMC Nature Commitments Platform."'

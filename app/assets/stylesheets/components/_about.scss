@@ -26,4 +26,27 @@
       flex-grow: 1;
     }
   }
+
+  &__quote {
+    margin: rem-calc(60) rem-calc(200);
+    padding-bottom: rem-calc(20);
+
+    &-quote {
+      font-family: $body-font;
+      color: $grey-xxdark;
+      font-style: italic;
+      margin: rem-calc(20) rem-calc(20) 0 rem-calc(20);
+      line-height: 2;
+      flex-grow: 1;
+    }
+
+    &-author {
+      font-family: $body-font;
+      font-weight: $semi-bold;
+      font-style: italic;
+      margin: 0 rem-calc(20) rem-calc(20) rem-calc(20);
+      line-height: 2;
+      flex-grow: 1;
+    }
+  }
 }
