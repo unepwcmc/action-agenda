@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.2.2 (2022-11-28)
+
+- new partner logos on the home page
+- new quotes on the about page
+
 ### 0.2.1 (2022-09-16)
 
 
