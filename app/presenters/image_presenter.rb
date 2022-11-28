@@ -22,6 +22,14 @@ class ImagePresenter
       {
         alt: 'Government of the Netherlands',
         src: 'logos/government_of_the_netherlands.png'
+      },
+      {
+        alt: 'Cities with Nature',
+        src: 'logos/cities_with_nature.png'
+      },
+      {
+        alt: 'UN Decade on Ecosystem Restoration',
+        src: 'logos/UNDecade_on_ecosystem_restoration.png'
       }
     ]
   end
