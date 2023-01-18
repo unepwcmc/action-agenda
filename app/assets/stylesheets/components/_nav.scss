@@ -133,7 +133,6 @@
 
   .nav__li {
     margin: 0 rem-calc(14);
-
     display: inline;
 
     &:first-child {
@@ -161,5 +160,9 @@
   .nav__a {
     margin-right: rem-calc(30);
     margin-bottom: rem-calc(8);
+  }
+
+  .nav__contact-us {
+    text-transform: none;
   }
 }

@@ -4,7 +4,13 @@
       <ul class="nav__ul">
         <% links.each do |link| %>
           <li class="nav__li">
-            <%= link_to link[:title], link[:url], class: 'nav__a' %>
+            <% if link[:url] != 'not a link' %>
+              <%= link_to link[:title], link[:url], class: 'nav__a' %>
+            <% else %>
+              <div class= "nav__contact-us">
+                <%= link[:title] %>
+              </div>
+            <% end %>
           </li>
         <% end %>
       </ul>
