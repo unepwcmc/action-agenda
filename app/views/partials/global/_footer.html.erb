@@ -1,20 +1,17 @@
 <footer class="footer">
   <div class="footer__container">
-    <nav class="nav--footer">
-      <ul class="nav__ul">
-        <% links.each do |link| %>
-          <li class="nav__li">
-            <% if link[:url] != 'not a link' %>
+    <div>
+      <nav class="nav--footer">
+        <ul class="nav__ul">
+          <% links.each do |link| %>
+            <li class="nav__li">
               <%= link_to link[:title], link[:url], class: 'nav__a' %>
-            <% else %>
-              <div class= "nav__contact-us">
-                <%= link[:title] %>
-              </div>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
-    </nav>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+      <a class="nav__contact-us"><%= email %></a>
+    </div>
 
     <div class="list--footer-logos">
       <ul class="list__ul">

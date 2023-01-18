@@ -162,7 +162,9 @@
     margin-bottom: rem-calc(8);
   }
 
-  .nav__contact-us {
-    text-transform: none;
-  }
+}
+
+.nav__contact-us {
+  @include nav-basic;
+  text-transform: none;
 }
