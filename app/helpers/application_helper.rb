@@ -11,6 +11,12 @@ module ApplicationHelper
     navPresenter.nav_footer
   end
 
+  def contact_email
+    navPresenter = NavigationPresenter.new
+
+    navPresenter.contact_us
+  end
+
   def footer_icons; end
 
   def site_logos
