@@ -55,4 +55,8 @@ class NavigationPresenter
       }
     ]
   end
+
+  def contact_us
+   'CONTACT US: nature.commitments@unep-wcmc.org'
+  end
 end
