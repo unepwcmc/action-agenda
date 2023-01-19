@@ -2,9 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### 0.2.3 (2023-01-19)
+### 0.3.1 (2023-01-19)
 
 - add contact-us email address to the footer
+
+### 0.3.0
+
+- Add GoogleAnalytics tag
 
 ### 0.2.2 (2022-11-28)
 
