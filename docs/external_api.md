@@ -27,7 +27,7 @@
     "stage": "A string, either In progress/Committed/Implemented fully",
     "responsible_group": "A string describing the responsible group",
     "duration_years": "more than 25 years",
-    "area_owner_and_role": "A string describing the owner and their role if the are does not belong to the group/person making the commitment",
+    "area_owner_and_role": "A string describing the owner and their role if the area does not belong to the group/person making the commitment",
     "created_at": Wed, 18 May 2022 14:43:33 UTC +00:00,
     "updated_at": Wed, 18 May 2022 14:43:33 UTC +00:00,
     "managers": [
@@ -78,7 +78,7 @@
 
 ## Associated records
 
-The data below are provided for reference and are included in the API where associated with a particular commitment - the API does not provide an index of these associations
+The data below are provided for reference and are included in the API where associated with a particular commitment - the API does not currently provide an index of these associations
 
 ### Managers
 
