@@ -1,10 +1,10 @@
 <section class="flex-center flex-column bg--grey-xlight spacer-medium--top spacer-medium--bottom">
   <div class="container carousel-title">
     <h2>
-      <%= I18n.t('dashboard.carousel.title').html_safe %>
+      <%= t('dashboard.carousel.title').html_safe %>
     </h2>
   </div>
   <div>
-    <%= I18n.t('dashboard.carousel.subheading') %>
+    <%= t('dashboard.carousel.subheading', cbd_link: link_to('https://www.cbd.int/gbf', 'https://www.cbd.int/gbf', target: '_blank')).html_safe %>
   </div>
 </section>
