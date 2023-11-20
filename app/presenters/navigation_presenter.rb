@@ -57,6 +57,6 @@ class NavigationPresenter
   end
 
   def contact_us
-   'CONTACT US: nature.commitments@unep-wcmc.org'
+    'CONTACT US: anushree.bhattacharjee@unep-wcmc.org'
   end
 end
