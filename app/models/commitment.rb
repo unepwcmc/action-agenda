@@ -5,7 +5,7 @@ require 'wcmc_components'
 class Commitment < ApplicationRecord
   STAGE_OPTIONS = ['In progress', 'Committed', 'Implemented fully'].freeze
   enum state: %i[draft live]
-  enum commitment_source: %i[form csv cbd]
+  enum commitment_source: %i[form csv cbd ferm]
 
   include WcmcComponents::Loadable
 
