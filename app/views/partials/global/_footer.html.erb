@@ -1,5 +1,14 @@
 <footer class="footer">
   <div class="footer__container">
+    <div class="list--footer-logos">
+      <ul class="list__ul">
+        <% main_logo.each do |logo| %>
+          <li class="list__li">
+            <%= image_tag logo[:src], alt: logo[:alt], class: 'list__img' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
     <div>
       <nav class="nav--footer">
         <ul class="nav__ul">

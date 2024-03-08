@@ -19,7 +19,7 @@
         <% end %>
       <% end %>
 
-      <%= render partial: '/partials/topbar/topbar_primary' %>
+      <%= render partial: '/partials/topbar/topbar_primary', locals: { logos: main_logo } %>
 
       <div class="content<%= " bg--grey-xlight" if @grey_bg %>">
         <%= yield %>
@@ -29,8 +29,9 @@
         <%= render partial:'partials/global/reduced_footer' %>
       <% else %>
         <%= render partial:'partials/global/footer', locals: {
-          links: footer_nav, 
+          links: footer_nav,
           logos: site_logos,
+          main_logo: main_logo,
           email: contact_email
         } %>
       <% end %>

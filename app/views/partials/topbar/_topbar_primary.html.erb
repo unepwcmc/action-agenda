@@ -1,4 +1,13 @@
 <div class="topbar--primary">
+  <div class="list--footer-logos" style="padding-right: 1.5rem">
+    <ul class="list__ul">
+      <% logos.each do |logo| %>
+        <li class="list__li">
+          <%= image_tag logo[:src], alt: logo[:alt], class: 'list__img' %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
   <ul class="nav nav--primary">
     <li class="nav__item">
       <%= link_to 'Main Action Agenda', 'https://www.cbd.int/action-agenda', title: 'Visit the Action Agenda website', target: '_blank', class: 'nav__link' %>

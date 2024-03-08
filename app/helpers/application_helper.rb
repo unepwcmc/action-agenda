@@ -20,9 +20,15 @@ module ApplicationHelper
   def footer_icons; end
 
   def site_logos
-    imagePresenter = ImagePresenter.new
+    image_presenter = ImagePresenter.new
 
-    imagePresenter.site_logos
+    image_presenter.site_logos
+  end
+
+  def main_logo
+    image_presenter = ImagePresenter.new
+
+    image_presenter.main_logo
   end
 
   def error_messages(resource)

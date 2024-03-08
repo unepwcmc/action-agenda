@@ -2,8 +2,8 @@ class HomeController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    imagePresenter = ImagePresenter.new
-    @partner_logos = imagePresenter.partner_logos
+    image_presenter = ImagePresenter.new
+    @partner_logos = image_presenter.partner_logos
 
     live_commitments = Commitment.published
     countries_with_commitments_ids = live_commitments.joins(:countries).pluck('countries.id').uniq

@@ -1,7 +1,15 @@
 class ImagePresenter
   include Rails.application.routes.url_helpers
 
-  def initialize
+  def initialize; end
+
+  def main_logo
+    [
+      {
+        alt: 'Nature Commitments logo',
+        src: 'logos/NC_Logo-White.svg'
+      }
+    ]
   end
 
   def site_logos
