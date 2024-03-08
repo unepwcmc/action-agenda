@@ -9,6 +9,10 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <%= render_google_analytics_tag %>
+
+    <% if Rails.env.production? %>
+      <%= render "partials/head/hotjar" %>
+    <% end %>
   </head>
 
   <body>
