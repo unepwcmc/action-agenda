@@ -53,6 +53,8 @@ class Commitment < ApplicationRecord
 
   validate :name_is_10_words_or_less, if: :user_created_and_live?
 
+  validate :description_is_10_words_or_more, if: :user_created_and_live?
+
   scope :published, -> { where(state: 'live', cfn_approved: true) }
   scope :api_records, lambda {
     where(state: 'live', cfn_approved: true, shareable: true, commitment_source: %w[csv form])
@@ -247,5 +249,9 @@ class Commitment < ApplicationRecord
 
   def name_is_10_words_or_less
     errors.add(:name, :too_long) if name && name.split(' ').length > 10
+  end
+
+  def description_is_10_words_or_more
+    errors.add(:description, :too_short) if description && description.split(' ').lenght < 10
   end
 end
