@@ -92,13 +92,13 @@ class CommitmentsController < ApplicationController
   end
 
   def edit
-    raise ForbiddenError unless @commitment.user == current_user
+    raise ForbiddenError unless @commitment.user == current_user || current_user&.admin?
 
     @form_hash = Services::CommitmentProps.new(@commitment).call
   end
 
   def update
-    raise ForbiddenError unless @commitment.user == current_user
+    raise ForbiddenError unless @commitment.user == current_user || current_user&.admin?
 
     if @commitment.update(commitment_params)
       respond_to do |format|
@@ -121,7 +121,7 @@ class CommitmentsController < ApplicationController
   end
 
   def destroy
-    raise ForbiddenError unless @commitment.user == current_user
+    raise ForbiddenError unless @commitment.user == current_user || current_user&.admin?
 
     if @commitment.destroy
       respond_to do |format|
