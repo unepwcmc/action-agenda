@@ -25,7 +25,7 @@ every 1.day, at: '1:00' do
   runner "CbdImportJob.perform_later"
 end
 
-every 1.day, at: '1:30' do
+every 2.weeks, at: '1:30' do
   runner "FermImportJob.perform_later"
 end
 
