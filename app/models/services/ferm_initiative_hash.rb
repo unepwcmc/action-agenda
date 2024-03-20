@@ -21,10 +21,12 @@ class Services::FermInitiativeHash
       manager_ids: manager_ids, # type of managers, e.g. NGO, government, etc.
       cfn_approved: cfn_approved, # should also automatically decline it if has government managers
       state: 'live',
-      stage: restoration_status, # @ferm_initiative_hash['restoration_status'], # ['In progress', 'Committed', 'Implemented fully'] # restoration stage missing
+      stage: restoration_status,
       shareable: false,
-      link: [@ferm_initiative_hash['website']], # [link_attributes]
-      action_ids: action_ids, # , use the new categorical mappings hash, # HABTM and needs to map to our defaults, use the new categorical mappings
+      links_attributes: [
+        link_attributes
+      ],
+      action_ids: action_ids,
       objective_ids: objective_ids,
       current_area_ha: ha_converted_area,
     }
@@ -60,15 +62,15 @@ class Services::FermInitiativeHash
   end
 
   def duration_years
-    "#{@ferm_initiative_hash['starting_date']}-#{@ferm_initiative_hash['ending_date']}"
+    "#{@ferm_initiative_hash['starting_date']}/#{@ferm_initiative_hash['ending_date']}"
   end
 
-  # def link_attributes
-  #   {
-  #     id: @commitment.links.first&.id,
-  #     url: "https://www.cbd.int/action-agenda/contributions/action?action-id=#{@ferm_initiative['_id']}"
-  #   }
-  # end
+  def link_attributes
+    {
+      id: @commitment.links.first&.id,
+      url: "https://ferm.fao.org/initiatives/#{@ferm_initiative_hash['id']}"
+    }
+  end
 
   def manager_ids
     @manager_ids ||= begin
@@ -76,7 +78,7 @@ class Services::FermInitiativeHash
       return [] unless actor_data
 
       # Generate a list of ids from our database starting from the ferm types
-      actor_data.map { |actor| ferm_identifier_to_cfn_id(actor['type']) }
+      actor_data.map { |actor| ferm_identifier_to_cfn_id(actor['type']) }.uniq
     end
   end
 
@@ -122,6 +124,8 @@ class Services::FermInitiativeHash
   def nested_hash_value(action_array, value)
     action_array = action_array.first['items'] + action_array.second['items']
     action_name = action_array.detect do |parent|
+      return parent['label'] if parent['label'] == value
+
       parent['items'].detect do |child|
         child['label'] == value
       end
