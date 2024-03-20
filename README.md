@@ -12,9 +12,9 @@
 
 1. `bundle install`
 2. `yarn install`
-3. `bundle exec rails db:create db:migrate db:seed`
-4. `bundle exec rails s`
-5. Obtain a copy of `config/master.key` from lastpass
+3. Obtain a copy of `config/master.key` from lastpass
+4. `bundle exec rails db:create db:migrate db:seed`
+5. `bundle exec rails s`
 6. Run `rake import:commitments`
 7. On the Commitments page, you should see a list of commitments.
 
