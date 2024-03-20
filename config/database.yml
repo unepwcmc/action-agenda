@@ -9,7 +9,9 @@ development:
   encoding: utf-8
   database: aa_development
   pool: 5
-  
+  host: localhost
+  username: postgres
+
 staging:
   adapter: postgis
   encoding: utf-8
@@ -21,3 +23,5 @@ test:
   encoding: utf-8
   database: aa_test
   pool: 5
+  host: localhost
+  username: postgres
