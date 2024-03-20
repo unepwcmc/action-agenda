@@ -9,9 +9,7 @@ development:
   encoding: utf-8
   database: aa_development
   pool: 5
-  username: postgres
-  port: 5437
-  
+
 staging:
   adapter: postgis
   encoding: utf-8
@@ -23,5 +21,3 @@ test:
   encoding: utf-8
   database: aa_test
   pool: 5
-  username: postgres
-  port: 5437
