@@ -1,9 +1,12 @@
 # Nature Commitments
 
-
 ## Ruby version
+
 2.6.3
-## Node version 
+
+## Node version
+
+14.18.1
 
 ## Quickstart
 
