@@ -12,8 +12,8 @@
 
 1. `bundle install`
 2. `yarn install`
-3. `bundle exec rails db:create db:migrate rails db:seed`
-4. `bundle exec rails s` 
+3. `bundle exec rails db:create db:migrate db:seed`
+4. `bundle exec rails s`
 5. Obtain a copy of `config/master.key` from lastpass
 6. Run `rake import:commitments`
 7. On the Commitments page, you should see a list of commitments.
@@ -34,6 +34,6 @@ live, true, true
 
 We have an external API, that currently only includes a commitments index. The API only returns commitments created in Nature Commitments via the form or csv import, and which are published.
 
-The API does not use authentication, but is rate limited to 25 requests per minute followed by a 10 minute ban. This is implemented on the server using Cloudflare, and not handled in the Rails app. 
+The API does not use authentication, but is rate limited to 25 requests per minute followed by a 10 minute ban. This is implemented on the server using Cloudflare, and not handled in the Rails app.
 
 [API Documentation](docs/external_api.md)
