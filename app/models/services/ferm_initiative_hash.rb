@@ -16,6 +16,8 @@ class Services::FermInitiativeHash
       name: @ferm_initiative_hash['title'],
       description: @ferm_initiative_hash['description'],
       country_ids: country_ids,
+      committed_year: @ferm_initiative_hash['starting_date']&.split('-')&.first,
+      update_year: @ferm_initiative_hash['last_updated']&.split('-')&.first,
       duration_years: duration_years,
       commitment_source: 'ferm',
       manager_ids: manager_ids, # type of managers, e.g. NGO, government, etc.
@@ -62,13 +64,17 @@ class Services::FermInitiativeHash
   end
 
   def duration_years
-    "#{@ferm_initiative_hash['starting_date']}/#{@ferm_initiative_hash['ending_date']}"
+    if @ferm_initiative_hash['starting_date'].present? && @ferm_initiative_hash['ending_date'].present?
+      start_year = @ferm_initiative_hash['starting_date'].split('-').first.to_i
+      end_year = @ferm_initiative_hash['ending_date'].split('-').first.to_i
+    end
+    "#{end_year - start_year} years"
   end
 
   def link_attributes
     {
       id: @commitment.links.first&.id,
-      url: "https://ferm.fao.org/initiatives/#{@ferm_initiative_hash['id']}"
+      url: "https://ferm-search.fao.org/initiatives/#{@ferm_initiative_hash['id']}"
     }
   end
 
