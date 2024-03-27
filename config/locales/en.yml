@@ -47,7 +47,7 @@ en:
             base:
               none_of_the_above_option_for_cbd_commitments: 'CBD Objectives cannot include named objectives if "None of the above" option is selected'
             boundary:
-              nil_value: 'Boundary information missing' 
+              nil_value: 'Boundary information missing'
             five_year_commitment:
               nil_value: 'Five year commitment information missing'
             progress_report:
@@ -62,6 +62,8 @@ en:
               inclusion: "is not one of the allowed stage options"
             name:
               too_long: Must be 10 words or fewer
+            description:
+              too_short: "Must be 10 words or more"
         progress_document:
           attributes:
             document:
@@ -114,7 +116,7 @@ en:
       log_in:
         button: Log In
         title: Sign in to your Action Agenda account
-      log_out: Log Out 
+      log_out: Log Out
     criterium:
       ineligible:
         title: This platform might not be the best place to record your commitment

@@ -5,7 +5,7 @@ require 'wcmc_components'
 class Commitment < ApplicationRecord
   STAGE_OPTIONS = ['In progress', 'Committed', 'Implemented fully'].freeze
   enum state: %i[draft live]
-  enum commitment_source: %i[form csv cbd]
+  enum commitment_source: %i[form csv cbd ferm]
 
   include WcmcComponents::Loadable
 
@@ -52,6 +52,8 @@ class Commitment < ApplicationRecord
                         if: :user_created_and_live?
 
   validate :name_is_10_words_or_less, if: :user_created_and_live?
+
+  validate :description_is_10_words_or_more, if: :user_created_and_live?
 
   scope :published, -> { where(state: 'live', cfn_approved: true) }
   scope :api_records, lambda {
@@ -247,5 +249,9 @@ class Commitment < ApplicationRecord
 
   def name_is_10_words_or_less
     errors.add(:name, :too_long) if name && name.split(' ').length > 10
+  end
+
+  def description_is_10_words_or_more
+    errors.add(:description, :too_short) if description && description.split(' ').lenght < 10
   end
 end

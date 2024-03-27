@@ -9,7 +9,7 @@ development:
   encoding: utf-8
   database: aa_development
   pool: 5
-  
+
 staging:
   adapter: postgis
   encoding: utf-8
