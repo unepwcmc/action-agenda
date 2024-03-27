@@ -37,7 +37,7 @@ class Services::FermInitiativeHash
   def cfn_approved
     return false if government_managers?
 
-    @commitment.cfn_approved
+    true
   end
 
   def government_managers?
