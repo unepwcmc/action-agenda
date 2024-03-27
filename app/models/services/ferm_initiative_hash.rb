@@ -64,10 +64,10 @@ class Services::FermInitiativeHash
   end
 
   def duration_years
-    if @ferm_initiative_hash['starting_date'].present? && @ferm_initiative_hash['ending_date'].present?
-      start_year = @ferm_initiative_hash['starting_date'].split('-').first.to_i
-      end_year = @ferm_initiative_hash['ending_date'].split('-').first.to_i
-    end
+    return if @ferm_initiative_hash['starting_date'].blank? || @ferm_initiative_hash['ending_date'].blank?
+
+    start_year = @ferm_initiative_hash['starting_date'].split('-').first.to_i
+    end_year = @ferm_initiative_hash['ending_date'].split('-').first.to_i
     "#{end_year - start_year} years"
   end
 
