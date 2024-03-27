@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.4.0 (2024-03-27)
+
+- add FERM API integration
+
 ### 0.3.1 (2023-01-19)
 
 - add contact-us email address to the footer

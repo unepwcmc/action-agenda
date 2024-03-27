@@ -9,6 +9,8 @@ namespace :import do
     puts "local Commitments successfully imported"
     Services::CbdImporter.new.call
     puts "CBD Commitments successfully imported"
+    Services::FermImporter.new.call
+    puts "Ferm Commitments successfully imported"
   end
 
   def import_csv_file file
