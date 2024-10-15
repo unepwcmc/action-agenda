@@ -1,0 +1,9 @@
+services:
+  deploy:
+    build:
+      dockerfile: Dockerfile-deploy
+    volumes:
+      - .:/action-agenda
+      - ~/.ssh:/root/.ssh:ro
+    stdin_open: true
+    tty: true
