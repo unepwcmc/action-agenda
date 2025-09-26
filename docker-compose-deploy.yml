@@ -1,7 +1,7 @@
 services:
   deploy:
     build:
-      dockerfile: Dockerfile-deploy
+      dockerfile: Dockerfile
     volumes:
       - .:/action-agenda
       - ~/.ssh:/root/.ssh:ro
