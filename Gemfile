@@ -21,7 +21,9 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'mini_racer', platforms: :ruby
 
 # gem 'wcmc_components', path: '../web-components/wcmc_components'
-gem 'wcmc_components', '~> 0.3.1', source: 'http://gem-server.unep-wcmc.org/'
+# Leonardo: Either the gem or version is not exist in server. Freeze them by download them from production server and put in vendor folder.
+# gem 'wcmc_components', '~> 0.3.1', source: 'http://gem-server.unep-wcmc.org/'
+gem 'wcmc_components', path: 'vendor/gems/wcmc_components-0.3.1'
 gem 'will_paginate', '~> 3.0'
 
 # Use CoffeeScript for .coffee assets and views
