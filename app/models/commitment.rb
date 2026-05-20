@@ -252,6 +252,6 @@ class Commitment < ApplicationRecord
   end
 
   def description_is_10_words_or_more
-    errors.add(:description, :too_short) if description && description.split(' ').lenght < 10
+    errors.add(:description, :too_short) if description && description.split(' ').length < 10
   end
 end
